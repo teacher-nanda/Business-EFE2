@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business English — Course Overview</title>
+<style>
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --green:#16a34a;--lg:#dcfce7;
+  --purple:#7c3aed;--lp:#ede9fe;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+
+/* TOP BAR */
+.top-bar{background:var(--navy);padding:28px 40px 32px;text-align:center;}
+.course-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;}
+.course-title{font-size:28px;font-weight:800;color:white;margin-bottom:6px;}
+.course-sub{font-size:14px;color:rgba(255,255,255,0.45);}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:32px 18px 60px;}
+
+/* MODULE SECTION */
+.module-section{margin-bottom:28px;}
+.module-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.module-num{background:var(--navy);color:rgba(255,255,255,0.5);border-radius:8px;padding:4px 11px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;flex-shrink:0;}
+.module-name{font-size:17px;font-weight:700;color:var(--navy);}
+.module-divider{flex:1;height:1px;background:var(--border);}
+
+/* LESSON CARDS */
+.lessons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;}
+.lesson-card{background:white;border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;text-decoration:none;color:var(--text);display:block;transition:all .18s;position:relative;overflow:hidden;}
+.lesson-card.available:hover{border-color:var(--blue);box-shadow:0 4px 14px rgba(37,99,235,0.12);transform:translateY(-1px);}
+.lesson-card.locked{cursor:default;opacity:0.55;}
+.lesson-card.locked:hover{transform:none;box-shadow:none;}
+.lesson-num{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:6px;}
+.lesson-title{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.3;}
+.lesson-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.lesson-tag{font-size:10.5px;padding:2px 8px;border-radius:8px;font-weight:600;}
+.tag-vocab{background:#dbeafe;color:#1e40af;}
+.tag-speaking{background:#dcfce7;color:#15803d;}
+.tag-grammar{background:#fef3c7;color:#92400e;}
+.tag-writing{background:#ede9fe;color:#6d28d9;}
+.tag-listening{background:#ffe4e6;color:#9f1239;}
+.tag-reading{background:#ccfbf1;color:#134e4a;}
+.lesson-status{position:absolute;top:12px;right:12px;font-size:14px;}
+.lock-icon{color:#d1d5db;font-size:13px;}
+
+/* MODULE COLORS */
+.mod1 .module-num{background:#1a2e4a;}
+.mod2 .module-num{background:#0d5986;}
+.mod3 .module-num{background:#065f46;}
+.mod4 .module-num{background:#581c87;}
+.mod5 .module-num{background:#9d174d;}
+
+.mod1 .lesson-card.available{border-left:4px solid #2563eb;}
+.mod2 .lesson-card.available{border-left:4px solid #0d9488;}
+.mod3 .lesson-card.available{border-left:4px solid #16a34a;}
+.mod4 .lesson-card.available{border-left:4px solid #7c3aed;}
+.mod5 .lesson-card.available{border-left:4px solid #e11d48;}
+
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:16px;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="course-label">Course Overview</div>
+  <div class="course-title">Business English</div>
+  <div class="course-sub">17 lessons · 5 modules</div>
+</div>
+
+<div class="main">
+
+  <!-- MODULE 1 -->
+  <div class="module-section mod1">
+    <div class="module-header">
+      <span class="module-num">Module 1</span>
+      <span class="module-name">Meetings</span>
+      <div class="module-divider"></div>
+    </div>
+    <div class="lessons-grid">
+
+      <a class="lesson-card available" href="Lesson_01_Online_Meeting_Essentials.html">
+        <div class="lesson-num">Lesson 01</div>
+        <div class="lesson-title">Meeting Essentials</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-speaking">Speaking</span>
+        </div>
+      </a>
+
+      <a class="lesson-card available" href="Lesson_02_Reporting_What_Was_Said.html">
+        <div class="lesson-num">Lesson 02</div>
+        <div class="lesson-title">Reporting What Was Said</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-grammar">Grammar</span>
+          <span class="lesson-tag tag-listening">Listening</span>
+          <span class="lesson-tag tag-speaking">Speaking</span>
+        </div>
+      </a>
+
+      <a class="lesson-card available" href="Lesson_03_Reporting_Quantities.html">
+        <div class="lesson-num">Lesson 03</div>
+        <div class="lesson-title">Reporting Quantities</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+          <span class="lesson-tag tag-speaking">Speaking</span>
+        </div>
+      </a>
+
+      <a class="lesson-card available" href="Lesson_04_Checking_Information_Full_Meeting.html">
+        <div class="lesson-num">Lesson 04</div>
+        <div class="lesson-title">Checking Information &amp; Full Meeting</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+          <span class="lesson-tag tag-speaking">Speaking</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="module-section mod2">
+    <div class="module-header">
+      <span class="module-num">Module 2</span>
+      <span class="module-name">Communication</span>
+      <div class="module-divider"></div>
+    </div>
+    <div class="lessons-grid">
+
+      <a class="lesson-card available" href="Lesson_05_Planning_Formal_Emails.html">
+        <div class="lesson-num">Lesson 05</div>
+        <div class="lesson-title">Planning &amp; Formal Emails</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-reading">Reading</span>
+          <span class="lesson-tag tag-writing">Writing</span>
+        </div>
+      </a>
+
+      <a class="lesson-card available" href="Lesson_06_Informal_Communication.html">
+        <div class="lesson-num">Lesson 06</div>
+        <div class="lesson-title">Informal Communication &amp; Office Talk</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+        </div>
+      </a>
+
+      <a class="lesson-card available" href="Lesson_07_Telephone_Communication.html">
+        <div class="lesson-num">Lesson 07</div>
+        <div class="lesson-title">Telephone Communication</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-reading">Reading</span>
+          <span class="lesson-tag tag-speaking">Speaking</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="module-section mod3">
+    <div class="module-header">
+      <span class="module-num">Module 3</span>
+      <span class="module-name">HR &amp; Career</span>
+      <div class="module-divider"></div>
+    </div>
+    <div class="lessons-grid">
+
+      <a class="lesson-card available" href="Lesson_08_Job_Descriptions_Applications.html">
+        <div class="lesson-num">Lesson 08</div>
+        <div class="lesson-title">Job Descriptions &amp; Applications</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-reading">Reading</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+        </div>
+      </a>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 09</div>
+        <div class="lesson-title">Being Interviewed</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 10</div>
+        <div class="lesson-title">Interviewing Others</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 11</div>
+        <div class="lesson-title">Giving Feedback &amp; Performance Reviews</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="module-section mod4">
+    <div class="module-header">
+      <span class="module-num">Module 4</span>
+      <span class="module-name">Presentations</span>
+      <div class="module-divider"></div>
+    </div>
+    <div class="lessons-grid">
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 12</div>
+        <div class="lesson-title">Structuring a Presentation</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 13</div>
+        <div class="lesson-title">Developing an Argument &amp; Pitching</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 14</div>
+        <div class="lesson-title">Facts, Figures &amp; Trends</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+          <span class="lesson-tag tag-grammar">Grammar</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="module-section mod5">
+    <div class="module-header">
+      <span class="module-num">Module 5</span>
+      <span class="module-name">Advanced Skills</span>
+      <div class="module-divider"></div>
+    </div>
+    <div class="lessons-grid">
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 15</div>
+        <div class="lesson-title">Negotiating Politely</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 16</div>
+        <div class="lesson-title">Opinion, Emphasis &amp; Conditionals</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-grammar">Grammar</span>
+          <span class="lesson-tag tag-speaking">Speaking</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+      <div class="lesson-card locked">
+        <div class="lesson-num">Lesson 17</div>
+        <div class="lesson-title">Handling Conflicts &amp; Problems</div>
+        <div class="lesson-tags">
+          <span class="lesson-tag tag-speaking">Speaking</span>
+          <span class="lesson-tag tag-vocab">Vocabulary</span>
+        </div>
+        <span class="lesson-status lock-icon">🔒</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Business English · 17 Lessons · 5 Modules</div>
+
+</body>
+</html>

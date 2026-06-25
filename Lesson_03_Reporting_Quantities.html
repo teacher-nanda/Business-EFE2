@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 3 – Reporting Quantities</title>
+<style>
+
+
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --purple:#7c3aed;--lp:#ede9fe;
+  --green:#16a34a;--lg:#dcfce7;
+  --orange:#ea580c;--lo:#ffedd5;
+  --indigo:#4338ca;--li:#e0e7ff;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;--textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+.course-nav{background:var(--navy);color:white;}
+.nav-toggle{display:flex;align-items:center;gap:10px;padding:12px 32px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.5px;user-select:none;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-toggle .arrow{font-size:10px;transition:transform .25s;margin-left:auto;}
+.nav-toggle.open .arrow{transform:rotate(90deg);}
+.nav-body{display:none;padding:20px 32px 24px;}
+.nav-body.show{display:block;}
+.nav-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.nav-mod-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.nav-lesson{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12.5px;color:rgba(255,255,255,0.6);}
+.nav-lesson a{color:inherit;text-decoration:none;}
+.nav-lesson a:hover{color:var(--amber);}
+.nav-lesson.current{color:var(--amber);font-weight:700;}
+.nl{background:rgba(255,255,255,0.12);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700;}
+.nav-lesson.current .nl{background:var(--amber);color:var(--navy);}
+.page-header{background:var(--navy);color:white;padding:28px 48px 22px;position:relative;overflow:hidden;}
+
+.page-header::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);}
+.header-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px;}
+.header-title{font-size:26px;font-weight:700;letter-spacing:-.5px;}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.55);margin-top:3px;}
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;margin:24px 0 28px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;}.s2{background:#2563eb;flex:2;}.s3{background:#7c3aed;flex:2;}.s4{background:#d97706;flex:3;color:#1a1a00;}.s5{background:#1a2e4a;flex:1;}
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+.c-teal .card-head{background:var(--lt);}.c-teal .card-icon{background:var(--teal);color:white;}.c-teal .card-title{color:var(--teal);}.c-teal .card-badge{background:var(--teal);}
+.c-blue .card-head{background:var(--lb);}.c-blue .card-icon{background:var(--blue);color:white;}.c-blue .card-title{color:var(--blue);}.c-blue .card-badge{background:var(--blue);}
+.c-purple .card-head{background:var(--lp);}.c-purple .card-icon{background:var(--purple);color:white;}.c-purple .card-title{color:var(--purple);}.c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);}.c-amber .card-icon{background:var(--amber);color:white;}.c-amber .card-title{color:var(--amber);}.c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);}.c-green .card-icon{background:var(--green);color:white;}.c-green .card-title{color:var(--green);}.c-green .card-badge{background:var(--green);}
+.c-navy .card-head{background:#eef0f3;}.c-navy .card-icon{background:var(--navy);color:white;}.c-navy .card-title{color:var(--navy);}.c-navy .card-badge{background:var(--navy);}
+.c-orange .card-head{background:var(--lo);}.c-orange .card-icon{background:var(--orange);color:white;}.c-orange .card-title{color:var(--orange);}.c-orange .card-badge{background:var(--orange);}
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:400;color:var(--gray);font-style:italic;text-transform:none;letter-spacing:0;}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* WARM-UP: HAVE YOU EVER */
+.hye-list{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.hye-item{border:1.5px solid var(--border);border-radius:11px;overflow:hidden;}
+.hye-q{background:var(--lgr);padding:12px 16px;font-size:14.5px;font-weight:600;color:var(--navy);}
+.hye-opts{display:flex;gap:10px;padding:11px 16px;}
+.hye-opt{padding:7px 20px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.hye-opt:hover:not(.locked){background:var(--navy);color:white;border-color:var(--navy);}
+.hye-yes{background:var(--lg);border-color:var(--green);color:#14532d;}
+.hye-no{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.hye-exp{display:none;padding:10px 16px;border-top:1px solid var(--border);font-size:13px;background:#fafafa;color:var(--gray);font-style:italic;}
+.hye-exp.show{display:block;}
+
+/* VOCAB CARDS */
+.vocab-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-sentence{font-size:13.5px;color:var(--text);margin-bottom:7px;line-height:1.4;}
+.bvc-sentence em{font-style:normal;color:var(--blue);font-weight:700;}
+.bvc-term{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.bvc-def{font-size:12px;color:var(--gray);font-style:italic;}
+.bvc-go{border-color:var(--lp);background:var(--lp);}
+.bvc-go:hover{border-color:var(--purple);box-shadow:0 3px 10px rgba(124,58,237,0.12);}
+.bvc-go .bvc-sentence em{color:var(--purple);}
+.bvc-go .bvc-term{color:var(--purple);}
+.vocab-section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+
+/* FEW/LITTLE VISUAL */
+.q-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0;}
+.qc-box{border-radius:12px;overflow:hidden;border:2px solid transparent;}
+.qc-head{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.qc-body{padding:14px 16px;}
+.qc-rule{font-size:13.5px;margin-bottom:10px;color:var(--text);}
+.qc-example{font-size:14px;font-style:italic;border-top:1px solid var(--border);padding-top:10px;}
+.qc-example em{font-style:normal;font-weight:700;}
+.qc-note{font-size:12px;color:var(--textl);margin-top:6px;}
+.qc-few{border-color:#fcd34d;}.qc-few .qc-head{background:var(--la);color:#78350f;}
+.qc-afew{border-color:#86efac;}.qc-afew .qc-head{background:var(--lg);color:#14532d;}
+
+/* GAP FILL */
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;background:var(--lb);border-radius:8px;padding:11px 13px;margin-bottom:14px;}
+.wb-word{background:white;border:1.5px solid var(--blue);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--blue);color:white;}
+.wb-word.selected-wb{background:var(--blue);color:white;outline:3px solid var(--amber);}
+.wb-word.used{background:var(--lgr);border-color:var(--border);color:var(--gray);cursor:default;text-decoration:line-through;}
+.gf-list{list-style:none;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.gf-item{padding:11px 14px;border-bottom:1px solid var(--border);font-size:14.5px;display:flex;align-items:flex-start;gap:10px;}
+.gf-item:last-child{border-bottom:none;}
+.gf-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.blank-drop{display:inline-flex;align-items:center;justify-content:center;border:2px dashed #94a3b8;border-radius:20px;min-width:90px;min-height:34px;padding:8px 14px;cursor:pointer;color:transparent;font-style:italic;font-size:13px;font-weight:600;vertical-align:middle;transition:all .2s;background:#f8fafc;margin:0 3px;}
+.blank-drop:hover{border-color:var(--blue);background:var(--lb);}
+.blank-drop.has-word{color:var(--navy);border-style:solid;border-color:var(--amber);background:var(--la);}
+.blank-drop.correct{color:var(--green);border-style:solid;border-color:var(--green);background:var(--lg);}
+.blank-drop.incorrect{color:var(--rose);border-style:solid;border-color:var(--rose);background:var(--lr);}
+
+/* A/B PICKER */
+.fpick-item{border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden;}
+.fpick-q{background:var(--lgr);padding:12px 16px;font-size:14.5px;font-weight:600;color:var(--navy);}
+.fpick-opts{display:flex;gap:10px;padding:11px 16px;flex-wrap:wrap;}
+.fpick-opt{padding:7px 22px;border:1.5px solid var(--border);border-radius:20px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;}
+.fpick-opt:hover:not(.locked){background:var(--navy);color:white;border-color:var(--navy);}
+.fpick-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.fpick-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.fpick-hint{display:none;padding:10px 16px;border-top:1px solid var(--border);font-size:13.5px;background:#f0fdf4;color:#14532d;}
+.fpick-hint.show{display:block;}
+.fpick-hint em{color:var(--teal);font-style:normal;font-weight:700;}
+
+/* SPOT CHIPS */
+.spot-sentence{border:1.5px solid var(--border);border-radius:11px;padding:14px 18px;margin-bottom:11px;font-size:15px;font-style:italic;color:var(--navy);line-height:1.8;}
+.spot-chip{background:var(--lb);border:1.5px solid #93c5fd;border-radius:12px;padding:2px 9px;cursor:pointer;font-style:normal;font-weight:700;color:var(--blue);transition:all .15s;display:inline-block;}
+.spot-chip:hover:not(.locked){background:var(--navy);color:white;border-color:var(--navy);}
+.spot-chip.correct-fix{background:var(--lg);border-color:var(--green);color:#14532d;cursor:default;}
+.spot-chip.wrong-pick{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.spot-fix{display:none;margin-top:8px;padding:8px 14px;background:var(--lg);border:1px solid #86efac;border-radius:8px;font-size:13px;color:#14532d;font-style:normal;}
+.spot-fix.show{display:block;}
+
+/* SCENE-BASED SPEAKING */
+.scene-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.scene-counter{font-weight:700;color:var(--navy);font-size:14px;}
+.scene-dots{display:flex;gap:5px;flex-wrap:wrap;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .3s;}
+.scene-dot.active{background:var(--amber);}
+.scene-dot.done{background:var(--teal);}
+.scene-card{display:none;border:1.5px solid var(--border);border-radius:13px;overflow:hidden;}
+.scene-card.active{display:block;animation:fadeIn .3s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.scene-top{background:var(--navy);color:white;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:13px;}
+.scene-badge{border-radius:20px;padding:2px 12px;font-weight:700;font-size:12px;color:white;}
+.bg-data{background:#0d9488;}.bg-problem{background:#2563eb;}.bg-discuss{background:#7c3aed;}.bg-close{background:#d97706;color:#1a1a00;}
+.scene-situation{padding:14px 18px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;border-left:4px solid var(--border);}
+.scene-prompt{padding:14px 18px;font-size:15.5px;font-weight:700;color:var(--navy);}
+.scene-hint{padding:0 18px 12px;font-size:13px;color:var(--teal);}
+.scene-lang{padding:0 18px 10px;}
+.lang-pill{display:inline-flex;align-items:center;gap:5px;background:var(--lp);border:1px solid #c4b5fd;border-radius:12px;padding:3px 11px;font-size:12px;color:var(--purple);font-weight:600;margin:3px 3px 3px 0;}
+.scene-answer{display:none;margin:0 18px 14px;padding:13px 14px;background:var(--lg);border:1px solid #86efac;border-radius:9px;font-size:14px;color:#14532d;font-style:italic;}
+.scene-answer.show{display:block;animation:fadeIn .3s;}
+.scene-answer-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:5px;font-style:normal;}
+.scene-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;}
+
+/* QUICK FIRE */
+.qf-card{border:1.5px solid var(--border);border-radius:11px;margin-bottom:10px;overflow:hidden;}
+.qf-q{background:var(--lgr);padding:13px 16px;font-size:15px;font-weight:600;color:var(--navy);}
+.qf-minutes{padding:11px 16px;background:#fefce8;border-bottom:1px solid #fde68a;font-size:13.5px;color:#78350f;font-style:italic;line-height:1.5;}
+.qf-minutes-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#b45309;margin-bottom:4px;display:block;font-style:normal;}
+.qf-choose{padding:12px 16px;display:flex;gap:10px;flex-wrap:wrap;}
+.qf-opt{padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;}
+.qf-opt:hover:not(.locked){border-color:var(--navy);background:var(--navy);color:white;}
+.qf-correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.qf-wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.qf-exp{display:none;padding:10px 16px;border-top:1px solid var(--border);font-size:13px;background:#fafafa;}
+.qf-exp.show{display:block;animation:fadeIn .25s;}
+.qf-exp em{color:var(--teal);font-style:normal;font-weight:700;}
+
+/* HW */
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lr);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--rose);}
+.hw-tag{background:var(--rose);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hw-write{background:var(--lp);color:#5b21b6;}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:white;}.btn-navy:hover{background:#243e60;}
+.btn-green{background:var(--green);color:white;}.btn-green:hover{background:#15803d;}
+.btn-amber{background:var(--amber);color:white;}.btn-amber:hover{background:#b45309;}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:18px;}
+.lesson-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:28px 18px 10px;}
+.lesson-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;}
+.nav-home{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-home:hover{background:var(--border);border-color:#d1d5db;}
+.nav-prev{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-prev:hover{background:var(--border);}
+.nav-next{background:var(--navy);color:white;border:1.5px solid var(--navy);}
+.nav-next:hover{background:#243d5c;}
+.err-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.err-q{font-size:15px;color:var(--navy);margin-bottom:10px;font-style:italic;}
+.err-reveal-btn{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s;font-family:inherit;}
+.err-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+.err-answer{display:none;margin-top:10px;padding:10px 14px;background:var(--lg);border:1px solid #86efac;border-radius:7px;font-size:13.5px;color:#14532d;}
+.err-answer.show{display:block;}
+.correct-word{font-weight:700;color:var(--green);}
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▶";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;}
+.prev-box-item em{font-style:italic;color:var(--navy);font-weight:600;}
+
+/* RC NAV (Ex 4 one-at-a-time) */
+.rc-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;margin-top:4px;}
+.rc-counter{font-size:12px;font-weight:700;color:var(--gray);letter-spacing:.5px;}
+.rc-dots{display:flex;gap:6px;align-items:center;}
+.rc-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .2s;}
+.rc-dot.active{background:var(--purple);}
+.rc-dot.done{background:var(--green);}
+.rc-card{display:none;}
+.rc-card.active{display:block;animation:fadeIn .25s;}
+
+/* RESPOND CARDS — Ex 4 (speaking) */
+.respond-card{border:1.5px solid var(--border);border-radius:13px;overflow:hidden;margin-bottom:14px;}
+.respond-top{background:var(--navy);color:white;padding:9px 16px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;}
+.respond-situation{padding:14px 18px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--navy);border-left:4px solid var(--purple);line-height:1.55;}
+.respond-use{padding:10px 18px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;background:white;}
+.respond-use-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);flex-shrink:0;padding-top:4px;}
+.respond-use-pills{display:flex;flex-wrap:wrap;gap:5px;}
+.respond-speak{padding:12px 18px;background:var(--la);border-bottom:1px solid var(--border);font-size:13.5px;color:#78350f;font-weight:600;display:flex;align-items:center;gap:8px;}
+.respond-footer{padding:10px 18px;display:flex;justify-content:flex-end;background:white;}
+.respond-sample{display:none;padding:12px 18px;background:var(--lg);border-top:1px solid #86efac;font-size:14px;color:#14532d;line-height:1.6;}
+.respond-sample.show{display:block;animation:fadeIn .25s;}
+.respond-sample-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:5px;display:block;}
+.respond-sample strong{font-style:normal;color:#14532d;font-weight:700;}
+.respond-sample em{font-style:italic;}
+
+.match-left,.match-right{display:flex;align-items:flex-start;gap:8px;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13px;background:white;cursor:pointer;transition:all .15s;user-select:none;}
+.match-left:hover{border-color:var(--amber);background:var(--la);}
+.match-right{background:var(--lgr);}
+.match-right:hover{border-color:var(--amber);background:var(--la);}
+.match-left.selected{border-color:var(--amber);background:var(--la);box-shadow:0 0 0 2px var(--amber);}
+.match-left.paired,.match-right.paired{border-color:var(--amber);background:#fff7ed;}
+.match-left.correct,.match-right.correct{border-color:var(--green);background:var(--lg);}
+.match-left.incorrect,.match-right.incorrect{border-color:var(--rose);background:var(--lr);}
+.match-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--navy);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.match-letter{background:var(--teal);}
+.match-text{flex:1;color:var(--navy);line-height:1.4;}
+.match-badge{font-size:11px;font-weight:700;color:var(--amber);white-space:nowrap;flex-shrink:0;}
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+/* ── EXTRA BUTTON COLORS ── */
+.btn-purple{background:var(--purple);color:white;} .btn-purple:hover{background:#6d28d9;}
+
+  /* ══ SLIDE NAVBAR ══ */
+  .slide-navbar {
+    background: white; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+  }
+  .slide-nav-btn {
+    background: var(--navy); color: white; border: none; border-radius: 8px;
+    padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: background .15s; white-space: nowrap;
+  }
+  .slide-nav-btn:hover:not(:disabled) { background: #263d5c; }
+  .slide-nav-btn:disabled { opacity: .3; cursor: default; }
+  .slide-info { text-align: center; flex: 1; }
+  .slide-label { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .slide-counter-text { font-size: 12px; color: var(--gray); margin: 2px 0 6px; }
+  .slide-progress { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .15s; }
+  .sp-dot.active { background: var(--navy); transform: scale(1.3); }
+  .sp-dot.done { background: var(--teal); }
+  /* ══ BOTTOM NAV BAR ══ */
+  .slide-bottom-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px; margin-top: 30px;
+    border-top: 2px solid var(--border); background: #f8fafc;
+  }
+
+  /* ══ TOP HOME STRIP ══ */
+  .top-home-strip {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+    background: var(--navy); height: 42px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .top-home-link {
+    color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+    font-family: inherit; display: flex; align-items: center; gap: 6px;
+    opacity: .85; transition: opacity .15s;
+  }
+  .top-home-link:hover { opacity: 1; }
+  body { padding-top: 42px; }
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<!-- ══ SLIDE NAVBAR ══ -->
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 7</div>
+    <div class="slide-progress"><div class="sp-dot  active" onclick="goToSlide(0)" title="Slide 1"></div><div class="sp-dot" onclick="goToSlide(1)" title="Slide 2"></div><div class="sp-dot" onclick="goToSlide(2)" title="Slide 3"></div><div class="sp-dot" onclick="goToSlide(3)" title="Slide 4"></div><div class="sp-dot" onclick="goToSlide(4)" title="Slide 5"></div><div class="sp-dot" onclick="goToSlide(5)" title="Slide 6"></div><div class="sp-dot" onclick="goToSlide(6)" title="Slide 7"></div></div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+<!-- HEADER -->
+
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English with teacher Nanda</div>
+      <div class="cover-module-tag">Module 1 · Meetings — Lesson 3 of 4</div>
+      <div class="cover-title-main">Reporting Quantities</div>
+      <div class="cover-lesson-badge">Lesson 3</div>
+      <div class="cover-tl">
+        <div class="tl-bar">
+    <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+    <div class="tl-seg s2">Vocabulary<span class="t">10 min</span></div>
+    <div class="tl-seg s3">Key Language<span class="t">10 min</span></div>
+    <div class="tl-seg s4">Speaking<span class="t">15 min</span></div>
+    <div class="tl-seg s5">Wrap-up<span class="t">5 min</span></div>
+  </div>
+
+  <!-- ══ PART 1: WARM-UP ══ -->
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+    <div class="card-head">
+      <div class="card-icon">🤔</div>
+      <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">Have You Ever…?</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;font-style:italic;">Click Yes or No — then we'll talk about your answers.</p>
+
+      <div class="hye-list">
+        <div class="hye-item">
+          <div class="hye-q">1. &nbsp;Have you ever given an approximate figure in a meeting that turned out to be far off the real number?</div>
+          <div class="hye-opts">
+            <button class="hye-opt" onclick="hyePick(this,'yes','hye1')">Yes!</button>
+            <button class="hye-opt" onclick="hyePick(this,'no','hye1')">Not really</button>
+          </div>
+          <div class="hye-exp" id="hye1">Giving ballpark figures is normal in meetings — but knowing how to frame them correctly ("give or take", "roughly") helps you sound confident rather than vague.</div>
+        </div>
+        <div class="hye-item">
+          <div class="hye-q">2. &nbsp;Have you ever noticed that two reports showed different numbers for the same data?</div>
+          <div class="hye-opts">
+            <button class="hye-opt" onclick="hyePick(this,'yes','hye2')">Yes!</button>
+            <button class="hye-opt" onclick="hyePick(this,'no','hye2')">Not really</button>
+          </div>
+          <div class="hye-exp" id="hye2">A gap between two sets of data is called a discrepancy — a key word for today's lesson.</div>
+        </div>
+        <div class="hye-item">
+          <div class="hye-q">3. &nbsp;Have you ever had to explain why actual results were lower than expected?</div>
+          <div class="hye-opts">
+            <button class="hye-opt" onclick="hyePick(this,'yes','hye3')">Yes!</button>
+            <button class="hye-opt" onclick="hyePick(this,'no','hye3')">Not really</button>
+          </div>
+          <div class="hye-exp" id="hye3">When results fall short of a target, that gap is called a shortfall. You'll also learn how to "account for" it — meaning explain why it happened.</div>
+        </div>
+        <div class="hye-item">
+          <div class="hye-q">4. &nbsp;Have you ever said "a few" when you meant "not many"? Or "little" when you meant "some"?</div>
+          <div class="hye-opts">
+            <button class="hye-opt" onclick="hyePick(this,'yes','hye4')">Yes!</button>
+            <button class="hye-opt" onclick="hyePick(this,'no','hye4')">Not really</button>
+          </div>
+          <div class="hye-exp" id="hye4">Few and a few sound similar — but they carry opposite tones. Today you'll master the difference and use it precisely in meetings.</div>
+        </div>
+      </div>
+
+      <div style="background:var(--lt);border:1px solid #5eead4;border-radius:12px;padding:16px 18px;margin-top:4px;">
+        <div style="font-size:15px;color:#134e4a;font-weight:600;margin-bottom:8px;">💬 Follow-up discussion</div>
+        <p style="font-size:14px;color:#134e4a;">In your work, do you usually deal with exact figures or approximations? When is it acceptable — or even better — to use a rough estimate instead of a precise number?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PART 2: VOCABULARY ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 2 ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-blue">
+    <div class="card-head">
+      <div class="card-icon">📚</div>
+      <div><div class="card-label">Part 2 · Vocabulary</div><div class="card-title">Quantities &amp; Precision</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <div class="vocab-section-label" style="color:var(--blue);">📝 Key vocabulary</div>
+      <div class="vocab-card-grid">
+        <div class="bvc">
+          <div class="bvc-term">ballpark figure</div>
+          <div class="bvc-sentence">I don't have the exact number — can I give you a <em>ballpark figure</em> for now?</div>
+          <div class="bvc-def">an approximate estimate; not necessarily exact</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">shortfall</div>
+          <div class="bvc-sentence">There's a <em>shortfall</em> of 15% — we didn't hit the target we set at the start of the quarter.</div>
+          <div class="bvc-def">the gap between what was expected or needed and what was actually achieved</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">discrepancy</div>
+          <div class="bvc-sentence">There's a <em>discrepancy</em> between the two reports — we need to find out why.</div>
+          <div class="bvc-def">a difference or inconsistency between two sets of information</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">to account for</div>
+          <div class="bvc-sentence">Can you <em>account for</em> the shortfall? The board will need an explanation before the next meeting.</div>
+          <div class="bvc-def">to explain or justify a figure, result, or difference — why it happened</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">double-check</div>
+          <div class="bvc-sentence">Let me <em>double-check</em> the number of attendees before I confirm the room.</div>
+          <div class="bvc-def">to check something a second time to make sure it's correct</div>
+        </div>
+      </div>
+
+      <div class="vocab-section-label" style="color:var(--purple);">🚀 Going further</div>
+      <div class="vocab-card-grid">
+        <div class="bvc bvc-go">
+          <div class="bvc-term">to flag</div>
+          <div class="bvc-sentence">I'd like to <em>flag</em> a potential issue with the Q3 projections before we move on.</div>
+          <div class="bvc-def">to draw attention to something — often a problem or discrepancy</div>
+        </div>
+        <div class="bvc bvc-go">
+          <div class="bvc-term">give or take</div>
+          <div class="bvc-sentence">It'll take about three weeks, <em>give or take</em> a few days.</div>
+          <div class="bvc-def">approximately; allowing for a small margin of error</div>
+        </div>
+        <div class="bvc bvc-go">
+          <div class="bvc-term">to cross-reference</div>
+          <div class="bvc-sentence">We should <em>cross-reference</em> these numbers against last year's report before presenting.</div>
+          <div class="bvc-def">to compare information from two different sources to verify accuracy</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EX 1: VOCAB GAP FILL -->
+      <div class="act-head">
+        <div class="act-num">1</div>
+        Fill in the gaps — click a word from the box, then click the blank
+        <span class="act-type">Gap fill · words not in order</span>
+      </div>
+
+      <div class="word-bank" id="wbv">
+        <span class="wb-word" onclick="wbSelect(this)">ballpark figure</span>
+        <span class="wb-word" onclick="wbSelect(this)">shortfall</span>
+        <span class="wb-word" onclick="wbSelect(this)">account for</span>
+        <span class="wb-word" onclick="wbSelect(this)">double-check</span>
+        <span class="wb-word" onclick="wbSelect(this)">flag</span>
+        <span class="wb-word" onclick="wbSelect(this)">give or take</span>
+        <span class="wb-word" onclick="wbSelect(this)">cross-reference</span>
+      </div>
+
+      <ul class="gf-list">
+        <li class="gf-item"><div class="gf-num">1</div><div>We fell short of the sales target — there's a <span class="blank-drop" id="gv-1" onclick="dropOnBlank(this)" data-answer="shortfall"></span> of around 12% that we need to address.</div></li>
+        <li class="gf-item"><div class="gf-num">2</div><div>I don't have the exact number yet, but I can give you a <span class="blank-drop" id="gv-2" onclick="dropOnBlank(this)" data-answer="ballpark figure"></span> — we're looking at somewhere between €80,000 and €100,000.</div></li>
+        <li class="gf-item"><div class="gf-num">3</div><div>Can you <span class="blank-drop" id="gv-3" onclick="dropOnBlank(this)" data-answer="double-check"></span> the start date before we send the client the timeline?</div></li>
+        <li class="gf-item"><div class="gf-num">4</div><div>The board has asked the team to <span class="blank-drop" id="gv-4" onclick="dropOnBlank(this)" data-answer="account for"></span> the €25,000 difference before Friday's presentation.</div></li>
+      </ul>
+      <div style="display:flex;gap:9px;margin-top:11px;">
+        <button class="btn btn-green btn-sm" onclick="checkGF('gv',4)">✓ Check answers</button>
+        <button class="btn btn-outline btn-sm" onclick="resetGF('gv',4,'wbv')">↺ Reset</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- FEW vs A FEW visual -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:12px;">📊 The key difference — few/little vs. a few/a little</div>
+      <div class="q-compare">
+        <div class="qc-box qc-few">
+          <div class="qc-head">⚠️ few / little — not enough</div>
+          <div class="qc-body">
+            <div class="qc-rule">Negative meaning — less than expected, almost none</div>
+            <div class="qc-example">There are <em>few</em> options left. (not enough to choose from)<br>There is <em>little</em> support for this idea.</div>
+            <div class="qc-note">Tone: problem, concern, not ideal</div>
+          </div>
+        </div>
+        <div class="qc-box qc-afew">
+          <div class="qc-head">✅ a few / a little — some, enough</div>
+          <div class="qc-body">
+            <div class="qc-rule">Positive meaning — some, at least something</div>
+            <div class="qc-example">There are <em>a few</em> options we can explore.<br>We have <em>a little</em> budget remaining.</div>
+            <div class="qc-note">Tone: neutral or optimistic</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--lb);border-radius:10px;padding:13px 16px;margin-top:4px;font-size:13px;color:#1e3a8a;">
+        <strong>Also remember:</strong> Use <em>few / a few</em> with <strong>countable nouns</strong> (meetings, options, people). Use <em>little / a little</em> with <strong>uncountable nouns</strong> (time, budget, evidence, support).
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EX 2: FEW/LITTLE GAP FILL -->
+      <div class="act-head">
+        <div class="act-num">2</div>
+        Fill in the gaps — few / a few / little / a little
+        <span class="act-type">Gap fill</span>
+      </div>
+
+      <div class="word-bank" id="wb1">
+        <span class="wb-word" onclick="wbSelect(this)">few</span>
+        <span class="wb-word" onclick="wbSelect(this)">a few</span>
+        <span class="wb-word" onclick="wbSelect(this)">little</span>
+        <span class="wb-word" onclick="wbSelect(this)">a little</span>
+        <span class="wb-word" onclick="wbSelect(this)">little</span>
+      </div>
+
+      <ul class="gf-list">
+        <li class="gf-item"><div class="gf-num">1</div><div>We have <span class="blank-drop" id="g1-1" onclick="dropOnBlank(this)" data-answer="a little"></span> time before the call — let's run through the agenda quickly.</div></li>
+        <li class="gf-item"><div class="gf-num">2</div><div><span class="blank-drop" id="g1-2" onclick="dropOnBlank(this)" data-answer="few"></span> people attended the training — we may need to reschedule.</div></li>
+        <li class="gf-item"><div class="gf-num">3</div><div>There is <span class="blank-drop" id="g1-3" onclick="dropOnBlank(this)" data-answer="little"></span> evidence to support that proposal — we need more data before moving forward.</div></li>
+        <li class="gf-item"><div class="gf-num">4</div><div>I still have <span class="blank-drop" id="g1-4" onclick="dropOnBlank(this)" data-answer="a few"></span> questions before we close the discussion.</div></li>
+      </ul>
+      <div style="display:flex;gap:9px;margin-top:11px;">
+        <button class="btn btn-green btn-sm" onclick="checkGF('g1',4)">✓ Check answers</button>
+        <button class="btn btn-outline btn-sm" onclick="resetGF('g1',4,'wb1')">↺ Reset</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 3: KEY LANGUAGE ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 3 ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-purple">
+    <div class="card-head">
+      <div class="card-icon">🎯</div>
+      <div><div class="card-label">Part 3 · Key Language</div><div class="card-title">Using Quantities Precisely</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:12px;">🔍 Exercise 3 — Choose the correct option</div>
+      <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Each question tests a word from today's lesson — vocabulary or grammar. Read the context carefully and click the best option.</p>
+
+      <!-- A/B PICKER Ex 3 -->
+      <div class="act-head" style="margin-top:0;">
+        <div class="act-num">3</div>
+        Which word or phrase fits the context?
+        <span class="act-type">A/B choice · vocabulary &amp; grammar mixed</span>
+      </div>
+
+      <div class="fpick-item">
+        <div class="fpick-q">1. &nbsp;"I don't have the final number yet, but I can give you a _____ — roughly €80,000."</div>
+        <div class="fpick-opts">
+          <button class="fpick-opt" onclick="grammarPick(this,false,'fp1')">A — shortfall</button>
+          <button class="fpick-opt" onclick="grammarPick(this,true,'fp1')">B — ballpark figure</button>
+        </div>
+        <div class="fpick-hint" id="fp1">✅ <em>Ballpark figure</em> — an approximate estimate. A "shortfall" means the gap between what was expected and what was achieved — it doesn't describe an estimate.</div>
+      </div>
+
+      <div class="fpick-item">
+        <div class="fpick-q">2. &nbsp;"There is _____ evidence to support this proposal — we need more data before we can move forward."</div>
+        <div class="fpick-opts">
+          <button class="fpick-opt" onclick="grammarPick(this,true,'fp2')">A — little</button>
+          <button class="fpick-opt" onclick="grammarPick(this,false,'fp2')">B — a little</button>
+        </div>
+        <div class="fpick-hint" id="fp2">✅ <em>Little</em> — "evidence" is uncountable and the context is negative ("we need more"). "Little" = almost none. "A little" would suggest some evidence exists, which doesn't match the concern.</div>
+      </div>
+
+      <div class="fpick-item">
+        <div class="fpick-q">3. &nbsp;"The two reports show different totals — there seems to be a _____ we need to investigate."</div>
+        <div class="fpick-opts">
+          <button class="fpick-opt" onclick="grammarPick(this,true,'fp3')">A — discrepancy</button>
+          <button class="fpick-opt" onclick="grammarPick(this,false,'fp3')">B — shortfall</button>
+        </div>
+        <div class="fpick-hint" id="fp3">✅ <em>Discrepancy</em> — a difference or inconsistency between two sets of information. A "shortfall" is a gap between a target and an actual result — it doesn't apply when you're comparing two sources.</div>
+      </div>
+
+      <div class="fpick-item">
+        <div class="fpick-q">4. &nbsp;"There are _____ people available to help this week — most of the team is on leave."</div>
+        <div class="fpick-opts">
+          <button class="fpick-opt" onclick="grammarPick(this,true,'fp4')">A — few</button>
+          <button class="fpick-opt" onclick="grammarPick(this,false,'fp4')">B — a few</button>
+        </div>
+        <div class="fpick-hint" id="fp4">✅ <em>Few</em> — "people" is countable and the tone is negative ("most of the team is on leave"). "Few" = almost none, which signals a problem. "A few" would be neutral or positive — meaning some people are available.</div>
+      </div>
+
+      <div class="fpick-item">
+        <div class="fpick-q">5. &nbsp;"Before we present, let's _____ these numbers against last month's report to make sure they match."</div>
+        <div class="fpick-opts">
+          <button class="fpick-opt" onclick="grammarPick(this,false,'fp5')">A — flag</button>
+          <button class="fpick-opt" onclick="grammarPick(this,true,'fp5')">B — cross-reference</button>
+        </div>
+        <div class="fpick-hint" id="fp5">✅ <em>Cross-reference</em> — to compare information from two sources to verify accuracy. "Flag" means to draw attention to something (a problem or concern) — it doesn't involve comparing sources.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EX 4: ALL AS A PRONOUN -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">📖 Key Language — "All" as a pronoun</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+        <div style="border:2px solid var(--lb);border-radius:11px;overflow:hidden;">
+          <div style="background:var(--lb);padding:9px 14px;font-size:14px;font-weight:700;color:var(--blue);">all = <strong>everything</strong></div>
+          <div style="padding:12px 14px;font-size:14px;font-style:italic;color:var(--navy);">"I hope <em style='color:var(--blue);font-style:normal;font-weight:700;'>all</em> goes well in the presentation."<br><span style="font-size:12px;color:var(--gray);font-style:normal;">→ everything goes well</span></div>
+        </div>
+        <div style="border:2px solid var(--lp);border-radius:11px;overflow:hidden;">
+          <div style="background:var(--lp);padding:9px 14px;font-size:14px;font-weight:700;color:var(--purple);">all = <strong>the only thing</strong></div>
+          <div style="padding:12px 14px;font-size:14px;font-style:italic;color:var(--navy);"><em style='color:var(--purple);font-style:normal;font-weight:700;'>All</em> we can do is prepare thoroughly."<br><span style="font-size:12px;color:var(--gray);font-style:normal;">→ the only thing we can do</span></div>
+        </div>
+      </div>
+
+      <div class="act-head" style="margin-top:0;">
+        <div class="act-num">4</div>
+        Match the sentences that mean the same thing
+        <span class="act-type">Interactive matching</span>
+      </div>
+
+
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+        <!-- LEFT COLUMN (1–5) -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="match-left" id="ml1" onclick="selectLeft(1)">
+            <span class="match-num">1</span>
+            <span class="match-text">All we need is the client's signature.</span>
+            <span class="match-badge" id="mb1"></span>
+          </div>
+          <div class="match-left" id="ml2" onclick="selectLeft(2)">
+            <span class="match-num">2</span>
+            <span class="match-text">There's a little time left before the deadline.</span>
+            <span class="match-badge" id="mb2"></span>
+          </div>
+          <div class="match-left" id="ml3" onclick="selectLeft(3)">
+            <span class="match-num">3</span>
+            <span class="match-text">Few people responded to the survey.</span>
+            <span class="match-badge" id="mb3"></span>
+          </div>
+          <div class="match-left" id="ml4" onclick="selectLeft(4)">
+            <span class="match-num">4</span>
+            <span class="match-text">There's little money left in the budget.</span>
+            <span class="match-badge" id="mb4"></span>
+          </div>
+          <div class="match-left" id="ml5" onclick="selectLeft(5)">
+            <span class="match-num">5</span>
+            <span class="match-text">She knows all there is to know about the system.</span>
+            <span class="match-badge" id="mb5"></span>
+          </div>
+        </div>
+        <!-- RIGHT COLUMN (A–E, shuffled — A≠1, B≠2, etc.) -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="match-right" id="mrA" onclick="selectRight('A')">
+            <span class="match-num match-letter">A</span>
+            <span class="match-text">We don't have much budget left.</span>
+            <span class="match-badge" id="mbA"></span>
+          </div>
+          <div class="match-right" id="mrB" onclick="selectRight('B')">
+            <span class="match-num match-letter">B</span>
+            <span class="match-text">She's an expert in the system.</span>
+            <span class="match-badge" id="mbB"></span>
+          </div>
+          <div class="match-right" id="mrC" onclick="selectRight('C')">
+            <span class="match-num match-letter">C</span>
+            <span class="match-text">Not many people responded to the survey.</span>
+            <span class="match-badge" id="mbC"></span>
+          </div>
+          <div class="match-right" id="mrD" onclick="selectRight('D')">
+            <span class="match-num match-letter">D</span>
+            <span class="match-text">We have some time.</span>
+            <span class="match-badge" id="mbD"></span>
+          </div>
+          <div class="match-right" id="mrE" onclick="selectRight('E')">
+            <span class="match-num match-letter">E</span>
+            <span class="match-text">The only thing we need is the client's signature.</span>
+            <span class="match-badge" id="mbE"></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" onclick="checkMatchAnswers()">✓ Check</button>
+        <button class="btn btn-purple btn-sm" onclick="showAnswerKey()" id="match-key-btn" style="display:none;">📋 Answer key</button>
+        <button class="btn btn-outline btn-sm" onclick="resetMatches()">↺ Reset</button>
+        <span id="match-score" style="display:none;font-size:13px;font-weight:700;"></span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 4: GUIDED SPEAKING ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 4 ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-amber">
+    <div class="card-head">
+      <div class="card-icon">💬</div>
+      <div><div class="card-label">Part 4 · Guided Speaking</div><div class="card-title">Reporting Numbers in a Meeting</div></div>
+      <span class="card-badge">15 min</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:14px;color:var(--gray);margin-bottom:14px;">Read each situation and respond out loud. Use the Useful phrases shown — including ones from previous lessons.</p>
+
+      <details class="prev-box">
+        <summary>📌 Useful phrases to keep using</summary>
+        <div class="prev-box-body">
+          <div class="prev-box-item"><em>"I'd like to give a quick update on…"</em> — opening a topic or sharing new information</div>
+          <div class="prev-box-item"><em>"Before we go any further…"</em> — pausing to flag something important mid-meeting</div>
+          <div class="prev-box-item"><em>"She confirmed / mentioned that…"</em> — reporting what someone said (reported speech)</div>
+          <div class="prev-box-item"><em>"According to the latest figures…"</em> — attributing data to a source</div>
+          <div class="prev-box-item"><em>"He warned us that…"</em> — reporting a concern raised in a previous conversation</div>
+        </div>
+      </details>
+
+      <!-- NAV BAR -->
+      <div class="rc-nav" style="margin-top:14px;">
+        <button class="btn btn-outline btn-sm" onclick="rcNav4(0,'prev')" id="p4-prev" disabled>← Prev</button>
+        <span class="rc-counter" id="p4-counter">Situation 1 of 5</span>
+        <div class="rc-dots" id="p4-dots">
+          <div class="rc-dot active"></div><div class="rc-dot"></div><div class="rc-dot"></div><div class="rc-dot"></div><div class="rc-dot"></div>
+        </div>
+        <button class="btn btn-purple btn-sm" onclick="rcNav4(0,'next')" id="p4-next">Next →</button>
+      </div>
+
+      <!-- SITUATION 1 -->
+      <div class="rc-card active" id="p4c1">
+      <div class="respond-card">
+        <div class="respond-top">📋 Situation 1 — Giving an estimate</div>
+        <div class="respond-situation">Your manager asks: <em>"Do we have the final budget for this project yet?"</em> You don't have the exact number but have a rough idea.</div>
+        <div class="respond-use">
+          <span class="respond-use-label">Useful:</span>
+          <div class="respond-use-pills">
+            <span class="lang-pill">ballpark figure</span>
+            <span class="lang-pill">give or take</span>
+            <span class="lang-pill">roughly</span>
+            <span class="lang-pill">approximate</span>
+          </div>
+        </div>
+        <div class="respond-speak">💬 Say it — then check the sample</div>
+        <button class="btn btn-outline btn-sm" style="margin:6px 14px 10px;" onclick="toggleSample(this,'p4s1')">▶ Show sample</button>
+        <div class="respond-sample" id="p4s1">
+          <span class="respond-sample-label">Sample answer</span>
+          "I don't have the final number yet — the invoice is still pending. But I can give you a <strong>ballpark figure</strong>: we're looking at <strong>roughly</strong> €42,000, <strong>give or take</strong> a few thousand. I'll confirm the exact amount by end of week."
+        </div>
+      </div>
+      </div>
+
+      <!-- SITUATION 2 -->
+      <div class="rc-card" id="p4c2">
+      <div class="respond-card">
+        <div class="respond-top">📉 Situation 2 — Reporting a shortfall</div>
+        <div class="respond-situation">Sales reached only 76% of the quarterly target. Your director asks you to report the result and explain it to the team.</div>
+        <div class="respond-use">
+          <span class="respond-use-label">Useful:</span>
+          <div class="respond-use-pills">
+            <span class="lang-pill">shortfall</span>
+            <span class="lang-pill">fell short of</span>
+            <span class="lang-pill">flag</span>
+            <span class="lang-pill">account for</span>
+          </div>
+        </div>
+        <div class="respond-speak">💬 Say it — then check the sample</div>
+        <button class="btn btn-outline btn-sm" style="margin:6px 14px 10px;" onclick="toggleSample(this,'p4s2')">▶ Show sample</button>
+        <div class="respond-sample" id="p4s2">
+          <span class="respond-sample-label">Sample answer</span>
+          "I need to <strong>flag</strong> something. We <strong>fell short of</strong> our quarterly target — there's a <strong>shortfall</strong> of 24%. The director confirmed that this would be discussed at Friday's board meeting, so I'll prepare a full breakdown before then."
+        </div>
+      </div>
+      </div>
+
+      <!-- SITUATION 3 -->
+      <div class="rc-card" id="p4c3">
+      <div class="respond-card">
+        <div class="respond-top">🔎 Situation 3 — Flagging a discrepancy</div>
+        <div class="respond-situation">You're reviewing two documents before a client presentation. The revenue figures are different in each one. You need to raise this now.</div>
+        <div class="respond-use">
+          <span class="respond-use-label">Useful:</span>
+          <div class="respond-use-pills">
+            <span class="lang-pill">discrepancy</span>
+            <span class="lang-pill">cross-reference</span>
+            <span class="lang-pill">double-check</span>
+            <span class="lang-pill">flag</span>
+          </div>
+        </div>
+        <div class="respond-speak">💬 Say it — then check the sample</div>
+        <button class="btn btn-outline btn-sm" style="margin:6px 14px 10px;" onclick="toggleSample(this,'p4s3')">▶ Show sample</button>
+        <div class="respond-sample" id="p4s3">
+          <span class="respond-sample-label">Sample answer</span>
+          "<strong>Before we move on</strong>, I'd like to <strong>flag</strong> a <strong>discrepancy</strong>. The two documents don't show the same revenue figures. Can we take a moment to <strong>cross-reference</strong> them with the original data? I want to <strong>double-check</strong> before we present anything to the client."
+        </div>
+      </div>
+      </div>
+
+      <!-- SITUATION 4 -->
+      <div class="rc-card" id="p4c4">
+      <div class="respond-card">
+        <div class="respond-top">📊 Situation 4 — Accounting for a result</div>
+        <div class="respond-situation">The director asks: <em>"Can you account for the drop in customer satisfaction this quarter?"</em> You have a few possible reasons but limited hard data.</div>
+        <div class="respond-use">
+          <span class="respond-use-label">Useful:</span>
+          <div class="respond-use-pills">
+            <span class="lang-pill">account for</span>
+            <span class="lang-pill">a few</span>
+            <span class="lang-pill">little</span>
+            <span class="lang-pill">observations</span>
+          </div>
+        </div>
+        <div class="respond-speak">💬 Say it — then check the sample</div>
+        <button class="btn btn-outline btn-sm" style="margin:6px 14px 10px;" onclick="toggleSample(this,'p4s4')">▶ Show sample</button>
+        <div class="respond-sample" id="p4s4">
+          <span class="respond-sample-label">Sample answer</span>
+          "There's <strong>little</strong> hard data at this stage, but I can offer <strong>a few</strong> observations. The new platform rolled out mid-quarter and there were technical issues in the first two weeks — that likely affected user experience. She mentioned that support tickets spiked during that period, which would <strong>account for</strong> part of the drop."
+        </div>
+      </div>
+      </div>
+
+      <!-- SITUATION 5 -->
+      <div class="rc-card" id="p4c5">
+      <div class="respond-card">
+        <div class="respond-top">⏱️ Situation 5 — Warning the team</div>
+        <div class="respond-situation">The project deadline is in two days. Time and budget are almost gone. You need to alert the team and keep everyone focused on what matters.</div>
+        <div class="respond-use">
+          <span class="respond-use-label">Useful:</span>
+          <div class="respond-use-pills">
+            <span class="lang-pill">little</span>
+            <span class="lang-pill">few</span>
+            <span class="lang-pill">all we can do</span>
+            <span class="lang-pill">running out</span>
+          </div>
+        </div>
+        <div class="respond-speak">💬 Say it — then check the sample</div>
+        <button class="btn btn-outline btn-sm" style="margin:6px 14px 10px;" onclick="toggleSample(this,'p4s5')">▶ Show sample</button>
+        <div class="respond-sample" id="p4s5">
+          <span class="respond-sample-label">Sample answer</span>
+          "I want to make sure everyone is aware: we have very <strong>little</strong> time and <strong>little</strong> budget left. There are <strong>few</strong> options at this stage — <strong>all we can do</strong> is focus on the critical tasks. He warned us last week that this might happen, so let's not lose any more time."
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 5: FIX THE MINUTES ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 5 ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-navy">
+    <div class="card-head">
+      <div class="card-icon">⚡</div>
+      <div><div class="card-label">Part 5 · Wrap-up</div><div class="card-title">Fix the Minutes</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;">Each draft meeting minute below contains <strong>one mistake</strong>. Pick the corrected version.</p>
+
+      <!-- Q1 — reported speech: will → would -->
+      <div class="qf-card">
+        <div class="qf-q">1. &nbsp;Spot the mistake</div>
+        <div class="qf-minutes">
+          <span class="qf-minutes-label">📄 Draft minutes</span>
+          "The supplier confirmed that delivery <u>will begin</u> the following Monday."
+        </div>
+        <div class="qf-choose" style="flex-direction:column;gap:7px;">
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,true,'qf1')">A — "The supplier confirmed that delivery <strong>would begin</strong> the following Monday."</button>
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,false,'qf1')">B — "The supplier confirmed that delivery <strong>begins</strong> the following Monday."</button>
+        </div>
+        <div class="qf-exp" id="qf1">✅ <em>A</em> — In reported speech, "will" shifts back to "would". The tense changes to match the reporting verb "confirmed" (past).</div>
+      </div>
+
+      <!-- Q2 — few/little: "few time" → "little time" -->
+      <div class="qf-card">
+        <div class="qf-q">2. &nbsp;Spot the mistake</div>
+        <div class="qf-minutes">
+          <span class="qf-minutes-label">📄 Draft minutes</span>
+          "There were <u>few time</u> remaining, so the last agenda point was postponed."
+        </div>
+        <div class="qf-choose" style="flex-direction:column;gap:7px;">
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,false,'qf2')">A — "There was <strong>a few time</strong> remaining, so the last agenda point was postponed."</button>
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,true,'qf2')">B — "There was <strong>little time</strong> remaining, so the last agenda point was postponed."</button>
+        </div>
+        <div class="qf-exp" id="qf2">✅ <em>B</em> — "Time" is uncountable, so it takes "little" (not "few"). Two errors fixed: "few" → "little" and "were" → "was".</div>
+      </div>
+
+      <!-- Q3 — vocabulary: "give or take" misused as a verb -->
+      <div class="qf-card">
+        <div class="qf-q">3. &nbsp;Spot the mistake</div>
+        <div class="qf-minutes">
+          <span class="qf-minutes-label">📄 Draft minutes</span>
+          "The finance team was asked to <u>give or take</u> the two versions of the expense report."
+        </div>
+        <div class="qf-choose" style="flex-direction:column;gap:7px;">
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,false,'qf3')">A — "The finance team was asked to <strong>account for</strong> the two versions of the expense report."</button>
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,true,'qf3')">B — "The finance team was asked to <strong>cross-reference</strong> the two versions of the expense report."</button>
+        </div>
+        <div class="qf-exp" id="qf3">✅ <em>B</em> — "Give or take" is used with numbers to mean "approximately" (e.g. €50,000, give or take). It is not a verb meaning "compare". "Cross-reference" means to check one document against another.</div>
+      </div>
+
+      <!-- Q4 — reported speech + quantities: backshift + a little → a few -->
+      <div class="qf-card">
+        <div class="qf-q">4. &nbsp;Spot the mistake</div>
+        <div class="qf-minutes">
+          <span class="qf-minutes-label">📄 Draft minutes</span>
+          "Sara mentioned that there <u>are</u> only <u>a little</u> options left and the team needs to decide quickly."
+        </div>
+        <div class="qf-choose" style="flex-direction:column;gap:7px;">
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,true,'qf4')">A — "Sara mentioned that there <strong>were</strong> only <strong>a few</strong> options left and the team <strong>needed</strong> to decide quickly."</button>
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,false,'qf4')">B — "Sara mentioned that there <strong>is</strong> only <strong>little</strong> options left and the team needs to decide quickly."</button>
+        </div>
+        <div class="qf-exp" id="qf4">✅ <em>A</em> — Two fixes: "are" → "were" (reported speech backshift), and "a little" → "a few" because "options" is countable. "Needs" also shifts to "needed".</div>
+      </div>
+
+      <!-- Q5 — vocabulary: "discrepancy" misused for an estimate -->
+      <div class="qf-card">
+        <div class="qf-q">5. &nbsp;Spot the mistake</div>
+        <div class="qf-minutes">
+          <span class="qf-minutes-label">📄 Draft minutes</span>
+          "James presented a <u>discrepancy</u> of around €80,000 for the total project costs."
+        </div>
+        <div class="qf-choose" style="flex-direction:column;gap:7px;">
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,false,'qf5')">A — "James presented a <strong>cross-reference</strong> of around €80,000 for the total project costs."</button>
+          <button class="qf-opt" style="text-align:left;" onclick="qfPick(this,true,'qf5')">B — "James presented a <strong>ballpark figure</strong> of around €80,000 for the total project costs."</button>
+        </div>
+        <div class="qf-exp" id="qf5">✅ <em>B</em> — A "discrepancy" is an inconsistency between two different figures — not an estimate. When giving an approximate total, you give a "ballpark figure".</div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ══ HOMEWORK ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 6 ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-orange">
+    <div class="card-head">
+      <div class="card-icon">📝</div>
+      <div><div class="card-label">For next time</div><div class="card-title">Homework</div></div>
+      <span class="card-badge">1 task</span>
+    </div>
+    <div class="card-body">
+
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task</span> Write Your Meeting Summary Email</div>
+        <div class="hw-body">
+          <span class="hw-type hw-write">✉️ Writing · reported speech + quantities</span>
+          <div style="background:var(--lr);border:1px solid #fda4af;border-radius:10px;padding:15px 17px;margin:12px 0;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--rose);margin-bottom:7px;">Your task</div>
+            <p style="font-size:14px;">Write a short email (80–100 words) summarizing the project review meeting from the speaking practice above. A colleague who wasn't present needs to be brought up to speed.</p>
+          </div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin:12px 0 8px;">Your email must include:</div>
+          <ul style="list-style:none;padding:0;margin-bottom:14px;">
+            <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">①</span> A summary of key figures and decisions (use reported speech)</li>
+            <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">②</span> At least one use of few/a few or little/a little</li>
+            <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">③</span> At least one quantity word (ballpark figure, shortfall, discrepancy, or give or take)</li>
+            <li style="padding:6px 0;font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">④</span> A professional closing line</li>
+          </ul>
+          <textarea style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;font-family:inherit;color:var(--navy);outline:none;resize:vertical;min-height:160px;line-height:1.6;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border)'" placeholder="Hi [name],&#10;&#10;Just to bring you up to speed on today's project review…"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <a class="slide-nav-btn" href="Lesson_04_Checking_Information_Full_Meeting.html" style="text-decoration:none;">Lesson 4 →</a>
+    </div>
+  </div>
+
+
+
+<script>
+
+const SLIDE_LABELS = ["Cover", "Part 1 · Warm-up", "Part 2 · Vocabulary", "Part 3 · Key Language", "Part 4 · Guided Speaking", "Part 5 · Wrap-up", "For next time"];
+const TOTAL_SLIDES = 7;
+let currentSlide = 0;
+
+function slideNav(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= TOTAL_SLIDES) return;
+  goToSlide(n);
+}
+
+function goToSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateSlideUI();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function updateSlideUI() {
+  const prev = document.getElementById('slide-prev');
+  const next = document.getElementById('slide-next');
+  if (prev) prev.disabled = currentSlide === 0;
+  if (next) {
+    if (currentSlide === TOTAL_SLIDES - 1) {
+      next.disabled = false;
+      next.textContent = 'Lesson 4 →';
+      next.onclick = () => { window.location.href='Lesson_04_Checking_Information_Full_Meeting.html'; };
+    } else {
+      next.disabled = false;
+      next.textContent = 'Next →';
+      next.onclick = () => slideNav(1);
+    }
+  }
+  const lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = SLIDE_LABELS[currentSlide];
+  const ctr = document.getElementById('slide-counter');
+  if (ctr) ctr.textContent = 'Slide ' + (currentSlide+1) + ' of ' + TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < currentSlide) d.classList.add('done');
+    else if (i === currentSlide) d.classList.add('active');
+  });
+}
+
+function hyePick(el,type,expId){
+  const opts=el.closest('.hye-opts').querySelectorAll('.hye-opt');
+  if([...opts].some(o=>o.classList.contains('hye-yes')||o.classList.contains('hye-no')))return;
+  opts.forEach(o=>o.classList.add('locked'));
+  el.classList.add(type==='yes'?'hye-yes':'hye-no');
+  document.getElementById(expId).classList.add('show');
+}
+
+function wbSelect(el){if(el.classList.contains('used'))return;if(wbSelectedEl)wbSelectedEl.classList.remove('selected-wb');if(wbSelectedEl===el){wbSelected=null;wbSelectedEl=null;return;}wbSelected=el.textContent.trim();wbSelectedEl=el;el.classList.add('selected-wb');}
+
+function dropOnBlank(el){if(!wbSelected){el.style.borderColor='var(--rose)';setTimeout(()=>el.style.borderColor='',500);return;}if(el.dataset.filled){const old=[...document.querySelectorAll('.wb-word')].find(w=>w.textContent.trim()===el.dataset.filled&&w.classList.contains('used'));if(old)old.classList.remove('used');}el.textContent=wbSelected;el.classList.add('has-word');el.classList.remove('correct','incorrect');el.dataset.filled=wbSelected;wbSelectedEl.classList.add('used');wbSelectedEl.classList.remove('selected-wb');wbSelected=null;wbSelectedEl=null;}
+
+function checkGF(prefix,count){for(let i=1;i<=count;i++){const el=document.getElementById(prefix+'-'+i);if(!el)continue;const filled=(el.dataset.filled||'').trim().toLowerCase();const answer=el.dataset.answer.toLowerCase();el.classList.remove('has-word','correct','incorrect');if(filled===answer)el.classList.add('correct');else if(filled)el.classList.add('incorrect');}}
+
+function resetGF(prefix,count,bankId){for(let i=1;i<=count;i++){const el=document.getElementById(prefix+'-'+i);if(!el)continue;el.textContent='';el.dataset.filled='';el.classList.remove('has-word','correct','incorrect');}document.querySelectorAll(`#${bankId} .wb-word`).forEach(w=>{w.classList.remove('used','selected-wb');});wbSelected=null;wbSelectedEl=null;}
+
+function grammarPick(el,correct,hintId){
+  const opts=el.closest('.fpick-opts').querySelectorAll('.fpick-opt');
+  if([...opts].some(o=>o.classList.contains('correct')||o.classList.contains('wrong')))return;
+  opts.forEach(o=>o.classList.add('locked'));
+  el.classList.add(correct?'correct':'wrong');
+  if(!correct)opts.forEach(o=>{if(o!==el)o.classList.add('correct');});
+  document.getElementById(hintId).classList.add('show');
+}
+
+function spotPick(el,correct,fixId){
+  const chips=el.closest('.spot-sentence').querySelectorAll('.spot-chip');
+  if([...chips].some(c=>c.classList.contains('correct-fix')||c.classList.contains('wrong-pick')))return;
+  chips.forEach(c=>c.classList.add('locked'));
+  if(correct){el.classList.add('correct-fix');}
+  else{el.classList.add('wrong-pick');chips.forEach(c=>{if(c!==el)c.classList.add('correct-fix');});}
+  document.getElementById(fixId).classList.add('show');
+}
+
+function toggleSA(id,btn){const el=document.getElementById(id);if(el.classList.contains('show')){el.classList.remove('show');btn.textContent='👁 Sample answer';}else{el.classList.add('show');btn.textContent='🙈 Hide';}}
+
+function nextSC(n){document.getElementById('sc'+n).classList.remove('active');curSC=n+1;document.getElementById('sc'+curSC).classList.add('active');updateSCDots();document.getElementById('sc-counter').textContent=`Situation ${curSC} of ${totalSC}`;}
+
+function finishSC(){document.getElementById('sc'+totalSC).classList.remove('active');const done=document.getElementById('sc-done');done.style.display='block';done.classList.add('active');document.getElementById('sc-counter').textContent='All done! 🎯';document.querySelectorAll('#sc-dots .scene-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done');});}
+
+function updateSCDots(){document.querySelectorAll('#sc-dots .scene-dot').forEach((d,i)=>{d.classList.remove('active','done');if(i<curSC-1)d.classList.add('done');else if(i===curSC-1)d.classList.add('active');});}
+
+function qfPick(el,correct,expId){const btns=el.closest('.qf-choose').querySelectorAll('.qf-opt');if([...btns].some(b=>b.classList.contains('qf-correct')||b.classList.contains('qf-wrong')))return;btns.forEach(b=>b.classList.add('locked'));document.getElementById(expId).classList.add('show');if(correct)el.classList.add('qf-correct');else{el.classList.add('qf-wrong');btns.forEach(b=>{if(b!==el)b.classList.add('qf-correct');});}}
+
+function rcNav(n,dir){
+  const total=5;
+  document.getElementById('rc'+n).classList.remove('active');
+  let next;
+  if(dir==='next') next=n+1;
+  else if(dir==='prev') next=n-1;
+  else{/* done — just hide and show completion */
+    document.getElementById('rc-counter').textContent='All done! 🎯';
+    document.querySelectorAll('#rc-dots .rc-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done');});
+    return;
+  }
+  if(next<1||next>total)return;
+  document.getElementById('rc'+next).classList.add('active');
+  document.getElementById('rc-counter').textContent='Situation '+next+' of '+total;
+  document.querySelectorAll('#rc-dots .rc-dot').forEach((d,i)=>{
+    d.classList.remove('active','done');
+    if(i<next-1)d.classList.add('done');
+    else if(i===next-1)d.classList.add('active');
+  });
+}
+
+function toggleSample(btn,id){const s=document.getElementById(id);const showing=s.classList.contains('show');s.classList.toggle('show');btn.textContent=showing?'▶ Show sample':'▼ Hide sample';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+function selectLeft(n){
+  if(matchCurrent!==null)document.getElementById('ml'+matchCurrent).classList.remove('selected');
+  if(matchCurrent===n){matchCurrent=null;return;}
+  matchCurrent=n;
+  document.getElementById('ml'+n).classList.add('selected');
+  
+}
+
+function selectRight(letter){
+  if(matchCurrent===null)return;
+  const prevLetter=userMatches[matchCurrent];
+  if(prevLetter){document.getElementById('mr'+prevLetter).classList.remove('paired');document.getElementById('mb'+prevLetter).textContent='';}
+  for(let k in userMatches){if(userMatches[k]===letter){document.getElementById('ml'+k).classList.remove('paired');document.getElementById('mb'+k).textContent='';delete userMatches[k];}}
+  userMatches[matchCurrent]=letter;
+  ['correct','incorrect'].forEach(c=>{document.getElementById('ml'+matchCurrent).classList.remove(c);document.getElementById('mr'+letter).classList.remove(c);});
+  document.getElementById('ml'+matchCurrent).classList.remove('selected');
+  document.getElementById('ml'+matchCurrent).classList.add('paired');
+  document.getElementById('mb'+matchCurrent).textContent='→ '+letter;
+  document.getElementById('mr'+letter).classList.add('paired');
+  document.getElementById('mb'+letter).textContent='← '+matchCurrent;
+  matchCurrent=null;
+  const matched=Object.keys(userMatches).length;
+}
+
+function checkMatchAnswers(){
+  let correct=0;
+  for(let n=1;n<=matchTotal;n++){
+    const el=document.getElementById('ml'+n);
+    el.classList.remove('correct','incorrect','selected','paired');
+    const ans=userMatches[n];
+    const rightEl=ans?document.getElementById('mr'+ans):null;
+    if(rightEl)rightEl.classList.remove('correct','incorrect','paired');
+    if(ans===matchAnswers[n]){el.classList.add('correct');rightEl.classList.add('correct');correct++;}
+    else if(ans){el.classList.add('incorrect');rightEl.classList.add('incorrect');}
+  }
+  const score=document.getElementById('match-score');
+  score.style.display='inline';
+  if(correct===matchTotal){score.textContent='✅ Perfect — 5/5!';score.style.color='var(--green)';}
+  else{score.textContent=correct+'/5 correct — the red ones need fixing';score.style.color='var(--rose)';}
+  document.getElementById('match-key-btn').style.display='inline-flex';
+}
+
+function showAnswerKey(){
+  for(let n=1;n<=matchTotal;n++){
+    const correct=matchAnswers[n];
+    document.getElementById('mb'+n).textContent='→ '+correct;
+    document.getElementById('mb'+n).style.color='var(--navy)';
+    document.getElementById('ml'+n).classList.remove('correct','incorrect','paired','selected');
+    document.getElementById('ml'+n).classList.add('correct');
+  }
+  matchKeys.forEach(l=>{
+    document.getElementById('mr'+l).classList.remove('correct','incorrect','paired');
+    document.getElementById('mr'+l).classList.add('correct');
+    document.getElementById('mb'+l).textContent='';
+  });
+  
+  document.getElementById('match-key-btn').style.display='none';
+}
+
+function resetMatches(){
+  userMatches={};matchCurrent=null;
+  for(let n=1;n<=matchTotal;n++){document.getElementById('ml'+n).className='match-left';document.getElementById('mb'+n).textContent='';document.getElementById('mb'+n).style.color='';}
+  matchKeys.forEach(l=>{document.getElementById('mr'+l).className='match-right';document.getElementById('mb'+l).textContent='';});
+  document.getElementById('match-score').style.display='none';
+  document.getElementById('match-key-btn').style.display='none';
+  
+}
+
+function rcNav4(cur,dir){
+  if(dir==='next'&&p4cur<5){document.getElementById('p4c'+p4cur).classList.remove('active');p4cur++;document.getElementById('p4c'+p4cur).classList.add('active');}
+  else if(dir==='prev'&&p4cur>1){document.getElementById('p4c'+p4cur).classList.remove('active');p4cur--;document.getElementById('p4c'+p4cur).classList.add('active');}
+  document.getElementById('p4-counter').textContent='Situation '+p4cur+' of 5';
+  document.getElementById('p4-prev').disabled=p4cur===1;
+  const nxt=document.getElementById('p4-next');
+  if(p4cur===5){nxt.textContent='✓ Done';nxt.onclick=function(){};}
+  else{nxt.textContent='Next →';nxt.onclick=function(){rcNav4(0,'next');};}
+  const dots=document.getElementById('p4-dots').querySelectorAll('.rc-dot');
+  dots.forEach((d,i)=>d.classList.toggle('active',i===p4cur-1));
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
+});
+let wbSelected=null,wbSelectedEl=null;
+let curSC=1;const totalSC=5;
+const matchAnswers={1:'E',2:'D',3:'C',4:'A',5:'B'};
+const matchKeys=['A','B','C','D','E'];
+const matchTotal=5;
+let matchCurrent=null,userMatches={};
+let p4cur=1;
+</script>
+</body>
+</html
+
+
+
+
+</body>
+</html>

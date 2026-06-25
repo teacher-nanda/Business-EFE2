@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1 – Meeting Essentials</title>
+<style>
+
+:root {
+  --navy:#1a2e4a; --blue:#2563eb; --lb:#dbeafe;
+  --teal:#0d9488; --lt:#ccfbf1;
+  --amber:#d97706; --la:#fef3c7;
+  --rose:#e11d48; --lr:#ffe4e6; --orange:#ea580c; --lo:#ffedd5;
+  --purple:#7c3aed; --lp:#ede9fe;
+  --green:#16a34a; --lg:#dcfce7;
+  --gray:#6b7280; --lgr:#f3f4f6;
+  --border:#e5e7eb; --text:#111827; --textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+
+/* ── COURSE NAV ── */
+.course-nav{background:var(--navy);color:white;}
+.nav-toggle{display:flex;align-items:center;gap:10px;padding:12px 32px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.5px;user-select:none;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-toggle .arrow{font-size:10px;transition:transform .25s;margin-left:auto;}
+.nav-toggle.open .arrow{transform:rotate(90deg);}
+.nav-body{display:none;padding:20px 32px 24px;animation:fadeIn .2s;}
+.nav-body.show{display:block;}
+.nav-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.nav-module{}
+.nav-mod-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.nav-lesson{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12.5px;color:rgba(255,255,255,0.65);cursor:default;}
+.nav-lesson a{color:inherit;text-decoration:none;}
+.nav-lesson a:hover{color:var(--amber);}
+.nav-lesson.current{color:var(--amber);font-weight:700;}
+.nav-lesson.current .nl{background:var(--amber);color:var(--navy);}
+.nav-lesson.done{color:rgba(255,255,255,0.4);text-decoration:line-through;}
+.nl{background:rgba(255,255,255,0.12);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700;}
+
+/* ── HEADER ── */
+.page-header{background:var(--navy);color:white;padding:28px 48px 22px;position:relative;overflow:hidden;}
+
+.page-header::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);}
+.header-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px;}
+.header-title{font-size:26px;font-weight:700;letter-spacing:-.5px;}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.55);margin-top:3px;}
+
+/* ── TIMELINE ── */
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;margin:24px 0 28px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;} .s2{background:#2563eb;flex:2;} .s3{background:#7c3aed;flex:2;} .s4{background:#d97706;flex:3;color:#1a1a00;} .s5{background:#1a2e4a;flex:1;}
+
+/* ── MAIN ── */
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+
+/* ── CARD ── */
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+
+.c-teal .card-head{background:var(--lt);} .c-teal .card-icon{background:var(--teal);color:white;} .c-teal .card-title{color:var(--teal);} .c-teal .card-badge{background:var(--teal);}
+.c-blue .card-head{background:var(--lb);} .c-blue .card-icon{background:var(--blue);color:white;} .c-blue .card-title{color:var(--blue);} .c-blue .card-badge{background:var(--blue);}
+.c-purple .card-head{background:var(--lp);} .c-purple .card-icon{background:var(--purple);color:white;} .c-purple .card-title{color:var(--purple);} .c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);} .c-amber .card-icon{background:var(--amber);color:white;} .c-amber .card-title{color:var(--amber);} .c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);} .c-green .card-icon{background:var(--green);color:white;} .c-green .card-title{color:var(--green);} .c-green .card-badge{background:var(--green);}
+.c-rose .card-head{background:var(--lr);} .c-orange .card-head{background:var(--lo);} .c-orange .card-icon{background:var(--orange);color:white;} .c-orange .card-title{color:var(--orange);} .c-orange .card-badge{background:var(--orange);} .c-rose .card-badge{background:var(--rose);}
+.c-navy .card-head{background:#eef0f3;} .c-navy .card-icon{background:var(--navy);color:white;} .c-navy .card-title{color:var(--navy);} .c-navy .card-badge{background:var(--navy);} .c-rose .card-icon{background:var(--rose);color:white;} .c-rose .card-title{color:var(--rose);} .c-rose .card-badge{background:var(--rose);}
+
+/* ── ACT HEAD ── */
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:400;color:var(--gray);font-style:italic;text-transform:none;letter-spacing:0;}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* ── BOOK VOCAB CARDS ── */
+.book-vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-sentence{font-size:13.5px;color:var(--text);margin-bottom:7px;line-height:1.4;}
+.bvc-sentence em{font-style:normal;color:var(--rose);font-weight:700;}
+.bvc-term{font-weight:700;color:var(--navy);font-size:13px;margin-bottom:2px;}
+.bvc-def{font-size:12px;color:var(--gray);font-style:italic;}
+
+/* ── MATCHING EXERCISE ── */
+.match-container{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.match-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;}
+.match-word{padding:9px 14px;border:1.5px solid var(--blue);border-radius:8px;background:var(--lb);color:#1e40af;font-weight:700;font-size:13px;cursor:pointer;margin-bottom:6px;transition:all .15s;user-select:none;}
+.match-word:hover:not(.used):not(.matched){background:#bfdbfe;transform:translateX(3px);}
+.match-word.selected{background:var(--blue);color:white;border-color:var(--blue);}
+.match-word.matched{background:var(--lg);border-color:var(--green);color:#14532d;cursor:default;}
+.match-word.wrong-flash{animation:wrongFlash .4s;}
+.match-def{padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;background:#fafafa;font-size:13px;cursor:pointer;margin-bottom:6px;transition:all .15s;color:var(--text);user-select:none;}
+.match-def:hover:not(.matched){border-color:var(--blue);background:var(--lb);}
+.match-def.matched{background:var(--lg);border-color:var(--green);color:#14532d;cursor:default;}
+.match-def.wrong-flash{animation:wrongFlash .4s;}
+@keyframes wrongFlash{0%,100%{background:#fafafa;}25%,75%{background:var(--lr);border-color:var(--rose);}}
+
+/* ── WORD BANK DROP ── */
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;background:var(--lb);border-radius:8px;padding:11px 13px;margin-bottom:14px;}
+.wb-word{background:white;border:1.5px solid var(--blue);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--blue);color:white;}
+.wb-word.selected-wb{background:var(--blue);color:white;outline:3px solid var(--amber);}
+.wb-word.used{background:var(--lgr);border-color:var(--border);color:var(--gray);cursor:default;text-decoration:line-through;}
+
+.gf-list{list-style:none;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.gf-item{padding:11px 14px;border-bottom:1px solid var(--border);font-size:14.5px;display:flex;align-items:flex-start;gap:10px;}
+.gf-item:last-child{border-bottom:none;}
+.gf-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.blank-drop{display:inline-flex;align-items:center;justify-content:center;border:2px dashed #94a3b8;border-radius:20px;min-width:130px;min-height:34px;padding:8px 14px;cursor:pointer;color:transparent;font-style:italic;font-size:13px;font-weight:600;vertical-align:middle;transition:all .2s;background:#f8fafc;margin:0 3px;}
+.blank-drop:hover{border-color:var(--blue);background:var(--lb);}
+.blank-drop.has-word{color:var(--navy);border-style:solid;border-color:var(--amber);background:var(--la);}
+.blank-drop.correct{color:var(--green);border-style:solid;border-color:var(--green);background:var(--lg);}
+.blank-drop.incorrect{color:var(--rose);border-style:solid;border-color:var(--rose);background:var(--lr);}
+
+/* ── ERROR CORRECTION ── */
+.err-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.err-q{font-size:15px;color:var(--navy);margin-bottom:10px;font-style:italic;}
+.err-q strong{font-style:normal;}
+.err-reveal-btn{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s;font-family:inherit;}
+.err-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+.err-answer{display:none;margin-top:10px;padding:10px 14px;background:var(--lg);border:1px solid #86efac;border-radius:7px;font-size:13.5px;color:#14532d;animation:fadeIn .25s;}
+.err-answer.show{display:block;}
+.correct-word{font-weight:700;color:var(--green);}
+
+/* ── MULTIPLE CHOICE ── */
+.mc-item{margin-bottom:20px;}
+.mc-q{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--navy);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;font-size:14px;transition:all .15s;user-select:none;}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--lb);transform:translateX(3px);}
+.mc-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.mc-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.mc-opt.locked{cursor:default;}
+.mc-letter{background:var(--lgr);border:1px solid var(--border);border-radius:4px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;color:var(--navy);}
+.mc-opt.correct .mc-letter{background:var(--green);border-color:var(--green);color:white;}
+.mc-opt.wrong .mc-letter{background:var(--rose);border-color:var(--rose);color:white;}
+
+/* ── PHASES DIAGRAM ── */
+.phases{display:flex;border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+.phase{flex:1;padding:16px 14px;text-align:center;position:relative;}
+.phase:not(:last-child)::after{content:'›';position:absolute;right:-1px;top:50%;transform:translateY(-50%);font-size:22px;color:white;opacity:.7;z-index:2;}
+.ph-open{background:#1e40af;color:white;} .ph-mid{background:#5b21b6;color:white;} .ph-close{background:#0f766e;color:white;}
+.phase-icon{font-size:24px;margin-bottom:5px;}
+.phase-name{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;opacity:.8;}
+.phase-phrases{list-style:none;text-align:left;}
+.phase-phrases li{font-size:12px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.15);line-height:1.3;}
+.phase-phrases li:last-child{border-bottom:none;}
+
+/* ── SPEECH BUBBLES ── */
+.sb-diagram{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;background:var(--lgr);border-radius:12px;padding:18px;margin:16px 0;border:1px solid var(--border);}
+.sb-side-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px;}
+.sb{border-radius:14px;padding:13px 15px;font-size:13.5px;line-height:1.4;margin-bottom:4px;position:relative;}
+.sb::after{content:'';position:absolute;bottom:-9px;left:16px;border:9px solid transparent;border-top-width:9px;border-bottom:none;}
+.sb-bad{background:var(--lr);color:#9f1239;border:1.5px solid #fda4af;} .sb-bad::after{border-top-color:#fda4af;}
+.sb-good{background:var(--lg);color:#14532d;border:1.5px solid #86efac;} .sb-good::after{border-top-color:#86efac;}
+.sb-note{font-size:12px;margin-top:14px;font-style:italic;}
+.sb-arrow{font-size:26px;color:var(--gray);text-align:center;}
+
+/* ── PHRASE TABLE ── */
+.phrase-tbl{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:13.5px;}
+.phrase-tbl th{background:var(--navy);color:white;padding:9px 14px;text-align:left;font-size:12px;letter-spacing:.5px;}
+.phrase-tbl td{padding:9px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.phrase-tbl tr:last-child td{border-bottom:none;}
+.phrase-tbl tr:nth-child(even) td{background:#fafafa;}
+.phrase-text{font-style:italic;color:var(--navy);}
+.ftag{display:inline-block;padding:2px 9px;border-radius:9px;font-size:11px;font-weight:700;white-space:nowrap;}
+.f-open{background:#dbeafe;color:#1e40af;} .f-turn{background:#ede9fe;color:#5b21b6;} .f-agree{background:#dcfce7;color:#15803d;} .f-disagree{background:#ffe4e6;color:#be123c;} .f-clarify{background:#fef9c3;color:#92400e;} .f-tech{background:#f3f4f6;color:#374151;} .f-close{background:#fce7f3;color:#9d174d;}
+
+/* ── SCENARIO ── */
+.scene-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.scene-counter{font-weight:700;color:var(--navy);font-size:14px;}
+.scene-dots{display:flex;gap:5px;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .3s;}
+.scene-dot.active{background:var(--amber);}
+.scene-dot.done{background:var(--teal);}
+.scene-card{display:none;border:1.5px solid var(--border);border-radius:13px;overflow:hidden;animation:fadeIn .3s;}
+.scene-card.active{display:block;}
+.scene-top{background:var(--navy);color:white;padding:13px 19px;display:flex;align-items:center;gap:11px;font-size:13px;}
+.scene-badge{background:var(--amber);color:var(--navy);border-radius:20px;padding:2px 12px;font-weight:700;font-size:12px;}
+.scene-situation{padding:16px 20px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;border-left:4px solid var(--border);}
+.scene-prompt{padding:16px 20px;font-size:16px;font-weight:700;color:var(--navy);}
+.scene-hint{padding:0 20px 14px;font-size:13px;color:var(--teal);}
+.scene-answer{display:none;margin:0 20px 14px;padding:13px 15px;background:var(--lg);border:1px solid #86efac;border-radius:9px;font-size:14px;color:#14532d;font-style:italic;}
+.scene-answer.show{display:block;animation:fadeIn .3s;}
+.scene-answer-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:5px;font-style:normal;}
+.scene-footer{padding:13px 20px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;}
+
+/* ── WRAP-UP MEMORY ROUND ── */
+.memory-card{border:1.5px solid var(--border);border-radius:11px;margin-bottom:10px;overflow:hidden;}
+.memory-situation{background:var(--lp);padding:13px 16px;font-size:14px;color:#3b0764;}
+.memory-situation .prompt{font-weight:700;font-size:15px;margin-bottom:4px;color:var(--purple);}
+.memory-situation .context{font-size:13px;color:#6d28d9;font-style:italic;}
+.memory-answer-area{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.memory-input-hint{font-size:13px;color:var(--gray);font-style:italic;}
+.memory-reveal{display:none;width:100%;padding:10px 14px;background:var(--lg);border-top:1px solid var(--border);font-size:13.5px;color:#14532d;font-style:italic;}
+.memory-reveal.show{display:block;animation:fadeIn .25s;}
+.memory-reveal .reveal-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:4px;font-style:normal;}
+
+/* ── NATURAL OR NOT ── */
+.nat-item{border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;margin-bottom:10px;}
+.nat-q{font-size:14.5px;font-style:italic;margin-bottom:10px;color:var(--navy);}
+.nat-btns{display:flex;gap:10px;}
+.nat-btn{flex:1;padding:8px 10px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;text-align:center;}
+.nat-yes{color:var(--green);border-color:#86efac;background:white;}
+.nat-no{color:var(--rose);border-color:#fda4af;background:white;}
+.nat-btn:hover:not(.locked){transform:scale(1.02);}
+.nat-btn.sel-correct{background:var(--lg);border-color:var(--green);}
+.nat-btn.sel-wrong{background:var(--lr);border-color:var(--rose);}
+.nat-btn.show-right{background:var(--lg);border-color:var(--green);opacity:.55;}
+.nat-exp{display:none;margin-top:10px;padding:8px 12px;border-radius:6px;font-size:13px;}
+.nat-exp.show{display:block;animation:fadeIn .25s;}
+.nat-good{background:var(--lg);color:#14532d;}
+.nat-bad{background:var(--lr);color:#9f1239;}
+
+/* ── HW ── */
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lr);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--rose);}
+.hw-tag{background:var(--rose);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:10px;}
+.hw-mc{background:var(--lb);color:#1e40af;}
+.hw-rec{background:var(--lg);color:#15803d;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:white;} .btn-navy:hover{background:#243e60;}
+.btn-green{background:var(--green);color:white;} .btn-green:hover{background:#15803d;}
+.btn-amber{background:var(--amber);color:white;} .btn-amber:hover{background:#b45309;}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);} .btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+.btn:disabled{opacity:.4;cursor:default;pointer-events:none;}
+
+/* ── MISC ── */
+.chk-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:6px;transition:background .12s;font-size:14px;}
+.chk-item:hover{background:var(--lgr);}
+.chk-item:last-child{border-bottom:none;}
+.chk-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .2s;}
+.chk-item.checked .chk-box{background:var(--green);border-color:var(--green);}
+.chk-item.checked .chk-box::after{content:'✓';color:white;font-weight:700;}
+.chk-item.checked span{color:var(--gray);text-decoration:line-through;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:18px;}
+.lesson-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:28px 18px 10px;}
+.lesson-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;}
+.nav-home{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-home:hover{background:var(--border);border-color:#d1d5db;}
+.nav-next{background:var(--navy);color:white;border:1.5px solid var(--navy);}
+.nav-next:hover{background:#243d5c;}
+
+/* ── PREVIOUS LESSON LANGUAGE BOX ── */
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▸";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;}
+.prev-box-item em{font-style:italic;color:var(--navy);font-weight:600;}
+
+
+        /* MEME CARD */
+        .meme-card{border-radius:14px;overflow:hidden;margin-bottom:20px;box-shadow:0 4px 18px rgba(0,0,0,0.12);}
+        .meme-top{background:#1a1a2e;padding:22px 26px 18px;position:relative;}
+        .meme-top::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple));}
+        .meme-tag{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:20px;padding:3px 12px;margin-bottom:14px;}
+        .meme-quote{font-size:22px;font-weight:800;color:white;line-height:1.35;letter-spacing:-.3px;}
+        .meme-quote em{font-style:normal;color:var(--amber);}
+        .meme-credit{margin-top:10px;font-size:12px;color:rgba(255,255,255,0.35);font-style:italic;}
+        .meme-reaction{background:#f8fafc;padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+        .meme-reaction-label{font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.8px;}
+        .react-btn{background:white;border:1.5px solid var(--border);border-radius:20px;padding:5px 14px;font-size:14px;cursor:pointer;transition:all .15s;font-family:inherit;}
+        .react-btn:hover:not(.picked){border-color:var(--amber);background:var(--la);transform:scale(1.08);}
+        .react-btn.picked{background:var(--la);border-color:var(--amber);transform:scale(1.05);}
+        .meme-discuss{background:white;padding:18px 20px;}
+        .discuss-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;}
+        .discuss-q{font-size:14.5px;color:var(--navy);font-weight:600;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+        .discuss-followups{display:none;flex-direction:column;gap:9px;}
+        .discuss-followups.show{display:flex;animation:fadeIn .25s;}
+        .discuss-fu{display:flex;align-items:flex-start;gap:10px;background:var(--lgr);border-radius:9px;padding:11px 14px;font-size:14px;color:var(--text);}
+        .dfu-dot{background:var(--teal);color:white;min-width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:2px;}
+        .show-fu-btn{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s;font-family:inherit;}
+        .show-fu-btn:hover{border-color:var(--teal);color:var(--teal);}
+      
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.cover-slide::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner {
+  text-align: center;
+  max-width: 680px;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+.cover-teacher {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 8px;
+}
+.cover-module-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 18px;
+}
+.cover-title-main {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.cover-lesson-badge {
+  display: inline-block;
+  background: var(--amber);
+  color: var(--navy);
+  border-radius: 20px;
+  padding: 4px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  margin-bottom: 32px;
+}
+.cover-tl { margin: 0 auto 34px; max-width: 620px; }
+.cover-start {
+  background: white;
+  color: var(--navy);
+  border: none;
+  border-radius: 12px;
+  padding: 14px 38px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover {
+  background: var(--amber);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+
+  /* ══ SLIDE NAVBAR ══ */
+  .slide-navbar {
+    background: white; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+  }
+  .slide-nav-btn {
+    background: var(--navy); color: white; border: none; border-radius: 8px;
+    padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: background .15s; white-space: nowrap;
+  }
+  .slide-nav-btn:hover:not(:disabled) { background: #263d5c; }
+  .slide-nav-btn:disabled { opacity: .3; cursor: default; }
+  .slide-info { text-align: center; flex: 1; }
+  .slide-label { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .slide-counter-text { font-size: 12px; color: var(--gray); margin: 2px 0 6px; }
+  .slide-progress { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .15s; }
+  .sp-dot.active { background: var(--navy); transform: scale(1.3); }
+  .sp-dot.done { background: var(--teal); }
+  /* ══ BOTTOM NAV BAR ══ */
+  .slide-bottom-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px; margin-top: 30px;
+    border-top: 2px solid var(--border); background: #f8fafc;
+  }
+
+  /* ══ TOP HOME STRIP ══ */
+  .top-home-strip {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+    background: var(--navy); height: 42px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .top-home-link {
+    color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+    font-family: inherit; display: flex; align-items: center; gap: 6px;
+    opacity: .85; transition: opacity .15s;
+  }
+  .top-home-link:hover { opacity: 1; }
+  body { padding-top: 42px; }
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<!-- ══ SLIDE NAVBAR ══ -->
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 8</div>
+    <div class="slide-progress"><div class="sp-dot  active" onclick="goToSlide(0)" title="Slide 1"></div><div class="sp-dot" onclick="goToSlide(1)" title="Slide 2"></div><div class="sp-dot" onclick="goToSlide(2)" title="Slide 3"></div><div class="sp-dot" onclick="goToSlide(3)" title="Slide 4"></div><div class="sp-dot" onclick="goToSlide(4)" title="Slide 5"></div><div class="sp-dot" onclick="goToSlide(5)" title="Slide 6"></div><div class="sp-dot" onclick="goToSlide(6)" title="Slide 7"></div><div class="sp-dot" onclick="goToSlide(7)" title="Slide 8"></div></div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+<!-- ══ COURSE NAVIGATOR ══ -->
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English with teacher Nanda</div>
+      <div class="cover-module-tag">Module 1 · Meetings</div>
+      <div class="cover-title-main">Meeting Essentials</div>
+      <div class="cover-lesson-badge">Lesson 1</div>
+      <div class="cover-tl">
+        <!-- TIMELINE -->
+  <div class="tl-bar">
+    <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+    <div class="tl-seg s2">Vocabulary<span class="t">10 min</span></div>
+    <div class="tl-seg s3">Key Phrases<span class="t">10 min</span></div>
+    <div class="tl-seg s4">Guided Speaking<span class="t">15 min</span></div>
+    <div class="tl-seg s5">Wrap-up<span class="t">5 min</span></div>
+  </div>
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 · WARM-UP ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <!-- ══ WARM-UP ══ -->
+  <div class="card c-teal">
+    <div class="card-head">
+      <div class="card-icon">☀️</div>
+      <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">Let's Talk</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+<div class="meme-card">
+        <!-- THE MEME / QUOTE -->
+        <div class="meme-top">
+          <div class="meme-tag">💬 Real talk</div>
+          <div class="meme-quote">"This meeting could have been <em>an email.</em>"</div>
+          <div class="meme-credit">— Every professional, at least once a week</div>
+        </div>
+
+        <!-- REACTION ROW -->
+        <div class="meme-reaction">
+          <span class="meme-reaction-label">Your reaction:</span>
+          <button class="react-btn" onclick="pickReact(this)">😂 100% me</button>
+          <button class="react-btn" onclick="pickReact(this)">😬 More often than I'd like</button>
+          <button class="react-btn" onclick="pickReact(this)">🤔 Depends on the meeting</button>
+          <button class="react-btn" onclick="pickReact(this)">😇 I actually like meetings</button>
+        </div>
+
+        <!-- DISCUSSION -->
+        <div class="meme-discuss">
+          <div class="discuss-label">Now let's talk about it</div>
+          <div class="discuss-q">Have you ever been in a meeting where you thought exactly this? What happened — and what made it feel like a waste of time?</div>
+
+          <div class="discuss-followups" id="wu-followups">
+            <div class="discuss-fu"><div class="dfu-dot">↗</div>Think about a recent meeting that went well. What made it different? Was it the agenda, the people, the length?</div>
+            <div class="discuss-fu"><div class="dfu-dot">↗</div>In your company, who usually calls meetings? And is it easy to say "let's just send an email instead"?</div>
+          </div>
+
+          <button class="show-fu-btn" id="fu-toggle" onclick="toggleFollowUps()">+ Follow-up questions</button>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 2 · VOCABULARY ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <!-- ══ VOCABULARY ══ -->
+  <div class="card c-blue">
+    <div class="card-head">
+      <div class="card-icon">📚</div>
+      <div><div class="card-label">Part 2 · Vocabulary</div><div class="card-title">Meetings Vocabulary</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <!-- VOCAB CARDS -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">📝 Key vocabulary</div>
+      <div class="book-vocab-grid">
+        <div class="bvc">
+          <div class="bvc-sentence">Lee, could you <em>send out the agenda</em> for Friday's meeting?</div>
+          <div class="bvc-term">to send out the agenda</div>
+          <div class="bvc-def">[to send a plan of what will be discussed]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">We need someone to <em>take minutes</em> during today's call.</div>
+          <div class="bvc-term">to take minutes</div>
+          <div class="bvc-def">[to write a written record of what is discussed]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">Please send the summary to all <em>attendees</em> after the meeting.</div>
+          <div class="bvc-term">attendees</div>
+          <div class="bvc-def">[people who are present at a meeting]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">If we can't <em>reach a consensus</em>, we will have a vote.</div>
+          <div class="bvc-term">to reach a consensus</div>
+          <div class="bvc-def">[to come to an agreement everyone accepts]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">We have three clear <em>action items</em> to work on before Friday.</div>
+          <div class="bvc-term">action items</div>
+          <div class="bvc-def">[specific tasks agreed on after a meeting]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">It's nearly 5pm — let's <em>wrap up</em> and send the minutes.</div>
+          <div class="bvc-term">to wrap up / sum up</div>
+          <div class="bvc-def">[to conclude or bring a meeting to an end]</div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin:18px 0 10px;">🚀 Going further</div>
+      <div class="book-vocab-grid">
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">We didn't have time to decide — let's <em>table</em> that and come back to it next week.</div>
+          <div class="bvc-term">to table (a topic)</div>
+          <div class="bvc-def">[to set aside a discussion for a later time — AmE: to postpone]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">The chair decided to <em>adjourn</em> the meeting until more data was available.</div>
+          <div class="bvc-term">to adjourn</div>
+          <div class="bvc-def">[to officially pause or end a meeting]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">I'll <em>circulate</em> the report to everyone before Thursday's call.</div>
+          <div class="bvc-term">to circulate (a document)</div>
+          <div class="bvc-def">[to send or share something with all relevant people]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">I just want to <em>flag</em> a potential issue with the timeline before we move on.</div>
+          <div class="bvc-term">to flag (an issue)</div>
+          <div class="bvc-def">[to draw attention to a problem or concern]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">That's too detailed for this call — let's <em>take it offline</em> and discuss later.</div>
+          <div class="bvc-term">to take something offline</div>
+          <div class="bvc-def">[to discuss something separately, outside the main meeting]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">Can you <em>loop in</em> Sarah? She should know about this decision.</div>
+          <div class="bvc-term">to loop someone in</div>
+          <div class="bvc-def">[to include someone in a conversation or email chain]</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EXERCISE 1: MATCHING -->
+      <div class="act-head">
+        <div class="act-num">1</div>
+        Match each word to its definition — click a word, then click the matching definition
+        <span class="act-type">Interactive matching</span>
+      </div>
+
+      <div class="match-container" id="match1">
+        <div>
+          <div class="match-col-label">Words &amp; phrases</div>
+          <div class="match-word" data-id="a" onclick="matchClick(this,'word')">adjourn</div>
+          <div class="match-word" data-id="b" onclick="matchClick(this,'word')">reach a consensus</div>
+          <div class="match-word" data-id="c" onclick="matchClick(this,'word')">loop someone in</div>
+          <div class="match-word" data-id="d" onclick="matchClick(this,'word')">table</div>
+          <div class="match-word" data-id="e" onclick="matchClick(this,'word')">take it offline</div>
+          <div class="match-word" data-id="f" onclick="matchClick(this,'word')">flag an issue</div>
+        </div>
+        <div>
+          <div class="match-col-label">Definitions</div>
+          <div class="match-def" data-id="d" onclick="matchClick(this,'def')">To postpone a decision to a later time</div>
+          <div class="match-def" data-id="f" onclick="matchClick(this,'def')">To draw attention to a problem or concern</div>
+          <div class="match-def" data-id="b" onclick="matchClick(this,'def')">To come to an agreement that everyone accepts</div>
+          <div class="match-def" data-id="a" onclick="matchClick(this,'def')">To officially pause or end a meeting</div>
+          <div class="match-def" data-id="c" onclick="matchClick(this,'def')">To include someone in a conversation or email chain</div>
+          <div class="match-def" data-id="e" onclick="matchClick(this,'def')">To discuss something separately, outside the main meeting</div>
+        </div>
+      </div>
+      <button class="btn btn-outline btn-sm" style="margin-top:10px;" onclick="resetMatch()">↺ Reset</button>
+
+      <div class="divider"></div>
+
+      <!-- EXERCISE 2: GAP FILL (SCRAMBLED) -->
+      <div class="act-head">
+        <div class="act-num">2</div>
+        Fill in the gaps — click a word from the box, then click the blank
+        <span class="act-type">Gap fill · words not in order</span>
+      </div>
+
+      <div class="word-bank" id="wb2">
+        <span class="wb-word" onclick="wbSelect(this)">loop in</span>
+        <span class="wb-word" onclick="wbSelect(this)">action items</span>
+        <span class="wb-word" onclick="wbSelect(this)">table</span>
+        <span class="wb-word" onclick="wbSelect(this)">circulate</span>
+        <span class="wb-word" onclick="wbSelect(this)">flag</span>
+        <span class="wb-word" onclick="wbSelect(this)">take it offline</span>
+        <span class="wb-word" onclick="wbSelect(this)">adjourn</span>
+      </div>
+
+      <ul class="gf-list">
+        <li class="gf-item"><div class="gf-num">1</div><div>Before we finish, I want to <span class="blank-drop" id="g2-1" onclick="dropOnBlank(this)" data-answer="flag"></span> a concern about the budget — I don't think we have enough time to review it today.</div></li>
+        <li class="gf-item"><div class="gf-num">2</div><div>That topic is too complex for this call. Let's <span class="blank-drop" id="g2-2" onclick="dropOnBlank(this)" data-answer="take it offline"></span> and schedule a separate meeting.</div></li>
+        <li class="gf-item"><div class="gf-num">3</div><div>I'll <span class="blank-drop" id="g2-3" onclick="dropOnBlank(this)" data-answer="circulate"></span> the updated proposal to everyone before the end of the day.</div></li>
+        <li class="gf-item"><div class="gf-num">4</div><div>We didn't have time to make a final decision, so we agreed to <span class="blank-drop" id="g2-4" onclick="dropOnBlank(this)" data-answer="table"></span> it and revisit it next Tuesday.</div></li>
+        <li class="gf-item"><div class="gf-num">5</div><div>Can you <span class="blank-drop" id="g2-5" onclick="dropOnBlank(this)" data-answer="loop in"></span> the legal team? They need to know about this before we move forward.</div></li>
+        <li class="gf-item"><div class="gf-num">6</div><div>Before I send the minutes, let me confirm the <span class="blank-drop" id="g2-6" onclick="dropOnBlank(this)" data-answer="action items"></span> — who is doing what, and by when?</div></li>
+      </ul>
+      <div style="display:flex;gap:9px;margin-top:11px;">
+        <button class="btn btn-green btn-sm" onclick="checkGF('g2',6)">✓ Check answers</button>
+        <button class="btn btn-outline btn-sm" onclick="resetGF('g2',6,'wb2')">↺ Reset</button>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 3 · KEY LANGUAGE ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <!-- ══ KEY PHRASES ══ -->
+  <div class="card c-purple">
+    <div class="card-head">
+      <div class="card-icon">💬</div>
+      <div><div class="card-label">Part 3 · Key Language</div><div class="card-title">Phrases for Every Stage of a Meeting</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <!-- MEETING PHASES VISUAL -->
+      <div class="phases">
+        <div class="phase ph-open">
+          <div class="phase-icon">🟢</div>
+          <div class="phase-name">Opening</div>
+          <ul class="phase-phrases">
+            <li>"Let's make a start."</li>
+            <li>"Can everyone hear me?"</li>
+            <li>"The purpose today is…"</li>
+            <li>"We have 3 items on the agenda."</li>
+          </ul>
+        </div>
+        <div class="phase ph-mid">
+          <div class="phase-icon">🗣️</div>
+          <div class="phase-name">During</div>
+          <ul class="phase-phrases">
+            <li>"Could I just add something?"</li>
+            <li>"Sorry to interrupt, but…"</li>
+            <li>"I see your point, but…"</li>
+            <li>"Could you elaborate on that?"</li>
+            <li>"You're on mute."</li>
+          </ul>
+        </div>
+        <div class="phase ph-close">
+          <div class="phase-icon">🔴</div>
+          <div class="phase-name">Closing</div>
+          <ul class="phase-phrases">
+            <li>"Let's wrap up."</li>
+            <li>"To summarize…"</li>
+            <li>"The action items are…"</li>
+            <li>"I'll send the minutes by…"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SPEECH BUBBLE COMPARISON -->
+      <div class="sb-diagram">
+        <div>
+          <div class="sb-side-label" style="color:var(--rose);">❌ Too direct</div>
+          <div class="sb sb-bad">"I disagree. That's wrong."</div>
+          <div class="sb-note" style="color:var(--rose);">Can sound aggressive in a business context.</div>
+        </div>
+        <div class="sb-arrow">→</div>
+        <div>
+          <div class="sb-side-label" style="color:var(--green);">✅ Polite &amp; professional</div>
+          <div class="sb sb-good">"I see your point, but have you considered…?"</div>
+          <div class="sb-note" style="color:var(--green);">Shows respect while still disagreeing clearly.</div>
+        </div>
+      </div>
+
+      <!-- PHRASE TABLE -->
+      <table class="phrase-tbl">
+        <thead><tr><th>Function</th><th>Phrase</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ftag f-open">Opening</span></td><td class="phrase-text">"Let's make a start. Can everyone hear me okay?"</td></tr>
+          <tr><td><span class="ftag f-open">Opening</span></td><td class="phrase-text">"The purpose of today's meeting is to discuss…"</td></tr>
+          <tr><td><span class="ftag f-turn">Turn-taking</span></td><td class="phrase-text">"Could I just add something here?"</td></tr>
+          <tr><td><span class="ftag f-turn">Turn-taking</span></td><td class="phrase-text">"Sorry to interrupt, but I'd like to pick up on that."</td></tr>
+          <tr><td><span class="ftag f-agree">Agreeing</span></td><td class="phrase-text">"That's a fair point. I completely agree."</td></tr>
+          <tr><td><span class="ftag f-disagree">Disagreeing</span></td><td class="phrase-text">"I see your point, but I'm not sure I agree."</td></tr>
+          <tr><td><span class="ftag f-disagree">Disagreeing</span></td><td class="phrase-text">"That's interesting, but have you considered…?"</td></tr>
+          <tr><td><span class="ftag f-clarify">Clarifying</span></td><td class="phrase-text">"Could you elaborate on that?"</td></tr>
+          <tr><td><span class="ftag f-tech">Tech issues</span></td><td class="phrase-text">"I think you're on mute — we can't hear you."</td></tr>
+          <tr><td><span class="ftag f-tech">Tech issues</span></td><td class="phrase-text">"Sorry, you're breaking up. Could you repeat that?"</td></tr>
+          <tr><td><span class="ftag f-close">Closing</span></td><td class="phrase-text">"Let's wrap up. To summarize the main points…"</td></tr>
+          <tr><td><span class="ftag f-close">Closing</span></td><td class="phrase-text">"I'll send the minutes and action items by end of day."</td></tr>
+        </tbody>
+      </table>
+
+      <div class="divider"></div>
+
+      <!-- EXERCISE 3: ERROR CORRECTION (no hints) -->
+      <div class="act-head">
+        <div class="act-num">3</div>
+        Find the mistake — there is ONE error in each sentence. Find it, then click to check.
+        <span class="act-type">Error correction</span>
+      </div>
+
+      <div class="err-item">
+        <div class="err-q">"Sorry to interrupt, but could I just add something on here?"</div>
+        <button class="err-reveal-btn" onclick="showErrAns(this)">▶ Show correction</button>
+        <div class="err-answer">Remove <strong>"on"</strong> → <em>"Could I just add something <span class="correct-word">here</span>?"</em> — "add something on" is not a natural combination.</div>
+      </div>
+      <div class="err-item">
+        <div class="err-q">"I see your view, but I'm not sure I agree with the proposal."</div>
+        <button class="err-reveal-btn" onclick="showErrAns(this)">▶ Show correction</button>
+        <div class="err-answer"><strong>"view"</strong> → <em>"I see your <span class="correct-word">point</span>…"</em> — the fixed phrase is always "I see your point."</div>
+      </div>
+      <div class="err-item">
+        <div class="err-q">"Sorry, you're cutting up — could you check your microphone?"</div>
+        <button class="err-reveal-btn" onclick="showErrAns(this)">▶ Show correction</button>
+        <div class="err-answer"><strong>"cutting"</strong> → <em>"you're <span class="correct-word">breaking</span> up"</em> — "breaking up" is the correct phrasal verb for a bad connection.</div>
+      </div>
+      <div class="err-item">
+        <div class="err-q">"Could you explain on that point a bit more, please?"</div>
+        <button class="err-reveal-btn" onclick="showErrAns(this)">▶ Show correction</button>
+        <div class="err-answer"><strong>"explain"</strong> → <em>"Could you <span class="correct-word">elaborate</span> on that?"</em> — "elaborate on" is the correct phrase. You don't say "explain on."</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EXERCISE 4: MULTIPLE CHOICE -->
+      <div class="act-head">
+        <div class="act-num">4</div>
+        What function does each phrase serve? — click your answer
+        <span class="act-type">Multiple choice</span>
+      </div>
+
+      <div class="mc-item">
+        <div class="mc-q">1. &nbsp;"If I could just come in here — I have a relevant update."</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> Closing</div>
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> Turn-taking</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> Agreeing</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-q">2. &nbsp;"I'll send the minutes and action items to everyone by 5pm."</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> Opening</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> Tech issues</div>
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span> Closing</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-q">3. &nbsp;"That's interesting, but have you considered the cost implications?"</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">A</span> Disagreeing</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> Clarifying</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> Turn-taking</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-q">4. &nbsp;"Sorry, could you say that again? You were breaking up."</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> Closing</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> Disagreeing</div>
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span> Tech issues</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 4 · GUIDED SPEAKING ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <!-- ══ GUIDED SCENARIO ══ -->
+  <div class="card c-amber">
+    <div class="card-head">
+      <div class="card-icon">🎬</div>
+      <div><div class="card-label">Part 4 · Guided Speaking</div><div class="card-title">Scenario: The Product Launch Call</div></div>
+      <span class="card-badge">15 min</span>
+    </div>
+    <div class="card-body">
+
+      <div style="background:var(--la);border:1px solid #fcd34d;border-radius:12px;padding:16px 19px;margin-bottom:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+        <div style="font-size:13px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:4px;">Your role</div>Ana — Marketing team member</div>
+        <div style="font-size:13px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:4px;">Chair</div>Mark</div>
+        <div style="font-size:13px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:4px;">Goal</div>Agree on launch date for expense-tracking app</div>
+      </div>
+
+      <div class="scene-nav">
+        <span class="scene-counter" id="scene-counter">Situation 1 of 7</span>
+        <div class="scene-dots" id="scene-dots">
+          <div class="scene-dot active"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div>
+        </div>
+      </div>
+
+      <div class="scene-card active" id="sc1">
+        <div class="scene-top"><span class="scene-badge">1</span> Joining the meeting</div>
+        <div class="scene-situation">Ana just joined the video call. There are five <strong>attendees</strong> today. She's a little early — two colleagues are already there — and she's been asked to <strong>take minutes</strong> during the call.</div>
+        <div class="scene-prompt">💬 What does Ana say when she joins?</div>
+        <div class="scene-hint">💡 Think about: <strong>greeting everyone</strong> + <strong>audio check</strong></div>
+        <div class="scene-answer" id="sa1"><div class="scene-answer-label">Sample answer</div>"Hi everyone, good morning! Can you hear me okay? Great — really looking forward to today's call."</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa1',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(1)">Next →</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc2">
+        <div class="scene-top"><span class="scene-badge">2</span> Introducing the agenda</div>
+        <div class="scene-situation">Mark says: <em>"Right, let's get started — we have a lot to cover."</em> He asks Ana, who <strong>sent out the agenda</strong> yesterday, to open the meeting and walk everyone through the items.</div>
+        <div class="scene-prompt">💬 How does Ana introduce the agenda?</div>
+        <div class="scene-hint">💡 Use: <strong>"The purpose of today's meeting is…"</strong> + list 3 items</div>
+        <div class="scene-answer" id="sa2"><div class="scene-answer-label">Sample answer</div>"Thanks, Mark. The purpose of today's meeting is to agree on the launch date for our new app and assign tasks. We have three items on the agenda: the timeline, the marketing plan, and task allocation."</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa2',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(2)">Next →</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc3">
+        <div class="scene-top"><span class="scene-badge">3</span> Interrupting politely</div>
+        <div class="scene-situation">A colleague, Pedro, has been talking about app features for a while. Ana has an important point about the launch date.</div>
+        <div class="scene-prompt">💬 How does Ana interrupt politely?</div>
+        <div class="scene-hint">💡 Use: <strong>"Sorry to interrupt, but…"</strong> / <strong>"If I could just come in here…"</strong></div>
+        <div class="scene-answer" id="sa3"><div class="scene-answer-label">Sample answer</div>"Sorry to interrupt, Pedro, but I'd like to raise a point about the launch date — I think it affects everything else we're planning."</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa3',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(3)">Next →</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc4">
+        <div class="scene-top"><span class="scene-badge">4</span> Disagreeing politely</div>
+        <div class="scene-situation">Mark suggests launching on March 1st. Ana believes this is too early — the marketing campaign needs two more weeks. The team needs to <strong>reach a consensus</strong> before the call ends.</div>
+        <div class="scene-prompt">💬 How does Ana disagree — politely but clearly?</div>
+        <div class="scene-hint">💡 Use: <strong>"I see your point, but…"</strong> / <strong>"Have you considered…?"</strong></div>
+        <div class="scene-answer" id="sa4"><div class="scene-answer-label">Sample answer</div>"I see your point, Mark, and I understand the pressure — but have you considered that the marketing campaign still needs two more weeks? March 15th would be more realistic."</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa4',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(4)">Next →</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc5">
+        <div class="scene-top"><span class="scene-badge">5</span> Asking for clarification</div>
+        <div class="scene-situation">Pedro says: <em>"We need to make sure the UX flow is optimized before go-live."</em> Ana isn't clear what "UX flow" means here.</div>
+        <div class="scene-prompt">💬 How does Ana ask for clarification without sounding rude?</div>
+        <div class="scene-hint">💡 Use: <strong>"Could you elaborate on that?"</strong> / <strong>"What exactly do you mean by…?"</strong></div>
+        <div class="scene-answer" id="sa5"><div class="scene-answer-label">Sample answer</div>"Sorry Pedro, could you elaborate on 'UX flow'? I want to understand the scope before we assign tasks."</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa5',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(5)">Next →</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc6">
+        <div class="scene-top"><span class="scene-badge">6</span> Technical issue</div>
+        <div class="scene-situation">Mark starts speaking but no one can hear him. It seems he's on mute.</div>
+        <div class="scene-prompt">💬 What does Ana say?</div>
+        <div class="scene-hint">💡 Keep it polite and clear — he may not hear you either!</div>
+        <div class="scene-answer" id="sa6"><div class="scene-answer-label">Sample answer</div>"Mark, I think you might be on mute — we can't hear you. Could you check your microphone?"</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa6',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(6)">Next →</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc7">
+        <div class="scene-top"><span class="scene-badge">7</span> Closing the meeting</div>
+        <div class="scene-situation">The meeting is nearly over. Mark asks Ana to close by summarizing what was agreed and the next steps.</div>
+        <div class="scene-prompt">💬 How does Ana close the meeting professionally?</div>
+        <div class="scene-hint">💡 Include: <strong>summary</strong> + <strong>action items</strong> + <strong>what you'll send &amp; when</strong></div>
+        <div class="scene-answer" id="sa7"><div class="scene-answer-label">Sample answer</div>"Okay, let's wrap up. To summarize: we've agreed on March 15th as the launch date. Pedro will finalize the UX review by March 8th, and I'll complete the marketing plan by March 10th. The pricing question we'll <strong>table</strong> for next week. I'll <strong>circulate</strong> the minutes and action items to all attendees by end of day — and I'll <strong>loop in</strong> the legal team too. With that, I'd like to <strong>adjourn</strong> the meeting. Thanks everyone!"</div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa7',this)">👁 Sample answer</button>
+          <button class="btn btn-green btn-sm" onclick="finishSC()">🎉 Done!</button>
+        </div>
+      </div>
+
+      <div class="scene-card" id="sc-done" style="display:none;">
+        <div style="padding:32px;text-align:center;">
+          <div style="font-size:44px;margin-bottom:10px;">🎉</div>
+          <div style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:6px;">Scenario complete!</div>
+          <div style="font-size:14px;color:var(--gray);">Which situation was most challenging for you?</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 5 · WRAP-UP ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <!-- ══ WRAP-UP: MEMORY ROUND ══ -->
+  <div class="card c-navy">
+    <div class="card-head">
+      <div class="card-icon">🧠</div>
+      <div><div class="card-label">Part 5 · Wrap-up</div><div class="card-title">Memory Round — Can you remember the phrases?</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;">Read each situation. <strong>Try to say the right phrase out loud</strong> before clicking to see the answer.</p>
+
+      <div class="memory-card">
+        <div class="memory-situation">
+          <div class="prompt">You want to start the meeting.</div>
+          <div class="context">Everyone has joined and it's time to begin.</div>
+        </div>
+        <div class="memory-answer-area">
+          <span class="memory-input-hint">Say a phrase → then reveal</span>
+          <button class="btn btn-outline btn-sm" onclick="revealMemory(this)">Show answer</button>
+        </div>
+        <div class="memory-reveal"><div class="reveal-label">Example phrases</div>"Let's make a start — can everyone hear me?" &nbsp;/&nbsp; "The purpose of today's meeting is to…"</div>
+      </div>
+
+      <div class="memory-card">
+        <div class="memory-situation">
+          <div class="prompt">Someone has been talking for a long time and you need to speak.</div>
+          <div class="context">You have important information to add.</div>
+        </div>
+        <div class="memory-answer-area">
+          <span class="memory-input-hint">Say a phrase → then reveal</span>
+          <button class="btn btn-outline btn-sm" onclick="revealMemory(this)">Show answer</button>
+        </div>
+        <div class="memory-reveal"><div class="reveal-label">Example phrases</div>"Sorry to interrupt, but…" &nbsp;/&nbsp; "Could I just add something here?" &nbsp;/&nbsp; "If I could just come in…"</div>
+      </div>
+
+      <div class="memory-card">
+        <div class="memory-situation">
+          <div class="prompt">Your colleague suggests an idea you don't agree with.</div>
+          <div class="context">You want to push back — but professionally.</div>
+        </div>
+        <div class="memory-answer-area">
+          <span class="memory-input-hint">Say a phrase → then reveal</span>
+          <button class="btn btn-outline btn-sm" onclick="revealMemory(this)">Show answer</button>
+        </div>
+        <div class="memory-reveal"><div class="reveal-label">Example phrases</div>"I see your point, but I'm not sure I agree." &nbsp;/&nbsp; "That's interesting, but have you considered…?"</div>
+      </div>
+
+      <div class="memory-card">
+        <div class="memory-situation">
+          <div class="prompt">You can't hear your colleague — the audio is poor.</div>
+          <div class="context">It sounds like they might be on mute.</div>
+        </div>
+        <div class="memory-answer-area">
+          <span class="memory-input-hint">Say a phrase → then reveal</span>
+          <button class="btn btn-outline btn-sm" onclick="revealMemory(this)">Show answer</button>
+        </div>
+        <div class="memory-reveal"><div class="reveal-label">Example phrases</div>"I think you're on mute — we can't hear you." &nbsp;/&nbsp; "You're breaking up — could you repeat that?"</div>
+      </div>
+
+      <div class="memory-card">
+        <div class="memory-situation">
+          <div class="prompt">The meeting is ending. You need to summarize and close.</div>
+          <div class="context">Everyone is waiting to know what was agreed.</div>
+        </div>
+        <div class="memory-answer-area">
+          <span class="memory-input-hint">Say a phrase → then reveal</span>
+          <button class="btn btn-outline btn-sm" onclick="revealMemory(this)">Show answer</button>
+        </div>
+        <div class="memory-reveal"><div class="reveal-label">Example phrases</div>"Let's wrap up. To summarize: [key points]… The action items are… I'll send the minutes by [time]."</div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 6 · EXTRA ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <!-- ══ EXTRA ACTIVITY ══ -->
+  <div class="card c-green">
+    <div class="card-head">
+      <div class="card-icon">⚡</div>
+      <div><div class="card-label">If there's time · Extra Activity</div><div class="card-title">Natural or Not?</div></div>
+      <span class="card-badge">5–8 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;">Is each phrase natural business English? Click your answer — then see the explanation.</p>
+
+      <div class="nat-item">
+        <div class="nat-q">"Sorry to interrupt, but could I just add something here?"</div>
+        <div class="nat-btns">
+          <div class="nat-btn nat-yes" onclick="checkNat(this,true,'nexp1')">✅ Natural</div>
+          <div class="nat-btn nat-no" onclick="checkNat(this,false,'nexp1')">❌ Unnatural</div>
+        </div>
+        <div class="nat-exp nat-good" id="nexp1">✅ Natural — Perfect combination. Polite and professional.</div>
+      </div>
+
+      <div class="nat-item">
+        <div class="nat-q">"Let's make a beginning — we have a lot to discuss today."</div>
+        <div class="nat-btns">
+          <div class="nat-btn nat-yes" onclick="checkNat(this,false,'nexp2')">✅ Natural</div>
+          <div class="nat-btn nat-no" onclick="checkNat(this,true,'nexp2')">❌ Unnatural</div>
+        </div>
+        <div class="nat-exp nat-bad" id="nexp2">❌ Unnatural → Say <strong>"Let's make a <em>start</em>"</strong> or <strong>"Let's get started."</strong> — "beginning" doesn't collocate with "make" in this context.</div>
+      </div>
+
+      <div class="nat-item">
+        <div class="nat-q">"You are in mute — we cannot listen to you."</div>
+        <div class="nat-btns">
+          <div class="nat-btn nat-yes" onclick="checkNat(this,false,'nexp3')">✅ Natural</div>
+          <div class="nat-btn nat-no" onclick="checkNat(this,true,'nexp3')">❌ Unnatural</div>
+        </div>
+        <div class="nat-exp nat-bad" id="nexp3">❌ Unnatural — Two errors: <strong>"on mute"</strong> (not "in mute") + <strong>"can't hear"</strong> (not "cannot listen to"). → <em>"You're on mute — we can't hear you."</em></div>
+      </div>
+
+      <div class="nat-item">
+        <div class="nat-q">"I see your point, but have you considered pushing the deadline?"</div>
+        <div class="nat-btns">
+          <div class="nat-btn nat-yes" onclick="checkNat(this,true,'nexp4')">✅ Natural</div>
+          <div class="nat-btn nat-no" onclick="checkNat(this,false,'nexp4')">❌ Unnatural</div>
+        </div>
+        <div class="nat-exp nat-good" id="nexp4">✅ Natural — Excellent phrasing for polite disagreement.</div>
+      </div>
+
+      <div class="nat-item">
+        <div class="nat-q">"Could you elaborate more detailed about that point?"</div>
+        <div class="nat-btns">
+          <div class="nat-btn nat-yes" onclick="checkNat(this,false,'nexp5')">✅ Natural</div>
+          <div class="nat-btn nat-no" onclick="checkNat(this,true,'nexp5')">❌ Unnatural</div>
+        </div>
+        <div class="nat-exp nat-bad" id="nexp5">❌ Unnatural — "Elaborate" already implies giving more detail. → <em>"Could you <strong>elaborate on</strong> that?"</em></div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 7 · HOMEWORK ══ -->
+<div class="slide" id="slide-7">
+  <div class="main">
+    <!-- ══ HOMEWORK ══ -->
+  <div class="card c-orange">
+    <div class="card-head">
+      <div class="card-icon">📝</div>
+      <div><div class="card-label">For next time</div><div class="card-title">Homework</div></div>
+      <span class="card-badge">2 tasks</span>
+    </div>
+    <div class="card-body">
+
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task 1</span> Multiple Choice — Meeting Language</div>
+        <div class="hw-body">
+          <span class="hw-type hw-mc">Multiple choice · vocabulary &amp; grammar</span>
+          <p style="font-size:13px;color:var(--gray);margin-bottom:16px;font-style:italic;">Choose the best option. Do this without looking at your notes first!</p>
+
+          <div class="mc-item">
+            <div class="mc-q">1. &nbsp;"Let's ________ — I think we've covered everything for today."</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> make a close</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> wrap up</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> bring over</div>
+            </div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-q">2. &nbsp;"Sorry, could you ________ on that? I didn't quite follow."</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> explain more</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> elaborate</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> detail</div>
+            </div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-q">2. &nbsp;"I think you're ________. We can't hear anything you're saying."</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> in mute</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> at mute</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span> on mute</div>
+            </div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-q">3. &nbsp;"Please send the report to all ________ before the meeting."</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> participants</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> attendees</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> audiences</div>
+            </div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-q">4. &nbsp;"We couldn't ________ so we decided to vote on it."</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">A</span> reach a consensus</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> get an agreement</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> make a unanimous</div>
+            </div>
+          </div>
+          <div class="mc-item">
+            <div class="mc-q">6. &nbsp;"________ your point, but I think we need at least two more weeks."</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">A</span> I see</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> I look</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> I watch</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task 2</span> Record Yourself — Opening a Meeting</div>
+        <div class="hw-body">
+          <span class="hw-type hw-rec">🎙 Speaking · record yourself</span>
+          <div style="background:var(--lr);border:1px solid #fda4af;border-radius:10px;padding:15px 17px;margin:12px 0;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--rose);margin-bottom:7px;">Your situation</div>
+            <p style="font-size:14px;">You are chairing a team meeting to review the quarterly sales results. There are 5 people on the call. Record yourself <strong>opening the meeting</strong> (60–90 seconds).</p>
+          </div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin:12px 0 8px;">Your recording must include:</div>
+          <ul style="list-style:none;padding:0;">
+            <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">①</span> A greeting and audio check</li>
+            <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">②</span> The purpose of the meeting</li>
+            <li style="padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">③</span> At least 3 agenda items</li>
+            <li style="padding:6px 0;font-size:14px;display:flex;align-items:center;gap:10px;"><span style="color:var(--rose);font-size:16px;">④</span> An invitation for someone to speak first</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <a class="slide-nav-btn" href="Lesson_02_Reporting_What_Was_Said.html" style="text-decoration:none;">Lesson 2 →</a>
+    </div>
+  </div>
+
+
+
+<script>
+const SLIDE_LABELS = [
+  'Cover',
+  'Part 1 · Warm-up',
+  'Part 2 · Vocabulary',
+  'Part 3 · Key Language',
+  'Part 4 · Guided Speaking',
+  'Part 5 · Wrap-up',
+  'Extra Activity',
+  'Homework'
+];
+const TOTAL_SLIDES = 8;
+let currentSlide = 0;
+
+function pickReact(btn){
+          document.querySelectorAll('.react-btn').forEach(b=>b.classList.remove('picked'));
+          btn.classList.add('picked');
+        }
+
+function toggleFollowUps(){
+          const fu=document.getElementById('wu-followups');
+          const btn=document.getElementById('fu-toggle');
+          const showing=fu.classList.contains('show');
+          fu.classList.toggle('show');
+          btn.textContent=showing?'+ Follow-up questions':'− Follow-up questions';
+        }
+
+function slideNav(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= TOTAL_SLIDES) return;
+  goToSlide(n);
+}
+
+function goToSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateSlideUI();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function updateSlideUI() {
+  const prev = document.getElementById('slide-prev');
+  const next = document.getElementById('slide-next');
+  if (prev) prev.disabled = currentSlide === 0;
+  if (next) {
+    if (currentSlide === TOTAL_SLIDES - 1) {
+      next.disabled = false;
+      next.textContent = 'Lesson 2 →';
+      next.onclick = () => { window.location.href='Lesson_02_Reporting_What_Was_Said.html'; };
+    } else {
+      next.disabled = false;
+      next.textContent = 'Next →';
+      next.onclick = () => slideNav(1);
+    }
+  }
+  const lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = SLIDE_LABELS[currentSlide];
+  const ctr = document.getElementById('slide-counter');
+  if (ctr) ctr.textContent = 'Slide ' + (currentSlide+1) + ' of ' + TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < currentSlide) d.classList.add('done');
+    else if (i === currentSlide) d.classList.add('active');
+  });
+}
+
+function toggleNav(btn) {
+  btn.classList.toggle('open');
+  document.getElementById('course-nav-body').classList.toggle('show');
+}
+
+function matchClick(el, type) {
+  if (el.classList.contains('matched')) return;
+  if (type === 'word') {
+    if (mSel && mSel.type === 'word') mSel.el.classList.remove('selected');
+    if (mSel && mSel.type === 'word' && mSel.el === el) { mSel = null; return; }
+    el.classList.add('selected');
+    mSel = { el, type, id: el.dataset.id };
+  } else {
+    if (!mSel || mSel.type !== 'word') return;
+    const defId = el.dataset.id;
+    if (mSel.id === defId) {
+      el.classList.add('matched'); mSel.el.classList.remove('selected'); mSel.el.classList.add('matched');
+      mSel = null;
+    } else {
+      el.classList.add('wrong-flash'); mSel.el.classList.add('wrong-flash');
+      setTimeout(() => { el.classList.remove('wrong-flash'); mSel.el.classList.remove('wrong-flash'); }, 450);
+    }
+  }
+}
+
+function resetMatch() {
+  mSel = null;
+  document.querySelectorAll('.match-word, .match-def').forEach(e => e.classList.remove('matched','selected','wrong-flash'));
+}
+
+function wbSelect(el) {
+  if (el.classList.contains('used')) return;
+  if (wbSelectedEl) wbSelectedEl.classList.remove('selected-wb');
+  if (wbSelectedEl === el) { wbSelected = null; wbSelectedEl = null; return; }
+  wbSelected = el.textContent.trim();
+  wbSelectedEl = el;
+  el.classList.add('selected-wb');
+}
+
+function dropOnBlank(el) {
+  if (!wbSelected) { el.style.borderBottomColor='var(--rose)'; setTimeout(()=>el.style.borderBottomColor='',500); return; }
+  // return old word if blank was filled
+  if (el.dataset.filled) {
+    const old = [...document.querySelectorAll('.wb-word')].find(w=>w.textContent.trim()===el.dataset.filled&&w.classList.contains('used'));
+    if(old){old.classList.remove('used');}
+  }
+  el.textContent = wbSelected;
+  el.classList.add('has-word');
+  el.classList.remove('correct','incorrect');
+  el.dataset.filled = wbSelected;
+  wbSelectedEl.classList.add('used'); wbSelectedEl.classList.remove('selected-wb');
+  wbSelected = null; wbSelectedEl = null;
+}
+
+function checkGF(prefix, count) {
+  for(let i=1;i<=count;i++){
+    const el=document.getElementById(prefix+'-'+i);
+    if(!el) continue;
+    const filled=(el.dataset.filled||'').trim().toLowerCase();
+    const answer=el.dataset.answer.toLowerCase();
+    el.classList.remove('has-word','correct','incorrect');
+    if(filled===answer) el.classList.add('correct');
+    else if(filled) el.classList.add('incorrect');
+  }
+}
+
+function resetGF(prefix, count, bankId) {
+  for(let i=1;i<=count;i++){
+    const el=document.getElementById(prefix+'-'+i);
+    if(!el) continue;
+    el.textContent=''; el.dataset.filled='';
+    el.classList.remove('has-word','correct','incorrect');
+    el.style.borderBottomColor='';
+  }
+  document.querySelectorAll(`#${bankId} .wb-word`).forEach(w=>{w.classList.remove('used','selected-wb');});
+  wbSelected=null; wbSelectedEl=null;
+}
+
+function showErrAns(btn) {
+  const ans = btn.nextElementSibling;
+  const showing = ans.classList.contains('show');
+  ans.classList.toggle('show');
+  btn.textContent = showing ? '▶ Show correction' : '▼ Correction shown';
+  btn.style.color = showing ? '' : 'var(--green)';
+  btn.style.borderColor = showing ? '' : 'var(--green)';
+}
+
+function mcPick(el, correct) {
+  const opts = el.closest('.mc-opts').querySelectorAll('.mc-opt');
+  if([...opts].some(o=>o.classList.contains('correct','wrong'))) return;
+  opts.forEach(o=>o.classList.add('locked'));
+  if(correct){el.classList.add('correct');}
+  else{
+    el.classList.add('wrong');
+    opts.forEach(o=>{ if(o.onclick && o.onclick.toString().includes('true,')) o.classList.add('correct'); });
+  }
+}
+
+function toggleSA(id, btn) {
+  const el=document.getElementById(id);
+  if(el.classList.contains('show')){el.classList.remove('show');btn.textContent='👁 Sample answer';}
+  else{el.classList.add('show');btn.textContent='🙈 Hide';}
+}
+
+function nextSC(n) {
+  document.getElementById('sc'+n).classList.remove('active');
+  curScene=n+1;
+  document.getElementById('sc'+curScene).classList.add('active');
+  updateDots();
+  document.getElementById('scene-counter').textContent=`Situation ${curScene} of ${totalScenes}`;
+}
+
+function finishSC() {
+  document.getElementById('sc'+totalScenes).classList.remove('active');
+  const done=document.getElementById('sc-done'); done.style.display='block'; done.classList.add('active');
+  document.getElementById('scene-counter').textContent='Complete! 🎉';
+  document.querySelectorAll('.scene-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done');});
+}
+
+function updateDots() {
+  document.querySelectorAll('.scene-dot').forEach((d,i)=>{
+    d.classList.remove('active','done');
+    if(i<curScene-1) d.classList.add('done');
+    else if(i===curScene-1) d.classList.add('active');
+  });
+}
+
+function revealMemory(btn) {
+  const r=btn.parentElement.nextElementSibling;
+  const showing=r.classList.contains('show');
+  r.classList.toggle('show');
+  btn.textContent=showing?'▶ Reveal':'▼ Hide';
+  btn.style.color=showing?'':'var(--green)';
+  btn.style.borderColor=showing?'':'var(--green)';
+}
+
+function checkNat(el, correct, expId) {
+  const btns=el.closest('.nat-item').querySelectorAll('.nat-btn');
+  if([...btns].some(b=>b.classList.contains('sel-correct','sel-wrong'))) return;
+  btns.forEach(b=>b.classList.add('locked'));
+  document.getElementById(expId).classList.add('show');
+  if(correct){el.classList.add('sel-correct');}
+  else{el.classList.add('sel-wrong');btns.forEach(b=>{if(b!==el)b.classList.add('show-right');});}
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
+});
+let mSel = null;
+let wbSelected = null, wbSelectedEl = null;
+let curScene=1; const totalScenes=7;
+</script>
+</body>
+</html>

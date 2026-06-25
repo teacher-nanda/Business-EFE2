@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 5 – Planning Formal Emails</title>
+<style>
+
+
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --purple:#7c3aed;--lp:#ede9fe;--indigo:#4338ca;--li:#e0e7ff;
+  --green:#16a34a;--lg:#dcfce7;
+  --orange:#ea580c;--lo:#ffedd5;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;--textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+.course-nav{background:var(--navy);color:white;}
+.nav-toggle{display:flex;align-items:center;gap:10px;padding:12px 32px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.5px;user-select:none;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-toggle .arrow{font-size:10px;transition:transform .25s;margin-left:auto;}
+.nav-toggle.open .arrow{transform:rotate(90deg);}
+.nav-body{display:none;padding:20px 32px 24px;}
+.nav-body.show{display:block;}
+.nav-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.nav-mod-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.nav-lesson{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12.5px;color:rgba(255,255,255,0.6);}
+.nav-lesson a{color:inherit;text-decoration:none;}
+.nav-lesson a:hover{color:var(--amber);}
+.nav-lesson.current{color:var(--amber);font-weight:700;}
+.nl{background:rgba(255,255,255,0.12);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700;}
+.nav-lesson.current .nl{background:var(--amber);color:var(--navy);}
+.page-header{background:var(--navy);color:white;padding:28px 48px 22px;position:relative;overflow:hidden;}
+
+.page-header::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d5986,#2563eb,#7c3aed,#0d9488);}
+.header-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px;}
+.header-title{font-size:26px;font-weight:700;letter-spacing:-.5px;}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.55);margin-top:3px;}
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;margin:24px 0 28px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;}.s2{background:#4338ca;flex:2;}.s3{background:#2563eb;flex:2;}.s4{background:#7c3aed;flex:2;}.s5{background:#d97706;flex:2;}
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+.c-teal .card-head{background:var(--lt);}.c-teal .card-icon{background:var(--teal);color:white;}.c-teal .card-title{color:var(--teal);}.c-teal .card-badge{background:var(--teal);}
+.c-blue .card-head{background:var(--lb);}.c-blue .card-icon{background:var(--blue);color:white;}.c-blue .card-title{color:var(--blue);}.c-blue .card-badge{background:var(--blue);}
+.c-indigo .card-head{background:var(--li);}.c-indigo .card-icon{background:var(--indigo);color:white;}.c-indigo .card-title{color:var(--indigo);}.c-indigo .card-badge{background:var(--indigo);}
+.c-purple .card-head{background:var(--lp);}.c-purple .card-icon{background:var(--purple);color:white;}.c-purple .card-title{color:var(--purple);}.c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);}.c-amber .card-icon{background:var(--amber);color:white;}.c-amber .card-title{color:var(--amber);}.c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);}.c-green .card-icon{background:var(--green);color:white;}.c-green .card-title{color:var(--green);}.c-green .card-badge{background:var(--green);}
+.c-rose .card-head{background:var(--lr);}.c-rose .card-icon{background:var(--rose);color:white;}.c-rose .card-title{color:var(--rose);}.c-rose .card-badge{background:var(--rose);}
+.c-navy .card-head{background:var(--lgr);}.c-navy .card-icon{background:var(--navy);color:white;}.c-navy .card-title{color:var(--navy);}.c-navy .card-badge{background:var(--navy);}
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:700;color:white;border-radius:8px;padding:2px 8px;text-transform:none;letter-spacing:0;}
+.type-reading{background:var(--teal);}
+.type-grammar{background:var(--purple);}
+.type-vocab{background:var(--blue);}
+.type-writing{background:var(--orange);}
+.type-speaking{background:var(--green);}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* WARM-UP: HAVE YOU EVER + DISCUSSION */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.hye-intro{font-size:14px;color:var(--textl);margin-bottom:18px;}
+.hye-list{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}
+.hye-item{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1.5px solid var(--border);border-radius:11px;padding:13px 16px;background:white;transition:border-color .2s;}
+.hye-item.picked{border-color:var(--teal);background:var(--lt);}
+.hye-q{font-size:14px;color:var(--navy);line-height:1.45;flex:1;}
+.hye-btn{flex-shrink:0;padding:7px 16px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--gray);transition:all .15s;}
+.hye-btn:hover{border-color:var(--teal);color:var(--teal);}
+.hye-btn.yes{background:var(--teal);border-color:var(--teal);color:white;}
+.wu-disc{background:var(--lt);border:1px solid #5eead4;border-radius:12px;padding:18px;margin-top:20px;}
+.wu-disc-q{font-size:15px;color:#134e4a;font-weight:600;}
+
+/* EMAIL READING */
+.email-mockup{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;font-size:14px;}
+.email-toolbar{background:var(--navy);padding:10px 16px;display:flex;align-items:center;gap:8px;}
+.email-dot{width:10px;height:10px;border-radius:50%;}
+.email-dot.r{background:#ef4444;}.email-dot.y{background:#f59e0b;}.email-dot.g{background:#22c55e;}
+.email-toolbar-label{font-size:12px;color:rgba(255,255,255,0.5);margin-left:auto;}
+.email-header{padding:14px 18px;border-bottom:1px solid var(--border);background:#fafafa;}
+.email-meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px;}
+.email-meta-label{color:var(--gray);font-weight:700;text-align:right;}
+.email-meta-val{color:var(--navy);}
+.email-subject{font-size:15px;font-weight:700;color:var(--navy);margin-top:10px;}
+.email-body{padding:18px;line-height:1.8;color:var(--text);}
+.email-body p{margin-bottom:12px;}
+.email-body p:last-child{margin-bottom:0;}
+.email-phrase{background:var(--lb);border-radius:4px;padding:1px 5px;font-weight:600;color:#1e40af;}
+
+/* READING COMPREHENSION */
+.tf-item{border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:10px;}
+.tf-stmt{font-size:14.5px;color:var(--navy);margin-bottom:10px;}
+.tf-btns{display:flex;gap:8px;}
+.tf-btn{padding:6px 20px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.tf-btn:hover:not(.locked){border-color:var(--navy);background:var(--navy);color:white;}
+.tf-btn.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.tf-btn.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.tf-btn.locked{cursor:default;}
+.tf-explain{display:none;margin-top:7px;padding:7px 10px;background:#f0fdf4;border-radius:7px;font-size:11.5px;color:#14532d;border:1px solid #86efac;}
+.tf-explain.show{display:block;}
+
+/* MC */
+.mc-item{margin-bottom:18px;}
+.mc-q{font-size:14.5px;font-weight:600;margin-bottom:9px;color:var(--navy);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:13.5px;transition:all .15s;user-select:none;}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--lb);transform:translateX(3px);}
+.mc-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.mc-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.mc-opt.locked{cursor:default;}
+.mc-letter{background:var(--lgr);border:1px solid var(--border);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--navy);}
+.mc-opt.correct .mc-letter{background:var(--green);border-color:var(--green);color:white;}
+.mc-opt.wrong .mc-letter{background:var(--rose);border-color:var(--rose);color:white;}
+
+/* VOCAB CARDS */
+.vocab-section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;}
+.vocab-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-sentence{font-size:13.5px;color:var(--text);margin-bottom:7px;line-height:1.4;}
+.bvc-sentence em{font-style:normal;color:var(--blue);font-weight:700;}
+.bvc-term{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.bvc-def{font-size:12px;color:var(--gray);font-style:italic;}
+.bvc-go{border-color:var(--lp);background:var(--lp);}
+.bvc-go:hover{border-color:var(--purple);box-shadow:0 3px 10px rgba(124,58,237,0.12);}
+.bvc-go .bvc-sentence em{color:var(--purple);}
+.bvc-go .bvc-term{color:var(--purple);}
+
+/* REGISTER COMPARISON */
+.reg-compare{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:14px 0;}
+.reg-head{display:grid;grid-template-columns:1fr 1fr;background:var(--navy);color:white;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.reg-head-cell{padding:10px 14px;text-align:center;}
+.reg-head-cell:first-child{border-right:1px solid rgba(255,255,255,0.15);}
+.reg-row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);}
+.reg-row:last-child{border-bottom:none;}
+.reg-cell{padding:10px 14px;font-size:13.5px;font-style:italic;}
+.reg-informal{color:#78350f;background:#fffbeb;}
+.reg-formal{color:#1e3a8a;background:var(--lb);}
+.reg-cell:first-child{border-right:1px solid var(--border);}
+.reg-arrow{text-align:center;font-size:16px;padding:0 4px;display:inline-block;color:var(--gray);}
+
+/* TRANSFORM EXERCISE */
+.transform-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.transform-q{font-size:15px;color:var(--navy);margin-bottom:10px;}
+.transform-informal-tag{display:inline-block;background:var(--la);color:#78350f;border-radius:6px;padding:2px 9px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.transform-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;font-size:14px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .15s;}
+.transform-input:focus{border-color:var(--purple);}
+.transform-reveal-btn{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s;font-family:inherit;margin-top:9px;}
+.transform-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+.transform-answer{display:none;margin-top:9px;padding:10px 14px;background:var(--lg);border:1px solid #86efac;border-radius:7px;font-size:13.5px;color:#14532d;}
+.transform-answer.show{display:block;}
+.correct-phrase{font-weight:700;color:var(--green);}
+
+/* WRITING TASK */
+.scenario-card{background:var(--lgr);border:1px solid var(--border);border-radius:12px;padding:17px 18px;margin-bottom:16px;}
+.scenario-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:10px;}
+.scenario-head{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.bullet-list{list-style:none;padding:0;}
+.bullet-item{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.bullet-item:last-child{border-bottom:none;}
+.bullet-icon{color:var(--blue);flex-shrink:0;font-size:14px;margin-top:2px;}
+.email-checklist{display:flex;flex-direction:column;gap:6px;margin:14px 0;}
+.check-item{display:flex;align-items:center;gap:9px;font-size:14px;padding:7px 11px;border:1px solid var(--border);border-radius:8px;background:white;}
+.check-circle{width:18px;height:18px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;}
+
+/* HW */
+.hw2-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13.5px;cursor:pointer;background:white;transition:all .15s;line-height:1.5;}
+.hw2-opt:hover{border-color:var(--blue);background:#eff6ff;}
+.hw2-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--navy);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+.hw2-text{flex:1;color:var(--navy);}
+.hw2-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.hw2-opt.hw2-correct{border-color:var(--green);background:#dcfce7;}
+.hw2-opt.hw2-wrong{border-color:var(--rose);background:var(--lr);}
+.hw2-opt.hw2-locked{cursor:default;pointer-events:none;}
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lo);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--orange);}
+.hw-tag{background:var(--orange);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hw-grammar{background:var(--lp);color:#5b21b6;}
+.hw-write{background:var(--lt);color:#134e4a;}
+
+/* ERROR SPOT */
+.err-email{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:14px 0;}
+.err-email-head{background:var(--la);border-bottom:1px solid #fcd34d;padding:11px 16px;font-size:12px;font-weight:700;color:#78350f;}
+.err-email-body{padding:16px;line-height:1.9;font-size:14px;color:var(--navy);}
+.err-underline{border-bottom:2px dashed var(--amber);cursor:pointer;font-weight:600;color:#78350f;}
+.err-fix-row{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);}
+.err-fix-row:last-child{border-bottom:none;}
+.err-fix-label{font-size:13px;color:var(--gray);flex:0 0 auto;min-width:18px;}
+.err-fix-input{border:1.5px solid var(--border);border-radius:8px;padding:6px 11px;font-size:13.5px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .15s;flex:1;}
+.err-fix-input:focus{border-color:var(--purple);}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:white;}.btn-navy:hover{background:#243e60;}
+.btn-green{background:var(--green);color:white;}.btn-green:hover{background:#15803d;}
+.btn-purple{background:var(--purple);color:white;}.btn-purple:hover{background:#6d28d9;}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:18px;}
+.lesson-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:28px 18px 10px;}
+.lesson-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;}
+.nav-home{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-home:hover{background:var(--border);}
+.nav-prev{background:white;color:var(--navy);border:1.5px solid var(--border);}
+.nav-prev:hover{border-color:var(--navy);}
+.nav-next{background:var(--navy);color:white;border:1.5px solid var(--navy);}
+.nav-next:hover{background:#243d5c;}
+
+/* ── PREVIOUS LESSON LANGUAGE BOX ── */
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▸";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;}
+.prev-box-item em{font-style:italic;color:var(--navy);font-weight:600;}
+
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;background:var(--lb);border-radius:8px;padding:11px 13px;margin-bottom:14px;}
+.wb-word{background:white;border:1.5px solid var(--blue);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--blue);color:white;}
+.wb-word.selected-wb{background:var(--blue);color:white;outline:3px solid var(--amber);}
+.wb-word.used{background:var(--lgr);border-color:var(--border);color:var(--gray);cursor:default;text-decoration:line-through;}
+.gf-list{list-style:none;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.gf-item{padding:11px 14px;border-bottom:1px solid var(--border);font-size:14.5px;display:flex;align-items:flex-start;gap:10px;}
+.gf-item:last-child{border-bottom:none;}
+.gf-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.blank-drop{display:inline-flex;align-items:center;justify-content:center;border:2px dashed #94a3b8;border-radius:20px;min-width:90px;padding:4px 14px;cursor:pointer;color:transparent;font-style:italic;font-size:13px;font-weight:600;vertical-align:middle;transition:all .2s;background:#f8fafc;margin:0 3px;}
+.blank-drop:hover{border-color:var(--blue);background:var(--lb);}
+.blank-drop.has-word{color:var(--navy);border-style:solid;border-color:var(--amber);background:var(--la);}
+.blank-drop.correct{color:var(--green);border-style:solid;border-color:var(--green);background:var(--lg);}
+.blank-drop.incorrect{color:var(--rose);border-style:solid;border-color:var(--rose);background:var(--lr);}
+
+/* Reading split layout */
+.reading-split{display:grid;grid-template-columns:60fr 40fr;gap:22px;align-items:start;}
+.reading-email-col{position:sticky;top:16px;}
+.reading-email-col .email-body p{font-size:12.5px;line-height:1.55;}
+.reading-email-col .email-subject{font-size:13px;}
+.reading-email-col .email-meta-val{font-size:11.5px;}
+.reading-email-col .email-meta-label{font-size:11.5px;}
+.reading-email-col .email-mockup{margin-bottom:0;}
+.reading-ex-col .act-head{margin-top:0;}
+/* Fade-out for answered items */
+.ex-answered{transition:opacity .5s ease, max-height .6s ease, margin-bottom .6s ease, padding .6s ease;overflow:hidden;}
+.ex-answered.ex-gone{}
+
+/* Smaller fonts in the exercise column */
+.reading-ex-col .tf-stmt{font-size:13px;}
+.reading-ex-col .tf-explain{font-size:11px;}
+.reading-ex-col .tf-btn{font-size:12px;padding:4px 12px;}
+/* Per-question split for Ex 2 */
+.mc-reading-wrap{display:grid;grid-template-columns:55fr 45fr;gap:16px;align-items:stretch;margin-bottom:14px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.mc-email-mini{background:#fafafa;border-right:1px solid var(--border);padding:14px 14px;overflow-y:auto;}
+.mc-email-mini .mini-subject{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.mc-email-mini .mini-from{font-size:10.5px;color:var(--gray);margin-bottom:10px;}
+.mc-email-mini p{font-size:11.5px;line-height:1.6;margin-bottom:8px;color:var(--text);}
+.mc-email-mini p:last-child{margin-bottom:0;}
+.mc-q-col{padding:16px 14px;}
+.mc-q-col .mc-q{font-size:13.5px;}
+.mc-q-col .mc-opt{font-size:13px;padding:8px 12px;}
+.mc-q-col .mc-letter{font-size:12px;min-width:20px;height:20px;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.btn-green{background:var(--green);color:white;}.btn-green:hover{background:#15803d;}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+
+.spot-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:white;}
+.spot-sentence{font-size:14px;line-height:2;margin-bottom:8px;color:var(--navy);}
+.spot-chip{background:var(--lp);border:1.5px solid var(--purple);border-radius:16px;padding:2px 11px;cursor:pointer;font-weight:600;color:var(--purple);transition:all .2s;display:inline-block;margin:0 2px;font-size:13px;}
+.spot-chip:hover:not(.sp-locked){background:var(--purple);color:white;}
+.spot-chip.sp-flash{background:var(--rose)!important;border-color:var(--rose)!important;color:white!important;}
+.spot-chip.sp-correct{background:var(--green)!important;border-color:var(--green)!important;color:white!important;cursor:default;}
+.spot-chip.sp-locked{cursor:default;opacity:0.55;pointer-events:none;}
+.spot-fix{display:none;font-size:13px;margin-top:10px;padding:9px 13px;background:var(--lg);border-radius:7px;color:#166534;line-height:1.6;}
+.spot-fix.show{display:block;}
+
+.fpick-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:white;}
+.fpick-informal{font-size:13px;color:var(--rose);font-weight:600;margin-bottom:4px;}
+.fpick-q{font-size:14px;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.fpick-opts{display:flex;flex-direction:column;gap:8px;}
+.fpick-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:13.5px;line-height:1.55;}
+.fpick-opt:hover:not(.fp-locked){border-color:var(--blue);background:var(--lb);}
+.fpick-letter{background:var(--lgr);color:var(--navy);min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.fpick-opt.fp-correct{border-color:var(--green);background:var(--lg);}.fpick-opt.fp-correct .fpick-letter{background:var(--green);color:white;}
+.fpick-opt.fp-wrong{border-color:var(--rose);background:var(--lr);}.fpick-opt.fp-wrong .fpick-letter{background:var(--rose);color:white;}
+.fpick-opt.fp-locked{cursor:default;opacity:0.6;}
+.fpick-hint{font-size:12px;color:var(--gray);margin-top:8px;font-style:italic;display:none;}
+.fpick-hint.show{display:block;}
+.fpick-cat{font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;}
+
+/* EMAIL MAKEOVER EXTRA */
+.makeover-item{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.makeover-label{background:#fef2f2;padding:7px 16px;font-size:10px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#b91c1c;border-bottom:1px solid #fecaca;display:flex;align-items:center;gap:6px;}
+.makeover-bad{padding:13px 18px;background:#fafafa;font-size:14.5px;font-style:italic;color:var(--navy);border-bottom:1px solid var(--border);line-height:1.55;}
+.makeover-footer{padding:10px 18px;background:white;display:flex;justify-content:flex-end;}
+.makeover-fix{display:none;padding:14px 18px;background:var(--lg);border-top:1px solid #86efac;}
+.makeover-fix.show{display:block;animation:fadeIn .25s;}
+.makeover-fix-label{font-size:10px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.fix-point{display:flex;gap:10px;margin-bottom:8px;font-size:13.5px;line-height:1.55;color:#14532d;}
+.fix-point:last-child{margin-bottom:0;}
+.fix-num{font-weight:700;color:var(--green);flex-shrink:0;min-width:18px;}
+.fix-text .correct-word{background:white;border:1px solid #86efac;border-radius:4px;padding:1px 6px;font-weight:700;color:#14532d;font-style:normal;}
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+  /* ══ SLIDE NAVBAR ══ */
+  .slide-navbar {
+    background: white; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+  }
+  .slide-nav-btn {
+    background: var(--navy); color: white; border: none; border-radius: 8px;
+    padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: background .15s; white-space: nowrap;
+  }
+  .slide-nav-btn:hover:not(:disabled) { background: #263d5c; }
+  .slide-nav-btn:disabled { opacity: .3; cursor: default; }
+  .slide-info { text-align: center; flex: 1; }
+  .slide-label { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .slide-counter-text { font-size: 12px; color: var(--gray); margin: 2px 0 6px; }
+  .slide-progress { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .15s; }
+  .sp-dot.active { background: var(--navy); transform: scale(1.3); }
+  .sp-dot.done { background: var(--teal); }
+  /* ══ BOTTOM NAV BAR ══ */
+  .slide-bottom-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px; margin-top: 30px;
+    border-top: 2px solid var(--border); background: #f8fafc;
+  }
+
+  /* ══ TOP HOME STRIP ══ */
+  .top-home-strip {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+    background: var(--navy); height: 42px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .top-home-link {
+    color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+    font-family: inherit; display: flex; align-items: center; gap: 6px;
+    opacity: .85; transition: opacity .15s;
+  }
+  .top-home-link:hover { opacity: 1; }
+  body { padding-top: 42px; }
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<!-- ══ SLIDE NAVBAR ══ -->
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 8</div>
+    <div class="slide-progress"><div class="sp-dot  active" onclick="goToSlide(0)" title="Slide 1"></div><div class="sp-dot" onclick="goToSlide(1)" title="Slide 2"></div><div class="sp-dot" onclick="goToSlide(2)" title="Slide 3"></div><div class="sp-dot" onclick="goToSlide(3)" title="Slide 4"></div><div class="sp-dot" onclick="goToSlide(4)" title="Slide 5"></div><div class="sp-dot" onclick="goToSlide(5)" title="Slide 6"></div><div class="sp-dot" onclick="goToSlide(6)" title="Slide 7"></div><div class="sp-dot" onclick="goToSlide(7)" title="Slide 8"></div></div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+<!-- HEADER -->
+
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English with teacher Nanda</div>
+      <div class="cover-module-tag">Module 2 · Communication — Lesson 1 of 3</div>
+      <div class="cover-title-main">Planning &amp; Formal Emails</div>
+      <div class="cover-lesson-badge">Lesson 5</div>
+      <div class="cover-tl">
+        <div class="tl-bar">
+    <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+    <div class="tl-seg s2">Reading<span class="t">10 min</span></div>
+    <div class="tl-seg s3">Vocabulary<span class="t">8 min</span></div>
+    <div class="tl-seg s4">Grammar<span class="t">10 min</span></div>
+    <div class="tl-seg s5">Speaking<span class="t">10 min</span></div>
+  </div>
+
+  <!-- ══ PART 1: WARM-UP — HAVE YOU EVER? ══ -->
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+    <div class="card-head">
+      <div class="card-icon">🕵️</div>
+      <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">Have You Ever…?</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+
+      <p class="hye-intro">Click the ones that apply to you</p>
+
+      <div class="hye-list">
+        <div class="hye-item" id="hye1">
+          <div class="hye-q">✉️ &nbsp;Re-read a professional email several times before finally hitting send?</div>
+          <button class="hye-btn" onclick="hyePick(1)">✋ Yes!</button>
+        </div>
+        <div class="hye-item" id="hye2">
+          <div class="hye-q">😬 &nbsp;Sent an email and immediately wished you could take it back?</div>
+          <button class="hye-btn" onclick="hyePick(2)">✋ Yes!</button>
+        </div>
+        <div class="hye-item" id="hye3">
+          <div class="hye-q">🤔 &nbsp;Received an email and genuinely couldn't tell if the person was being polite or passive-aggressive?</div>
+          <button class="hye-btn" onclick="hyePick(3)">✋ Yes!</button>
+        </div>
+        <div class="hye-item" id="hye4">
+          <div class="hye-q">⏱️ &nbsp;Spent much longer writing a professional email than you expected?</div>
+          <button class="hye-btn" onclick="hyePick(4)">✋ Yes!</button>
+        </div>
+      </div>
+
+      <div class="wu-disc">
+        <div class="wu-disc-q">💬 When you write a professional email, what's the hardest part — starting it, making a request, or ending it?</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 2: READING ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 2 ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-indigo">
+    <div class="card-head">
+      <div class="card-icon">📨</div>
+      <div><div class="card-label">Part 2 · Reading</div><div class="card-title">A Formal Business Email</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:13px;color:var(--textl);margin-bottom:14px;">Read the email — notice the structure and the language used. Then answer the questions on the right.</p>
+
+      <div class="act-head" style="margin-bottom:12px;">
+        <div class="act-num">1</div>
+        True or False — read carefully
+        <span class="act-type type-reading">Reading</span>
+      </div>
+
+      <div class="mc-reading-wrap">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Project Kickoff — Proposed Timeline and Next Steps</div>
+          <div class="mini-from">Sarah Mitchell → Michael Chen · June 3, 2026</div>
+          <p>Dear Mr. Chen,</p>
+          <p><span class="email-phrase">I hope this email finds you well.</span></p>
+          <p><span class="email-phrase">I am writing to follow up on</span> our conversation during last Tuesday's discovery call and to share our proposed timeline for the Horizon Platform project.</p>
+          <p><span class="email-phrase">As discussed,</span> the project will be divided into three phases: research and planning (Weeks 1–3), development and testing (Weeks 4–10), and deployment and review (Weeks 11–12). <span class="email-phrase">Please find the detailed project brief attached to this email.</span></p>
+          <p><span class="email-phrase">With regard to</span> the kickoff meeting, I would like to propose Wednesday, June 18th, at 10:00 AM. <span class="email-phrase">Should this date not be convenient,</span> please do not hesitate to suggest an alternative and I will do my best to accommodate your schedule.</p>
+          <p>I would be grateful if you could review the attached brief before our meeting, as this will allow us to use our time together as efficiently as possible.</p>
+          <p><span class="email-phrase">I look forward to hearing from you</span> and to beginning this exciting project together.</p>
+          <p><strong>Kind regards,</strong><br>Sarah Mitchell<br><em>Account Manager | Vertex Solutions</em><br><em>Tel: +1 (212) 555-0184</em></p>
+        </div>
+        <div class="mc-q-col">
+          <div class="tf-item">
+            <div class="tf-stmt">1. &nbsp;Sarah is contacting Mr. Chen for the first time.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this, false, 'te1')">True</button>
+              <button class="tf-btn" onclick="tfPick(this, true, 'te1')">False</button>
+            </div>
+            <div class="tf-explain" id="te1">❌ False. Sarah mentions "our conversation during last Tuesday's discovery call" — they have already spoken.</div>
+          </div>
+
+          <div class="tf-item">
+            <div class="tf-stmt">2. &nbsp;The project has three phases.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this, true, 'te2')">True</button>
+              <button class="tf-btn" onclick="tfPick(this, false, 'te2')">False</button>
+            </div>
+            <div class="tf-explain" id="te2">✅ True. Sarah lists three phases: research and planning, development and testing, and deployment and review.</div>
+          </div>
+
+          <div class="tf-item">
+            <div class="tf-stmt">3. &nbsp;The deployment phase is the longest phase in the project.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this, false, 'te3')">True</button>
+              <button class="tf-btn" onclick="tfPick(this, true, 'te3')">False</button>
+            </div>
+            <div class="tf-explain" id="te3">❌ False. Development and testing lasts 7 weeks (Weeks 4–10); deployment is only 2 weeks (Weeks 11–12).</div>
+          </div>
+
+          <div class="tf-item" style="border-bottom:none;margin-bottom:0;">
+            <div class="tf-stmt">4. &nbsp;Sarah wants Mr. Chen to read something before they meet.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this, true, 'te4')">True</button>
+              <button class="tf-btn" onclick="tfPick(this, false, 'te4')">False</button>
+            </div>
+            <div class="tf-explain" id="te4">✅ True. "I would be grateful if you could review the attached brief before our meeting."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="act-head">
+        <div class="act-num">2</div>
+        Reading comprehension — choose the best answer
+        <span class="act-type type-reading">Reading</span>
+      </div>
+      <p style="font-size:13px;color:var(--textl);margin-bottom:14px;font-style:italic;">The email is on the left — refer to it as you answer each question.</p>
+
+      <div class="mc-reading-wrap">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Project Kickoff — Proposed Timeline and Next Steps</div>
+          <div class="mini-from">Sarah Mitchell → Michael Chen · June 3, 2026</div>
+          <p>Dear Mr. Chen,</p>
+          <p><span class="email-phrase">I hope this email finds you well.</span></p>
+          <p><span class="email-phrase">I am writing to follow up on</span> our conversation during last Tuesday's discovery call and to share our proposed timeline for the Horizon Platform project.</p>
+          <p><span class="email-phrase">As discussed,</span> the project will be divided into three phases: research and planning (Weeks 1–3), development and testing (Weeks 4–10), and deployment and review (Weeks 11–12). <span class="email-phrase">Please find the detailed project brief attached to this email.</span></p>
+          <p><span class="email-phrase">With regard to</span> the kickoff meeting, I would like to propose Wednesday, June 18th, at 10:00 AM. <span class="email-phrase">Should this date not be convenient,</span> please do not hesitate to suggest an alternative and I will do my best to accommodate your schedule.</p>
+          <p>I would be grateful if you could review the attached brief before our meeting, as this will allow us to use our time together as efficiently as possible.</p>
+          <p><span class="email-phrase">I look forward to hearing from you</span> and to beginning this exciting project together.</p>
+          <p><strong>Kind regards,</strong><br>Sarah Mitchell<br><em>Account Manager | Vertex Solutions</em></p>
+        </div>
+        <div class="mc-q-col">
+          <div class="mc-item" style="margin-bottom:0;border:none;padding:0;">
+            <div class="mc-q">1. &nbsp;What is the main purpose of this email?</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> To apologize for a delay in starting the project</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> To share a project timeline and propose a kickoff meeting</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> To introduce the Vertex Solutions team to a new client</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span> To request a contract signature before work begins</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc-reading-wrap">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Project Kickoff — Proposed Timeline and Next Steps</div>
+          <div class="mini-from">Sarah Mitchell → Michael Chen · June 3, 2026</div>
+          <p>Dear Mr. Chen,</p>
+          <p><span class="email-phrase">I hope this email finds you well.</span></p>
+          <p><span class="email-phrase">I am writing to follow up on</span> our conversation during last Tuesday's discovery call and to share our proposed timeline for the Horizon Platform project.</p>
+          <p><span class="email-phrase">As discussed,</span> the project will be divided into three phases: research and planning (Weeks 1–3), development and testing (Weeks 4–10), and deployment and review (Weeks 11–12). <span class="email-phrase">Please find the detailed project brief attached to this email.</span></p>
+          <p><span class="email-phrase">With regard to</span> the kickoff meeting, I would like to propose Wednesday, June 18th, at 10:00 AM. <span class="email-phrase">Should this date not be convenient,</span> please do not hesitate to suggest an alternative and I will do my best to accommodate your schedule.</p>
+          <p>I would be grateful if you could review the attached brief before our meeting, as this will allow us to use our time together as efficiently as possible.</p>
+          <p><span class="email-phrase">I look forward to hearing from you</span> and to beginning this exciting project together.</p>
+          <p><strong>Kind regards,</strong><br>Sarah Mitchell<br><em>Account Manager | Vertex Solutions</em></p>
+        </div>
+        <div class="mc-q-col">
+          <div class="mc-item" style="margin-bottom:0;border:none;padding:0;">
+            <div class="mc-q">2. &nbsp;Why does Sarah want Mr. Chen to review the brief before the meeting?</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> Because the meeting has already been confirmed and won't change</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> Because she needs him to sign the brief before the kickoff</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span> So they can use their meeting time as efficiently as possible</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span> Because the brief was sent late and she wants to make up for it</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mc-reading-wrap">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Project Kickoff — Proposed Timeline and Next Steps</div>
+          <div class="mini-from">Sarah Mitchell → Michael Chen · June 3, 2026</div>
+          <p>Dear Mr. Chen,</p>
+          <p><span class="email-phrase">I hope this email finds you well.</span></p>
+          <p><span class="email-phrase">I am writing to follow up on</span> our conversation during last Tuesday's discovery call and to share our proposed timeline for the Horizon Platform project.</p>
+          <p><span class="email-phrase">As discussed,</span> the project will be divided into three phases: research and planning (Weeks 1–3), development and testing (Weeks 4–10), and deployment and review (Weeks 11–12). <span class="email-phrase">Please find the detailed project brief attached to this email.</span></p>
+          <p><span class="email-phrase">With regard to</span> the kickoff meeting, I would like to propose Wednesday, June 18th, at 10:00 AM. <span class="email-phrase">Should this date not be convenient,</span> please do not hesitate to suggest an alternative and I will do my best to accommodate your schedule.</p>
+          <p>I would be grateful if you could review the attached brief before our meeting, as this will allow us to use our time together as efficiently as possible.</p>
+          <p><span class="email-phrase">I look forward to hearing from you</span> and to beginning this exciting project together.</p>
+          <p><strong>Kind regards,</strong><br>Sarah Mitchell<br><em>Account Manager | Vertex Solutions</em></p>
+        </div>
+        <div class="mc-q-col">
+          <div class="mc-item" style="margin-bottom:0;border:none;padding:0;">
+            <div class="mc-q">3. &nbsp;How does Sarah handle the fact that Mr. Chen might not be available on June 18th?</div>
+            <div class="mc-opts">
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> She offers two alternative dates</div>
+              <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> She says she will accommodate his schedule if the date isn't convenient</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> She asks him to confirm within 48 hours</div>
+              <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span> She asks his assistant to book the meeting directly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PART 3: VOCABULARY ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 3 ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-blue">
+    <div class="card-head">
+      <div class="card-icon">📚</div>
+      <div><div class="card-label">Part 3 · Vocabulary</div><div class="card-title">Essential Email Phrases</div></div>
+      <span class="card-badge">8 min</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">These are the building blocks of professional email writing — learn them, and your emails will sound natural and polished immediately.</p>
+
+      <div class="vocab-section-label" style="color:var(--blue);">📝 Opening &amp; context</div>
+      <div class="vocab-card-grid">
+        <div class="bvc">
+          <div class="bvc-term">I am writing to…</div>
+          <div class="bvc-sentence"><em>I am writing to</em> inform you of a change to the project schedule.</div>
+          <div class="bvc-def">Standard formal opening — states the purpose immediately</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">With reference to / With regard to</div>
+          <div class="bvc-sentence"><em>With regard to</em> your recent inquiry, I am happy to provide further details.</div>
+          <div class="bvc-def">Links your email to a previous communication or topic</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">I am writing to follow up on…</div>
+          <div class="bvc-sentence"><em>I am writing to follow up on</em> our conversation from last week regarding the contract.</div>
+          <div class="bvc-def">Checks in on something discussed or promised previously</div>
+        </div>
+      </div>
+
+      <div class="vocab-section-label" style="color:var(--blue);">📝 Requests &amp; attachments</div>
+      <div class="vocab-card-grid">
+        <div class="bvc">
+          <div class="bvc-term">Please find attached…</div>
+          <div class="bvc-sentence"><em>Please find attached</em> the meeting agenda and supporting documents.</div>
+          <div class="bvc-def">Standard phrase for pointing to an attachment — more formal than "I've attached"</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">I would be grateful if…</div>
+          <div class="bvc-sentence"><em>I would be grateful if</em> you could confirm your attendance by Friday.</div>
+          <div class="bvc-def">A polite, formal way to make a request</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">Please do not hesitate to…</div>
+          <div class="bvc-sentence"><em>Please do not hesitate to</em> contact me if you have any questions.</div>
+          <div class="bvc-def">Invites the reader to reach out — common in formal closings</div>
+        </div>
+      </div>
+
+      <div class="vocab-section-label" style="color:var(--blue);">📝 Closing lines</div>
+      <div class="vocab-card-grid">
+        <div class="bvc">
+          <div class="bvc-term">I look forward to hearing from you.</div>
+          <div class="bvc-sentence">Thank you for your time. <em>I look forward to hearing from you.</em></div>
+          <div class="bvc-def">Classic formal closing — signals you expect a reply</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">I look forward to our meeting.</div>
+          <div class="bvc-sentence"><em>I look forward to our meeting</em> on Thursday and to discussing this further.</div>
+          <div class="bvc-def">Used when a meeting has already been scheduled</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">Kind regards / Best regards</div>
+          <div class="bvc-sentence"><em>Kind regards,</em> Sarah Mitchell | Account Manager</div>
+          <div class="bvc-def">Standard professional sign-off — not "Cheers" or "Best" with someone you don't know</div>
+        </div>
+      </div>
+
+      <div class="vocab-section-label" style="color:var(--purple);">🚀 Going further</div>
+      <div class="vocab-card-grid">
+        <div class="bvc bvc-go">
+          <div class="bvc-term">I trust that…</div>
+          <div class="bvc-sentence"><em>I trust that</em> this information is helpful and that you will find the proposal satisfactory.</div>
+          <div class="bvc-def">A confident, formal assumption — implies you expect a positive outcome</div>
+        </div>
+        <div class="bvc bvc-go">
+          <div class="bvc-term">Should you require…</div>
+          <div class="bvc-sentence"><em>Should you require</em> any further information, please contact our team directly.</div>
+          <div class="bvc-def">Formal conditional — equivalent to "If you need…" but more polished</div>
+        </div>
+        <div class="bvc bvc-go">
+          <div class="bvc-term">I would like to take this opportunity to…</div>
+          <div class="bvc-sentence"><em>I would like to take this opportunity to</em> thank you for your continued support.</div>
+          <div class="bvc-def">Used to add a polite extra point — common in formal correspondence</div>
+        </div>
+      </div>
+
+
+      <div class="divider"></div>
+
+      <div class="act-head">
+        <div class="act-num">3</div>
+        Complete each phrase — click a word from the bank, then click the gap
+        <span class="act-type type-vocab">Vocabulary</span>
+      </div>
+      <p style="font-size:13px;color:var(--textl);margin-bottom:14px;font-style:italic;">Click a word in the bank to select it, then click a gap to place it. Two words are distractors!</p>
+
+      <div class="word-bank" id="wbe3">
+        <span class="wb-word" onclick="wbSelect(this)">attached</span>
+        <span class="wb-word" onclick="wbSelect(this)">trust</span>
+        <span class="wb-word" onclick="wbSelect(this)">regard</span>
+        <span class="wb-word" onclick="wbSelect(this)">follow up</span>
+        <span class="wb-word" onclick="wbSelect(this)">require</span>
+        <span class="wb-word" onclick="wbSelect(this)">forward</span>
+        <span class="wb-word" onclick="wbSelect(this)">hesitate</span>
+        <span class="wb-word" onclick="wbSelect(this)">grateful</span>
+      </div>
+
+      <ol class="gf-list">
+        <li class="gf-item">
+          <div class="gf-num">1</div>
+          <span>I am writing to <span class="blank-drop" id="e3-1" data-answer="follow up" onclick="dropOnBlank(this)">_______</span> on our conversation last week.</span>
+        </li>
+        <li class="gf-item">
+          <div class="gf-num">2</div>
+          <span>Please find <span class="blank-drop" id="e3-2" data-answer="attached" onclick="dropOnBlank(this)">_______</span> the updated project brief.</span>
+        </li>
+        <li class="gf-item">
+          <div class="gf-num">3</div>
+          <span>I would be <span class="blank-drop" id="e3-3" data-answer="grateful" onclick="dropOnBlank(this)">_______</span> if you could confirm by Friday.</span>
+        </li>
+        <li class="gf-item">
+          <div class="gf-num">4</div>
+          <span>Please do not <span class="blank-drop" id="e3-4" data-answer="hesitate" onclick="dropOnBlank(this)">_______</span> to contact me with any questions.</span>
+        </li>
+        <li class="gf-item">
+          <div class="gf-num">5</div>
+          <span>I look <span class="blank-drop" id="e3-5" data-answer="forward" onclick="dropOnBlank(this)">_______</span> to hearing from you.</span>
+        </li>
+        <li class="gf-item">
+          <div class="gf-num">6</div>
+          <span>With <span class="blank-drop" id="e3-6" data-answer="regard" onclick="dropOnBlank(this)">_______</span> to your recent inquiry, I am happy to help.</span>
+        </li>
+      </ol>
+
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button class="btn btn-green btn-sm" onclick="checkGF('e3',6)">✓ Check answers</button>
+        <button class="btn btn-outline btn-sm" onclick="resetGF('e3',6,'wbe3')">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PART 4: GRAMMAR — FORMAL REGISTER ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 4 ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-purple">
+    <div class="card-head">
+      <div class="card-icon">🔧</div>
+      <div><div class="card-label">Part 4 · Grammar</div><div class="card-title">Upgrading Your Register</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">In formal writing, small choices — a contraction, a phrasal verb, a casual word — can make you sound unprofessional even if your grammar is perfect. Here's what to watch for.</p>
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:12px;">📋 Three key areas to upgrade</div>
+
+      <div class="reg-compare" style="margin-bottom:20px;">
+        <div class="reg-head">
+          <div class="reg-head-cell">⚡ Informal / casual</div>
+          <div class="reg-head-cell">✅ Formal / professional</div>
+        </div>
+        <div class="reg-row">
+          <div class="reg-cell reg-informal"><strong>Contractions</strong><br>"I can't make it on Friday." · "I'm writing about…"</div>
+          <div class="reg-cell reg-formal"><strong>Full forms</strong><br>"I cannot attend on Friday." · "I am writing regarding…"</div>
+        </div>
+        <div class="reg-row">
+          <div class="reg-cell reg-informal"><strong>Phrasal verbs</strong><br>"look into it" · "get back to you" · "put off the meeting"</div>
+          <div class="reg-cell reg-formal"><strong>Single-word verbs</strong><br>"investigate" · "respond to you" · "postpone the meeting"</div>
+        </div>
+        <div class="reg-row">
+          <div class="reg-cell reg-informal"><strong>Casual words</strong><br>"ASAP" · "thanks a lot" · "sorry" · "let me know"</div>
+          <div class="reg-cell reg-formal"><strong>Formal equivalents</strong><br>"at your earliest convenience" · "thank you for…" · "I apologize for…" · "please do not hesitate to inform me"</div>
+        </div>
+      </div>
+
+      <div class="act-head">
+        <div class="act-num">4</div>
+        Which version is more formal? — click the best option
+        <span class="act-type type-grammar">Grammar</span>
+      </div>
+      <p style="font-size:13px;color:var(--textl);margin-bottom:14px;font-style:italic;">Both options fix something — but only one is truly formal. Can you spot why the other still doesn't work?</p>
+
+      <div class="fpick-item">
+
+        <div class="fpick-informal">⚡ Informal: "I'm writing about the meeting we had last week."</div>
+        <div class="fpick-opts">
+          <div class="fpick-opt" data-correct="false" onclick="formalPick(this,false,'fh1')"><span class="fpick-letter">A</span>"I am writing about the meeting we had last week."</div>
+          <div class="fpick-opt" data-correct="true" onclick="formalPick(this,true,'fh1')"><span class="fpick-letter">B</span>"I am writing with reference to our meeting last week."</div>
+        </div>
+        <div class="fpick-hint" id="fh1">A fixes the contraction ("I'm" → "I am") but keeps "about" — still too casual. B also replaces "about" with the formal phrase "with reference to".</div>
+      </div>
+
+      <div class="fpick-item">
+
+        <div class="fpick-informal">⚡ Informal: "We need to put off the launch until next quarter."</div>
+        <div class="fpick-opts">
+          <div class="fpick-opt" data-correct="true" onclick="formalPick(this,true,'fh2')"><span class="fpick-letter">A</span>"We will need to postpone the launch until the following quarter."</div>
+          <div class="fpick-opt" data-correct="false" onclick="formalPick(this,false,'fh2')"><span class="fpick-letter">B</span>"We need to postpone the launch until next quarter."</div>
+        </div>
+        <div class="fpick-hint" id="fh2">B replaces the phrasal verb "put off" with "postpone" — good. But "We need to" is still abrupt and informal, and "next quarter" sounds casual. A is more measured in tone throughout.</div>
+      </div>
+
+      <div class="fpick-item">
+
+        <div class="fpick-informal">⚡ Informal: "Let me know if you've got any questions."</div>
+        <div class="fpick-opts">
+          <div class="fpick-opt" data-correct="true" onclick="formalPick(this,true,'fh3')"><span class="fpick-letter">A</span>"Please do not hesitate to contact me should you have any questions."</div>
+          <div class="fpick-opt" data-correct="false" onclick="formalPick(this,false,'fh3')"><span class="fpick-letter">B</span>"Please let me know if you have any questions."</div>
+        </div>
+        <div class="fpick-hint" id="fh3">B fixes "you've got" → "you have" and adds "Please" — better, but "let me know" is still too casual for a formal email. A replaces it with the standard closing phrase.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="act-head">
+        <div class="act-num">5</div>
+        Spot the mistake — click the word or phrase that breaks the register
+        <span class="act-type type-grammar">Grammar</span>
+      </div>
+      <p style="font-size:13px;color:var(--textl);margin-bottom:14px;font-style:italic;">Each sentence is almost formal — one highlighted word or phrase doesn't fit. Click it!</p>
+
+      <div class="spot-item">
+        <div class="spot-sentence">"Dear Mr. Patel, <span class="spot-chip" onclick="spotPick(this,true,'sf1')">I'm</span> writing to <span class="spot-chip" onclick="spotPick(this,false,'sf1')">follow up on</span> our conversation <span class="spot-chip" onclick="spotPick(this,false,'sf1')">last Tuesday</span>."</div>
+        <div class="spot-fix" id="sf1">✅ <strong>"I'm"</strong> is a contraction — avoid these in formal emails. → <em>"I am writing to follow up on our conversation last Tuesday."</em></div>
+      </div>
+
+      <div class="spot-item">
+        <div class="spot-sentence">"Please find <span class="spot-chip" onclick="spotPick(this,false,'sf2')">attached</span> the report. <span class="spot-chip" onclick="spotPick(this,true,'sf2')">Get back to me</span> by <span class="spot-chip" onclick="spotPick(this,false,'sf2')">Thursday</span> if you have any questions."</div>
+        <div class="spot-fix" id="sf2">✅ <strong>"Get back to me"</strong> is a casual phrasal verb — it clashes with the formal opening. → <em>"Please do not hesitate to contact me by Thursday."</em></div>
+      </div>
+
+      <div class="spot-item">
+        <div class="spot-sentence">"<span class="spot-chip" onclick="spotPick(this,false,'sf3')">Should you require</span> any <span class="spot-chip" onclick="spotPick(this,false,'sf3')">further information</span>, <span class="spot-chip" onclick="spotPick(this,true,'sf3')">feel free to</span> contact me."</div>
+        <div class="spot-fix" id="sf3">✅ <strong>"Feel free to"</strong> is too casual next to "Should you require…". → <em>"Should you require any further information, please do not hesitate to contact me."</em></div>
+      </div>
+
+      <div class="spot-item">
+        <div class="spot-sentence">"I would be <span class="spot-chip" onclick="spotPick(this,false,'sf4')">grateful</span> if you could review the brief. <span class="spot-chip" onclick="spotPick(this,true,'sf4')">ASAP</span> would be great, as we have a <span class="spot-chip" onclick="spotPick(this,false,'sf4')">tight deadline</span>."</div>
+        <div class="spot-fix" id="sf4">✅ <strong>"ASAP"</strong> is an informal abbreviation. → <em>"I would be grateful if you could review the brief at your earliest convenience, as we are working to a tight deadline."</em></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 5: SPEAKING ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 5 ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-amber">
+    <div class="card-head">
+      <div class="card-icon">🗣️</div>
+      <div><div class="card-label">Part 5 · Speaking</div><div class="card-title">Say It Like a Pro</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+
+      <details class="prev-box">
+        <summary>📌 Useful phrases from previous lessons — keep using these!</summary>
+        <div class="prev-box-body">
+          <div class="prev-box-item"><em>"I am writing to follow up on our conversation…"</em> — opening a follow-up email (situations 1 &amp; 3)</div>
+          <div class="prev-box-item"><em>"As discussed, …"</em> — referencing what was said or agreed in a previous call or meeting (situations 2 &amp; 3)</div>
+          <div class="prev-box-item"><em>"I would like to refer back to what was agreed…"</em> — politely flagging a discrepancy without sounding accusatory (situation 2)</div>
+          <div class="prev-box-item"><em>"Please find attached…"</em> — introducing an attachment formally (situation 3)</div>
+          <div class="prev-box-item"><em>"I would be happy to arrange a call at your convenience."</em> — proposing a meeting or next step at the close of an email (situation 3)</div>
+        </div>
+      </details>
+
+      <div class="act-head" style="margin-top:0;">
+        <div class="act-num">6</div>
+        The Email Dilemma — discuss &amp; speak
+        <span class="act-type type-speaking">Speaking</span>
+      </div>
+
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">Three real workplace situations. For each one: think about the situation and speak your key sentences out loud.</p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+
+        <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="background:var(--navy);padding:11px 16px;display:flex;align-items:center;gap:9px;">
+            <span style="background:var(--teal);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 1 — The unpaid invoice</span>
+          </div>
+          <div style="padding:14px 16px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;">
+            A client owes you payment for a project completed 45 days ago. You have emailed twice already. They've been polite but haven't paid. This is your third follow-up.
+          </div>
+          <div style="padding:14px 16px;">
+            <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;">💬 Discuss &amp; speak:</div>
+            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--lt);border-radius:8px;color:#134e4a;">How do you mention the overdue payment without sounding aggressive or threatening?</li>
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--lt);border-radius:8px;color:#134e4a;">Which phrases from today fit the opening? The request? The closing?</li>
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--lt);border-radius:8px;color:#134e4a;">Try to say your opening line and one request sentence out loud.</li>
+            </ul>
+            <div style="margin-top:12px;">
+              <button class="err-reveal-btn" onclick="toggleSa(this,'sa-s1')" style="font-size:12.5px;">▶ Show sample answer</button>
+              <div id="sa-s1" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:12px 15px;font-size:13px;color:#14532d;line-height:1.8;">
+                <strong>Sample sentences:</strong><br>
+                <em>Opening:</em> "I am writing to follow up on my previous emails regarding invoice #INV-2045, now 45 days overdue."<br>
+                <em>Request:</em> "Could you please confirm when we can expect to receive payment? We would appreciate settlement by the end of this week."<br>
+                <em>Closing:</em> "Should you require any further information, please do not hesitate to contact me. I look forward to your prompt response."
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="background:var(--navy);padding:11px 16px;display:flex;align-items:center;gap:9px;">
+            <span style="background:var(--amber);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 2 — The professional 'no'</span>
+          </div>
+          <div style="padding:14px 16px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;">
+            A supplier sends you a contract with pricing 30% higher than what was agreed verbally. You cannot accept these terms — but you want to keep the relationship and negotiate.
+          </div>
+          <div style="padding:14px 16px;">
+            <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;">💬 Discuss &amp; speak:</div>
+            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--la);border-radius:8px;color:#78350f;">How do you refer back to the original agreement without sounding accusatory?</li>
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--la);border-radius:8px;color:#78350f;">What is the formal way to say "this is different from what we agreed"?</li>
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--la);border-radius:8px;color:#78350f;">Speak one or two key sentences from this email.</li>
+            </ul>
+            <div style="margin-top:12px;">
+              <button class="err-reveal-btn" onclick="toggleSa(this,'sa-s2')" style="font-size:12.5px;">▶ Show sample answer</button>
+              <div id="sa-s2" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:12px 15px;font-size:13px;color:#14532d;line-height:1.8;">
+                <strong>Sample sentences:</strong><br>
+                <em>Opening:</em> "I am writing to refer back to what was agreed during our call of [date] regarding the project pricing."<br>
+                <em>Flagging the issue:</em> "I would like to bring to your attention that the contract received reflects a figure approximately 30% higher than the rate verbally confirmed."<br>
+                <em>Closing:</em> "I would be happy to arrange a call at your convenience to discuss this further and reach an agreement that works for both parties."
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="background:var(--navy);padding:11px 16px;display:flex;align-items:center;gap:9px;">
+            <span style="background:var(--purple);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 3 — The delayed report</span>
+          </div>
+          <div style="padding:14px 16px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;">
+            You promised to send a quarterly report to your manager by last Friday. It is now Monday and the report is almost ready, but you need one more day. Write a short apologetic email explaining the delay and giving a new deadline.
+          </div>
+          <div style="padding:14px 16px;">
+            <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;">💬 Discuss &amp; speak:</div>
+            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--lp);border-radius:8px;color:#4c1d95;">How do you open formally when apologizing for a delay?</li>
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--lp);border-radius:8px;color:#4c1d95;">What is a professional way to give a new deadline without sounding unreliable?</li>
+              <li style="font-size:13.5px;padding:8px 12px;background:var(--lp);border-radius:8px;color:#4c1d95;">Try saying your opening, your explanation, and your closing out loud.</li>
+            </ul>
+            <div style="margin-top:12px;">
+              <button class="err-reveal-btn" onclick="toggleSa(this,'sa-s3')" style="font-size:12.5px;">▶ Show sample answer</button>
+              <div id="sa-s3" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:12px 15px;font-size:13px;color:#14532d;line-height:1.8;">
+                <strong>Sample sentences:</strong><br>
+                <em>Opening:</em> "I am writing to apologize for the delay in submitting the quarterly report, which was due on Friday."<br>
+                <em>Explanation &amp; new deadline:</em> "I require one additional day to finalize the figures and ensure accuracy. I will send the completed report by end of business tomorrow."<br>
+                <em>Closing:</em> "I apologize for any inconvenience this may cause and appreciate your understanding. Please do not hesitate to contact me should you have any questions."
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ EXTRA ACTIVITY ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 6 ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-green">
+    <div class="card-head">
+      <div class="card-icon">🌟</div>
+      <div><div class="card-label">Extra · If you have time</div><div class="card-title">Email Makeover</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:6px;">Someone wrote this email in a hurry — and it shows. Each part has at least one problem with register or phrasing.</p>
+      <p style="font-size:13.5px;color:var(--gray);margin-bottom:16px;font-style:italic;">Can you spot what's wrong before clicking to reveal the fix?</p>
+
+      <!-- 1 — greeting + opening -->
+      <div class="makeover-item">
+        <div class="makeover-label">❌ Part 1 — Greeting &amp; opening</div>
+        <div class="makeover-bad">"Hey Lisa, I'm writing to get back to you about what we talked about last week."</div>
+        <div class="makeover-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleMakeover(this,'mk1')">▶ Show fix</button>
+        </div>
+        <div class="makeover-fix" id="mk1">
+          <div class="makeover-fix-label">✅ How to fix it</div>
+          <div class="fix-point"><span class="fix-num">1</span><span class="fix-text">"Hey" → <span class="correct-word">Dear Ms. Rivera,</span> — formal greeting always uses title + surname, not a first name alone.</span></div>
+          <div class="fix-point"><span class="fix-num">2</span><span class="fix-text">"I'm" → <span class="correct-word">I am</span> — no contractions in formal writing.</span></div>
+          <div class="fix-point"><span class="fix-num">3</span><span class="fix-text">"get back to you about what we talked about" → <span class="correct-word">I am writing to follow up on our conversation</span> — avoid phrasal verbs; use a standard email opening phrase.</span></div>
+        </div>
+      </div>
+
+      <!-- 2 — can't attend -->
+      <div class="makeover-item">
+        <div class="makeover-label">❌ Part 2 — Declining a meeting</div>
+        <div class="makeover-bad">"I can't make the Friday meeting but I'll let you know when I'm free."</div>
+        <div class="makeover-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleMakeover(this,'mk2')">▶ Show fix</button>
+        </div>
+        <div class="makeover-fix" id="mk2">
+          <div class="makeover-fix-label">✅ How to fix it</div>
+          <div class="fix-point"><span class="fix-num">1</span><span class="fix-text">"can't" / "I'll" / "I'm" → <span class="correct-word">cannot / I will / I am</span> — expand every contraction.</span></div>
+          <div class="fix-point"><span class="fix-num">2</span><span class="fix-text">"make the meeting" → <span class="correct-word">attend the meeting</span> — "make" is too casual; "attend" is the correct formal verb.</span></div>
+          <div class="fix-point"><span class="fix-num">3</span><span class="fix-text">"let you know when I'm free" → <span class="correct-word">Please do not hesitate to contact me so we can arrange an alternative time.</span></span></div>
+        </div>
+      </div>
+
+      <!-- 3 — attachment + urgency -->
+      <div class="makeover-item">
+        <div class="makeover-label">❌ Part 3 — Attachment &amp; request</div>
+        <div class="makeover-bad">"I've attached the stuff you asked for. ASAP would be great to hear back."</div>
+        <div class="makeover-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleMakeover(this,'mk3')">▶ Show fix</button>
+        </div>
+        <div class="makeover-fix" id="mk3">
+          <div class="makeover-fix-label">✅ How to fix it</div>
+          <div class="fix-point"><span class="fix-num">1</span><span class="fix-text">"I've attached the stuff" → <span class="correct-word">Please find attached the documents you requested.</span></span></div>
+          <div class="fix-point"><span class="fix-num">2</span><span class="fix-text">"ASAP" → <span class="correct-word">at your earliest convenience</span> — never use abbreviations in formal email.</span></div>
+          <div class="fix-point"><span class="fix-num">3</span><span class="fix-text">"great to hear back" → <span class="correct-word">I would be grateful if you could respond</span> — use a formal request structure.</span></div>
+        </div>
+      </div>
+
+      <!-- 4 — closing -->
+      <div class="makeover-item">
+        <div class="makeover-label">❌ Part 4 — Sign-off</div>
+        <div class="makeover-bad">"Thanks a lot, Tom"</div>
+        <div class="makeover-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleMakeover(this,'mk4')">▶ Show fix</button>
+        </div>
+        <div class="makeover-fix" id="mk4">
+          <div class="makeover-fix-label">✅ How to fix it</div>
+          <div class="fix-point"><span class="fix-num">1</span><span class="fix-text">"Thanks a lot" → <span class="correct-word">Thank you for your time. I look forward to hearing from you.</span> — always add a closing sentence before the sign-off.</span></div>
+          <div class="fix-point"><span class="fix-num">2</span><span class="fix-text">"Tom" → <span class="correct-word">Kind regards, [Full name] · [Job title]</span> — use a formal sign-off with full identification.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    <!-- ══ HOMEWORK ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 7 ══ -->
+<div class="slide" id="slide-7">
+  <div class="main">
+    <div class="card c-orange">
+    <div class="card-head">
+      <div class="card-icon">📝</div>
+      <div><div class="card-label">For next time</div><div class="card-title">Homework</div></div>
+      <span class="card-badge">2 tasks</span>
+    </div>
+    <div class="card-body">
+
+      <!-- Task 1: Fix the email -->
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task 1</span> Fix the Email — 5 Register Mistakes</div>
+        <div class="hw-body">
+          <span class="hw-type hw-grammar">✏️ Grammar · formal register</span>
+          <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">This email has 5 register problems — it's too informal for the context. Find each one and write the corrected version in the box below.</p>
+
+          <div class="err-email">
+            <div class="err-email-head">⚠️ Email contains 5 informal expressions — can you spot them?</div>
+            <div class="err-email-body">
+              Dear Mr. Williams,<br><br>
+              Hey, just wanted to drop you a line about the contract renewal we discussed last week.<br><br>
+              I've attached the updated terms for your review. Can you get back to me ASAP with your thoughts? We can't move forward without your sign-off, so the sooner the better.<br><br>
+              Let me know if you've got any questions.<br><br>
+              Cheers,<br>
+              Tom Bradley
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:30px 1fr 1fr;gap:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin:14px 0 6px;padding:0 14px;">
+            <div></div><div>Informal expression</div><div>Formal version</div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+            <div class="err-fix-row" style="padding:9px 14px;">
+              <div class="err-fix-label">1.</div>
+              <input type="text" class="err-fix-input" placeholder="Found in the email…">
+              <input type="text" class="err-fix-input" placeholder="More formal version…">
+            </div>
+            <div class="err-fix-row" style="padding:9px 14px;">
+              <div class="err-fix-label">2.</div>
+              <input type="text" class="err-fix-input" placeholder="Found in the email…">
+              <input type="text" class="err-fix-input" placeholder="More formal version…">
+            </div>
+            <div class="err-fix-row" style="padding:9px 14px;">
+              <div class="err-fix-label">3.</div>
+              <input type="text" class="err-fix-input" placeholder="Found in the email…">
+              <input type="text" class="err-fix-input" placeholder="More formal version…">
+            </div>
+            <div class="err-fix-row" style="padding:9px 14px;">
+              <div class="err-fix-label">4.</div>
+              <input type="text" class="err-fix-input" placeholder="Found in the email…">
+              <input type="text" class="err-fix-input" placeholder="More formal version…">
+            </div>
+            <div class="err-fix-row" style="padding:9px 14px;border-bottom:none;">
+              <div class="err-fix-label">5.</div>
+              <input type="text" class="err-fix-input" placeholder="Found in the email…">
+              <input type="text" class="err-fix-input" placeholder="More formal version…">
+            </div>
+          </div>
+          <div style="margin-top:12px;">
+            <button class="transform-reveal-btn" onclick="showTransform(this)">▶ Reveal answer key</button>
+            <div class="transform-answer">
+              <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                <thead>
+                  <tr style="border-bottom:1px solid #86efac;">
+                    <th style="text-align:left;padding:4px 8px;width:24px;color:#14532d;font-weight:700;">#</th>
+                    <th style="text-align:left;padding:4px 8px;color:#14532d;font-weight:700;">Informal expression</th>
+                    <th style="text-align:left;padding:4px 8px;color:#14532d;font-weight:700;">Formal version</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">1</td>
+                    <td style="padding:5px 8px;color:#166534;">Hey, just wanted to drop you a line</td>
+                    <td style="padding:5px 8px;color:#14532d;">I am writing to follow up on…</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">2</td>
+                    <td style="padding:5px 8px;color:#166534;">I've attached</td>
+                    <td style="padding:5px 8px;color:#14532d;">Please find attached…</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">3</td>
+                    <td style="padding:5px 8px;color:#166534;">Can you get back to me ASAP</td>
+                    <td style="padding:5px 8px;color:#14532d;">I would be grateful if you could respond at your earliest convenience</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">4</td>
+                    <td style="padding:5px 8px;color:#166534;">can't</td>
+                    <td style="padding:5px 8px;color:#14532d;">cannot</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px 8px;color:#14532d;">5</td>
+                    <td style="padding:5px 8px;color:#166534;">Cheers</td>
+                    <td style="padding:5px 8px;color:#14532d;">Kind regards / Best regards</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task 2: Read the email and mark the correct summary -->
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task 2</span> Read the Email — Mark the Correct Summary</div>
+        <div class="hw-body">
+          <span class="hw-type" style="background:var(--li);color:#1e3a5f;">📖 Reading · comprehension</span>
+          <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Read the email below and select the summary that best matches its content.</p>
+
+          <!-- Email display -->
+          <div style="border:1.5px solid #cbd5e1;border-radius:10px;overflow:hidden;margin-bottom:18px;font-size:13.5px;">
+            <div style="background:#f1f5f9;padding:9px 14px;border-bottom:1px solid #cbd5e1;">
+              <div style="color:var(--gray);"><strong style="color:var(--navy);">To:</strong> Catherine Quint</div>
+              <div style="color:var(--gray);"><strong style="color:var(--navy);">Subject:</strong> Sales presentation</div>
+            </div>
+            <div style="padding:14px 18px;color:var(--navy);line-height:1.9;">
+              Hi Catherine,<br><br>
+              Hope all's well with you. I just wanted to check that you got my earlier email about our sales presentation next Friday. Pauline and I are meeting this morning to discuss arrangements. Will you be free to come and join us in Room A at 11:30?<br><br>
+              Please find the attached timetable and agenda for the presentation. I've copied Pauline in on this message. If you have any ideas or want to ask any questions, please let me know.<br><br>
+              All the best,<br>
+              Mira
+            </div>
+          </div>
+
+          <!-- Summary options -->
+          <div style="display:flex;flex-direction:column;gap:9px;" id="hw2-opts">
+            <div class="hw2-opt" id="hw2-opt1" onclick="hw2Pick(1,false)">
+              <span class="hw2-num">1</span>
+              <span class="hw2-text">Mira is emailing Catherine to check that she is coming to a sales presentation in Room A. Pauline is also invited to the presentation.</span>
+              <span class="hw2-icon" id="hw2-icon1"></span>
+            </div>
+            <div class="hw2-opt" id="hw2-opt2" onclick="hw2Pick(2,false)">
+              <span class="hw2-num">2</span>
+              <span class="hw2-text">Mira wants to meet next Friday to discuss arrangements for the sales presentation. She has asked Pauline to send her the agenda.</span>
+              <span class="hw2-icon" id="hw2-icon2"></span>
+            </div>
+            <div class="hw2-opt" id="hw2-opt3" onclick="hw2Pick(3,true)">
+              <span class="hw2-num">3</span>
+              <span class="hw2-text">Mira is inviting Catherine to a meeting to discuss arrangements for the sales presentation. She has sent Catherine and Pauline the timetable and agenda.</span>
+              <span class="hw2-icon" id="hw2-icon3"></span>
+            </div>
+            <div class="hw2-opt" id="hw2-opt4" onclick="hw2Pick(4,false)">
+              <span class="hw2-num">4</span>
+              <span class="hw2-text">Mira is emailing to check that Pauline is coming to the sales presentation. Catherine has sent the timetable and agenda.</span>
+              <span class="hw2-icon" id="hw2-icon4"></span>
+            </div>
+          </div>
+          <div id="hw2-explain" style="display:none;margin-top:12px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:11px 14px;font-size:13px;color:#14532d;">
+            ✅ <strong>Correct — option 3.</strong> Mira invites Catherine to join a meeting (Room A, 11:30) to discuss the presentation. She has attached the timetable and agenda and copied Pauline in.
+          </div>
+          <div style="margin-top:12px;">
+            <button class="btn btn-outline btn-sm" onclick="resetHw2()">↺ Reset</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <a class="slide-nav-btn" href="Lesson_06_Informal_Communication.html" style="text-decoration:none;">Lesson 6 →</a>
+    </div>
+  </div>
+
+
+
+<script>
+
+const SLIDE_LABELS = ["Cover", "Part 1 · Warm-up", "Part 2 · Reading", "Part 3 · Vocabulary", "Part 4 · Grammar", "Part 5 · Speaking", "Extra · If you have time", "For next time"];
+const TOTAL_SLIDES = 8;
+let currentSlide = 0;
+
+function slideNav(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= TOTAL_SLIDES) return;
+  goToSlide(n);
+}
+
+function goToSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateSlideUI();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function updateSlideUI() {
+  const prev = document.getElementById('slide-prev');
+  const next = document.getElementById('slide-next');
+  if (prev) prev.disabled = currentSlide === 0;
+  if (next) {
+    if (currentSlide === TOTAL_SLIDES - 1) {
+      next.disabled = false;
+      next.textContent = 'Lesson 6 →';
+      next.onclick = () => { window.location.href='Lesson_06_Informal_Communication.html'; };
+    } else {
+      next.disabled = false;
+      next.textContent = 'Next →';
+      next.onclick = () => slideNav(1);
+    }
+  }
+  const lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = SLIDE_LABELS[currentSlide];
+  const ctr = document.getElementById('slide-counter');
+  if (ctr) ctr.textContent = 'Slide ' + (currentSlide+1) + ' of ' + TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < currentSlide) d.classList.add('done');
+    else if (i === currentSlide) d.classList.add('active');
+  });
+}
+
+function hyePick(n) {
+  const item = document.getElementById('hye'+n);
+  const btn = item.querySelector('.hye-btn');
+  item.classList.toggle('picked');
+  btn.classList.toggle('yes');
+  btn.textContent = btn.classList.contains('yes') ? '✓ Yes!' : '✋ Yes!';
+}
+
+function tfPick(btn, isCorrect, expId) {
+  const btns = btn.closest('.tf-btns').querySelectorAll('.tf-btn');
+  if ([...btns].some(b => b.classList.contains('correct') || b.classList.contains('wrong'))) return;
+  btns.forEach(b => b.classList.add('locked'));
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  document.getElementById(expId).classList.add('show');
+  setTimeout(()=>fadeOutEx(btn.closest('.tf-item')), 1800);
+}
+
+function mcPick(el, correct) {
+  const opts = el.closest('.mc-opts').querySelectorAll('.mc-opt');
+  if ([...opts].some(o => o.classList.contains('correct') || o.classList.contains('wrong'))) return;
+  opts.forEach(o => o.classList.add('locked'));
+  if (correct) { el.classList.add('correct'); }
+  else {
+    el.classList.add('wrong');
+    opts.forEach(o => { if (o.onclick && o.onclick.toString().includes('true')) o.classList.add('correct'); });
+  }
+  setTimeout(()=>fadeOutEx(el.closest('.mc-reading-wrap')||el.closest('.mc-item')), 1800);
+}
+
+function hw2Pick(n, correct){
+  const opts = document.querySelectorAll('.hw2-opt');
+  if([...opts].some(o=>o.classList.contains('hw2-correct')||o.classList.contains('hw2-wrong'))) return;
+  opts.forEach(o=>o.classList.add('hw2-locked'));
+  const el = document.getElementById('hw2-opt'+n);
+  const icon = document.getElementById('hw2-icon'+n);
+  if(correct){
+    el.classList.add('hw2-correct');
+    if(icon) icon.textContent='✅';
+    document.getElementById('hw2-explain').style.display='block';
+  } else {
+    el.classList.add('hw2-wrong');
+    if(icon) icon.textContent='❌';
+    // reveal correct
+    const correct3 = document.getElementById('hw2-opt3');
+    if(correct3){ correct3.classList.add('hw2-correct'); document.getElementById('hw2-icon3').textContent='✅'; }
+    document.getElementById('hw2-explain').style.display='block';
+  }
+}
+
+function resetHw2(){
+  document.querySelectorAll('.hw2-opt').forEach(o=>{
+    o.classList.remove('hw2-correct','hw2-wrong','hw2-locked');
+  });
+  ['hw2-icon1','hw2-icon2','hw2-icon3','hw2-icon4'].forEach(id=>{
+    document.getElementById(id).textContent='';
+  });
+  document.getElementById('hw2-explain').style.display='none';
+}
+
+function toggleSa(btn,id){
+  const d=document.getElementById(id);
+  const showing=d.style.display==='block';
+  d.style.display=showing?'none':'block';
+  btn.textContent=showing?'▶ Show sample answer':'▼ Hide sample answer';
+  btn.style.color=showing?'':'var(--green)';
+  btn.style.borderColor=showing?'':'var(--green)';
+}
+
+function toggleSampleEmail(btn,id){const el=document.getElementById(id);const showing=el.classList.contains('show');el.classList.toggle('show');btn.textContent=showing?'▶ Sample Email':'▼ Hide sample';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+function toggleMakeover(btn,id){const el=document.getElementById(id);const showing=el.classList.contains('show');el.classList.toggle('show');btn.textContent=showing?'▶ Show fix':'▼ Hide fix';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+function revealSAP(btn){const reveal=btn.closest('div').parentElement.querySelector('.sap-reveal');const showing=reveal.style.display==='block';reveal.style.display=showing?'none':'block';btn.textContent=showing?'▶ Show answer':'▼ Hide';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+function showTransform(btn) {
+  const ans = btn.nextElementSibling;
+  const showing = ans.classList.contains('show');
+  ans.classList.toggle('show');
+  btn.textContent = showing ? '▶ Reveal answer key' : '▼ Hide answer key';
+  btn.style.color = showing ? '' : 'var(--green)';
+  btn.style.borderColor = showing ? '' : 'var(--green)';
+}
+
+function wbSelect(el){if(el.classList.contains('used'))return;if(wbSelectedEl)wbSelectedEl.classList.remove('selected-wb');if(wbSelectedEl===el){wbSelected=null;wbSelectedEl=null;return;}wbSelected=el.textContent.trim();wbSelectedEl=el;el.classList.add('selected-wb');}
+
+function dropOnBlank(el){if(!wbSelected){el.style.borderColor='var(--rose)';setTimeout(()=>el.style.borderColor='',500);return;}if(el.dataset.filled){const old=[...document.querySelectorAll('.wb-word')].find(w=>w.textContent.trim()===el.dataset.filled&&w.classList.contains('used'));if(old)old.classList.remove('used');}el.textContent=wbSelected;el.classList.add('has-word');el.classList.remove('correct','incorrect');el.dataset.filled=wbSelected;wbSelectedEl.classList.add('used');wbSelectedEl.classList.remove('selected-wb');wbSelected=null;wbSelectedEl=null;}
+
+function checkGF(prefix,count){for(let i=1;i<=count;i++){const el=document.getElementById(prefix+'-'+i);if(!el)continue;const filled=(el.dataset.filled||'').trim().toLowerCase();const answer=el.dataset.answer.toLowerCase();el.classList.remove('has-word','correct','incorrect');if(filled===answer)el.classList.add('correct');else if(filled)el.classList.add('incorrect');}}
+
+function resetGF(prefix,count,bankId){for(let i=1;i<=count;i++){const el=document.getElementById(prefix+'-'+i);if(!el)continue;el.textContent='';el.dataset.filled='';el.classList.remove('has-word','correct','incorrect');}document.querySelectorAll(`#${bankId} .wb-word`).forEach(w=>{w.classList.remove('used','selected-wb');});wbSelected=null;wbSelectedEl=null;}
+
+function fadeOutEx(el){if(!el)return;el.classList.add('ex-answered');el.style.maxHeight=el.offsetHeight+'px';requestAnimationFrame(()=>{requestAnimationFrame(()=>{el.classList.add('ex-gone');});});}
+
+function spotPick(el, correct, fixId) {
+  if (el.classList.contains('sp-locked') || el.classList.contains('sp-correct')) return;
+  if (correct) {
+    el.classList.add('sp-correct');
+    el.closest('.spot-item').querySelectorAll('.spot-chip').forEach(c => { if (!c.classList.contains('sp-correct')) c.classList.add('sp-locked'); });
+    document.getElementById(fixId).classList.add('show');
+  } else {
+    el.classList.add('sp-flash');
+    setTimeout(() => el.classList.remove('sp-flash'), 650);
+  }
+}
+
+function formalPick(el, correct, hintId) {
+  const opts = el.closest('.fpick-opts').querySelectorAll('.fpick-opt');
+  if ([...opts].some(o => o.classList.contains('fp-correct'))) return;
+  opts.forEach(o => o.classList.add('fp-locked'));
+  el.classList.remove('fp-locked');
+  el.classList.add(correct ? 'fp-correct' : 'fp-wrong');
+  if (!correct) {
+    opts.forEach(o => { if (o.dataset.correct === 'true') { o.classList.remove('fp-locked'); o.classList.add('fp-correct'); } });
+  }
+  if (hintId) document.getElementById(hintId).classList.add('show');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
+});
+let wbSelected=null,wbSelectedEl=null;
+</script>
+</body>
+</html
+
+
+
+
+</body>
+</html>

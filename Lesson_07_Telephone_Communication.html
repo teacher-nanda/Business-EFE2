@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 7 – Telephone Communication</title>
+<style>
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --purple:#7c3aed;--lp:#ede9fe;--indigo:#4338ca;--li:#e0e7ff;
+  --green:#16a34a;--lg:#dcfce7;
+  --orange:#ea580c;--lo:#ffedd5;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;--textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;padding-top:42px;}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+.c-teal .card-head{background:var(--lt);}.c-teal .card-icon{background:var(--teal);color:white;}.c-teal .card-title{color:var(--teal);}.c-teal .card-badge{background:var(--teal);}
+.c-indigo .card-head{background:var(--li);}.c-indigo .card-icon{background:var(--indigo);color:white;}.c-indigo .card-title{color:var(--indigo);}.c-indigo .card-badge{background:var(--indigo);}
+.c-blue .card-head{background:var(--lb);}.c-blue .card-icon{background:var(--blue);color:white;}.c-blue .card-title{color:var(--blue);}.c-blue .card-badge{background:var(--blue);}
+.c-purple .card-head{background:var(--lp);}.c-purple .card-icon{background:var(--purple);color:white;}.c-purple .card-title{color:var(--purple);}.c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);}.c-amber .card-icon{background:var(--amber);color:white;}.c-amber .card-title{color:var(--amber);}.c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);}.c-green .card-icon{background:var(--green);color:white;}.c-green .card-title{color:var(--green);}.c-green .card-badge{background:var(--green);}
+.c-navy .card-head{background:var(--lgr);}.c-navy .card-icon{background:var(--navy);color:white;}.c-navy .card-title{color:var(--navy);}.c-navy .card-badge{background:var(--navy);}
+.c-orange .card-head{background:var(--lo);}.c-orange .card-icon{background:var(--orange);color:white;}.c-orange .card-title{color:var(--orange);}.c-orange .card-badge{background:var(--orange);}
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:700;color:white;border-radius:8px;padding:2px 8px;text-transform:none;letter-spacing:0;}
+.type-reading{background:var(--teal);}.type-grammar{background:var(--purple);}.type-vocab{background:var(--blue);}.type-speaking{background:var(--green);}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* TFD */
+.tfd-item{border:1.5px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:12px;}
+.tfd-q{padding:14px 18px;background:#f8fafc;font-size:14.5px;color:var(--navy);font-weight:600;line-height:1.5;border-bottom:1px solid var(--border);}
+.tfd-opts{display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;}
+.tfd-btn{padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:white;transition:all .15s;}
+.tfd-btn:hover:not(.tfd-picked){background:var(--lgr);}
+.tfd-btn.tfd-true{background:var(--lg);border-color:var(--green);color:#14532d;}
+.tfd-btn.tfd-false{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.tfd-btn.tfd-depends{background:var(--la);border-color:var(--amber);color:#78350f;}
+.tfd-exp{display:none;padding:11px 18px;font-size:13.5px;color:var(--text);background:white;border-top:1px solid var(--border);line-height:1.55;}
+.tfd-exp.show{display:block;animation:fadeIn .25s;}
+.tfd-exp em{color:var(--teal);font-style:normal;font-weight:600;}
+
+/* TRANSCRIPT */
+.transcript-box{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+.transcript-head{background:var(--navy);padding:10px 18px;color:white;font-size:12px;font-weight:700;letter-spacing:.5px;display:flex;align-items:center;gap:10px;}
+.transcript-body{padding:18px;font-size:13.5px;line-height:2;}
+.tr-line{display:flex;gap:12px;margin-bottom:4px;align-items:flex-start;}
+.tr-speaker{font-weight:700;color:var(--navy);flex-shrink:0;min-width:90px;font-size:12.5px;text-align:right;}
+.tr-text{color:var(--text);flex:1;}
+.tr-note{font-size:11px;color:var(--gray);font-style:italic;}
+
+/* MC */
+.mc-item{margin-bottom:18px;}
+.mc-q{font-size:14.5px;font-weight:600;margin-bottom:9px;color:var(--navy);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:13.5px;transition:all .15s;user-select:none;}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--lb);transform:translateX(3px);}
+.mc-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.mc-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.mc-opt.locked{cursor:default;}
+.mc-letter{background:var(--lgr);border:1px solid var(--border);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--navy);}
+.mc-opt.correct .mc-letter{background:var(--green);border-color:var(--green);color:white;}
+.mc-opt.wrong .mc-letter{background:var(--rose);border-color:var(--rose);color:white;}
+
+/* VOCAB */
+.vocab-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-term{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.bvc-def{font-size:12.5px;color:var(--gray);margin-bottom:7px;line-height:1.4;}
+.bvc-eg{font-size:13px;color:var(--text);font-style:italic;border-left:3px solid var(--lb);padding-left:9px;line-height:1.4;}
+
+/* WORD BANK */
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;background:var(--lb);border-radius:8px;padding:11px 13px;margin-bottom:14px;}
+.wb-word{background:white;border:1.5px solid var(--blue);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--blue);color:white;}
+.wb-word.used{background:var(--lgr);border-color:var(--border);color:var(--gray);cursor:default;text-decoration:line-through;}
+.gf-list{list-style:none;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.gf-item{padding:11px 14px;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:flex-start;gap:10px;}
+.gf-item:last-child{border-bottom:none;}
+.gf-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.blank-drop{display:inline-flex;align-items:center;justify-content:center;border:2px dashed #94a3b8;border-radius:20px;min-width:110px;min-height:34px;padding:6px 12px;cursor:pointer;color:transparent;font-size:13px;font-weight:600;vertical-align:middle;transition:all .2s;background:#f8fafc;margin:0 3px;}
+.blank-drop:hover{border-color:var(--blue);background:var(--lb);}
+.blank-drop.has-word{color:var(--navy);border-style:solid;border-color:var(--amber);background:var(--la);}
+.blank-drop.correct{color:var(--green);border-style:solid;border-color:var(--green);background:var(--lg);}
+.blank-drop.incorrect{color:var(--rose);border-style:solid;border-color:var(--rose);background:var(--lr);}
+
+/* KEY LANGUAGE PANEL */
+.kl-panel{border:1px solid var(--lp);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.kl-panel-head{background:var(--purple);color:white;padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;}
+.kl-section{padding:14px 16px;border-bottom:1px solid var(--lp);}
+.kl-section:last-child{border-bottom:none;}
+.kl-section-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+.kl-phrase{background:var(--lp);border-radius:7px;padding:8px 12px;font-size:13.5px;color:var(--navy);margin-bottom:6px;line-height:1.5;}
+.kl-phrase em{font-style:italic;color:var(--purple);font-weight:600;}
+.kl-phrase:last-child{margin-bottom:0;}
+
+/* FPICK */
+.fpick-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:white;}
+.fpick-q{font-size:14px;color:var(--navy);margin-bottom:12px;line-height:1.6;font-weight:600;}
+.fpick-opts{display:flex;flex-direction:column;gap:8px;}
+.fpick-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:13.5px;line-height:1.55;}
+.fpick-opt:hover:not(.fp-locked){border-color:var(--blue);background:var(--lb);}
+.fpick-letter{background:var(--lgr);color:var(--navy);min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.fpick-opt.fp-correct{border-color:var(--green);background:var(--lg);}.fpick-opt.fp-correct .fpick-letter{background:var(--green);color:white;}
+.fpick-opt.fp-wrong{border-color:var(--rose);background:var(--lr);}.fpick-opt.fp-wrong .fpick-letter{background:var(--rose);color:white;}
+.fpick-opt.fp-locked{cursor:default;opacity:0.6;}
+.fpick-hint{font-size:12px;color:#14532d;margin-top:8px;font-style:italic;display:none;padding:7px 10px;background:#f0fdf4;border-radius:7px;border:1px solid #86efac;}
+.fpick-hint.show{display:block;}
+
+/* SPEAKING */
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▸";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;display:flex;align-items:flex-start;gap:8px;}
+.prev-tag{flex-shrink:0;font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-top:2px;}
+.prev-tag-vocab{background:var(--lp);color:var(--purple);}
+.prev-tag-reading{background:var(--li);color:#1e40af;}
+.prev-tag-speaking{background:var(--la);color:#92400e;}
+.scene-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.scene-dots{display:flex;gap:5px;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .2s;}
+.scene-dot.active{background:var(--amber);}
+.scene-dot.done{background:var(--green);}
+.scene-card{display:none;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeIn .3s;}
+.scene-card.active{display:block;}
+.scene-top{background:var(--navy);color:white;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:13px;}
+.scene-situation{padding:15px 18px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;line-height:1.6;}
+.scene-task{padding:14px 18px;font-size:14px;line-height:1.6;color:var(--navy);}
+.scene-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;}
+.scene-answer{display:none;margin:0 18px 14px;padding:12px 14px;background:var(--lg);border-radius:8px;font-size:13.5px;color:#14532d;line-height:1.6;border:1px solid #86efac;}
+.scene-answer.show{display:block;animation:fadeIn .3s;}
+
+/* MATCH (L3 style) */
+.match-left,.match-right{display:flex;align-items:flex-start;gap:8px;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13px;background:white;cursor:pointer;transition:all .15s;user-select:none;}
+.match-left:hover{border-color:var(--amber);background:var(--la);}
+.match-right{background:var(--lgr);}
+.match-right:hover{border-color:var(--amber);background:var(--la);}
+.match-left.selected{border-color:var(--amber);background:var(--la);box-shadow:0 0 0 2px var(--amber);}
+.match-left.paired,.match-right.paired{border-color:var(--amber);background:#fff7ed;}
+.match-left.correct,.match-right.correct{border-color:var(--green);background:var(--lg);}
+.match-left.incorrect,.match-right.incorrect{border-color:var(--rose);background:var(--lr);}
+.match-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--navy);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.match-letter{background:var(--teal);}
+.match-text{flex:1;color:var(--navy);line-height:1.4;}
+.match-badge{font-size:11px;font-weight:700;color:var(--amber);white-space:nowrap;flex-shrink:0;}
+
+/* HW */
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lo);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--orange);}
+.hw-tag{background:var(--orange);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hw-grammar{background:var(--lp);color:#5b21b6;}
+.hw-write{background:var(--lt);color:#134e4a;}
+.qtag-hw-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.qtag-hw-item:last-child{border-bottom:none;}
+.qtag-hw-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.qtag-hw-q{flex:1;font-size:13.5px;color:var(--navy);line-height:1.7;}
+.qtag-inline{border:1.5px solid var(--border);border-radius:6px;padding:3px 9px;font-size:13px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .15s;width:130px;}
+.qtag-inline:focus{border-color:var(--purple);}
+.qtag-inline.filled{border-color:var(--green);background:var(--lg);color:#14532d;}
+.err-reveal-btn{padding:5px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--gray);transition:all .15s;white-space:nowrap;}
+.err-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn-navy{background:var(--navy);color:white;}.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-purple{background:var(--purple);color:white;}.btn-sm{padding:6px 13px;font-size:12px;}
+
+/* SLIDE SYSTEM */
+.slide{display:none;}.slide.active{display:block;animation:slideIn .25s ease;}
+.top-home-strip{position:fixed;top:0;left:0;right:0;z-index:400;background:var(--navy);height:42px;display:flex;align-items:center;justify-content:flex-end;padding:0 20px;box-shadow:0 2px 6px rgba(0,0,0,0.25);}
+.top-home-link{color:white;text-decoration:none;font-size:13px;font-weight:700;font-family:inherit;display:flex;align-items:center;gap:6px;opacity:.85;transition:opacity .15s;}
+.top-home-link:hover{opacity:1;}
+.slide-navbar{background:white;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:10px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.08);gap:12px;}
+.slide-nav-btn{background:var(--navy);color:white;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;}
+.slide-nav-btn:hover:not(:disabled){background:#263d5c;}
+.slide-nav-btn:disabled{opacity:.3;cursor:default;}
+.slide-info{text-align:center;flex:1;}
+.slide-label{font-weight:700;color:var(--navy);font-size:14px;}
+.slide-counter-text{font-size:12px;color:var(--gray);margin:2px 0 6px;}
+.slide-progress{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.sp-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .15s;}
+.sp-dot.active{background:var(--navy);transform:scale(1.3);}
+.sp-dot.done{background:var(--teal);}
+.slide-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;margin-top:30px;border-top:2px solid var(--border);background:#f8fafc;}
+
+/* COVER */
+.cover-slide{min-height:calc(100vh - 98px);background:linear-gradient(140deg,var(--navy) 0%,#1e3a5f 60%,#243060 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden;}
+.cover-slide::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.cover-slide::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);}
+.cover-inner{text-align:center;max-width:680px;color:white;position:relative;z-index:1;}
+.cover-teacher{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;}
+.cover-module-tag{display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:18px;}
+.cover-title-main{font-size:42px;font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px;}
+.cover-lesson-badge{display:inline-block;background:var(--amber);color:var(--navy);border-radius:20px;padding:4px 18px;font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:32px;}
+.cover-tl{margin:0 auto 34px;max-width:620px;}
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;}.s2{background:#4338ca;flex:2;}.s3{background:#2563eb;flex:2;}.s4{background:#7c3aed;flex:2;}.s5{background:#d97706;flex:2;}
+.cover-start{background:white;color:var(--navy);border:none;border-radius:12px;padding:14px 38px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,0.25);}
+.cover-start:hover{background:var(--amber);color:white;transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 9</div>
+    <div class="slide-progress">
+      <div class="sp-dot active" onclick="goToSlide(0)"></div><div class="sp-dot" onclick="goToSlide(1)"></div><div class="sp-dot" onclick="goToSlide(2)"></div><div class="sp-dot" onclick="goToSlide(3)"></div><div class="sp-dot" onclick="goToSlide(4)"></div><div class="sp-dot" onclick="goToSlide(5)"></div><div class="sp-dot" onclick="goToSlide(6)"></div><div class="sp-dot" onclick="goToSlide(7)"></div><div class="sp-dot" onclick="goToSlide(8)"></div>
+    </div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English</div>
+      <div class="cover-module-tag">Module 2 · Communication — Lesson 3 of 3</div>
+      <div class="cover-title-main">Telephone Communication</div>
+      <div class="cover-lesson-badge">Lesson 7</div>
+      <div class="cover-tl">
+        <div class="tl-bar">
+          <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+          <div class="tl-seg s2">Reading<span class="t">10 min</span></div>
+          <div class="tl-seg s3">Vocabulary<span class="t">8 min</span></div>
+          <div class="tl-seg s4">Key Language<span class="t">10 min</span></div>
+          <div class="tl-seg s5">Speaking<span class="t">10 min</span></div>
+        </div>
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 · WARM-UP ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+      <div class="card-head">
+        <div class="card-icon">📞</div>
+        <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">Call or Type?</div></div>
+        <span class="card-badge">5 min</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:14px;color:var(--textl);margin-bottom:18px;">Think about phone calls in your professional life. Are these statements <strong>True</strong>, <strong>False</strong>, or <strong>It depends</strong>?</p>
+
+        <div class="tfd-item">
+          <div class="tfd-q">A phone call is always faster than sending an email.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'depends','exp1')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'depends','exp1')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp1')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp1"><em>It depends.</em> For urgent or complex issues, a call can save time — but for simple updates, a quick email may be faster.</div>
+        </div>
+
+        <div class="tfd-item">
+          <div class="tfd-q">You should always identify yourself when answering a business call.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp2')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp2')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp2')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp2"><em>True.</em> Saying your name and company when answering sounds professional and helps the caller confirm they've reached the right place.</div>
+        </div>
+
+        <div class="tfd-item">
+          <div class="tfd-q">Leaving a voicemail is considered unprofessional in a business context.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp3')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp3')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp3')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp3"><em>False.</em> A clear, professional voicemail is perfectly acceptable — it saves the other person time and shows you made an effort to reach them.</div>
+        </div>
+
+        <div class="tfd-item">
+          <div class="tfd-q">You should always send a follow-up email after an important phone call.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'depends','exp4')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'depends','exp4')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp4')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp4"><em>It depends.</em> For meetings, agreements, or important decisions, a follow-up email confirms what was discussed. For routine calls, it's usually not necessary.</div>
+        </div>
+
+        <div style="background:var(--lt);border:1px solid #5eead4;border-radius:12px;padding:16px 18px;margin-top:20px;">
+          <div style="font-size:14px;font-weight:700;color:#134e4a;margin-bottom:10px;">💬 Discuss:</div>
+          <div style="font-size:14px;color:#134e4a;line-height:1.7;">When do you prefer to call rather than email? What makes a phone call feel professional or unprofessional to you?</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 · READING ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-indigo">
+      <div class="card-head">
+        <div class="card-icon">📋</div>
+        <div><div class="card-label">Part 2 · Reading</div><div class="card-title">A Professional Call</div></div>
+        <span class="card-badge">10 min</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">Read this telephone conversation, then answer the comprehension questions.</p>
+
+        <div class="transcript-box">
+          <div class="transcript-head">📞 Telephone Transcript — ClearPath Logistics</div>
+          <div class="transcript-body">
+            <div class="tr-line"><span class="tr-speaker">Alex (receptionist):</span><span class="tr-text">"Good morning, ClearPath Logistics. Alex Morgan speaking. How can I help you?"</span></div>
+            <div class="tr-line"><span class="tr-speaker">David (caller):</span><span class="tr-text">"Good morning. This is David Reyes calling from Zenith Trading. Could I speak to your operations manager, please?"</span></div>
+            <div class="tr-line"><span class="tr-speaker">Alex:</span><span class="tr-text">"I'm afraid she's in a conference call right now. Would you like to hold, or can I take a message?"</span></div>
+            <div class="tr-line"><span class="tr-speaker">David:</span><span class="tr-text">"I'll leave a message if that's OK. Could you let her know I'm calling about the shipment delay for order 8421? We need to reschedule the delivery for next Tuesday if possible."</span></div>
+            <div class="tr-line"><span class="tr-speaker">Alex:</span><span class="tr-text">"Of course. Could you give me your contact details?"</span></div>
+            <div class="tr-line"><span class="tr-speaker">David:</span><span class="tr-text">"Sure. My name is David Reyes — that's R-E-Y-E-S. My number is 555-0193. And could you ask her to call me back before noon? It's quite urgent."</span></div>
+            <div class="tr-line"><span class="tr-speaker">Alex:</span><span class="tr-text">"Absolutely. I'll make sure she gets your message, Mr. Reyes. Is there anything else I can help you with?"</span></div>
+            <div class="tr-line"><span class="tr-speaker">David:</span><span class="tr-text">"No, that's everything. Thank you very much."</span></div>
+            <div class="tr-line"><span class="tr-speaker">Alex:</span><span class="tr-text">"You're welcome. Have a good morning. Goodbye."</span></div>
+          </div>
+        </div>
+
+        <div class="act-head"><span class="act-num">1</span> Comprehension Questions <span class="act-type type-reading">Reading</span></div>
+
+        <div class="mc-item">
+          <div class="mc-q">1. Why can't David speak to the operations manager?</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span>She is out of the office for the day.</div>
+            <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span>She is on another call.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span>She doesn't take calls from external companies.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span>She is on a lunch break.</div>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">2. What does David want to change?</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span>A payment deadline for an outstanding invoice.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span>A meeting scheduled for next Tuesday.</div>
+            <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span>A delivery date for order 8421.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span>His contact details on file.</div>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">3. What does Alex offer to do?</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span>Transfer David to another department.</div>
+            <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span>Take a message and pass it on to the operations manager.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span>Call David back personally within the hour.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span>Send an email to the operations team about the delay.</div>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">4. Why does David spell his last name?</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span>Alex asked him to repeat it.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span>The line was unclear.</div>
+            <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span>To make sure Alex records it correctly.</div>
+            <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">D</span>It is company policy to spell names on calls.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 · VOCABULARY ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-blue">
+      <div class="card-head">
+        <div class="card-icon">📖</div>
+        <div><div class="card-label">Part 3 · Vocabulary</div><div class="card-title">Telephone Expressions</div></div>
+        <span class="card-badge">8 min</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Key Expressions <span class="act-type type-vocab">Vocabulary</span></div>
+        <div class="vocab-card-grid">
+          <div class="bvc">
+            <div class="bvc-term">put on hold</div>
+            <div class="bvc-def">Ask a caller to wait on the line while you check something or connect them.</div>
+            <div class="bvc-eg">"Could you hold the line for a moment? I'll check if she's available."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">put (someone) through</div>
+            <div class="bvc-def">Connect a caller to another person or extension.</div>
+            <div class="bvc-eg">"I'll put you through to the sales department right away."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">get cut off</div>
+            <div class="bvc-def">Lose the phone connection unexpectedly during a call.</div>
+            <div class="bvc-eg">"I'm sorry — we got cut off. Let me call you back."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">call back</div>
+            <div class="bvc-def">Return a missed call or call someone again later.</div>
+            <div class="bvc-eg">"She's away from her desk. Could she call you back this afternoon?"</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">take a message</div>
+            <div class="bvc-def">Write down what a caller wants to say for someone who is not available.</div>
+            <div class="bvc-eg">"He's on another call. Would you like me to take a message?"</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">speak up</div>
+            <div class="bvc-def">Talk more loudly — often requested when the line is unclear.</div>
+            <div class="bvc-eg">"I'm sorry, could you speak up? The line is a bit unclear."</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="act-head"><span class="act-num">2</span> Fill in the Gaps — choose the right expression <span class="act-type type-vocab">Vocabulary</span></div>
+        <div class="word-bank" id="wb7">
+          <span class="wb-word" onclick="selectWb(this,'put her through')">put her through</span>
+          <span class="wb-word" onclick="selectWb(this,'take a message')">take a message</span>
+          <span class="wb-word" onclick="selectWb(this,'got cut off')">got cut off</span>
+          <span class="wb-word" onclick="selectWb(this,'call you back')">call you back</span>
+          <span class="wb-word" onclick="selectWb(this,'hold the line')">hold the line</span>
+          <span class="wb-word" onclick="selectWb(this,'speak up')">speak up</span>
+        </div>
+        <ul class="gf-list">
+          <li class="gf-item"><span class="gf-num">1</span><span>Could you <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="speak up">_____</span>? I can barely hear you — the connection is very bad.</span></li>
+          <li class="gf-item"><span class="gf-num">2</span><span>I'm so sorry — we <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="got cut off">_____</span> earlier. Is this a better time to talk?</span></li>
+          <li class="gf-item"><span class="gf-num">3</span><span>Could you <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="hold the line">_____</span> for a moment? I'll check if she's available.</span></li>
+          <li class="gf-item"><span class="gf-num">4</span><span>Mr. Torres is in a meeting. Would you like me to <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="take a message">_____</span>?</span></li>
+          <li class="gf-item"><span class="gf-num">5</span><span>One moment — I'll <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="put her through">_____</span> to the accounts team.</span></li>
+          <li class="gf-item"><span class="gf-num">6</span><span>She's stepped away. Could she <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="call you back">_____</span> in about 20 minutes?</span></li>
+        </ul>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="btn btn-outline btn-sm" onclick="checkBlanks()">✓ Check</button>
+          <button class="btn btn-outline btn-sm" onclick="resetBlanks()">↺ Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 · KEY LANGUAGE ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-purple">
+      <div class="card-head">
+        <div class="card-icon">🗝️</div>
+        <div><div class="card-label">Part 4 · Key Language</div><div class="card-title">What to Say and When</div></div>
+        <span class="card-badge">10 min</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Reference — Phrases by Function <span class="act-type type-vocab">Vocabulary</span></div>
+
+        <div class="kl-panel">
+          <div class="kl-panel-head">📞 Key Telephone Language</div>
+          <div class="kl-section">
+            <div class="kl-section-title">Answering a call</div>
+            <div class="kl-phrase"><em>"Good morning, [Company], [Name] speaking."</em></div>
+            <div class="kl-phrase"><em>"Thank you for calling [Company]. How can I help you?"</em></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Making a call</div>
+            <div class="kl-phrase"><em>"Good morning. This is [Name] calling from [Company]."</em></div>
+            <div class="kl-phrase"><em>"Could I speak to [Name / Department], please?"</em></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Saying someone is unavailable</div>
+            <div class="kl-phrase"><em>"I'm afraid [Name] is not available at the moment."</em></div>
+            <div class="kl-phrase"><em>"She's in a meeting / on another call / away from her desk."</em></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Taking / leaving a message</div>
+            <div class="kl-phrase"><em>"Would you like to leave a message?"</em></div>
+            <div class="kl-phrase"><em>"Could I take your name and number?"</em></div>
+            <div class="kl-phrase"><em>"I'll make sure she gets your message."</em></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Asking for clarification</div>
+            <div class="kl-phrase"><em>"Could you repeat that, please?"</em></div>
+            <div class="kl-phrase"><em>"Could you spell that for me?"</em></div>
+            <div class="kl-phrase"><em>"I'm sorry, the line is a bit unclear — could you speak up?"</em></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Ending a call</div>
+            <div class="kl-phrase"><em>"Thank you for calling. Have a good day. Goodbye."</em></div>
+            <div class="kl-phrase"><em>"I'll get back to you as soon as possible."</em></div>
+          </div>
+        </div>
+
+        <div class="act-head"><span class="act-num">2</span> Which phrase fits? <span class="act-type type-grammar">Practice</span></div>
+        <p style="font-size:13.5px;color:var(--textl);margin-bottom:14px;">Choose the most appropriate response for each situation.</p>
+
+        <div class="fpick-item">
+          <div class="fpick-q">1. You pick up the phone at work. What do you say first?</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh1')"><span class="fpick-letter">A</span>"Good morning, ConnectPro, Jamie speaking."</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh1')"><span class="fpick-letter">B</span>"This is Jamie calling from ConnectPro."</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh1')"><span class="fpick-letter">C</span>"Could I speak to someone in sales, please?"</div>
+          </div>
+          <div class="fpick-hint" id="fh1">A is correct — state the company and your name when <em>answering</em>. Option B is used when <em>making</em> a call.</div>
+        </div>
+
+        <div class="fpick-item">
+          <div class="fpick-q">2. The caller is speaking very quietly and you can't understand them.</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh2')"><span class="fpick-letter">A</span>"Could you spell that for me?"</div>
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh2')"><span class="fpick-letter">B</span>"I'm sorry, the line is a bit unclear — could you speak up?"</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh2')"><span class="fpick-letter">C</span>"Could you hold the line for a moment?"</div>
+          </div>
+          <div class="fpick-hint" id="fh2">B is correct — when you can't hear well, ask them to speak up. "Spell that" (A) is for unclear names/words, and "hold the line" (C) is to ask them to wait.</div>
+        </div>
+
+        <div class="fpick-item">
+          <div class="fpick-q">3. The person the caller needs is at a meeting. What do you say?</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh3')"><span class="fpick-letter">A</span>"She doesn't want to be disturbed."</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh3')"><span class="fpick-letter">B</span>"She's not here today."</div>
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh3')"><span class="fpick-letter">C</span>"I'm afraid she's in a meeting at the moment. Would you like to leave a message?"</div>
+          </div>
+          <div class="fpick-hint" id="fh3">C is correct — always explain politely why they can't be reached and offer an alternative (message or call back).</div>
+        </div>
+
+        <div class="fpick-item">
+          <div class="fpick-q">4. You want to connect the caller to a different department.</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh4')"><span class="fpick-letter">A</span>"Could you hold the line? I'll put you through to the accounts team."</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh4')"><span class="fpick-letter">B</span>"Could you call back and ask for accounts directly?"</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh4')"><span class="fpick-letter">C</span>"I'll make sure she gets your message."</div>
+          </div>
+          <div class="fpick-hint" id="fh4">A is correct — ask them to hold, then transfer (put through) to the right person. Asking them to call back again (B) is unhelpful.</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 · SPEAKING ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-amber">
+      <div class="card-head">
+        <div class="card-icon">🎙️</div>
+        <div><div class="card-label">Part 5 · Speaking</div><div class="card-title">Your Turn — Role-Play Calls</div></div>
+        <span class="card-badge">10 min</span>
+      </div>
+      <div class="card-body">
+        <details class="prev-box">
+          <summary>📌 Useful phrases from previous lessons — keep using these!</summary>
+          <div class="prev-box-body">
+            <div class="prev-box-item"><em>"As discussed, …"</em> — referencing what was agreed or mentioned previously</div>
+            <div class="prev-box-item"><em>"I would like to follow up on …"</em> — opening a follow-up conversation or email</div>
+            <div class="prev-box-item"><em>"Please find attached …"</em> — introducing a document in a message or after a call</div>
+            <div class="prev-box-item"><em>"If I understand correctly, …"</em> — confirming what you heard before responding</div>
+            <div class="prev-box-item"><em>"Could you be a bit more specific?"</em> — asking for clearer information</div>
+          </div>
+        </details>
+
+        <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">Three telephone situations. Read the scenario, prepare your response, then check the sample.</p>
+
+        <div class="scene-nav">
+          <span id="sp-counter7" style="font-size:13px;font-weight:700;color:var(--navy);">Situation 1 of 3</span>
+          <div class="scene-dots">
+            <div class="scene-dot active" id="sd7-0"></div>
+            <div class="scene-dot" id="sd7-1"></div>
+            <div class="scene-dot" id="sd7-2"></div>
+          </div>
+        </div>
+
+        <div class="scene-card active" id="sc7-0">
+          <div class="scene-top">📞 <span style="background:var(--teal);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 1 — Taking a Message</span></div>
+          <div class="scene-situation">A caller asks to speak to your manager, who is currently away from her desk. You answer the call and handle it professionally.</div>
+          <div class="scene-task"><strong>Your role:</strong> Answer the call, explain that your manager is unavailable, offer to take a message, and get the caller's name, number, and reason for calling.</div>
+          <div class="scene-answer" id="sa7-0">
+            <strong>Sample response:</strong><br>
+            "Good morning, Brightfield Solutions, Sam speaking. How can I help you?"<br>
+            [Caller asks for the manager]<br>
+            "I'm afraid Ms. Torres is away from her desk at the moment. Would you like to leave a message, or would you prefer her to call you back?"<br>
+            [Caller wants to leave a message]<br>
+            "Of course. Could I take your name and number, please? … And may I ask what the call is regarding? … Thank you. I'll make sure she gets your message as soon as she's back."
+          </div>
+          <div class="scene-footer">
+            <button class="btn btn-outline btn-sm" onclick="toggleSa7(0)">▶ Sample answer</button>
+            <button class="btn btn-navy btn-sm" onclick="sceneNav7(1)">Next →</button>
+          </div>
+        </div>
+
+        <div class="scene-card" id="sc7-1">
+          <div class="scene-top">📞 <span style="background:var(--amber);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 2 — Rescheduling</span></div>
+          <div class="scene-situation">You need to call a client to let them know you have to postpone a meeting that was scheduled for tomorrow. You also want to suggest a new time.</div>
+          <div class="scene-task"><strong>Your role:</strong> Introduce yourself, explain the reason for rescheduling, apologize, and propose two alternative times.</div>
+          <div class="scene-answer" id="sa7-1">
+            <strong>Sample response:</strong><br>
+            "Good afternoon. This is Jamie Park calling from DataBridge Consulting. I'm calling regarding our meeting scheduled for tomorrow morning."<br>
+            "Unfortunately, I need to ask if we could reschedule — something urgent has come up on our end. I sincerely apologize for any inconvenience."<br>
+            "Would Thursday at 10 AM work for you, or perhaps Friday afternoon? I'm happy to work around your schedule."
+          </div>
+          <div class="scene-footer">
+            <button class="btn btn-outline btn-sm" onclick="sceneNav7(-1)">← Back</button>
+            <button class="btn btn-outline btn-sm" onclick="toggleSa7(1)">▶ Sample answer</button>
+            <button class="btn btn-navy btn-sm" onclick="sceneNav7(1)">Next →</button>
+          </div>
+        </div>
+
+        <div class="scene-card" id="sc7-2">
+          <div class="scene-top">📞 <span style="background:var(--purple);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 3 — Bad Connection</span></div>
+          <div class="scene-situation">You're on a call with an important client, but the line quality is very poor — you can barely hear them and you keep missing key information.</div>
+          <div class="scene-task"><strong>Your role:</strong> Handle the situation professionally — ask them to repeat or speak up, confirm what you did understand, and suggest calling back on a better line if needed.</div>
+          <div class="scene-answer" id="sa7-2">
+            <strong>Sample response:</strong><br>
+            "I'm terribly sorry — the line is a bit unclear on my end. Could you speak up slightly?"<br>
+            "I apologize, could you repeat the last part? I didn't quite catch the date you mentioned."<br>
+            "Just to confirm — you said the order number is 7-7-3-2, is that right?"<br>
+            "I'm so sorry, the connection seems to be cutting in and out. Would it be possible for me to call you back on a different line? I want to make sure I have all the details correct."
+          </div>
+          <div class="scene-footer">
+            <button class="btn btn-outline btn-sm" onclick="sceneNav7(-1)">← Back</button>
+            <button class="btn btn-outline btn-sm" onclick="toggleSa7(2)">▶ Sample answer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 · WRAP-UP ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-navy">
+      <div class="card-head">
+        <div class="card-icon">🎯</div>
+        <div><div class="card-label">Wrap-up</div><div class="card-title">Today's Key Language</div></div>
+        <span class="card-badge">5 min</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Match the phrase to its function <span class="act-type" style="background:var(--navy);">Matching</span></div>
+        <p style="font-size:13.5px;color:var(--textl);margin-bottom:14px;">Click a phrase on the left, then click its matching function on the right.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="match-left" id="ml1" onclick="selectLeft(1)"><span class="match-num">1</span><span class="match-text">"Could you hold the line for a moment?"</span><span class="match-badge" id="mb1"></span></div>
+            <div class="match-left" id="ml2" onclick="selectLeft(2)"><span class="match-num">2</span><span class="match-text">"I'm afraid she's not available right now."</span><span class="match-badge" id="mb2"></span></div>
+            <div class="match-left" id="ml3" onclick="selectLeft(3)"><span class="match-num">3</span><span class="match-text">"Could you spell that for me?"</span><span class="match-badge" id="mb3"></span></div>
+            <div class="match-left" id="ml4" onclick="selectLeft(4)"><span class="match-num">4</span><span class="match-text">"I'll make sure he gets your message."</span><span class="match-badge" id="mb4"></span></div>
+            <div class="match-left" id="ml5" onclick="selectLeft(5)"><span class="match-num">5</span><span class="match-text">"Thank you for calling. Have a good day."</span><span class="match-badge" id="mb5"></span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="match-right" id="mrA" onclick="selectRight('A')"><span class="match-num match-letter">A</span><span class="match-text">Confirming you'll pass on information</span><span class="match-badge" id="mbA"></span></div>
+            <div class="match-right" id="mrB" onclick="selectRight('B')"><span class="match-num match-letter">B</span><span class="match-text">Closing the call politely</span><span class="match-badge" id="mbB"></span></div>
+            <div class="match-right" id="mrC" onclick="selectRight('C')"><span class="match-num match-letter">C</span><span class="match-text">Asking the caller to wait</span><span class="match-badge" id="mbC"></span></div>
+            <div class="match-right" id="mrD" onclick="selectRight('D')"><span class="match-num match-letter">D</span><span class="match-text">Asking for clarification on spelling</span><span class="match-badge" id="mbD"></span></div>
+            <div class="match-right" id="mrE" onclick="selectRight('E')"><span class="match-num match-letter">E</span><span class="match-text">Saying someone is unavailable</span><span class="match-badge" id="mbE"></span></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-outline btn-sm" onclick="checkMatchAnswers()">✓ Check</button>
+          <button class="btn btn-purple btn-sm" onclick="showAnswerKey()" id="match-key-btn" style="display:none;">📋 Answer key</button>
+          <button class="btn btn-outline btn-sm" onclick="resetMatches()">↺ Reset</button>
+          <span id="match-score" style="display:none;font-size:13px;font-weight:700;"></span>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 · EXTRA ══ -->
+<div class="slide" id="slide-7">
+  <div class="main">
+    <div class="card c-green">
+      <div class="card-head">
+        <div class="card-icon">🌟</div>
+        <div><div class="card-label">Extra Activity</div><div class="card-title">Tricky Calls</div></div>
+        <span class="card-badge">5 min</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">These situations require extra care. Discuss how you would handle each one.</p>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+
+          <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;">
+            <div style="background:var(--navy);padding:11px 16px;"><span style="background:var(--teal);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 1 — The Frustrated Caller</span></div>
+            <div style="padding:14px 16px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;">A caller is angry because they have been waiting for a call back for two days. They demand to speak to a manager immediately, but no manager is available right now.</div>
+            <div style="padding:14px 16px;">
+              <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+                <li style="font-size:13.5px;padding:8px 12px;background:var(--lt);border-radius:8px;color:#134e4a;">How do you acknowledge their frustration without agreeing that the company made a mistake?</li>
+                <li style="font-size:13.5px;padding:8px 12px;background:var(--lt);border-radius:8px;color:#134e4a;">What do you offer instead of putting them through to a manager?</li>
+              </ul>
+              <div style="margin-top:12px;">
+                <button class="err-reveal-btn" onclick="toggleSa(this,'sa-ex1')" style="font-size:12.5px;">▶ Show sample answer</button>
+                <div id="sa-ex1" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:12px 15px;font-size:13px;color:#14532d;line-height:1.8;">
+                  <strong>Sample:</strong> "I completely understand your frustration, and I sincerely apologize for the delay. Unfortunately, our manager is unavailable at this moment, but I will personally ensure this is escalated as a priority. Could I take your details and have someone call you within the next two hours?"
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="border:1.5px solid var(--border);border-radius:12px;overflow:hidden;">
+            <div style="background:var(--navy);padding:11px 16px;"><span style="background:var(--amber);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 2 — Too Much Information</span></div>
+            <div style="padding:14px 16px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;">A caller is giving you a lot of important details very quickly — names, dates, order numbers, and special instructions — and you're struggling to keep up.</div>
+            <div style="padding:14px 16px;">
+              <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;">
+                <li style="font-size:13.5px;padding:8px 12px;background:var(--la);border-radius:8px;color:#78350f;">How do you politely interrupt to slow them down?</li>
+                <li style="font-size:13.5px;padding:8px 12px;background:var(--la);border-radius:8px;color:#78350f;">How do you confirm you've noted everything correctly at the end?</li>
+              </ul>
+              <div style="margin-top:12px;">
+                <button class="err-reveal-btn" onclick="toggleSa(this,'sa-ex2')" style="font-size:12.5px;">▶ Show sample answer</button>
+                <div id="sa-ex2" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:12px 15px;font-size:13px;color:#14532d;line-height:1.8;">
+                  <strong>Interrupting politely:</strong> "I'm so sorry to interrupt — could you slow down slightly? I want to make sure I get every detail right."<br>
+                  <strong>Confirming:</strong> "Just to make sure I have everything — the order number is 4412, delivery is needed by the 15th, and you need the expedited shipping option. Is that correct?"
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 · HOMEWORK ══ -->
+<div class="slide" id="slide-8">
+  <div class="main">
+    <div class="card c-orange">
+      <div class="card-head">
+        <div class="card-icon">📝</div>
+        <div><div class="card-label">For Next Time</div><div class="card-title">Homework</div></div>
+        <span class="card-badge">At home</span>
+      </div>
+      <div class="card-body">
+        <div class="hw-card">
+          <div class="hw-head"><span class="hw-tag">Task 1</span> Complete the Telephone Dialogue</div>
+          <div class="hw-body">
+            <span class="hw-type hw-grammar">✏️ Grammar · telephone language</span>
+            <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Fill in the blanks with the correct word or phrase. Use the word bank to help you.</p>
+            <div style="background:var(--lb);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;color:var(--blue);font-weight:700;">
+              Word bank: <em style="font-weight:400;color:var(--navy);">Could you repeat &nbsp;·&nbsp; leave a message &nbsp;·&nbsp; speaking &nbsp;·&nbsp; make sure she gets &nbsp;·&nbsp; I'm afraid &nbsp;·&nbsp; call you back &nbsp;·&nbsp; This is</em>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">1</span>
+                <div class="qtag-hw-q">A: "Good morning, ProLink Solutions, Anna <input class="qtag-inline" id="qi1" type="text" style="width:120px;" placeholder="___">."</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'speaking','qi1')">Show</button>
+              </div>
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">2</span>
+                <div class="qtag-hw-q">B: "Good morning. <input class="qtag-inline" id="qi2" type="text" style="width:120px;" placeholder="___"> Marcus Webb calling from DataSync."</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'This is','qi2')">Show</button>
+              </div>
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">3</span>
+                <div class="qtag-hw-q">A: "<input class="qtag-inline" id="qi3" type="text" style="width:140px;" placeholder="___"> Mr. Torres is in a meeting. Would you like to <input class="qtag-inline" id="qi3b" type="text" style="width:150px;" placeholder="___">?"</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'I\'m afraid','qi3');fillQtag(this,'leave a message','qi3b')">Show</button>
+              </div>
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">4</span>
+                <div class="qtag-hw-q">B: "Yes, please. My number is 555-0241. <input class="qtag-inline" id="qi4" type="text" style="width:175px;" placeholder="___"> that number?"</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'Could you repeat','qi4')">Show</button>
+              </div>
+              <div class="qtag-hw-item" style="border-bottom:none;">
+                <span class="qtag-hw-num">5</span>
+                <div class="qtag-hw-q">A: "Of course — 555-0241. I'll <input class="qtag-inline" id="qi5" type="text" style="width:195px;" placeholder="___"> your message."</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'make sure she gets','qi5')">Show</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-head"><span class="hw-tag">Task 2</span> Write a Follow-up Email</div>
+          <div class="hw-body">
+            <span class="hw-type hw-write">✉️ Writing · formal email</span>
+            <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">You have just finished a phone call with a client. Write a short follow-up email (5–7 sentences) summarizing what was discussed and confirming the next steps.</p>
+            <div style="background:var(--lo);border:1px solid #fdba74;border-radius:10px;padding:13px 16px;margin-bottom:14px;font-size:13.5px;color:#7c2d12;">
+              <strong>Call summary:</strong> You called Ms. Rivera to discuss a delayed shipment. She agreed to accept the new delivery date of the 18th. She also asked you to send a written confirmation and a revised invoice.
+            </div>
+            <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:8px;">Your email:</div>
+            <textarea style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;font-family:inherit;color:var(--navy);outline:none;resize:vertical;min-height:180px;line-height:1.8;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+            <div style="margin-top:12px;">
+              <button class="err-reveal-btn" onclick="toggleSa(this,'hw-sample7')" style="font-size:12.5px;">▶ Show sample email</button>
+              <div id="hw-sample7" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:13px 16px;font-size:13px;color:#14532d;line-height:1.9;">
+                <strong>Sample email:</strong><br><br>
+                Subject: Follow-up — Shipment Delivery Confirmation<br><br>
+                Dear Ms. Rivera,<br><br>
+                Thank you for taking the time to speak with me today. As discussed, I am writing to confirm that the revised delivery date for your shipment is the 18th of this month.<br><br>
+                Please find attached the written confirmation and the revised invoice, as requested during our call. Should you have any questions regarding the documents, please do not hesitate to contact me.<br><br>
+                I appreciate your understanding and flexibility in this matter. I look forward to confirming receipt of the shipment on the agreed date.<br><br>
+                Kind regards,<br>
+                [Your name]
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Course Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const SLIDE_LABELS = ["Cover","Part 1 · Warm-up","Part 2 · Reading","Part 3 · Vocabulary","Part 4 · Key Language","Part 5 · Speaking","Wrap-up","Extra Activity","For next time"];
+const TOTAL_SLIDES = 9;
+let currentSlide = 0;
+
+function slideNav(dir){const n=currentSlide+dir;if(n<0||n>=TOTAL_SLIDES)return;goToSlide(n);}
+function goToSlide(n){document.getElementById('slide-'+currentSlide).classList.remove('active');currentSlide=n;document.getElementById('slide-'+currentSlide).classList.add('active');updateSlideUI();window.scrollTo({top:0,behavior:'instant'});}
+function updateSlideUI(){
+  const prev=document.getElementById('slide-prev');
+  const next=document.getElementById('slide-next');
+  if(prev)prev.disabled=currentSlide===0;
+  if(next){
+    if(currentSlide===TOTAL_SLIDES-1){
+      next.disabled=false;next.textContent='🏠 Course Home';
+      next.onclick=()=>{window.location.href='index.html';};
+    } else {
+      next.disabled=false;next.textContent='Next →';
+      next.onclick=()=>slideNav(1);
+    }
+  }
+  const lbl=document.getElementById('slide-label');if(lbl)lbl.textContent=SLIDE_LABELS[currentSlide];
+  const ctr=document.getElementById('slide-counter');if(ctr)ctr.textContent='Slide '+(currentSlide+1)+' of '+TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d,i)=>{d.classList.remove('active','done');if(i<currentSlide)d.classList.add('done');else if(i===currentSlide)d.classList.add('active');});
+}
+
+function tfdPick(btn,val,expId){
+  const opts=btn.closest('.tfd-opts');
+  if(opts.querySelector('.tfd-picked'))return;
+  opts.querySelectorAll('.tfd-btn').forEach(b=>b.classList.add('tfd-picked'));
+  btn.classList.add('tfd-'+val);
+  document.getElementById(expId).classList.add('show');
+}
+
+function mcPick(el,correct){
+  const opts=el.closest('.mc-opts').querySelectorAll('.mc-opt');
+  if([...opts].some(o=>o.classList.contains('correct')||o.classList.contains('wrong')))return;
+  opts.forEach(o=>o.classList.add('locked'));
+  if(correct){el.classList.add('correct');}
+  else{el.classList.add('wrong');opts.forEach(o=>{if(o.onclick&&o.onclick.toString().includes('true'))o.classList.add('correct');});}
+}
+
+function fpPick(el,correct,hintId){
+  const opts=el.closest('.fpick-opts').querySelectorAll('.fpick-opt');
+  if([...opts].some(o=>o.classList.contains('fp-correct')||o.classList.contains('fp-wrong')))return;
+  opts.forEach(o=>o.classList.add('fp-locked'));
+  el.classList.add(correct?'fp-correct':'fp-wrong');
+  if(!correct)opts.forEach(o=>{if(o.onclick&&o.onclick.toString().includes('true'))o.classList.add('fp-correct');});
+  document.getElementById(hintId).classList.add('show');
+}
+
+// Word bank
+let selectedWb=null;
+function selectWb(el,word){
+  if(el.classList.contains('used'))return;
+  if(selectedWb){selectedWb.style.outline='';selectedWb.classList.remove('selected-wb');}
+  if(selectedWb===el){selectedWb=null;return;}
+  selectedWb=el;el.classList.add('selected-wb');el.style.outline='3px solid var(--amber)';
+}
+function dropOnBlank(blank){
+  if(!selectedWb){
+    if(blank.classList.contains('has-word')){
+      const word=blank.dataset.placed;blank.textContent='_____';blank.classList.remove('has-word','correct','incorrect');blank.style.color='transparent';
+      const wb=document.querySelector(`[onclick*="selectWb"][onclick*="${word}"]`);if(wb)wb.classList.remove('used');
+      delete blank.dataset.placed;
+    }
+    return;
+  }
+  if(blank.dataset.placed){
+    const old=blank.dataset.placed;
+    const wb=document.querySelector(`[onclick*="selectWb"][onclick*="${old}"]`);if(wb)wb.classList.remove('used');
+  }
+  blank.textContent=selectedWb.textContent;blank.classList.add('has-word');blank.classList.remove('correct','incorrect');blank.style.color='';
+  blank.dataset.placed=selectedWb.textContent;
+  selectedWb.classList.add('used');selectedWb.style.outline='';selectedWb.classList.remove('selected-wb');selectedWb=null;
+}
+function checkBlanks(){
+  document.querySelectorAll('.blank-drop').forEach(b=>{
+    if(!b.dataset.placed){b.classList.remove('correct','incorrect');return;}
+    const correct=b.dataset.placed.trim()===b.dataset.answer.trim();
+    b.classList.toggle('correct',correct);b.classList.toggle('incorrect',!correct);
+  });
+}
+function resetBlanks(){
+  document.querySelectorAll('.blank-drop').forEach(b=>{
+    if(b.dataset.placed){
+      const wb=document.querySelector(`[onclick*="selectWb"][onclick*="${b.dataset.placed}"]`);if(wb)wb.classList.remove('used');
+    }
+    b.textContent='_____';b.classList.remove('has-word','correct','incorrect');b.style.color='transparent';delete b.dataset.placed;
+  });
+  selectedWb=null;
+}
+
+// Speaking scenes
+let sc7cur=0;
+function sceneNav7(dir){
+  document.getElementById('sc7-'+sc7cur).classList.remove('active');
+  document.getElementById('sd7-'+sc7cur).classList.remove('active');
+  document.getElementById('sd7-'+sc7cur).classList.add('done');
+  sc7cur=Math.max(0,Math.min(2,sc7cur+dir));
+  document.getElementById('sc7-'+sc7cur).classList.add('active');
+  document.getElementById('sd7-'+sc7cur).classList.remove('done');
+  document.getElementById('sd7-'+sc7cur).classList.add('active');
+  document.getElementById('sp-counter7').textContent='Situation '+(sc7cur+1)+' of 3';
+}
+function toggleSa7(n){
+  const d=document.getElementById('sa7-'+n);
+  const btn=document.querySelector('#sc7-'+n+' .btn-outline');
+  const showing=d.classList.contains('show');
+  d.classList.toggle('show');
+  if(btn){btn.textContent=showing?'▶ Sample answer':'▼ Hide sample';}
+}
+
+// Matching (L3 style)
+const matchAnswers={1:'C',2:'E',3:'D',4:'A',5:'B'};
+const matchKeys=['A','B','C','D','E'];
+const matchTotal=5;
+let matchCurrent=null,userMatches={};
+function selectLeft(n){if(matchCurrent!==null)document.getElementById('ml'+matchCurrent).classList.remove('selected');if(matchCurrent===n){matchCurrent=null;return;}matchCurrent=n;document.getElementById('ml'+n).classList.add('selected');}
+function selectRight(letter){if(matchCurrent===null)return;const prevLetter=userMatches[matchCurrent];if(prevLetter){document.getElementById('mr'+prevLetter).classList.remove('paired');document.getElementById('mb'+prevLetter).textContent='';}for(let k in userMatches){if(userMatches[k]===letter){document.getElementById('ml'+k).classList.remove('paired');document.getElementById('mb'+k).textContent='';delete userMatches[k];}}userMatches[matchCurrent]=letter;['correct','incorrect'].forEach(c=>{document.getElementById('ml'+matchCurrent).classList.remove(c);document.getElementById('mr'+letter).classList.remove(c);});document.getElementById('ml'+matchCurrent).classList.remove('selected');document.getElementById('ml'+matchCurrent).classList.add('paired');document.getElementById('mb'+matchCurrent).textContent='→ '+letter;document.getElementById('mr'+letter).classList.add('paired');document.getElementById('mb'+letter).textContent='← '+matchCurrent;matchCurrent=null;}
+function checkMatchAnswers(){let correct=0;for(let n=1;n<=matchTotal;n++){const el=document.getElementById('ml'+n);el.classList.remove('correct','incorrect','selected','paired');const ans=userMatches[n];const rightEl=ans?document.getElementById('mr'+ans):null;if(rightEl)rightEl.classList.remove('correct','incorrect','paired');if(ans===matchAnswers[n]){el.classList.add('correct');rightEl.classList.add('correct');correct++;}else if(ans){el.classList.add('incorrect');rightEl.classList.add('incorrect');}}const score=document.getElementById('match-score');score.style.display='inline';if(correct===matchTotal){score.textContent='✅ Perfect — 5/5!';score.style.color='var(--green)';}else{score.textContent=correct+'/5 correct — the red ones need fixing';score.style.color='var(--rose)';}document.getElementById('match-key-btn').style.display='inline-flex';}
+function showAnswerKey(){for(let n=1;n<=matchTotal;n++){const c=matchAnswers[n];document.getElementById('mb'+n).textContent='→ '+c;document.getElementById('mb'+n).style.color='var(--navy)';document.getElementById('ml'+n).classList.remove('correct','incorrect','paired','selected');document.getElementById('ml'+n).classList.add('correct');}matchKeys.forEach(l=>{document.getElementById('mr'+l).classList.remove('correct','incorrect','paired');document.getElementById('mr'+l).classList.add('correct');document.getElementById('mb'+l).textContent='';});document.getElementById('match-key-btn').style.display='none';}
+function resetMatches(){userMatches={};matchCurrent=null;for(let n=1;n<=matchTotal;n++){document.getElementById('ml'+n).className='match-left';document.getElementById('mb'+n).textContent='';document.getElementById('mb'+n).style.color='';}matchKeys.forEach(l=>{document.getElementById('mr'+l).className='match-right';document.getElementById('mb'+l).textContent='';});document.getElementById('match-score').style.display='none';document.getElementById('match-key-btn').style.display='none';}
+
+// HW Task 1
+function fillQtag(btn,answer,inputId){const inp=document.getElementById(inputId);if(!inp)return;inp.value=answer;inp.classList.add('filled');}
+
+function toggleSa(btn,id){
+  const d=document.getElementById(id);
+  const showing=d.style.display==='block';
+  d.style.display=showing?'none':'block';
+  btn.textContent=showing?'▶ Show sample answer':'▼ Hide sample answer';
+  btn.style.color=showing?'':'var(--green)';
+  btn.style.borderColor=showing?'':'var(--green)';
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')slideNav(1);if(e.key==='ArrowLeft')slideNav(-1);});
+updateSlideUI();
+</script>
+</body>
+</html>

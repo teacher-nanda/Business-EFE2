@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 6 – Informal Communication</title>
+<style>
+
+
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --purple:#7c3aed;--lp:#ede9fe;--indigo:#4338ca;--li:#e0e7ff;
+  --green:#16a34a;--lg:#dcfce7;
+  --orange:#ea580c;--lo:#ffedd5;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;--textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+.course-nav{background:var(--navy);color:white;}
+.nav-toggle{display:flex;align-items:center;gap:10px;padding:12px 32px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.5px;user-select:none;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-toggle .arrow{font-size:10px;transition:transform .25s;margin-left:auto;}
+.nav-toggle.open .arrow{transform:rotate(90deg);}
+.nav-body{display:none;padding:20px 32px 24px;}
+.nav-body.show{display:block;}
+.nav-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.nav-mod-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.nav-lesson{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12.5px;color:rgba(255,255,255,0.6);}
+.nav-lesson a{color:inherit;text-decoration:none;}
+.nav-lesson a:hover{color:var(--amber);}
+.nav-lesson.current{color:var(--amber);font-weight:700;}
+.nl{background:rgba(255,255,255,0.12);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700;}
+.nav-lesson.current .nl{background:var(--amber);color:var(--navy);}
+.page-header{background:var(--navy);color:white;padding:28px 48px 22px;position:relative;overflow:hidden;}
+
+.page-header::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d5986,#2563eb,#7c3aed,#0d9488);}
+.header-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px;}
+.header-title{font-size:26px;font-weight:700;letter-spacing:-.5px;}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.55);margin-top:3px;}
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;margin:24px 0 28px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;}.s2{background:#4338ca;flex:2;}.s3{background:#2563eb;flex:2;}.s4{background:#7c3aed;flex:2;}.s5{background:#d97706;flex:2;}
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+.c-teal .card-head{background:var(--lt);}.c-teal .card-icon{background:var(--teal);color:white;}.c-teal .card-title{color:var(--teal);}.c-teal .card-badge{background:var(--teal);}
+.c-blue .card-head{background:var(--lb);}.c-blue .card-icon{background:var(--blue);color:white;}.c-blue .card-title{color:var(--blue);}.c-blue .card-badge{background:var(--blue);}
+.c-indigo .card-head{background:var(--li);}.c-indigo .card-icon{background:var(--indigo);color:white;}.c-indigo .card-title{color:var(--indigo);}.c-indigo .card-badge{background:var(--indigo);}
+.c-purple .card-head{background:var(--lp);}.c-purple .card-icon{background:var(--purple);color:white;}.c-purple .card-title{color:var(--purple);}.c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);}.c-amber .card-icon{background:var(--amber);color:white;}.c-amber .card-title{color:var(--amber);}.c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);}.c-green .card-icon{background:var(--green);color:white;}.c-green .card-title{color:var(--green);}.c-green .card-badge{background:var(--green);}
+.c-navy .card-head{background:var(--lgr);}.c-navy .card-icon{background:var(--navy);color:white;}.c-navy .card-title{color:var(--navy);}.c-navy .card-badge{background:var(--navy);}
+.c-orange .card-head{background:var(--lo);}.c-orange .card-icon{background:var(--orange);color:white;}.c-orange .card-title{color:var(--orange);}.c-orange .card-badge{background:var(--orange);}
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:700;color:white;border-radius:8px;padding:2px 8px;text-transform:none;letter-spacing:0;}
+.type-reading{background:var(--teal);}
+.type-grammar{background:var(--purple);}
+.type-vocab{background:var(--blue);}
+.type-writing{background:var(--orange);}
+.type-speaking{background:var(--green);}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* WARM-UP */
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.hye-intro{font-size:14px;color:var(--textl);margin-bottom:18px;}
+.hye-list{display:flex;flex-direction:column;gap:10px;margin-bottom:22px;}
+.hye-item{display:flex;align-items:center;justify-content:space-between;gap:14px;border:1.5px solid var(--border);border-radius:11px;padding:13px 16px;background:white;transition:border-color .2s;}
+.hye-item.picked{border-color:var(--teal);background:var(--lt);}
+.hye-q{font-size:14px;color:var(--navy);line-height:1.45;flex:1;}
+.hye-btn{flex-shrink:0;padding:7px 16px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--gray);transition:all .15s;}
+.hye-btn:hover{border-color:var(--teal);color:var(--teal);}
+.hye-btn.yes{background:var(--teal);border-color:var(--teal);color:white;}
+.wu-disc{background:var(--lt);border:1px solid #5eead4;border-radius:12px;padding:18px;margin-top:20px;}
+.wu-disc-q{font-size:15px;color:#134e4a;font-weight:600;}
+
+/* EMAIL / READING */
+.email-mockup{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;font-size:14px;}
+.email-toolbar{background:var(--navy);padding:10px 16px;display:flex;align-items:center;gap:8px;}
+.email-dot{width:10px;height:10px;border-radius:50%;}
+.email-dot.r{background:#ef4444;}.email-dot.y{background:#f59e0b;}.email-dot.g{background:#22c55e;}
+.email-toolbar-label{font-size:12px;color:rgba(255,255,255,0.5);margin-left:auto;}
+.email-header{padding:14px 18px;border-bottom:1px solid var(--border);background:#fafafa;}
+.email-meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px;}
+.email-meta-label{color:var(--gray);font-weight:700;text-align:right;}
+.email-meta-val{color:var(--navy);}
+.email-subject{font-size:15px;font-weight:700;color:var(--navy);margin-top:10px;}
+.email-body{padding:18px;line-height:1.8;color:var(--text);}
+.email-body p{margin-bottom:12px;}
+.email-body p:last-child{margin-bottom:0;}
+
+/* T/F */
+.tf-item{border:1px solid var(--border);border-radius:10px;padding:13px 16px;margin-bottom:10px;}
+.tf-stmt{font-size:14.5px;color:var(--navy);margin-bottom:10px;}
+.tf-btns{display:flex;gap:8px;}
+.tf-btn{padding:6px 20px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.tf-btn:hover:not(.locked){border-color:var(--navy);background:var(--navy);color:white;}
+.tf-btn.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.tf-btn.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.tf-btn.locked{cursor:default;}
+.tf-explain{display:none;margin-top:7px;padding:7px 10px;background:#f0fdf4;border-radius:7px;font-size:11.5px;color:#14532d;border:1px solid #86efac;}
+.tf-explain.show{display:block;}
+
+/* MC */
+.mc-item{margin-bottom:18px;}
+.mc-q{font-size:14.5px;font-weight:600;margin-bottom:9px;color:var(--navy);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:13.5px;transition:all .15s;user-select:none;}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--lb);transform:translateX(3px);}
+.mc-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.mc-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.mc-opt.locked{cursor:default;}
+.mc-letter{background:var(--lgr);border:1px solid var(--border);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--navy);}
+.mc-opt.correct .mc-letter{background:var(--green);border-color:var(--green);color:white;}
+.mc-opt.wrong .mc-letter{background:var(--rose);border-color:var(--rose);color:white;}
+
+/* READING SPLIT */
+.reading-split{display:grid;grid-template-columns:60fr 40fr;gap:22px;align-items:start;}
+.reading-email-col{position:sticky;top:16px;}
+.reading-email-col .email-body p{font-size:12.5px;line-height:1.55;}
+.reading-email-col .email-subject{font-size:13px;}
+.reading-email-col .email-meta-val{font-size:11.5px;}
+.reading-email-col .email-meta-label{font-size:11.5px;}
+.reading-email-col .email-mockup{margin-bottom:0;}
+.reading-ex-col .act-head{margin-top:0;}
+.ex-answered{transition:opacity .5s ease, max-height .6s ease, margin-bottom .6s ease, padding .6s ease;overflow:hidden;}
+.ex-answered.ex-gone{}
+.reading-ex-col .tf-stmt{font-size:13px;}
+.reading-ex-col .tf-explain{font-size:11px;}
+.reading-ex-col .tf-btn{font-size:12px;padding:4px 12px;}
+
+/* PER-QUESTION SPLIT (Ex 2) */
+.mc-reading-wrap{display:grid;grid-template-columns:55fr 45fr;gap:16px;align-items:stretch;margin-bottom:14px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.mc-email-mini{background:#fafafa;border-right:1px solid var(--border);padding:14px 14px;overflow-y:auto;}
+.mc-email-mini .mini-subject{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.mc-email-mini .mini-from{font-size:10.5px;color:var(--gray);margin-bottom:10px;}
+.mc-email-mini p{font-size:11.5px;line-height:1.6;margin-bottom:8px;color:var(--text);}
+.mc-email-mini p:last-child{margin-bottom:0;}
+.mc-q-col{padding:16px 14px;}
+.mc-q-col .mc-q{font-size:13.5px;}
+.mc-q-col .mc-opt{font-size:13px;padding:8px 12px;}
+.mc-q-col .mc-letter{font-size:12px;min-width:20px;height:20px;}
+
+/* VOCAB CARDS */
+.vocab-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-term{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.bvc-pos{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.bvc-def{font-size:12.5px;color:var(--gray);margin-bottom:7px;line-height:1.4;}
+.bvc-eg{font-size:13px;color:var(--text);font-style:italic;border-left:3px solid var(--lb);padding-left:9px;line-height:1.4;}
+.bvc-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-top:6px;background:var(--lg);color:#15803d;}
+.bvc-tag.insep{background:var(--lp);color:#5b21b6;}
+
+/* WORD BANK */
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;background:var(--lb);border-radius:8px;padding:11px 13px;margin-bottom:14px;}
+.wb-word{background:white;border:1.5px solid var(--blue);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--blue);color:white;}
+.wb-word.selected-wb{background:var(--blue);color:white;outline:3px solid var(--amber);}
+.wb-word.used{background:var(--lgr);border-color:var(--border);color:var(--gray);cursor:default;text-decoration:line-through;}
+.gf-list{list-style:none;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.gf-item{padding:11px 14px;border-bottom:1px solid var(--border);font-size:14.5px;display:flex;align-items:flex-start;gap:10px;}
+.gf-item:last-child{border-bottom:none;}
+.gf-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.blank-drop{display:inline-flex;align-items:center;justify-content:center;border:2px dashed #94a3b8;border-radius:20px;min-width:110px;min-height:34px;padding:8px 14px;cursor:pointer;color:transparent;font-style:italic;font-size:13px;font-weight:600;vertical-align:middle;transition:all .2s;background:#f8fafc;margin:0 3px;}
+.blank-drop:hover{border-color:var(--blue);background:var(--lb);}
+.blank-drop.has-word{color:var(--navy);border-style:solid;border-color:var(--amber);background:var(--la);}
+.blank-drop.correct{color:var(--green);border-style:solid;border-color:var(--green);background:var(--lg);}
+.blank-drop.incorrect{color:var(--rose);border-style:solid;border-color:var(--rose);background:var(--lr);}
+
+/* GRAMMAR REFERENCE PANEL */
+.gram-panel{border:1px solid var(--lp);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.gram-panel-head{background:var(--purple);color:white;padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;}
+.gram-panel-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.gram-col{padding:14px 16px;}
+.gram-col:first-child{border-right:1px solid var(--lp);}
+.gram-col-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+.gram-rule{font-size:13px;color:var(--text);margin-bottom:10px;line-height:1.5;}
+.gram-eg{font-size:13px;color:var(--navy);background:var(--lp);border-radius:7px;padding:7px 11px;margin-bottom:7px;line-height:1.5;}
+.gram-eg em{font-style:normal;font-weight:700;color:var(--purple);}
+.gram-note{font-size:11.5px;color:var(--gray);font-style:italic;margin-top:8px;}
+.gram-warn{background:var(--lr);border-radius:7px;padding:7px 11px;font-size:12.5px;color:#9f1239;margin-top:8px;}
+.gram-warn em{font-style:normal;font-weight:700;}
+
+/* A/B PICKER (Ex 4) */
+.fpick-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:white;}
+.fpick-q{font-size:14px;color:var(--navy);margin-bottom:12px;line-height:1.6;}
+.fpick-opts{display:flex;flex-direction:column;gap:8px;}
+.fpick-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:13.5px;line-height:1.55;}
+.fpick-opt:hover:not(.fp-locked){border-color:var(--blue);background:var(--lb);}
+.fpick-letter{background:var(--lgr);color:var(--navy);min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.fpick-opt.fp-correct{border-color:var(--green);background:var(--lg);}.fpick-opt.fp-correct .fpick-letter{background:var(--green);color:white;}
+.fpick-opt.fp-wrong{border-color:var(--rose);background:var(--lr);}.fpick-opt.fp-wrong .fpick-letter{background:var(--rose);color:white;}
+.fpick-opt.fp-locked{cursor:default;opacity:0.6;}
+.fpick-hint{font-size:12px;color:var(--gray);margin-top:8px;font-style:italic;display:none;}
+.fpick-hint.show{display:block;}
+
+/* SPOT-CHIP (Ex 5) */
+.spot-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:white;}
+.spot-sentence{font-size:14px;line-height:2.2;margin-bottom:8px;color:var(--navy);}
+.spot-chip{background:var(--lp);border:1.5px solid var(--purple);border-radius:16px;padding:2px 11px;cursor:pointer;font-weight:600;color:var(--purple);transition:all .2s;display:inline-block;margin:0 2px;font-size:13px;}
+.spot-chip:hover:not(.sp-locked){background:var(--purple);color:white;}
+.spot-chip.sp-flash{background:var(--rose)!important;border-color:var(--rose)!important;color:white!important;}
+.spot-chip.sp-correct{background:var(--green)!important;border-color:var(--green)!important;color:white!important;cursor:default;}
+.spot-chip.sp-locked{cursor:default;opacity:0.55;pointer-events:none;}
+.spot-fix{display:none;font-size:13px;margin-top:10px;padding:9px 13px;background:var(--lg);border-radius:7px;color:#166534;line-height:1.6;}
+.spot-fix.show{display:block;}
+
+/* SPEAKING SCENES */
+.scene-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.scene-dots{display:flex;gap:5px;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .2s;}
+.scene-dot.active{background:var(--amber);}
+.scene-dot.done{background:var(--green);}
+.scene-card{display:none;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeIn .3s;}
+.scene-card.active{display:block;}
+.scene-top{background:var(--navy);color:white;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:13px;}
+.scene-situation{padding:15px 18px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;line-height:1.6;}
+.scene-task{padding:14px 18px;font-size:14px;line-height:1.6;color:var(--navy);}
+.scene-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;}
+.scene-answer{display:none;margin:0 18px 14px;padding:12px 14px;background:var(--lg);border-radius:8px;font-size:13.5px;color:#14532d;line-height:1.6;border:1px solid #86efac;}
+.scene-answer.show{display:block;animation:fadeIn .3s;}
+.scene-done{display:none;text-align:center;padding:28px 18px;}
+
+/* HW */
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lo);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--orange);}
+.hw-tag{background:var(--orange);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hw-grammar{background:var(--lp);color:#5b21b6;}
+.hw-write{background:var(--lt);color:#134e4a;}
+
+/* ERR EMAIL (HW Task 1) */
+.err-email{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin:14px 0;}
+.err-email-head{background:var(--la);border-bottom:1px solid #fcd34d;padding:11px 16px;font-size:12px;font-weight:700;color:#78350f;}
+.err-email-body{padding:16px;line-height:1.9;font-size:14px;color:var(--navy);}
+.err-fix-row{display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--border);}
+.err-fix-row:last-child{border-bottom:none;}
+.err-fix-label{font-size:13px;color:var(--gray);flex:0 0 auto;min-width:18px;padding:9px 0 9px 14px;}
+.err-fix-input{border:1.5px solid var(--border);border-radius:8px;padding:6px 11px;font-size:13.5px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .15s;flex:1;margin:6px 14px 6px 0;}
+.err-fix-input:focus{border-color:var(--purple);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:white;}.btn-navy:hover{background:#243e60;}
+.btn-green{background:var(--green);color:white;}.btn-green:hover{background:#15803d;}
+.btn-purple{background:var(--purple);color:white;}.btn-purple:hover{background:#6d28d9;}
+.btn-amber{background:var(--amber);color:white;}.btn-amber:hover{background:#b45309;}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+
+/* PREV BOX */
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▸";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;display:flex;align-items:flex-start;gap:8px;}
+.prev-tag{flex-shrink:0;font-size:9.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:2px 7px;border-radius:6px;margin-top:2px;}
+.prev-tag-vocab{background:var(--lv);color:var(--purple);}
+.prev-tag-reading{background:var(--li);color:#1e40af;}
+.prev-tag-speaking{background:var(--la);color:#92400e;}
+
+/* TRANSFORM REVEAL */
+.transform-reveal-btn{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s;font-family:inherit;margin-top:9px;}
+.transform-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+.transform-answer{display:none;margin-top:9px;padding:10px 14px;background:var(--lg);border:1px solid #86efac;border-radius:7px;}
+.transform-answer.show{display:block;}
+
+/* NAV */
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:18px;}
+.lesson-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:28px 18px 10px;}
+.lesson-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;}
+.nav-home{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-home:hover{background:var(--border);}
+.nav-prev{background:white;color:var(--navy);border:1.5px solid var(--border);}
+.nav-prev:hover{border-color:var(--navy);}
+.nav-next{background:var(--navy);color:white;border:1.5px solid var(--navy);}
+.nav-next:hover{background:#243d5c;}
+
+/* TFD WARM-UP — True / False / It Depends */
+.tfd-item{border:1.5px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:12px;}
+.tfd-q{padding:14px 18px;background:#f8fafc;font-size:14.5px;color:var(--navy);font-weight:600;line-height:1.5;border-bottom:1px solid var(--border);}
+.tfd-opts{display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;}
+.tfd-btn{padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:white;transition:all .15s;}
+.tfd-btn:hover:not(.tfd-picked){background:var(--lgr);}
+.tfd-btn.tfd-true{background:var(--lg);border-color:var(--green);color:#14532d;}
+.tfd-btn.tfd-false{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.tfd-btn.tfd-depends{background:var(--la);border-color:var(--amber);color:#78350f;}
+.tfd-btn.tfd-picked.tfd-true,.tfd-btn.tfd-picked.tfd-false,.tfd-btn.tfd-picked.tfd-depends{opacity:1;}
+.tfd-exp{display:none;padding:11px 18px;font-size:13.5px;color:var(--text);background:white;border-top:1px solid var(--border);line-height:1.55;}
+.tfd-exp.show{display:block;animation:fadeIn .25s;}
+.tfd-exp em{color:var(--teal);font-style:normal;font-weight:600;}
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+  .slide-home-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;background:var(--lgr);border:1.5px solid var(--border);font-size:18px;text-decoration:none;transition:background .15s;}
+  .slide-home-btn:hover{background:var(--border);}
+
+  /* ══ SLIDE NAVBAR ══ */
+  .slide-navbar {
+    background: white; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+  }
+  .slide-nav-btn {
+    background: var(--navy); color: white; border: none; border-radius: 8px;
+    padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: background .15s; white-space: nowrap;
+  }
+  .slide-nav-btn:hover:not(:disabled) { background: #263d5c; }
+  .slide-nav-btn:disabled { opacity: .3; cursor: default; }
+  .slide-info { text-align: center; flex: 1; }
+  .slide-label { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .slide-counter-text { font-size: 12px; color: var(--gray); margin: 2px 0 6px; }
+  .slide-progress { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .15s; }
+  .sp-dot.active { background: var(--navy); transform: scale(1.3); }
+  .sp-dot.done { background: var(--teal); }
+  /* ══ BOTTOM NAV BAR ══ */
+  .slide-bottom-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px; margin-top: 30px;
+    border-top: 2px solid var(--border); background: #f8fafc;
+  }
+
+  /* ══ TOP HOME STRIP ══ */
+  .top-home-strip {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+    background: var(--navy); height: 42px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .top-home-link {
+    color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+    font-family: inherit; display: flex; align-items: center; gap: 6px;
+    opacity: .85; transition: opacity .15s;
+  }
+  .top-home-link:hover { opacity: 1; }
+  body { padding-top: 42px; }
+
+  .match-left,.match-right{display:flex;align-items:flex-start;gap:8px;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13px;background:white;cursor:pointer;transition:all .15s;user-select:none;}
+  .match-left:hover{border-color:var(--amber);background:var(--la);}
+  .match-right{background:var(--lgr);}
+  .match-right:hover{border-color:var(--amber);background:var(--la);}
+  .match-left.selected{border-color:var(--amber);background:var(--la);box-shadow:0 0 0 2px var(--amber);}
+  .match-left.paired,.match-right.paired{border-color:var(--amber);background:#fff7ed;}
+  .match-left.correct,.match-right.correct{border-color:var(--green);background:var(--lg);}
+  .match-left.incorrect,.match-right.incorrect{border-color:var(--rose);background:var(--lr);}
+  .match-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--navy);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .match-letter{background:var(--teal);}
+  .match-text{flex:1;color:var(--navy);line-height:1.4;}
+  .match-badge{font-size:11px;font-weight:700;color:var(--amber);white-space:nowrap;flex-shrink:0;}
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<!-- ══ SLIDE NAVBAR ══ -->
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 9</div>
+    <div class="slide-progress"><div class="sp-dot  active" onclick="goToSlide(0)" title="Slide 1"></div><div class="sp-dot" onclick="goToSlide(1)" title="Slide 2"></div><div class="sp-dot" onclick="goToSlide(2)" title="Slide 3"></div><div class="sp-dot" onclick="goToSlide(3)" title="Slide 4"></div><div class="sp-dot" onclick="goToSlide(4)" title="Slide 5"></div><div class="sp-dot" onclick="goToSlide(5)" title="Slide 6"></div><div class="sp-dot" onclick="goToSlide(6)" title="Slide 7"></div><div class="sp-dot" onclick="goToSlide(7)" title="Slide 8"></div><div class="sp-dot" onclick="goToSlide(8)" title="Slide 9"></div></div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English with teacher Nanda</div>
+      <div class="cover-module-tag">Module 2 · Communication — Lesson 2 of 3</div>
+      <div class="cover-title-main">Informal Communication &amp; Office Talk</div>
+      <div class="cover-lesson-badge">Lesson 6</div>
+      <div class="cover-tl">
+        <div class="tl-bar">
+    <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+    <div class="tl-seg s2">Reading<span class="t">10 min</span></div>
+    <div class="tl-seg s3">Vocabulary<span class="t">8 min</span></div>
+    <div class="tl-seg s4">Grammar<span class="t">10 min</span></div>
+    <div class="tl-seg s5">Speaking<span class="t">10 min</span></div>
+  </div>
+
+  <!-- ══ PART 1: WARM-UP ══ -->
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+    <div class="card-head">
+      <div class="card-icon">💬</div>
+      <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">True, False, or It Depends?</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;">Read each statement about informal communication at work. Choose your answer — then discuss with your teacher or classmates.</p>
+
+      <div class="tfd-item">
+        <div class="tfd-q">1. &nbsp;"Using emojis in a work message always looks unprofessional." 😬</div>
+        <div class="tfd-opts">
+          <button class="tfd-btn" onclick="tfdPick(this,'true','tfd1')">✅ True</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'false','tfd1')">❌ False</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'depends','tfd1')">🤔 It depends</button>
+        </div>
+        <div class="tfd-exp" id="tfd1"><em>It depends.</em> With a close colleague over chat? Totally fine. In a formal email to a client? Probably not. The key is knowing your audience and reading the relationship.</div>
+      </div>
+
+      <div class="tfd-item">
+        <div class="tfd-q">2. &nbsp;"If a colleague writes to you informally, you should always reply in the same style."</div>
+        <div class="tfd-opts">
+          <button class="tfd-btn" onclick="tfdPick(this,'true','tfd2')">✅ True</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'false','tfd2')">❌ False</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'depends','tfd2')">🤔 It depends</button>
+        </div>
+        <div class="tfd-exp" id="tfd2"><em>It depends.</em> Mirroring someone's tone is usually a good idea — but if a senior colleague writes to you casually, it doesn't mean you should respond like you're texting a friend. Context always matters.</div>
+      </div>
+
+      <div class="tfd-item">
+        <div class="tfd-q">3. &nbsp;"A message that's too formal to a close colleague can feel cold — or even rude."</div>
+        <div class="tfd-opts">
+          <button class="tfd-btn" onclick="tfdPick(this,'true','tfd3')">✅ True</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'false','tfd3')">❌ False</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'depends','tfd3')">🤔 It depends</button>
+        </div>
+        <div class="tfd-exp" id="tfd3"><em>Often true.</em> Over-formality between close colleagues can create distance or even suggest you're unhappy with them. Tone communicates a lot — not just the words.</div>
+      </div>
+
+      <div class="tfd-item">
+        <div class="tfd-q">4. &nbsp;"Most communication mistakes at work happen in informal messages, not formal ones."</div>
+        <div class="tfd-opts">
+          <button class="tfd-btn" onclick="tfdPick(this,'true','tfd4')">✅ True</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'false','tfd4')">❌ False</button>
+          <button class="tfd-btn" onclick="tfdPick(this,'depends','tfd4')">🤔 It depends</button>
+        </div>
+        <div class="tfd-exp" id="tfd4"><em>Often true.</em> People are more careful when writing formally. Informal messages are written quickly — so misunderstandings, wrong tone, and missing context are much more common there.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 2: READING ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 2 ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-indigo">
+    <div class="card-head">
+      <div class="card-icon">📨</div>
+      <div><div class="card-label">Part 2 · Reading</div><div class="card-title">A Message Between Co-workers</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <!-- EX 1: T/F SPLIT -->
+      <div class="act-head">
+        <span class="act-num">1</span>
+        Read the message and answer True or False.
+        <span class="act-type type-reading">Reading</span>
+      </div>
+
+      <div class="reading-split">
+        <div class="reading-email-col">
+          <div class="email-mockup">
+            <div class="email-toolbar">
+              <div class="email-dot r"></div><div class="email-dot y"></div><div class="email-dot g"></div>
+              <span class="email-toolbar-label">Internal message</span>
+            </div>
+            <div class="email-header">
+              <div class="email-meta">
+                <span class="email-meta-label">From:</span><span class="email-meta-val">Marcus Chen</span>
+                <span class="email-meta-label">To:</span><span class="email-meta-val">Sophie Torres</span>
+              </div>
+              <div class="email-subject">Re: Workshop next week</div>
+            </div>
+            <div class="email-body">
+              <p>Hi Sophie,</p>
+              <p>Quick one — I just wanted to <strong>catch up</strong> about the workshop. Have you managed to <strong>sort out</strong> the room booking? I've been <strong>putting off</strong> writing the agenda because I wasn't sure about the venue.</p>
+              <p>I've also been trying to <strong>come up with</strong> a few ideas for the interactive session at the end. Could we <strong>set up</strong> a quick call tomorrow to go through everything before Friday?</p>
+              <p>One more thing — could you <strong>fill in</strong> for me at the Thursday briefing? I have a scheduling conflict. I'll <strong>hand over</strong> all the notes beforehand so you have everything you need.</p>
+              <p>Let me know!</p>
+              <p>Marcus</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reading-ex-col">
+          <div class="tf-item ex-answered" id="tf1">
+            <div class="tf-stmt">1. The workshop Marcus is writing about is happening next week.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this,true,'exp1')">True</button>
+              <button class="tf-btn" onclick="tfPick(this,false,'exp1')">False</button>
+            </div>
+            <div class="tf-explain" id="exp1">True — Marcus opens with "I just wanted to catch up about the workshop" and the subject line says "Workshop next week."</div>
+          </div>
+          <div class="tf-item ex-answered" id="tf2">
+            <div class="tf-stmt">2. Marcus knows which room the workshop will be held in.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this,false,'exp2')">True</button>
+              <button class="tf-btn" onclick="tfPick(this,true,'exp2')">False</button>
+            </div>
+            <div class="tf-explain" id="exp2">False — Marcus asks Sophie about the room booking, and says he was waiting because he "wasn't sure about the venue."</div>
+          </div>
+          <div class="tf-item ex-answered" id="tf3">
+            <div class="tf-stmt">3. Marcus wants to speak to Sophie before Friday.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this,true,'exp3')">True</button>
+              <button class="tf-btn" onclick="tfPick(this,false,'exp3')">False</button>
+            </div>
+            <div class="tf-explain" id="exp3">True — Marcus asks "Could we set up a quick call tomorrow to go through everything before Friday?"</div>
+          </div>
+          <div class="tf-item ex-answered" id="tf4">
+            <div class="tf-stmt">4. Marcus will attend the Thursday briefing himself.</div>
+            <div class="tf-btns">
+              <button class="tf-btn" onclick="tfPick(this,false,'exp4')">True</button>
+              <button class="tf-btn" onclick="tfPick(this,true,'exp4')">False</button>
+            </div>
+            <div class="tf-explain" id="exp4">False — Marcus has a scheduling conflict on Thursday and asks Sophie to cover it. He says he'll give her all the notes beforehand.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EX 2: MC PER-QUESTION SPLIT -->
+      <div class="act-head">
+        <span class="act-num">2</span>
+        Choose the best answer.
+        <span class="act-type type-reading">Reading</span>
+      </div>
+
+      <!-- Q1 -->
+      <div class="mc-reading-wrap ex-answered" id="mcw1">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Re: Workshop next week</div>
+          <div class="mini-from">From Marcus Chen to Sophie Torres</div>
+          <p>Have you managed to <strong>sort out</strong> the room booking? I've been putting off writing the agenda because I wasn't sure about the venue.</p>
+        </div>
+        <div class="mc-q-col">
+          <div class="mc-q">What does "sort out" mean in this message?</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,false,'mcw1')"><div class="mc-letter">A</div>To cancel or delete the booking</div>
+            <div class="mc-opt" onclick="mcPick(this,true,'mcw1')"><div class="mc-letter">B</div>To resolve, organize or deal with</div>
+            <div class="mc-opt" onclick="mcPick(this,false,'mcw1')"><div class="mc-letter">C</div>To check the booking confirmation number</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="mc-reading-wrap ex-answered" id="mcw2">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Re: Workshop next week</div>
+          <div class="mini-from">From Marcus Chen to Sophie Torres</div>
+          <p>I've been <strong>putting off</strong> writing the agenda because I wasn't sure about the venue.</p>
+        </div>
+        <div class="mc-q-col">
+          <div class="mc-q">"I've been putting off writing the agenda." This means Marcus…</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,false,'mcw2')"><div class="mc-letter">A</div>Has been working on the agenda slowly</div>
+            <div class="mc-opt" onclick="mcPick(this,false,'mcw2')"><div class="mc-letter">B</div>Decided not to write the agenda at all</div>
+            <div class="mc-opt" onclick="mcPick(this,true,'mcw2')"><div class="mc-letter">C</div>Has been delaying writing the agenda</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="mc-reading-wrap ex-answered" id="mcw3">
+        <div class="mc-email-mini">
+          <div class="mini-subject">Re: Workshop next week</div>
+          <div class="mini-from">From Marcus Chen to Sophie Torres</div>
+          <p>Could you <strong>fill in</strong> for me at the Thursday briefing? I have a scheduling conflict. I'll hand over all the notes beforehand.</p>
+        </div>
+        <div class="mc-q-col">
+          <div class="mc-q">What is Marcus asking Sophie to do on Thursday?</div>
+          <div class="mc-opts">
+            <div class="mc-opt" onclick="mcPick(this,true,'mcw3')"><div class="mc-letter">A</div>Attend a briefing in his place</div>
+            <div class="mc-opt" onclick="mcPick(this,false,'mcw3')"><div class="mc-letter">B</div>Send him the briefing notes afterwards</div>
+            <div class="mc-opt" onclick="mcPick(this,false,'mcw3')"><div class="mc-letter">C</div>Set up a replacement meeting</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 3: VOCABULARY ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 3 ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-blue">
+    <div class="card-head">
+      <div class="card-icon">📖</div>
+      <div><div class="card-label">Part 3 · Vocabulary</div><div class="card-title">Phrasal Verbs for the Workplace</div></div>
+      <span class="card-badge">8 min</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">Phrasal verbs are very common in informal spoken and written English. Study these eight — you'll need them for the exercises below.</p>
+
+      <div class="vocab-card-grid">
+        <div class="bvc">
+          <div class="bvc-term">catch up (with)</div>
+          <div class="bvc-def">To speak with someone about recent news or updates; to get back to the same level as others.</div>
+          <div class="bvc-eg">"Let's catch up over coffee — I haven't seen you in ages."</div>
+          <span class="bvc-tag">inseparable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">sort out</div>
+          <div class="bvc-def">To resolve, fix or organize something that is messy or unclear.</div>
+          <div class="bvc-eg">"Could you sort out the issue with the printer before the meeting?"</div>
+          <span class="bvc-tag insep" style="background:var(--lb);color:var(--blue);">separable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">put off</div>
+          <div class="bvc-def">To delay or postpone something to a later time.</div>
+          <div class="bvc-eg">"We had to put off the launch because of the technical issues."</div>
+          <span class="bvc-tag insep" style="background:var(--lb);color:var(--blue);">separable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">come up with</div>
+          <div class="bvc-def">To think of or produce an idea, plan or solution.</div>
+          <div class="bvc-eg">"The team came up with three proposals for the client."</div>
+          <span class="bvc-tag">inseparable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">follow up (on)</div>
+          <div class="bvc-def">To take further action on something, or check whether something has been done.</div>
+          <div class="bvc-eg">"I'll follow up on the email I sent last week."</div>
+          <span class="bvc-tag insep" style="background:var(--lb);color:var(--blue);">separable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">set up</div>
+          <div class="bvc-def">To arrange, organize or create something — often a meeting, call or system.</div>
+          <div class="bvc-eg">"Can you set up a call for Thursday afternoon?"</div>
+          <span class="bvc-tag insep" style="background:var(--lb);color:var(--blue);">separable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">fill in (for)</div>
+          <div class="bvc-def">To temporarily replace or cover for someone who is absent.</div>
+          <div class="bvc-eg">"Anna filled in for the manager during his holiday."</div>
+          <span class="bvc-tag insep" style="background:var(--lb);color:var(--blue);">separable</span>
+        </div>
+        <div class="bvc">
+          <div class="bvc-term">hand over</div>
+          <div class="bvc-def">To pass responsibility, ownership or control of something to someone else.</div>
+          <div class="bvc-eg">"She handed over the project files to the new coordinator."</div>
+          <span class="bvc-tag insep" style="background:var(--lb);color:var(--blue);">separable</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EX 3: WORD BANK GAP FILL -->
+      <div class="act-head">
+        <span class="act-num">3</span>
+        Fill in the gaps — use the correct phrasal verb.
+        <span class="act-type type-vocab">Vocabulary</span>
+      </div>
+
+      <p style="font-size:13px;color:var(--gray);margin-bottom:12px;font-style:italic;">Click a word from the bank, then click a blank to place it. Two words won't be used.</p>
+
+      <div class="word-bank" id="wbank">
+        <span class="wb-word" onclick="wbSelect(this,'come up with')">come up with</span>
+        <span class="wb-word" onclick="wbSelect(this,'fill in')">fill in</span>
+        <span class="wb-word" onclick="wbSelect(this,'set up')">set up</span>
+        <span class="wb-word" onclick="wbSelect(this,'follow up')">follow up</span>
+        <span class="wb-word" onclick="wbSelect(this,'put off')">put off</span>
+        <span class="wb-word" onclick="wbSelect(this,'hand over')">hand over</span>
+        <span class="wb-word" onclick="wbSelect(this,'sort out')">sort out</span>
+        <span class="wb-word" onclick="wbSelect(this,'catch up')">catch up</span>
+      </div>
+
+      <ul class="gf-list">
+        <li class="gf-item">
+          <span class="gf-num">1</span>
+          <span>We need to <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="sort out">_____</span> the budget issue before the board meeting on Friday.</span>
+        </li>
+        <li class="gf-item">
+          <span class="gf-num">2</span>
+          <span>Would you mind <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="fill in">_____</span> for me at the client call? I have a scheduling conflict.</span>
+        </li>
+        <li class="gf-item">
+          <span class="gf-num">3</span>
+          <span>I haven't spoken to Laura in months — let's <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="catch up">_____</span> this week over coffee.</span>
+        </li>
+        <li class="gf-item">
+          <span class="gf-num">4</span>
+          <span>The team has been trying to <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="come up with">_____</span> a new approach to the customer feedback problem.</span>
+        </li>
+        <li class="gf-item">
+          <span class="gf-num">5</span>
+          <span>Can you <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="set up">_____</span> a video call with the regional office for next Tuesday?</span>
+        </li>
+        <li class="gf-item">
+          <span class="gf-num">6</span>
+          <span>I'll <span class="blank-drop" onclick="dropOnBlank(this)" data-answer="follow up">_____</span> on the proposal and let you know what they say by end of day.</span>
+        </li>
+      </ul>
+
+      <div style="margin-top:14px;display:flex;gap:10px;">
+        <button class="btn btn-green btn-sm" onclick="checkGF()">✓ Check answers</button>
+        <button class="btn btn-outline btn-sm" onclick="resetGF()">↺ Reset</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 4: GRAMMAR ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 4 ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-purple">
+    <div class="card-head">
+      <div class="card-icon">⚙️</div>
+      <div><div class="card-label">Part 4 · Grammar</div><div class="card-title">Separable vs Inseparable Phrasal Verbs</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <!-- GRAMMAR REFERENCE PANEL -->
+      <div class="gram-panel">
+        <div class="gram-panel-head">📐 Key rule — where does the object go?</div>
+        <div class="gram-panel-body">
+          <div class="gram-col">
+            <div class="gram-col-title">Separable — noun object</div>
+            <div class="gram-rule">With a <strong>noun</strong>, the object can go <em>after</em> the particle OR <em>between</em> the verb and particle — both are correct.</div>
+            <div class="gram-eg">"Could you <em>sort out</em> the problem?" ✓</div>
+            <div class="gram-eg">"Could you <em>sort</em> the problem <em>out</em>?" ✓</div>
+            <div class="gram-warn"><em>With a pronoun, use the middle position only:</em><br>"Sort <em>it</em> out." ✓ &nbsp;|&nbsp; "Sort out <em>it</em>." ✗</div>
+          </div>
+          <div class="gram-col">
+            <div class="gram-col-title">Inseparable — always together</div>
+            <div class="gram-rule">The object <strong>always</strong> comes after the full phrasal verb. You cannot split it.</div>
+            <div class="gram-eg">"She <em>came up with</em> a great idea." ✓</div>
+            <div class="gram-eg">"Let's <em>catch up</em> with the team." ✓</div>
+            <div class="gram-warn"><em>Never split inseparable verbs:</em><br>"She came a great idea up with." ✗</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EX 4: A/B PICKER -->
+      <div class="act-head">
+        <span class="act-num">4</span>
+        Which sentence is correct? Choose A or B.
+        <span class="act-type type-grammar">Grammar</span>
+      </div>
+
+      <!-- Q1 — correct: B -->
+      <div class="fpick-item">
+        <div class="fpick-q">You want to tell your manager you've taken action on a report</div>
+        <div class="fpick-opts">
+          <div class="fpick-opt" onclick="grammarPick(this,false,'hint4a')">
+            <span class="fpick-letter">A</span>"I'll follow up it tomorrow morning."
+          </div>
+          <div class="fpick-opt" onclick="grammarPick(this,true,'hint4a')">
+            <span class="fpick-letter">B</span>"I'll follow it up tomorrow morning."
+          </div>
+        </div>
+        <div class="fpick-hint" id="hint4a">With pronouns and separable phrasal verbs, the pronoun always goes between the verb and the particle.</div>
+      </div>
+
+      <!-- Q2 — correct: A -->
+      <div class="fpick-item">
+        <div class="fpick-q">You want to say you organized the meeting</div>
+        <div class="fpick-opts">
+          <div class="fpick-opt" onclick="grammarPick(this,true,'hint4b')">
+            <span class="fpick-letter">A</span>"I've already set up the meeting for Thursday."
+          </div>
+          <div class="fpick-opt" onclick="grammarPick(this,false,'hint4b')">
+            <span class="fpick-letter">B</span>"I've already set up it for Thursday."
+          </div>
+        </div>
+        <div class="fpick-hint" id="hint4b">With a pronoun, the object must go between the verb and particle: "set it up". With a noun, both positions are correct.</div>
+      </div>
+
+      <!-- Q3 — correct: A -->
+      <div class="fpick-item">
+        <div class="fpick-q">You want to describe how your team thought of a new plan</div>
+        <div class="fpick-opts">
+          <div class="fpick-opt" onclick="grammarPick(this,true,'hint4c')">
+            <span class="fpick-letter">A</span>"The team finally came up with a solution."
+          </div>
+          <div class="fpick-opt" onclick="grammarPick(this,false,'hint4c')">
+            <span class="fpick-letter">B</span>"The team finally came with a solution up."
+          </div>
+        </div>
+        <div class="fpick-hint" id="hint4c">"Come up with" is inseparable — the object always goes after the complete phrasal verb. It can never be split.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- EX 5: SPOT-CHIP -->
+      <div class="act-head">
+        <span class="act-num">5</span>
+        Click the word that shouldn't be there.
+        <span class="act-type type-grammar">Grammar</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--textl);margin-bottom:14px;">Each sentence uses the wrong particle or verb. Find and click the incorrect word.</p>
+
+      <!-- S1: wrong particle [away] — should be "off" -->
+      <div class="spot-item">
+        <div class="spot-sentence">I've been <span class="spot-chip" onclick="spotPick(this,false,'fix5a')">putting</span> <span class="spot-chip" onclick="spotPick(this,true,'fix5a')">away</span> this decision for weeks — I really need to act.</div>
+        <div class="spot-fix" id="fix5a">✓ The correct particle is <strong>"off"</strong> → "putting <strong>off</strong>" means to delay or postpone.</div>
+      </div>
+
+      <!-- S2: wrong particle [down] — should be "off" for put, but here the verb is "put down" vs "put off" -->
+      <!-- Use: wrong verb [stand] — should be "set up" -->
+      <div class="spot-item">
+        <div class="spot-sentence">Could you <span class="spot-chip" onclick="spotPick(this,true,'fix5b')">stand</span> <span class="spot-chip" onclick="spotPick(this,false,'fix5b')">up</span> a meeting for Thursday afternoon?</div>
+        <div class="spot-fix" id="fix5b">✓ The correct verb is <strong>"set"</strong> → "set up" means to arrange or organize something.</div>
+      </div>
+
+      <!-- S3: wrong particle [out] — "come out with" vs "come up with" -->
+      <div class="spot-item">
+        <div class="spot-sentence">The team managed to come <span class="spot-chip" onclick="spotPick(this,true,'fix5c')">out</span> <span class="spot-chip" onclick="spotPick(this,false,'fix5c')">with</span> a great idea for the campaign.</div>
+        <div class="spot-fix" id="fix5c">✓ The correct particle is <strong>"up"</strong> → "come <strong>up</strong> with" means to think of or produce an idea.</div>
+      </div>
+
+      <!-- S4: wrong particle [out] — "fill out for" vs "fill in for" -->
+      <div class="spot-item">
+        <div class="spot-sentence">She volunteered to <span class="spot-chip" onclick="spotPick(this,false,'fix5d')">fill</span> <span class="spot-chip" onclick="spotPick(this,true,'fix5d')">out</span> <span class="spot-chip" onclick="spotPick(this,false,'fix5d')">for</span> the team leader during the conference.</div>
+        <div class="spot-fix" id="fix5d">✓ The correct particle is <strong>"in"</strong> → "fill <strong>in</strong> for" means to cover or replace someone temporarily.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 5: GUIDED SPEAKING ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 5 ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-amber">
+    <div class="card-head">
+      <div class="card-icon">🗣️</div>
+      <div><div class="card-label">Part 5 · Speaking</div><div class="card-title">Quick Catch-up — Office Situations</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <details class="prev-box">
+        <summary>📌 Useful phrases from previous lessons — keep using these!</summary>
+        <div class="prev-box-body">
+          <div class="prev-box-item"><span class="prev-tag prev-tag-vocab">Vocabulary</span><span><em>"As discussed, …"</em> — referencing something already agreed or mentioned</span></div>
+          <div class="prev-box-item"><span class="prev-tag prev-tag-vocab">Vocabulary</span><span><em>"She mentioned that…" / "He said that…"</em> — reporting what a colleague told you</span></div>
+          <div class="prev-box-item"><span class="prev-tag prev-tag-reading">Reading</span><span><em>"As per my last message, …"</em> — referring back to something said in a previous written communication</span></div>
+          <div class="prev-box-item"><span class="prev-tag prev-tag-speaking">Speaking</span><span><em>"I didn't quite catch that — could you say it again?"</em> — asking for repetition politely</span></div>
+          <div class="prev-box-item"><span class="prev-tag prev-tag-speaking">Speaking</span><span><em>"If I understand correctly, …"</em> — confirming what you heard before responding</span></div>
+        </div>
+      </details>
+
+
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">A colleague or manager speaks to you. Read the situation, then respond using the phrasal verbs from today's lesson. Think about your answer first, then check the sample.</p>
+
+      <div class="scene-nav">
+        <div id="scene-counter" style="font-size:13px;font-weight:700;color:var(--amber);">Situation 1 of 5</div>
+        <div class="scene-dots">
+          <div class="scene-dot active" id="dot1"></div>
+          <div class="scene-dot" id="dot2"></div>
+          <div class="scene-dot" id="dot3"></div>
+          <div class="scene-dot" id="dot4"></div>
+          <div class="scene-dot" id="dot5"></div>
+        </div>
+      </div>
+
+      <!-- Scene 1 -->
+      <div class="scene-card active" id="sc1">
+        <div class="scene-top">
+          <span style="background:var(--teal);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 1 — Confirming the call</span>
+        </div>
+        <div class="scene-situation">A colleague sends you a message: <em>"Hey! Are we still on for the team update call tomorrow? Just wanted to confirm."</em></div>
+        <div class="scene-task">
+          <strong>Your turn:</strong> Confirm the call and mention you'll send a calendar invite. Use at least one phrasal verb from today.
+        </div>
+        <div class="scene-answer" id="sa1">
+          💡 <strong>Sample:</strong> "Yes, we're still on! I'll follow it up with a calendar invite this afternoon so everyone has the details."
+        </div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa1',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(1)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Scene 2 -->
+      <div class="scene-card" id="sc2">
+        <div class="scene-top">
+          <span style="background:var(--blue);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 2 — Covering for a colleague</span>
+        </div>
+        <div class="scene-situation">Your manager says: <em>"Tom is out sick today. Could you fill in for him at the 2pm client call? It's quite important."</em></div>
+        <div class="scene-task">
+          <strong>Your turn:</strong> Agree to fill in and ask for the necessary materials. Use at least two phrasal verbs from today.
+        </div>
+        <div class="scene-answer" id="sa2">
+          💡 <strong>Sample:</strong> "Of course, happy to fill in. Could Tom hand over his notes before the call? I'll sort out any preparation I need from there."
+        </div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa2',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Scene 3 -->
+      <div class="scene-card" id="sc3">
+        <div class="scene-top">
+          <span style="background:var(--purple);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 3 — Brainstorming with the team</span>
+        </div>
+        <div class="scene-situation">A colleague says: <em>"We've been struggling to find a good theme for the annual team event. Any ideas?"</em></div>
+        <div class="scene-task">
+          <strong>Your turn:</strong> Offer a couple of ideas and suggest setting up a meeting to discuss them. Use at least two phrasal verbs.
+        </div>
+        <div class="scene-answer" id="sa3">
+          💡 <strong>Sample:</strong> "I've actually come up with a few ideas — how about a workshop or a team challenge? Let's set up a short call to go through them together."
+        </div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa3',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Scene 4 -->
+      <div class="scene-card" id="sc4">
+        <div class="scene-top">
+          <span style="background:var(--rose);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 4 — Explaining a delay</span>
+        </div>
+        <div class="scene-situation">Your manager asks: <em>"The product launch keeps getting pushed back. What's the situation right now?"</em></div>
+        <div class="scene-task">
+          <strong>Your turn:</strong> Explain why the launch was delayed and what the team is doing about it. Use at least two phrasal verbs.
+        </div>
+        <div class="scene-answer" id="sa4">
+          💡 <strong>Sample:</strong> "We had to put it off because of a technical issue with the platform. But the team has come up with a solution and we're sorting it out this week."
+        </div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa4',this)">👁 Sample answer</button>
+          <button class="btn btn-amber btn-sm" onclick="nextSC(4)">Next →</button>
+        </div>
+      </div>
+
+      <!-- Scene 5 -->
+      <div class="scene-card" id="sc5">
+        <div class="scene-top">
+          <span style="background:var(--green);color:white;border-radius:20px;padding:2px 12px;font-size:12px;font-weight:700;">Situation 5 — Chasing a response</span>
+        </div>
+        <div class="scene-situation">A colleague asks: <em>"Did you ever hear back from the supplier about the delivery date? We've been waiting for days."</em></div>
+        <div class="scene-task">
+          <strong>Your turn:</strong> Explain that you haven't heard back yet and say what you'll do next. Use at least two phrasal verbs.
+        </div>
+        <div class="scene-answer" id="sa5">
+          💡 <strong>Sample:</strong> "Not yet — I'll follow it up today and push for a confirmation. If they can't sort it out, we'll need to come up with a backup option."
+        </div>
+        <div class="scene-footer">
+          <button class="btn btn-outline btn-sm" onclick="toggleSA('sa5',this)">👁 Sample answer</button>
+          <button class="btn btn-green btn-sm" onclick="finishSC()">✓ Finish</button>
+        </div>
+      </div>
+
+      <!-- Done -->
+      <div class="scene-done" id="sc-done">
+        <div style="font-size:30px;margin-bottom:12px;">🎉</div>
+        <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px;">Speaking practice complete!</div>
+        <div style="font-size:14px;color:var(--textl);">Think about which phrasal verbs felt most natural. Which ones do you want to use more?</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ WRAP-UP ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 6 ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-navy">
+    <div class="card-head">
+      <div class="card-icon">✅</div>
+      <div><div class="card-label">Wrap-up</div><div class="card-title">Today's Key Language</div></div>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">Eight phrasal verbs to take with you from today's lesson:</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">catch up</span> <span style="font-size:12px;color:var(--gray);"> — talk about recent news with someone</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">sort out</span> <span style="font-size:12px;color:var(--gray);"> — resolve or deal with</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">put off</span> <span style="font-size:12px;color:var(--gray);"> — delay or postpone</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">come up with</span> <span style="font-size:12px;color:var(--gray);"> — think of an idea or solution</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">follow up</span> <span style="font-size:12px;color:var(--gray);"> — check on or take further action</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">set up</span> <span style="font-size:12px;color:var(--gray);"> — arrange or organize</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">fill in (for)</span> <span style="font-size:12px;color:var(--gray);"> — cover for someone temporarily</span>
+        </div>
+        <div style="padding:10px 14px;border:1px solid var(--border);border-radius:9px;background:#f8fafc;">
+          <span style="font-weight:700;color:var(--navy);">hand over</span> <span style="font-size:12px;color:var(--gray);"> — pass responsibility to someone else</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ EXTRA ACTIVITY ══ -->
+  
+      <div class="divider"></div>
+
+      <div class="act-head">
+        <span class="act-num" style="background:var(--green);">★</span>
+        Match each phrasal verb to its meaning.
+        <span class="act-type" style="background:var(--lg);color:#15803d;">Matching</span>
+      </div>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:4px;">Click a verb on the left, then click its definition on the right.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+        <!-- LEFT COLUMN (phrasal verbs) -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="match-left" id="ml1" onclick="selectLeft(1)">
+            <span class="match-num">1</span>
+            <span class="match-text">catch up</span>
+            <span class="match-badge" id="mb1"></span>
+          </div>
+          <div class="match-left" id="ml2" onclick="selectLeft(2)">
+            <span class="match-num">2</span>
+            <span class="match-text">sort out</span>
+            <span class="match-badge" id="mb2"></span>
+          </div>
+          <div class="match-left" id="ml3" onclick="selectLeft(3)">
+            <span class="match-num">3</span>
+            <span class="match-text">put off</span>
+            <span class="match-badge" id="mb3"></span>
+          </div>
+          <div class="match-left" id="ml4" onclick="selectLeft(4)">
+            <span class="match-num">4</span>
+            <span class="match-text">come up with</span>
+            <span class="match-badge" id="mb4"></span>
+          </div>
+          <div class="match-left" id="ml5" onclick="selectLeft(5)">
+            <span class="match-num">5</span>
+            <span class="match-text">hand over</span>
+            <span class="match-badge" id="mb5"></span>
+          </div>
+          <div class="match-left" id="ml6" onclick="selectLeft(6)">
+            <span class="match-num">6</span>
+            <span class="match-text">fill in for</span>
+            <span class="match-badge" id="mb6"></span>
+          </div>
+        </div>
+        <!-- RIGHT COLUMN (definitions, shuffled) -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="match-right" id="mrA" onclick="selectRight('A')">
+            <span class="match-num match-letter">A</span>
+            <span class="match-text">Temporarily replace someone in their role</span>
+            <span class="match-badge" id="mbA"></span>
+          </div>
+          <div class="match-right" id="mrB" onclick="selectRight('B')">
+            <span class="match-num match-letter">B</span>
+            <span class="match-text">Delay or postpone something</span>
+            <span class="match-badge" id="mbB"></span>
+          </div>
+          <div class="match-right" id="mrC" onclick="selectRight('C')">
+            <span class="match-num match-letter">C</span>
+            <span class="match-text">Think of or generate an idea</span>
+            <span class="match-badge" id="mbC"></span>
+          </div>
+          <div class="match-right" id="mrD" onclick="selectRight('D')">
+            <span class="match-num match-letter">D</span>
+            <span class="match-text">Pass on work or responsibilities to someone else</span>
+            <span class="match-badge" id="mbD"></span>
+          </div>
+          <div class="match-right" id="mrE" onclick="selectRight('E')">
+            <span class="match-num match-letter">E</span>
+            <span class="match-text">Reconnect and share recent updates</span>
+            <span class="match-badge" id="mbE"></span>
+          </div>
+          <div class="match-right" id="mrF" onclick="selectRight('F')">
+            <span class="match-num match-letter">F</span>
+            <span class="match-text">Organize or resolve a problem</span>
+            <span class="match-badge" id="mbF"></span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" onclick="checkMatchAnswers()">✓ Check</button>
+        <button class="btn btn-purple btn-sm" onclick="showAnswerKey()" id="match-key-btn" style="display:none;">📋 Answer key</button>
+        <button class="btn btn-outline btn-sm" onclick="resetMatches()">↺ Reset</button>
+        <span id="match-score" style="display:none;font-size:13px;font-weight:700;"></span>
+      </div>
+
+    </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 7 ══ -->
+<div class="slide" id="slide-7">
+  <div class="main">
+    <div class="card c-green">
+    <div class="card-head">
+      <div class="card-icon">🌟</div>
+      <div><div class="card-label">Extra Activity</div><div class="card-title">From Formal to Informal</div></div>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--textl);margin-bottom:16px;">These sentences are very formal. Rewrite each one using a phrasal verb from today's lesson. Compare with your teacher.</p>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+          <div style="padding:12px 16px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--navy);font-style:italic;">"I would like to speak with you briefly to exchange recent updates on the project."</div>
+          <div style="padding:12px 16px;">
+            <div style="font-size:12px;color:var(--gray);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Your informal version (use: <em>catch up</em>)</div>
+            <input type="text" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13.5px;font-family:inherit;color:var(--navy);outline:none;" placeholder="e.g. Let's catch up about the project…" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+          <div style="padding:0 16px 12px;">
+            <button class="transform-reveal-btn" onclick="showTransform(this)">▶ Show sample</button>
+            <div class="transform-answer"><strong>Sample:</strong> "Can we catch up about the project at some point this week?"</div>
+          </div>
+        </div>
+
+        <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+          <div style="padding:12px 16px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--navy);font-style:italic;">"Please transfer all project documentation and responsibilities to the incoming coordinator."</div>
+          <div style="padding:12px 16px;">
+            <div style="font-size:12px;color:var(--gray);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Your informal version (use: <em>hand over</em>)</div>
+            <input type="text" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13.5px;font-family:inherit;color:var(--navy);outline:none;" placeholder="e.g. Could you hand over…" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+          <div style="padding:0 16px 12px;">
+            <button class="transform-reveal-btn" onclick="showTransform(this)">▶ Show sample</button>
+            <div class="transform-answer"><strong>Sample:</strong> "Could you hand over the files and responsibilities to the new coordinator?"</div>
+          </div>
+        </div>
+
+        <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+          <div style="padding:12px 16px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--navy);font-style:italic;">"I will take further action regarding your enquiry following our next scheduled team meeting."</div>
+          <div style="padding:12px 16px;">
+            <div style="font-size:12px;color:var(--gray);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;">Your informal version (use: <em>follow up</em>)</div>
+            <input type="text" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13.5px;font-family:inherit;color:var(--navy);outline:none;" placeholder="e.g. I'll follow it up after…" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'">
+          </div>
+          <div style="padding:0 16px 12px;">
+            <button class="transform-reveal-btn" onclick="showTransform(this)">▶ Show sample</button>
+            <div class="transform-answer"><strong>Sample:</strong> "I'll follow it up after our team meeting and let you know."</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ HOMEWORK ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 8 ══ -->
+<div class="slide" id="slide-8">
+  <div class="main">
+    <div class="card c-orange">
+    <div class="card-head">
+      <div class="card-icon">📝</div>
+      <div><div class="card-label">For next time</div><div class="card-title">Homework</div></div>
+      <span class="card-badge">2 tasks</span>
+    </div>
+    <div class="card-body">
+
+      <!-- TASK 1 -->
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task 1</span> Find the Phrasal Verbs</div>
+        <div class="hw-body">
+          <span class="hw-type hw-grammar">🔍 Vocabulary · phrasal verbs</span>
+          <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">This internal message contains 5 phrasal verbs from today's lesson. Read it carefully, find them all, and write what each one means.</p>
+
+          <div class="err-email">
+            <div class="err-email-head">📨 Internal message — find the 5 phrasal verbs</div>
+            <div class="err-email-body">
+              Hi team,<br><br>
+              Quick update from this morning's call: we've managed to sort out the issue with the supplier — it took a while to come up with a solution, but we got there! I'll set up a meeting for Thursday to go through the details with everyone.<br><br>
+              I've been putting off the quarterly report for too long, but I'll finally get it done this week. If anyone needs to catch up on what was discussed this morning, just message me directly.<br><br>
+              Thanks,<br>
+              Jordan
+            </div>
+          </div>
+
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin:14px 0 6px;">Write the phrasal verb and its meaning:</div>
+          <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+            <div class="err-fix-row"><div class="err-fix-label">1.</div><input type="text" class="err-fix-input" style="width:30%;min-width:110px;flex-shrink:0;" placeholder="phrasal verb"><input type="text" class="err-fix-input" style="flex:1;border-left:1px solid var(--border);border-radius:0;" placeholder="meaning"></div>
+            <div class="err-fix-row"><div class="err-fix-label">2.</div><input type="text" class="err-fix-input" style="width:30%;min-width:110px;flex-shrink:0;" placeholder="phrasal verb"><input type="text" class="err-fix-input" style="flex:1;border-left:1px solid var(--border);border-radius:0;" placeholder="meaning"></div>
+            <div class="err-fix-row"><div class="err-fix-label">3.</div><input type="text" class="err-fix-input" style="width:30%;min-width:110px;flex-shrink:0;" placeholder="phrasal verb"><input type="text" class="err-fix-input" style="flex:1;border-left:1px solid var(--border);border-radius:0;" placeholder="meaning"></div>
+            <div class="err-fix-row"><div class="err-fix-label">4.</div><input type="text" class="err-fix-input" style="width:30%;min-width:110px;flex-shrink:0;" placeholder="phrasal verb"><input type="text" class="err-fix-input" style="flex:1;border-left:1px solid var(--border);border-radius:0;" placeholder="meaning"></div>
+            <div class="err-fix-row" style="border-bottom:none;"><div class="err-fix-label">5.</div><input type="text" class="err-fix-input" style="width:30%;min-width:110px;flex-shrink:0;" placeholder="phrasal verb"><input type="text" class="err-fix-input" style="flex:1;border-left:1px solid var(--border);border-radius:0;" placeholder="meaning"></div>
+          </div>
+          <div style="margin-top:12px;">
+            <button class="transform-reveal-btn" onclick="showTransform(this)">▶ Reveal answer key</button>
+            <div class="transform-answer">
+              <table style="width:100%;border-collapse:collapse;font-size:12.5px;">
+                <thead>
+                  <tr style="border-bottom:1px solid #86efac;">
+                    <th style="text-align:left;padding:4px 8px;width:24px;color:#14532d;font-weight:700;">#</th>
+                    <th style="text-align:left;padding:4px 8px;color:#14532d;font-weight:700;">Phrasal verb</th>
+                    <th style="text-align:left;padding:4px 8px;color:#14532d;font-weight:700;">Meaning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">1</td>
+                    <td style="padding:5px 8px;color:#166534;font-weight:600;">sort out</td>
+                    <td style="padding:5px 8px;color:#14532d;">to resolve or deal with a problem</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">2</td>
+                    <td style="padding:5px 8px;color:#166534;font-weight:600;">come up with</td>
+                    <td style="padding:5px 8px;color:#14532d;">to think of or produce an idea or solution</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">3</td>
+                    <td style="padding:5px 8px;color:#166534;font-weight:600;">set up</td>
+                    <td style="padding:5px 8px;color:#14532d;">to arrange or organize (a meeting, call, etc.)</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid #bbf7d0;">
+                    <td style="padding:5px 8px;color:#14532d;">4</td>
+                    <td style="padding:5px 8px;color:#166534;font-weight:600;">putting off</td>
+                    <td style="padding:5px 8px;color:#14532d;">delaying or postponing</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:5px 8px;color:#14532d;">5</td>
+                    <td style="padding:5px 8px;color:#166534;font-weight:600;">catch up</td>
+                    <td style="padding:5px 8px;color:#14532d;">to get information about what happened / speak with someone about recent news</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASK 2 -->
+      <div class="hw-card">
+        <div class="hw-head"><span class="hw-tag">Task 2</span> Write an Informal Message</div>
+        <div class="hw-body">
+          <span class="hw-type hw-write">✉️ Writing · informal message</span>
+          <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Write a short internal message (6–8 sentences) to a colleague. Use at least <strong>four phrasal verbs</strong> from today's lesson naturally.</p>
+          <div style="background:var(--lo);border:1px solid #fdba74;border-radius:10px;padding:13px 16px;margin-bottom:14px;font-size:13.5px;color:#7c2d12;">
+            <strong>Your message must include:</strong> a reason for writing, a request or update, a mention of a delay or plan, and a friendly closing.
+          </div>
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray);margin-bottom:8px;">Your message:</div>
+          <textarea style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:14px;font-family:inherit;color:var(--navy);outline:none;resize:vertical;min-height:180px;line-height:1.8;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+          <div style="margin-top:12px;">
+            <button class="err-reveal-btn" onclick="toggleSampleHw2(this)" style="font-size:12.5px;">▶ Show sample message</button>
+            <div id="hw2-sample" style="display:none;margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:13px 16px;font-size:13px;color:#14532d;line-height:1.8;">
+              <strong>Sample message:</strong><br><br>
+              Hi Marcus,<br><br>
+              Hope you're well! I wanted to <strong>catch up</strong> with you about the onboarding materials for the new team members. We had planned to share them this week, but I'm afraid we need to <strong>put off</strong> the deadline until next Friday — the design team is still working on the final slides.<br><br>
+              In the meantime, could you <strong>sort out</strong> the access permissions for the shared folder? That would really help us move things along. Also, I've asked Sara to <strong>fill in for</strong> me at Thursday's briefing since I'll be traveling.<br><br>
+              I'll <strong>hand over</strong> all the updated files as soon as they're ready, and I'm confident we'll <strong>come up with</strong> a solid plan by our next check-in.<br><br>
+              Thanks so much for your flexibility!<br><br>
+              Best,<br>
+              Jamie
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /main -->
+  
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Course Home</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+
+const SLIDE_LABELS = ["Cover", "Part 1 · Warm-up", "Part 2 · Reading", "Part 3 · Vocabulary", "Part 4 · Grammar", "Part 5 · Speaking", "Wrap-up", "Extra Activity", "For next time"];
+const TOTAL_SLIDES = 9;
+let currentSlide = 0;
+
+function slideNav(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= TOTAL_SLIDES) return;
+  goToSlide(n);
+}
+function goToSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateSlideUI();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+function updateSlideUI() {
+  const prev = document.getElementById('slide-prev');
+  const next = document.getElementById('slide-next');
+  if (prev) prev.disabled = currentSlide === 0;
+  if (next) {
+    if (currentSlide === TOTAL_SLIDES - 1) {
+      next.disabled = false;
+      next.textContent = '🏠 Course Home';
+      next.onclick = () => { window.location.href='index.html'; };
+    } else {
+      next.disabled = false;
+      next.textContent = 'Next →';
+      next.onclick = () => slideNav(1);
+    }
+  }
+  const lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = SLIDE_LABELS[currentSlide];
+  const ctr = document.getElementById('slide-counter');
+  if (ctr) ctr.textContent = 'Slide ' + (currentSlide+1) + ' of ' + TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < currentSlide) d.classList.add('done');
+    else if (i === currentSlide) d.classList.add('active');
+  });
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
+});
+
+
+// ── NAV ──
+function toggleNav(btn){btn.classList.toggle('open');document.getElementById('cnb').classList.toggle('show');}
+
+// ── WARM-UP ──
+function hyePick(n){const item=document.getElementById('hye'+n);const btn=item.querySelector('.hye-btn');item.classList.add('picked');btn.classList.add('yes');btn.textContent='✅ Same!';}
+
+// ── T/F ──
+function tfPick(btn,correct,expId){
+  const item=btn.closest('.tf-item');
+  if(item.querySelector('.correct,.wrong'))return;
+  const btns=item.querySelectorAll('.tf-btn');
+  btns.forEach(b=>b.classList.add('locked'));
+  btn.classList.add(correct?'correct':'wrong');
+  document.getElementById(expId).classList.add('show');
+}
+
+// ── MC (split cards) ──
+function mcPick(el,correct,wrapId){
+  const opts=el.closest('.mc-opts').querySelectorAll('.mc-opt');
+  if([...opts].some(o=>o.classList.contains('correct')||o.classList.contains('wrong')))return;
+  opts.forEach(o=>o.classList.add('locked'));
+  if(correct){
+    el.classList.add('correct');
+  } else {
+    el.classList.add('wrong');
+    opts.forEach(o=>{if(o!==el&&o.onclick&&o.onclick.toString().includes('true'))o.classList.add('correct');});
+  }
+}
+
+// ── WORD BANK ──
+let selectedWord=null;
+function wbSelect(el,word){
+  document.querySelectorAll('.wb-word').forEach(w=>w.classList.remove('selected-wb'));
+  if(el.classList.contains('used'))return;
+  selectedWord={el,word};
+  el.classList.add('selected-wb');
+}
+function dropOnBlank(blank){
+  if(!selectedWord)return;
+  blank.textContent=selectedWord.word;
+  blank.classList.add('has-word');
+  blank.classList.remove('correct','incorrect');
+  blank.dataset.filled=selectedWord.word;
+  selectedWord.el.classList.add('used');
+  selectedWord.el.classList.remove('selected-wb');
+  selectedWord=null;
+}
+function checkGF(){
+  document.querySelectorAll('.blank-drop').forEach(b=>{
+    if(!b.dataset.filled)return;
+    const correct=b.dataset.answer.trim().toLowerCase();
+    const given=b.dataset.filled.trim().toLowerCase();
+    b.classList.remove('has-word','correct','incorrect');
+    b.classList.add(given===correct?'correct':'incorrect');
+  });
+}
+function resetGF(){
+  document.querySelectorAll('.blank-drop').forEach(b=>{
+    b.textContent='_____';b.classList.remove('has-word','correct','incorrect');delete b.dataset.filled;
+  });
+  document.querySelectorAll('.wb-word').forEach(w=>w.classList.remove('used','selected-wb'));
+  selectedWord=null;
+}
+
+// ── GRAMMAR PICKER (Ex 4) ──
+function grammarPick(el,correct,hintId){
+  const opts=el.closest('.fpick-opts').querySelectorAll('.fpick-opt');
+  if([...opts].some(o=>o.classList.contains('fp-correct')||o.classList.contains('fp-wrong')))return;
+  opts.forEach(o=>o.classList.add('fp-locked'));
+  el.classList.add(correct?'fp-correct':'fp-wrong');
+  if(!correct)opts.forEach(o=>{if(o!==el)o.classList.add('fp-correct');});
+  document.getElementById(hintId).classList.add('show');
+}
+
+// ── SPOT-CHIP (Ex 5) ──
+function spotPick(el,correct,fixId){
+  const item=el.closest('.spot-item');
+  if(item.querySelector('.sp-locked'))return;
+  if(correct){
+    el.classList.add('sp-correct');
+    document.getElementById(fixId).classList.add('show');
+    item.querySelectorAll('.spot-chip').forEach(c=>c.classList.add('sp-locked'));
+  } else {
+    el.classList.add('sp-flash');
+    setTimeout(()=>el.classList.remove('sp-flash'),500);
+  }
+}
+
+// ── SCENES ──
+let curScene=1;const totalScenes=5;
+function updateDots(){
+  for(let i=1;i<=totalScenes;i++){
+    const d=document.getElementById('dot'+i);
+    d.classList.remove('active','done');
+    if(i<curScene)d.classList.add('done');
+    else if(i===curScene)d.classList.add('active');
+  }
+}
+function nextSC(n){
+  document.getElementById('sc'+n).classList.remove('active');
+  curScene=n+1;
+  document.getElementById('sc'+curScene).classList.add('active');
+  updateDots();
+  document.getElementById('scene-counter').textContent='Situation '+curScene+' of '+totalScenes;
+}
+function finishSC(){
+  document.getElementById('sc'+totalScenes).classList.remove('active');
+  const done=document.getElementById('sc-done');
+  done.style.display='block';
+  document.getElementById('scene-counter').textContent='Complete! 🎉';
+  document.querySelectorAll('.scene-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done');});
+}
+function toggleSA(id,btn){
+  const el=document.getElementById(id);
+  if(el.classList.contains('show')){el.classList.remove('show');btn.textContent='👁 Sample answer';}
+  else{el.classList.add('show');btn.textContent='🙈 Hide';}
+}
+
+// ── REVEAL BUTTONS ──
+function showTransform(btn){
+  const ans=btn.nextElementSibling;
+  const showing=ans.classList.contains('show');
+  ans.classList.toggle('show');
+  btn.textContent=showing?'▶ Show sample':'▼ Hide';
+  btn.style.color=showing?'':'var(--green)';
+  btn.style.borderColor=showing?'':'var(--green)';
+}
+
+
+function tfdPick(btn, val, expId) {
+  const opts = btn.closest('.tfd-opts');
+  if (opts.querySelector('.tfd-picked')) return;
+  opts.querySelectorAll('.tfd-btn').forEach(b => b.classList.add('tfd-picked'));
+  btn.classList.add('tfd-' + val);
+  document.getElementById(expId).classList.add('show');
+}
+
+
+const matchAnswers6={1:'E',2:'F',3:'B',4:'C',5:'D',6:'A'};
+const matchKeys6=['A','B','C','D','E','F'];
+const matchTotal6=6;
+let matchCurrent=null,userMatches={};
+
+function selectLeft(n){
+  if(matchCurrent!==null)document.getElementById('ml'+matchCurrent).classList.remove('selected');
+  if(matchCurrent===n){matchCurrent=null;return;}
+  matchCurrent=n;
+  document.getElementById('ml'+n).classList.add('selected');
+}
+
+function selectRight(letter){
+  if(matchCurrent===null)return;
+  const prevLetter=userMatches[matchCurrent];
+  if(prevLetter){document.getElementById('mr'+prevLetter).classList.remove('paired');document.getElementById('mb'+prevLetter).textContent='';}
+  for(let k in userMatches){if(userMatches[k]===letter){document.getElementById('ml'+k).classList.remove('paired');document.getElementById('mb'+k).textContent='';delete userMatches[k];}}
+  userMatches[matchCurrent]=letter;
+  ['correct','incorrect'].forEach(c=>{document.getElementById('ml'+matchCurrent).classList.remove(c);document.getElementById('mr'+letter).classList.remove(c);});
+  document.getElementById('ml'+matchCurrent).classList.remove('selected');
+  document.getElementById('ml'+matchCurrent).classList.add('paired');
+  document.getElementById('mb'+matchCurrent).textContent='→ '+letter;
+  document.getElementById('mr'+letter).classList.add('paired');
+  document.getElementById('mb'+letter).textContent='← '+matchCurrent;
+  matchCurrent=null;
+}
+
+function checkMatchAnswers(){
+  let correct=0;
+  for(let n=1;n<=matchTotal6;n++){
+    const el=document.getElementById('ml'+n);
+    el.classList.remove('correct','incorrect','selected','paired');
+    const ans=userMatches[n];
+    const rightEl=ans?document.getElementById('mr'+ans):null;
+    if(rightEl)rightEl.classList.remove('correct','incorrect','paired');
+    if(ans===matchAnswers6[n]){el.classList.add('correct');rightEl.classList.add('correct');correct++;}
+    else if(ans){el.classList.add('incorrect');rightEl.classList.add('incorrect');}
+  }
+  const score=document.getElementById('match-score');
+  score.style.display='inline';
+  if(correct===matchTotal6){score.textContent='✅ Perfect — 6/6!';score.style.color='var(--green)';}
+  else{score.textContent=correct+'/6 correct — the red ones need fixing';score.style.color='var(--rose)';}
+  document.getElementById('match-key-btn').style.display='inline-flex';
+}
+
+function showAnswerKey(){
+  for(let n=1;n<=matchTotal6;n++){
+    const correct=matchAnswers6[n];
+    document.getElementById('mb'+n).textContent='→ '+correct;
+    document.getElementById('mb'+n).style.color='var(--navy)';
+    document.getElementById('ml'+n).classList.remove('correct','incorrect','paired','selected');
+    document.getElementById('ml'+n).classList.add('correct');
+  }
+  matchKeys6.forEach(l=>{
+    document.getElementById('mr'+l).classList.remove('correct','incorrect','paired');
+    document.getElementById('mr'+l).classList.add('correct');
+    document.getElementById('mb'+l).textContent='';
+  });
+  document.getElementById('match-key-btn').style.display='none';
+}
+
+function toggleSampleHw2(btn){
+  const d=document.getElementById('hw2-sample');
+  const showing=d.style.display==='block';
+  d.style.display=showing?'none':'block';
+  btn.textContent=showing?'▶ Show sample message':'▼ Hide sample message';
+  btn.style.color=showing?'':'var(--green)';
+  btn.style.borderColor=showing?'':'var(--green)';
+}
+
+function resetMatches(){
+  userMatches={};matchCurrent=null;
+  for(let n=1;n<=matchTotal6;n++){document.getElementById('ml'+n).className='match-left';document.getElementById('mb'+n).textContent='';document.getElementById('mb'+n).style.color='';}
+  matchKeys6.forEach(l=>{document.getElementById('mr'+l).className='match-right';document.getElementById('mb'+l).textContent='';});
+  document.getElementById('match-score').style.display='none';
+  document.getElementById('match-key-btn').style.display='none';
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 4 – Checking Information</title>
+<style>
+
+
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --purple:#7c3aed;--lp:#ede9fe;
+  --green:#16a34a;--lg:#dcfce7;
+  --orange:#ea580c;--lo:#ffedd5;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;--textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+.course-nav{background:var(--navy);color:white;}
+.nav-toggle{display:flex;align-items:center;gap:10px;padding:12px 32px;cursor:pointer;font-size:13px;font-weight:700;letter-spacing:.5px;user-select:none;border-bottom:1px solid rgba(255,255,255,0.08);}
+.nav-toggle .arrow{font-size:10px;transition:transform .25s;margin-left:auto;}
+.nav-toggle.open .arrow{transform:rotate(90deg);}
+.nav-body{display:none;padding:20px 32px 24px;}
+.nav-body.show{display:block;}
+.nav-modules{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;}
+.nav-mod-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.nav-lesson{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12.5px;color:rgba(255,255,255,0.6);}
+.nav-lesson a{color:inherit;text-decoration:none;}
+.nav-lesson a:hover{color:var(--amber);}
+.nav-lesson.current{color:var(--amber);font-weight:700;}
+.nl{background:rgba(255,255,255,0.12);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:700;}
+.nav-lesson.current .nl{background:var(--amber);color:var(--navy);}
+.page-header{background:var(--navy);color:white;padding:28px 48px 22px;position:relative;overflow:hidden;}
+
+.page-header::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.page-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);}
+.header-label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px;}
+.header-title{font-size:26px;font-weight:700;letter-spacing:-.5px;}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.55);margin-top:3px;}
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;margin:24px 0 28px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;}.s2{background:#2563eb;flex:2;}.s3{background:#7c3aed;flex:2;}.s4{background:#d97706;flex:3;color:#1a1a00;}.s5{background:#1a2e4a;flex:1;}
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+.c-teal .card-head{background:var(--lt);}.c-teal .card-icon{background:var(--teal);color:white;}.c-teal .card-title{color:var(--teal);}.c-teal .card-badge{background:var(--teal);}
+.c-blue .card-head{background:var(--lb);}.c-blue .card-icon{background:var(--blue);color:white;}.c-blue .card-title{color:var(--blue);}.c-blue .card-badge{background:var(--blue);}
+.c-purple .card-head{background:var(--lp);}.c-purple .card-icon{background:var(--purple);color:white;}.c-purple .card-title{color:var(--purple);}.c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);}.c-amber .card-icon{background:var(--amber);color:white;}.c-amber .card-title{color:var(--amber);}.c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);}.c-green .card-icon{background:var(--green);color:white;}.c-green .card-title{color:var(--green);}.c-green .card-badge{background:var(--green);}
+.c-navy .card-head{background:#eef0f3;}.c-navy .card-icon{background:var(--navy);color:white;}.c-navy .card-title{color:var(--navy);}.c-navy .card-badge{background:var(--navy);}
+.c-orange .card-head{background:var(--lo);}.c-orange .card-icon{background:var(--orange);color:white;}.c-orange .card-title{color:var(--orange);}.c-orange .card-badge{background:var(--orange);}
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:400;color:var(--gray);font-style:italic;text-transform:none;letter-spacing:0;}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* WARM-UP: RATE IT */
+.rate-intro{font-size:14.5px;color:var(--textl);margin-bottom:20px;font-style:italic;}
+.rate-card{background:white;border:1.5px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:12px;display:flex;align-items:center;gap:16px;}
+.rate-phrase{flex:1;font-size:15px;font-style:italic;color:var(--navy);}
+.rate-stars{display:flex;gap:5px;flex-shrink:0;}
+.star-btn{font-size:22px;cursor:pointer;color:#d1d5db;transition:color .1s;background:none;border:none;padding:0 2px;line-height:1;}
+.star-btn.star-on{color:#f59e0b;}
+.star-btn:hover{color:#f59e0b;}
+.rate-reveal-btn{display:none;margin-top:16px;background:var(--teal);color:white;border:none;border-radius:10px;padding:11px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+.rate-reveal-btn:hover{background:#0f766e;}
+.rate-results{display:none;margin-top:18px;border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+.rr-row{display:flex;align-items:center;gap:14px;padding:13px 16px;border-bottom:1px solid var(--border);}
+.rr-row:last-child{border-bottom:none;}
+.rr-rank{font-size:22px;flex-shrink:0;}
+.rr-phrase{font-size:14px;font-style:italic;color:var(--navy);}
+.rr-verdict{font-size:12.5px;color:var(--gray);margin-top:3px;}
+.rr-row.rr-best{background:var(--lg);}
+.rr-row.rr-ok{background:#fffbeb;}
+.rr-row.rr-poor{background:var(--lgr);}
+.wu-disc{background:var(--lt);border:1px solid #5eead4;border-radius:12px;padding:18px;margin-top:20px;}
+.wu-disc-q{font-size:15px;color:#134e4a;font-weight:600;margin-bottom:12px;}
+.wu-follow-btn{background:none;border:none;font-size:12.5px;color:var(--teal);font-weight:700;cursor:pointer;font-family:inherit;padding:0;}
+.wu-followups{display:none;flex-direction:column;gap:8px;margin-top:12px;}
+.wu-followups.open{display:flex;}
+.wu-fu{background:white;border-radius:8px;padding:11px 14px;font-size:13.5px;color:#134e4a;border:1px solid #5eead4;}
+
+/* VOCAB CARDS */
+.vocab-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-sentence{font-size:13.5px;color:var(--text);margin-bottom:7px;line-height:1.4;}
+.bvc-sentence em{font-style:normal;color:var(--blue);font-weight:700;}
+.bvc-term{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.bvc-def{font-size:12px;color:var(--gray);font-style:italic;}
+
+/* QUESTION TAGS */
+.qtag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0;}
+.qtag-card{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.qt-rule{padding:10px 14px;background:var(--lp);font-size:13px;font-weight:700;color:var(--purple);}
+.qt-ex{padding:10px 14px;font-size:13.5px;font-style:italic;color:var(--navy);}
+.qt-ex em{font-style:normal;color:var(--teal);font-weight:700;}
+
+/* SITUATION MATCHING */
+.sit-match{border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden;}
+.sit-head{background:var(--lgr);padding:11px 16px;font-size:14px;font-weight:600;color:var(--navy);}
+.sit-opts{display:flex;flex-direction:column;gap:0;}
+.sit-opt{padding:10px 16px;border-top:1px solid var(--border);font-size:13.5px;font-style:italic;cursor:pointer;color:var(--navy);transition:all .15s;user-select:none;}
+.sit-opt:hover:not(.locked){background:var(--lb);color:var(--blue);}
+.sit-opt.correct{background:var(--lg);color:#14532d;font-weight:600;}
+.sit-opt.wrong{background:var(--la);color:#78350f;}
+.sit-exp{display:none;padding:9px 16px;font-size:12.5px;background:#f0fdf4;border-top:1px solid #86efac;color:#14532d;}
+.sit-exp.show{display:block;}
+
+/* MC */
+.mc-item{margin-bottom:18px;}
+.mc-q{font-size:14.5px;font-weight:600;margin-bottom:9px;color:var(--navy);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:13.5px;transition:all .15s;user-select:none;}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--lb);transform:translateX(3px);}
+.mc-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.mc-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.mc-opt.locked{cursor:default;}
+.mc-letter{background:var(--lgr);border:1px solid var(--border);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--navy);}
+.mc-opt.correct .mc-letter{background:var(--green);border-color:var(--green);color:white;}
+.mc-opt.wrong .mc-letter{background:var(--rose);border-color:var(--rose);color:white;}
+.mc-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mc-grid-2 .mc-item{margin-bottom:0;border:1px solid var(--border);border-radius:10px;padding:14px;}
+
+/* ERROR CORRECTION */
+.err-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+.err-q{font-size:15px;color:var(--navy);margin-bottom:10px;font-style:italic;}
+.err-reveal-btn{display:inline-flex;align-items:center;gap:6px;background:white;border:1.5px solid var(--border);border-radius:7px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--gray);cursor:pointer;transition:all .15s;font-family:inherit;}
+.err-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+.err-answer{display:none;margin-top:10px;padding:10px 14px;background:var(--lg);border:1px solid #86efac;border-radius:7px;font-size:13.5px;color:#14532d;}
+.err-answer.show{display:block;}
+.correct-word{font-weight:700;color:var(--green);}
+
+/* FULL MEETING SCENARIO */
+.meeting-context{background:var(--navy);color:white;border-radius:12px;padding:17px 20px;margin-bottom:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12.5px;}
+.mc2-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:5px;}
+.mc2-val{font-weight:600;}
+.scene-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.scene-counter{font-weight:700;color:var(--navy);font-size:14px;}
+.scene-dots{display:flex;gap:5px;flex-wrap:wrap;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .3s;}
+.scene-dot.active{background:var(--amber);}
+.scene-dot.done{background:var(--teal);}
+.scene-card{display:none;border:1.5px solid var(--border);border-radius:13px;overflow:hidden;}
+.scene-card.active{display:block;animation:fadeIn .3s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.scene-top{background:var(--navy);color:white;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:13px;}
+.scene-badge-m{border-radius:20px;padding:2px 12px;font-weight:700;font-size:12px;color:white;}
+.bg-open{background:#0d9488;}.bg-mid{background:#2563eb;}.bg-close{background:#7c3aed;}
+.scene-situation{padding:14px 18px;background:#f8fafc;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;border-left:4px solid var(--border);}
+.scene-prompt{padding:14px 18px;font-size:15.5px;font-weight:700;color:var(--navy);}
+.scene-hint{padding:0 18px 12px;font-size:13px;color:var(--teal);}
+.scene-lang{padding:0 18px 10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;}
+.lang-pill-tip{font-size:10.5px;font-weight:700;color:var(--gray);letter-spacing:.3px;margin-right:2px;}
+.lang-pill{display:inline-flex;align-items:center;gap:5px;background:var(--lp);border:1px solid #c4b5fd;border-radius:12px;padding:3px 11px;font-size:12px;color:var(--purple);font-weight:600;margin:3px 3px 3px 0;}
+.scene-answer{display:none;margin:0 18px 14px;padding:13px 14px;background:var(--lg);border:1px solid #86efac;border-radius:9px;font-size:14px;color:#14532d;font-style:italic;}
+.scene-answer.show{display:block;animation:fadeIn .3s;}
+.scene-answer-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:5px;font-style:normal;}
+.scene-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;}
+
+/* QUICK FIRE */
+.qf-card{border:1.5px solid var(--border);border-radius:11px;margin-bottom:10px;overflow:hidden;}
+.qf-q{background:var(--lgr);padding:13px 16px;font-size:15px;font-weight:600;color:var(--navy);}
+.qf-choose{padding:12px 16px;display:flex;gap:10px;flex-wrap:wrap;}
+.qf-opt{padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit;}
+.qf-opt:hover:not(.locked){border-color:var(--navy);background:var(--navy);color:white;}
+.qf-correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.qf-wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.qf-exp{display:none;padding:10px 16px;border-top:1px solid var(--border);font-size:13px;background:#fafafa;}
+.qf-exp.show{display:block;animation:fadeIn .25s;}
+.qf-exp em{color:var(--teal);font-style:normal;font-weight:700;}
+
+/* POLITE PAIRS */
+.polite-pair{border:1.5px solid var(--border);border-radius:11px;margin-bottom:12px;overflow:hidden;}
+.pp-head{background:var(--lgr);padding:10px 14px;font-size:13px;font-weight:700;color:var(--navy);}
+.pp-direct{padding:11px 14px;background:var(--la);font-size:14px;color:#78350f;font-style:italic;border-bottom:1px solid var(--border);}
+.pp-direct-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:4px;font-style:normal;}
+.pp-footer{padding:11px 14px;display:flex;justify-content:space-between;align-items:center;}
+.pp-polite{display:none;padding:11px 14px;background:var(--lg);border-top:1px solid #86efac;font-size:14px;color:#14532d;font-style:italic;}
+.pp-polite.show{display:block;animation:fadeIn .25s;}
+.pp-polite-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:4px;font-style:normal;}
+
+/* HW */
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lr);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--rose);}
+.hw-tag{background:var(--rose);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hw-grammar{background:var(--lt);color:#134e4a;}
+.qtag-input-list{list-style:none;padding:0;}
+.qtag-input-item{padding:12px 0;border-bottom:1px solid var(--border);font-size:14.5px;}
+.qtag-input-item:last-child{border-bottom:none;}
+.qtag-stmt{margin-bottom:8px;color:var(--navy);}
+.qtag-answer{display:none;margin-top:8px;padding:9px 13px;background:var(--lg);border:1px solid #86efac;border-radius:7px;font-size:13px;color:#14532d;}
+.qtag-answer.show{display:block;}
+.qtag-field{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;font-size:14px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .15s;}
+.qtag-field:focus{border-color:var(--purple);}
+.qtag-hint{font-size:11.5px;color:var(--gray);font-style:italic;margin-top:5px;}
+
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn:active{transform:scale(.97);}
+.btn-navy{background:var(--navy);color:white;}.btn-navy:hover{background:#243e60;}
+.btn-green{background:var(--green);color:white;}.btn-green:hover{background:#15803d;}
+.btn-amber{background:var(--amber);color:white;}.btn-amber:hover{background:#b45309;}
+.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:18px;}
+.lesson-nav{display:flex;align-items:center;justify-content:center;gap:14px;padding:28px 18px 10px;}
+.lesson-nav a{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;transition:all .15s;}
+.nav-home{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-home:hover{background:var(--border);border-color:#d1d5db;}
+.nav-prev{background:var(--lgr);color:var(--navy);border:1.5px solid var(--border);}
+.nav-prev:hover{background:var(--border);}
+.nav-next{background:var(--navy);color:white;border:1.5px solid var(--navy);}
+.nav-next:hover{background:#243d5c;}
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▸";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;}
+.prev-box-item em{font-style:italic;color:var(--navy);font-weight:600;}
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+
+
+/* ── SLIDE SYSTEM ── */
+.slide { display: none; }
+.slide.active { display: block; animation: slideIn .25s ease; }
+@keyframes slideIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.slide-navbar {
+  z-index: 200;
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: all .15s; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #243d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-size: 13px; font-weight: 700; color: var(--navy); }
+.slide-counter-text { font-size: 11px; color: var(--gray); margin-top: 1px; }
+.slide-progress { display: flex; gap: 5px; justify-content: center; margin-top: 5px; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all .2s; cursor: pointer; }
+.sp-dot.active { background: var(--navy); transform: scale(1.25); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 56px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #243060 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.03);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);
+}
+.cover-inner { text-align:center; max-width:680px; color:white; position:relative; z-index:1; }
+.cover-teacher { font-size:12px; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:8px; }
+.cover-module-tag {
+  display:inline-block; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--amber); margin-bottom:18px;
+}
+.cover-title-main { font-size:44px; font-weight:800; letter-spacing:-1.5px; line-height:1.1; margin-bottom:14px; }
+.cover-lesson-badge {
+  display:inline-block; background:var(--amber); color:var(--navy);
+  border-radius:20px; padding:4px 18px; font-size:12px; font-weight:700; letter-spacing:.5px; margin-bottom:32px;
+}
+.cover-tl { margin:0 auto 34px; max-width:620px; }
+.cover-start {
+  background:white; color:var(--navy); border:none; border-radius:12px;
+  padding:14px 38px; font-size:15px; font-weight:700; cursor:pointer;
+  transition:all .2s; font-family:inherit; box-shadow:0 4px 16px rgba(0,0,0,0.25);
+}
+.cover-start:hover { background:var(--amber); color:white; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.3); }
+
+
+/* ── MEETING STAGE BADGE COLORS ── */
+.bg-data{background:#0d9488;}
+.bg-discuss{background:#7c3aed;}
+.bg-problem{background:#d97706;}
+.bg-close{background:#1a2e4a;}
+
+/* ── QUESTION TAG HW ── */
+.qtag-hw-list{list-style:none;padding:0;}
+.qtag-hw-item{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);font-size:14.5px;}
+.qtag-hw-item:last-child{border-bottom:none;}
+.qtag-hw-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.qtag-hw-q{color:var(--navy);margin-bottom:8px;line-height:1.5;}
+.qtag-blank{display:inline-block;border-bottom:2px solid var(--navy);min-width:80px;color:transparent;vertical-align:middle;}
+.qtag-hw-item .qtag-field{width:150px;flex-shrink:0;}
+
+  /* ══ SLIDE NAVBAR ══ */
+  .slide-navbar {
+    background: white; border-bottom: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+  }
+  .slide-nav-btn {
+    background: var(--navy); color: white; border: none; border-radius: 8px;
+    padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: inherit; transition: background .15s; white-space: nowrap;
+  }
+  .slide-nav-btn:hover:not(:disabled) { background: #263d5c; }
+  .slide-nav-btn:disabled { opacity: .3; cursor: default; }
+  .slide-info { text-align: center; flex: 1; }
+  .slide-label { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .slide-counter-text { font-size: 12px; color: var(--gray); margin: 2px 0 6px; }
+  .slide-progress { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .15s; }
+  .sp-dot.active { background: var(--navy); transform: scale(1.3); }
+  .sp-dot.done { background: var(--teal); }
+  /* ══ BOTTOM NAV BAR ══ */
+  .slide-bottom-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 22px; margin-top: 30px;
+    border-top: 2px solid var(--border); background: #f8fafc;
+  }
+
+  /* ══ TOP HOME STRIP ══ */
+  .top-home-strip {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+    background: var(--navy); height: 42px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .top-home-link {
+    color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+    font-family: inherit; display: flex; align-items: center; gap: 6px;
+    opacity: .85; transition: opacity .15s;
+  }
+  .top-home-link:hover { opacity: 1; }
+  body { padding-top: 42px; }
+
+  .qtag-inline{border:none;border-bottom:2px solid var(--navy);outline:none;width:130px;
+    font-size:14px;font-family:inherit;color:var(--navy);text-align:center;
+    background:transparent;padding:2px 6px;transition:border-color .15s,background .15s;}
+  .qtag-inline:focus{border-bottom-color:var(--blue);}
+  .qtag-inline.filled{border-bottom-color:var(--green);background:var(--lg);border-radius:4px;}
+  .qtag-hw-item-v{padding:14px 0;border-bottom:1px solid var(--border);}
+  .qtag-hw-item-v:last-child{border-bottom:none;}
+  .qtag-hw-item-v .qtag-hw-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+  .qtag-hw-item-v .qtag-hw-q{color:var(--navy);line-height:1.5;font-size:14.5px;margin:0;}
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<!-- ══ SLIDE NAVBAR ══ -->
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 7</div>
+    <div class="slide-progress"><div class="sp-dot  active" onclick="goToSlide(0)" title="Slide 1"></div><div class="sp-dot" onclick="goToSlide(1)" title="Slide 2"></div><div class="sp-dot" onclick="goToSlide(2)" title="Slide 3"></div><div class="sp-dot" onclick="goToSlide(3)" title="Slide 4"></div><div class="sp-dot" onclick="goToSlide(4)" title="Slide 5"></div><div class="sp-dot" onclick="goToSlide(5)" title="Slide 6"></div><div class="sp-dot" onclick="goToSlide(6)" title="Slide 7"></div></div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+<!-- HEADER -->
+
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English with teacher Nanda</div>
+      <div class="cover-module-tag">Module 1 · Meetings — Lesson 4 of 4 · Capstone</div>
+      <div class="cover-title-main">Checking Information &amp; Full Meeting</div>
+      <div class="cover-lesson-badge">Lesson 4</div>
+      <div class="cover-tl">
+        <div class="tl-bar">
+    <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+    <div class="tl-seg s2">Vocabulary<span class="t">10 min</span></div>
+    <div class="tl-seg s3">Key Language<span class="t">10 min</span></div>
+    <div class="tl-seg s4">Meeting Simulation<span class="t">20 min</span></div>
+    <div class="tl-seg s5">Wrap-up<span class="t">5 min</span></div>
+  </div>
+
+  <!-- ══ PART 1: WARM-UP — RATE IT ══ -->
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+    <div class="card-head">
+      <div class="card-icon">⭐</div>
+      <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">Rate It — How Polite Is This?</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p class="rate-intro">Someone in the meeting just rattled off a number too fast and you missed it. Rate each response below for how polite and professional it sounds — click the stars.</p>
+
+      <div class="rate-card">
+        <div class="rate-phrase">"Could you repeat that, please?"</div>
+        <div class="rate-stars" id="stars-r1">
+          <button class="star-btn" onclick="rateStar('r1',1)">★</button>
+          <button class="star-btn" onclick="rateStar('r1',2)">★</button>
+          <button class="star-btn" onclick="rateStar('r1',3)">★</button>
+          <button class="star-btn" onclick="rateStar('r1',4)">★</button>
+          <button class="star-btn" onclick="rateStar('r1',5)">★</button>
+        </div>
+      </div>
+
+      <div class="rate-card">
+        <div class="rate-phrase">"I'm sorry — I didn't quite catch that. Would you mind saying it one more time?"</div>
+        <div class="rate-stars" id="stars-r2">
+          <button class="star-btn" onclick="rateStar('r2',1)">★</button>
+          <button class="star-btn" onclick="rateStar('r2',2)">★</button>
+          <button class="star-btn" onclick="rateStar('r2',3)">★</button>
+          <button class="star-btn" onclick="rateStar('r2',4)">★</button>
+          <button class="star-btn" onclick="rateStar('r2',5)">★</button>
+        </div>
+      </div>
+
+      <div class="rate-card">
+        <div class="rate-phrase">"What? I didn't hear you."</div>
+        <div class="rate-stars" id="stars-r3">
+          <button class="star-btn" onclick="rateStar('r3',1)">★</button>
+          <button class="star-btn" onclick="rateStar('r3',2)">★</button>
+          <button class="star-btn" onclick="rateStar('r3',3)">★</button>
+          <button class="star-btn" onclick="rateStar('r3',4)">★</button>
+          <button class="star-btn" onclick="rateStar('r3',5)">★</button>
+        </div>
+      </div>
+
+      <button class="rate-reveal-btn" id="rate-reveal-btn" onclick="revealRating()">✨ See the expert ranking</button>
+
+      <div class="rate-results" id="rate-results">
+        <div class="rr-row rr-best">
+          <div class="rr-rank">🥇</div>
+          <div>
+            <div class="rr-phrase">"I'm sorry — I didn't quite catch that. Would you mind saying it one more time?"</div>
+            <div class="rr-verdict">Most natural and polite. Acknowledges the issue ("I'm sorry"), names it ("didn't catch"), and softens the request ("would you mind"). You'll learn phrases like this in Part 3 today.</div>
+          </div>
+        </div>
+        <div class="rr-row rr-ok">
+          <div class="rr-rank">🥈</div>
+          <div>
+            <div class="rr-phrase">"Could you repeat that, please?"</div>
+            <div class="rr-verdict">Perfectly fine and professional — polite and direct. A solid default. Could feel slightly abrupt in some formal contexts, but it works well.</div>
+          </div>
+        </div>
+        <div class="rr-row rr-poor">
+          <div class="rr-rank">🥉</div>
+          <div>
+            <div class="rr-phrase">"What? I didn't hear you."</div>
+            <div class="rr-verdict">Understood, but too casual for a formal meeting. "What?" especially can come across as rude or impatient — even if that wasn't the intention.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wu-disc">
+        <div class="wu-disc-q">💬 Do you find it easy to ask someone to repeat themselves in a meeting — especially in English? What do you usually do when you miss something important?</div>
+        <button class="wu-follow-btn" id="fu3-btn" onclick="toggleFU3()">+ Follow-up questions</button>
+        <div class="wu-followups" id="wu-followups">
+          <div class="wu-fu">Have you ever pretended to understand something in a meeting because you didn't want to ask again? What happened?</div>
+          <div class="wu-fu">Do you think it's riskier to stay silent or to ask — and does your answer change depending on who's speaking?</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 2: VOCABULARY ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 2 ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-blue">
+    <div class="card-head">
+      <div class="card-icon">📚</div>
+      <div><div class="card-label">Part 2 · Vocabulary</div><div class="card-title">Checking &amp; Clarifying Language</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">📝 Key vocabulary</div>
+      <div class="vocab-card-grid">
+        <div class="bvc">
+          <div class="bvc-sentence">That project is on track, <em>isn't it</em>? We're meeting the deadline, <em>aren't we</em>?</div>
+          <div class="bvc-term">question tag</div>
+          <div class="bvc-def">[a short question added to the end of a statement — used to confirm or check]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">"We need to cut 20%." — "<em>Cut 20%?</em> Are you sure about that figure?"</div>
+          <div class="bvc-term">echo question</div>
+          <div class="bvc-def">[repeating part of what someone said — used to check or show surprise]</div>
+        </div>
+        <div class="bvc">
+          <div class="bvc-sentence">The board announced a major <em>budget cut</em> affecting all departments next quarter.</div>
+          <div class="bvc-term">budget cut</div>
+          <div class="bvc-def">[a reduction in the money available for a project or department]</div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin:18px 0 10px;">🚀 Going further</div>
+      <div class="vocab-card-grid">
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">"I didn't <em>quite</em> catch the last figure — could you say it again?"</div>
+          <div class="bvc-term">quite</div>
+          <div class="bvc-def">[a softener — makes a statement less direct. "Not quite" = not exactly. Not the same as "very".]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">"Sorry, I didn't <em>catch</em> that — could you repeat the deadline?"</div>
+          <div class="bvc-term">to catch</div>
+          <div class="bvc-def">[to hear or understand something. "I didn't catch it" = I missed it / didn't hear it clearly]</div>
+        </div>
+        <div class="bvc" style="border-color:var(--lp);background:var(--lp);">
+          <div class="bvc-sentence">"That's too <em>vague</em> — could you be more <em>specific</em> about the timeline?"</div>
+          <div class="bvc-term">vague / specific</div>
+          <div class="bvc-def">[<em>vague</em> = unclear, not detailed &nbsp;·&nbsp; <em>specific</em> = exact and detailed. Opposites — know both.]</div>
+        </div>
+      </div>
+
+      <div class="act-head" style="margin-top:18px;">
+        <div class="act-num">1</div>
+        Fix the vocabulary — one word is wrong in each sentence
+        <span class="act-type">Error correction</span>
+      </div>
+
+      <div class="err-item">
+        <div class="err-q">"I didn't quiet catch the last number — could you say it again?"</div>
+        <button class="err-reveal-btn" onclick="toggleErr(this,'ve1')">▶ Show answer</button>
+        <div class="err-answer" id="ve1"><strong>quiet</strong> → <em>"I didn't <span class="correct-word">quite</span> catch that…"</em> — <em>quite</em> is a softener meaning "fully / completely." <em>Quiet</em> means silent — a completely different word.</div>
+      </div>
+
+      <div class="err-item">
+        <div class="err-q">"His update was very specific — he just said 'things are going well.'"</div>
+        <button class="err-reveal-btn" onclick="toggleErr(this,'ve2')">▶ Show answer</button>
+        <div class="err-answer" id="ve2"><strong>specific</strong> → <em>"His update was very <span class="correct-word">vague</span>…"</em> — "things are going well" gives no detail, so it is <em>vague</em> (unclear), not <em>specific</em> (detailed).</div>
+      </div>
+
+      <div class="err-item">
+        <div class="err-q">"The company announced a budget increase last year, which led to layoffs across all departments."</div>
+        <button class="err-reveal-btn" onclick="toggleErr(this,'ve3')">▶ Show answer</button>
+        <div class="err-answer" id="ve3"><strong>budget increase</strong> → <em>"…a <span class="correct-word">budget cut</span>…"</em> — layoffs result from less money, not more. A <em>budget cut</em> is a reduction in available funds.</div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- ══ PART 3: KEY LANGUAGE ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 3 ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-purple">
+    <div class="card-head">
+      <div class="card-icon">🔍</div>
+      <div><div class="card-label">Part 3 · Key Language</div><div class="card-title">Question Tags &amp; Polite Checking</div></div>
+      <span class="card-badge">10 min</span>
+    </div>
+    <div class="card-body">
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:12px;">❓ Question tags — how they work</div>
+      <div class="qtag-grid">
+        <div class="qtag-card">
+          <div class="qt-rule">Positive statement → Negative tag</div>
+          <div class="qt-ex">The figures are correct, <em>aren't they</em>?</div>
+        </div>
+        <div class="qtag-card">
+          <div class="qt-rule">Negative statement → Positive tag</div>
+          <div class="qt-ex">We haven't missed the deadline, <em>have we</em>?</div>
+        </div>
+        <div class="qtag-card">
+          <div class="qt-rule">Use a pronoun — never repeat the noun</div>
+          <div class="qt-ex">She'll send the report, <em>won't she</em>?<br>The team confirmed, <em>didn't they</em>?</div>
+          <div style="margin:8px 14px 10px;padding:7px 11px;background:var(--lr);border-radius:7px;font-size:12.5px;color:#9f1239;font-style:italic;">❌ "Sarah will send it, <strong>won't Sarah?</strong>" → <strong>won't she?</strong></div>
+        </div>
+        <div class="qtag-card">
+          <div class="qt-rule">Special case: I am → aren't I</div>
+          <div class="qt-ex">I'm on the list of attendees, <em>aren't I</em>?</div>
+        </div>
+      </div>
+
+      <div class="act-head" style="margin-top:14px;">
+        <div class="act-num">1</div>
+        Complete the question tag — click the correct option
+        <span class="act-type">Multiple choice</span>
+      </div>
+
+      <div class="mc-grid-2">
+      <div class="mc-item">
+        <div class="mc-q">1. &nbsp;She hasn't confirmed her attendance yet, _____?</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> hasn't she</div>
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">B</span> has she</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> doesn't she</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-q">2. &nbsp;The finance team reviewed the numbers this morning, _____?</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">A</span> didn't he</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> didn't it</div>
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">C</span> didn't they</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-q">3. &nbsp;The meeting was postponed, _____?</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">A</span> wasn't it</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> didn't it</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> isn't it</div>
+        </div>
+      </div>
+      <div class="mc-item">
+        <div class="mc-q">4. &nbsp;I'm on the agenda for this meeting, _____?</div>
+        <div class="mc-opts">
+          <div class="mc-opt" onclick="mcPick(this,true)"><span class="mc-letter">A</span> aren't I</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">B</span> am I not</div>
+          <div class="mc-opt" onclick="mcPick(this,false)"><span class="mc-letter">C</span> isn't I</div>
+        </div>
+      </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;">💬 Polite checking phrases — match each to the right situation</div>
+      <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Click the phrase that best fits each meeting situation.</p>
+
+      <div class="act-head" style="margin-top:0;">
+        <div class="act-num">2</div>
+        Which phrase fits this situation?
+        <span class="act-type">Situation matching</span>
+      </div>
+
+      <div class="sit-match">
+        <div class="sit-head">The finance director just presented 5 numbers in 10 seconds. You missed the third one.</div>
+        <div class="sit-opts">
+          <div class="sit-opt" onclick="sitPick(this,false,'s1')">A — "What do you mean by 'significant growth'?"</div>
+          <div class="sit-opt" onclick="sitPick(this,true,'s1')">B — "I'm sorry, I didn't quite catch the third figure — could you say it again?"</div>
+          <div class="sit-opt" onclick="sitPick(this,false,'s1')">C — "Just to clarify — does that figure include the Q1 data?"</div>
+        </div>
+        <div class="sit-exp" id="s1">✅ <strong>B</strong> — You need to ask someone to repeat something specific. "I didn't quite catch" is the natural phrase for this. A is for vague language; C is for checking scope.</div>
+      </div>
+
+      <div class="sit-match">
+        <div class="sit-head">Your colleague says the project is "basically finished." You're not sure what that means exactly.</div>
+        <div class="sit-opts">
+          <div class="sit-opt" onclick="sitPick(this,false,'s2')">A — "Could you say that again, please?"</div>
+          <div class="sit-opt" onclick="sitPick(this,false,'s2')">B — "If I understand correctly, you're proposing a delay?"</div>
+          <div class="sit-opt" onclick="sitPick(this,true,'s2')">C — "Could you walk us through exactly where things stand — what's done and what's still outstanding?"</div>
+        </div>
+        <div class="sit-exp" id="s2">✅ <strong>C</strong> — Vague language needs clarification. "Could you be more specific?" is the right tool here. A is for repeating; B is for summarizing/confirming.</div>
+      </div>
+
+      <div class="sit-match">
+        <div class="sit-head">The CEO just proposed a major budget cut. You want to make sure you understood correctly before reacting.</div>
+        <div class="sit-opts">
+          <div class="sit-opt" onclick="sitPick(this,true,'s3')">A — "If I understand correctly, you're proposing a 15% cut across all departments?"</div>
+          <div class="sit-opt" onclick="sitPick(this,false,'s3')">B — "Sorry to interrupt — I need to check a figure."</div>
+          <div class="sit-opt" onclick="sitPick(this,false,'s3')">C — "Would you mind repeating the deadline?"</div>
+        </div>
+        <div class="sit-exp" id="s3">✅ <strong>A</strong> — You're confirming your understanding before reacting. "If I understand correctly…" signals you're checking, not challenging.</div>
+      </div>
+
+      <div class="sit-match">
+        <div class="sit-head">The speaker is moving on to the next topic, but you notice a number in the slides doesn't match your report.</div>
+        <div class="sit-opts">
+          <div class="sit-opt" onclick="sitPick(this,false,'s4')">A — "I'm sorry, I didn't quite catch that."</div>
+          <div class="sit-opt" onclick="sitPick(this,true,'s4')">B — "Can I just stop you there? I'm seeing a discrepancy between the slides and my report."</div>
+          <div class="sit-opt" onclick="sitPick(this,false,'s4')">C — "What do you mean exactly?"</div>
+        </div>
+        <div class="sit-exp" id="s4">✅ <strong>B</strong> — You need a soft interruption to raise a concern. "Can I just stop you there?" is polite but clear.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="act-head">
+        <div class="act-num">3</div>
+        Error correction — one mistake per sentence
+      </div>
+
+      <div class="err-item">
+        <div class="err-q">"We have few time left, so let's move to the final agenda item."</div>
+        <button class="err-reveal-btn" onclick="showErr(this)">▶ Show correction</button>
+        <div class="err-answer">"few time" → <em>"We have <span class="correct-word">a little</span> time left…"</em> — "time" is uncountable, so use "little / a little". "Few" is only for countable nouns.</div>
+      </div>
+      <div class="err-item">
+        <div class="err-q">"She attended few meetings last quarter, which was great for team alignment."</div>
+        <button class="err-reveal-btn" onclick="showErr(this)">▶ Show correction</button>
+        <div class="err-answer">The context is positive ("great") → <em>"She attended <span class="correct-word">a few</span> meetings…"</em> — "few" implies not enough (negative); "a few" = some, which fits the positive context.</div>
+      </div>
+      <div class="err-item">
+        <div class="err-q">"The results were good, weren't the results?"</div>
+        <button class="err-reveal-btn" onclick="showErr(this)">▶ Show correction</button>
+        <div class="err-answer">Question tags always use a pronoun, not the full noun: <em>"The results were good, <span class="correct-word">weren't they</span>?"</em></div>
+      </div>
+      <div class="err-item">
+        <div class="err-q">"Could you be more specifically about the timeline?"</div>
+        <button class="err-reveal-btn" onclick="showErr(this)">▶ Show correction</button>
+        <div class="err-answer">"more specifically" → <em>"Could you be <span class="correct-word">more specific</span>…?"</em> — After "be", use an adjective ("specific"), not an adverb ("specifically").</div>
+      </div>
+
+      <div style="background:var(--lp);border:1.5px solid #a78bfa;border-radius:12px;padding:18px;margin-top:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;">⚡ Quick Recap</div>
+        <p style="font-size:13.5px;color:#4c1d95;margin-bottom:12px;font-style:italic;">One final challenge — this sentence has <strong>three</strong> mistakes. Can you find all three?</p>
+        <div class="err-item" style="background:white;">
+          <div class="err-q">"The figures are correct, weren't the figures? And we only have few time left to decide."</div>
+          <button class="err-reveal-btn" onclick="showErr(this)">▶ Show corrections</button>
+          <div class="err-answer">Three errors: (1) "weren't" → <span class="correct-word">aren't</span> — the main verb is "are" (present), so the tag must be present too. (2) "the figures" → <span class="correct-word">they</span> — tags use pronouns, not full nouns. (3) "few time" → <span class="correct-word">little time</span> — "time" is uncountable.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 4: FULL MEETING SIMULATION ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 4 ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-amber">
+    <div class="card-head">
+      <div class="card-icon">🎭</div>
+      <div><div class="card-label">Part 4 · Guided Speaking</div><div class="card-title">Full Meeting Simulation</div></div>
+      <span class="card-badge">20 min</span>
+    </div>
+    <div class="card-body">
+
+      <p style="font-size:14px;color:var(--gray);margin-bottom:6px;">You're in a live project review meeting. Respond to each situation using the language from today — and from previous lessons.</p>
+
+      <details class="prev-box">
+        <summary>📌 <strong>Useful phrases to keep using</strong></summary>
+        <div class="prev-box-body">
+          <div class="prev-box-item"><em>"She confirmed / mentioned that…"</em> — reporting what was said in a previous meeting (situations 2 &amp; 8)</div>
+          <div class="prev-box-item"><em>"Before we go any further…"</em> — pausing to flag something important mid-meeting (situation 5)</div>
+          <div class="prev-box-item"><em>"According to the latest figures…"</em> — introducing data or an estimate (situation 3)</div>
+          <div class="prev-box-item"><em>"…roughly… / …give or take…"</em> — softening a figure when you don't have the exact number (situation 3)</div>
+          <div class="prev-box-item"><em>"Before we wrap up…"</em> — moving into the closing phase of a meeting (situations 9 &amp; 10)</div>
+        </div>
+      </details>
+
+      <div class="scene-nav" style="margin-top:14px;">
+        <span class="scene-counter" id="meeting-counter">Situation 1 of 10</span>
+        <div class="scene-dots" id="meeting-dots">
+          <div class="scene-dot active"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div><div class="scene-dot"></div>
+        </div>
+      </div>
+
+      <div class="scene-card active" id="m1">
+        <div class="scene-top"><span class="scene-badge bg-data">Opening</span> Situation 1 — Starting the meeting</div>
+        <div class="scene-situation">You're chairing the meeting. Two people haven't arrived yet but you want to start. You want to confirm that everyone present received the agenda.</div>
+        <div class="scene-prompt">💬 Open the meeting and check about the agenda using a question tag.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">opening sentence</span><span class="lang-pill">question tag</span><span class="lang-pill">confirm something</span></div>
+        <div class="scene-answer" id="ma1"><div class="scene-answer-label">Sample answer</div>"Right, let's get started — we have a full agenda today. You all received the agenda this morning, didn't you? Good. Let's begin with the sales update."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma1',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(1)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m2">
+        <div class="scene-top"><span class="scene-badge bg-data">Update</span> Situation 2 — Reporting what was decided last week</div>
+        <div class="scene-situation">The director asks you to remind the team what was agreed in last week's meeting about the project timeline.</div>
+        <div class="scene-prompt">💬 Report what was said. Use reported speech to summarize at least two things that were agreed.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">reported speech</span><span class="lang-pill">at least 2 decisions</span><span class="lang-pill">vary your reporting verbs</span></div>
+        <div class="scene-answer" id="ma2"><div class="scene-answer-label">Sample answer</div>"Of course. The team agreed that the launch date would be pushed to the 15th. It was also decided that each department would submit a progress report by Friday. The director confirmed that the budget would remain unchanged for now."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma2',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(2)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m3">
+        <div class="scene-top"><span class="scene-badge bg-problem">Numbers</span> Situation 3 — Presenting figures</div>
+        <div class="scene-situation">It's your turn to present the budget update. Final invoices aren't in yet, but you have an estimate. There's also a small gap between what was budgeted and what's been spent.</div>
+        <div class="scene-prompt">💬 Present the figures — use approximate language and flag the shortfall.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">approximate language</span><span class="lang-pill">flag a problem</span><span class="lang-pill">quantities vocabulary</span></div>
+        <div class="scene-answer" id="ma3"><div class="scene-answer-label">Sample answer</div>"I'd like to give a quick update on the budget. We're looking at a ballpark figure of €92,000, give or take a few thousand — final invoices are still pending. I do need to flag a shortfall of around €8,000 against what was originally allocated. I'll have the exact figures confirmed by end of week."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma3',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(3)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m4">
+        <div class="scene-top"><span class="scene-badge bg-discuss">Checking</span> Situation 4 — Catching a missed detail</div>
+        <div class="scene-situation">A colleague is going through a list of key dates quickly. You missed the second deadline — you heard a month but not the exact date.</div>
+        <div class="scene-prompt">💬 Politely ask them to repeat just the second deadline.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">ask to repeat</span><span class="lang-pill">name what you missed</span><span class="lang-pill">be polite</span></div>
+        <div class="scene-answer" id="ma4"><div class="scene-answer-label">Sample answer</div>"Sorry — I didn't quite catch the second deadline. Would you mind repeating the date? I want to make sure I note it correctly."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma4',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(4)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m5">
+        <div class="scene-top"><span class="scene-badge bg-problem">Interruption</span> Situation 5 — Flagging a discrepancy</div>
+        <div class="scene-situation">The presenter is moving to the next slide. You notice the revenue figure on the slide is different from what's in your printed report — a difference of €15,000.</div>
+        <div class="scene-prompt">💬 Interrupt politely and flag the discrepancy before they move on.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">polite interruption</span><span class="lang-pill">quantities vocabulary</span><span class="lang-pill">suggest a solution</span></div>
+        <div class="scene-answer" id="ma5"><div class="scene-answer-label">Sample answer</div>"Can I just stop you there? I'm seeing a discrepancy between the slide and my report — the revenue figure is €15,000 higher in your presentation. Could we cross-reference before we continue? I want to make sure we're working from the same data."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma5',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(5)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m6">
+        <div class="scene-top"><span class="scene-badge bg-discuss">Clarification</span> Situation 6 — Asking for clarification</div>
+        <div class="scene-situation">The marketing lead says the campaign was "reasonably successful" and results were "fairly positive." You need clearer data before the board meeting.</div>
+        <div class="scene-prompt">💬 Ask for more specific information about the results.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">ask for clarification</span><span class="lang-pill">refer to vague language</span><span class="lang-pill">ask a follow-up question</span></div>
+        <div class="scene-answer" id="ma6"><div class="scene-answer-label">Sample answer</div>"Could you be a bit more specific about the results? 'Fairly positive' is quite vague — I'll need actual figures for the board meeting. What do you mean by 'reasonably successful'? Are we talking about reach, conversions, or revenue?"</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma6',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(6)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m7">
+        <div class="scene-top"><span class="scene-badge bg-discuss">Confirming</span> Situation 7 — Confirming understanding</div>
+        <div class="scene-situation">The director just announced a major restructuring plan with several changes. Before reacting, you want to confirm you understood the key point correctly.</div>
+        <div class="scene-prompt">💬 Confirm your understanding of the main proposal before responding.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">confirm understanding</span><span class="lang-pill">restate the proposal</span><span class="lang-pill">question tag</span></div>
+        <div class="scene-answer" id="ma7"><div class="scene-answer-label">Sample answer</div>"If I understand correctly, you're proposing that the two teams merge into one and report to a single manager from next month — is that right? And the current team leads would both keep their roles, wouldn't they?"</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma7',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(7)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m8">
+        <div class="scene-top"><span class="scene-badge bg-data">Reported speech</span> Situation 8 — Passing on information</div>
+        <div class="scene-situation">A colleague who couldn't attend asks what the director said about the new policy. Summarize two or three key points from the meeting so far.</div>
+        <div class="scene-prompt">💬 Report the key decisions using reported speech.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">reported speech</span><span class="lang-pill">3 key points</span><span class="lang-pill">different reporting verbs</span></div>
+        <div class="scene-answer" id="ma8"><div class="scene-answer-label">Sample answer</div>"The director said that the restructuring would begin next month. She also mentioned that all team leads would need to submit updated role descriptions by the end of the quarter. She warned that the budget for new hires had been frozen, so no new positions would be approved this year."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma8',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(8)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m9">
+        <div class="scene-top"><span class="scene-badge bg-close">Wrapping up</span> Situation 9 — Summarizing action items</div>
+        <div class="scene-situation">The meeting is nearly over. As chair, you need to summarize the main action items and confirm who is doing what.</div>
+        <div class="scene-prompt">💬 Summarize at least three action items using reported speech and question tags to confirm.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">closing language</span><span class="lang-pill">reported speech</span><span class="lang-pill">question tag to confirm</span></div>
+        <div class="scene-answer" id="ma9"><div class="scene-answer-label">Sample answer</div>"Before we wrap up, let me summarize the action items. We agreed that Ana would send the revised budget report by Friday, didn't we? And Carlos confirmed that he'd follow up with the supplier about the discrepancy. The marketing team said they'd share the full campaign data by Monday. Does that cover everything?"</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma9',this)">👁 Sample answer</button><button class="btn btn-amber btn-sm" onclick="nextM(9)">Next →</button></div>
+      </div>
+
+      <div class="scene-card" id="m10">
+        <div class="scene-top"><span class="scene-badge bg-close">Closing</span> Situation 10 — Closing the meeting</div>
+        <div class="scene-situation">It's the end of the meeting. Close professionally — confirm next steps, mention the next meeting, and thank everyone.</div>
+        <div class="scene-prompt">💬 Close the meeting using language from all four Module 1 lessons.</div>
+        <div class="scene-lang"><span class="lang-pill-tip">💡 Try:</span><span class="lang-pill">closing phrase</span><span class="lang-pill">mention next steps</span><span class="lang-pill">question tag</span><span class="lang-pill">thank the team</span></div>
+        <div class="scene-answer" id="ma10"><div class="scene-answer-label">Sample answer</div>"Right, let's wrap up — we've covered a lot today. The main actions are confirmed, and everyone knows what they need to do before Friday, don't they? The next meeting is scheduled for the 22nd. I'll circulate the minutes by end of day. Thanks everyone for a productive session."</div>
+        <div class="scene-footer"><button class="btn btn-outline btn-sm" onclick="toggleMA('ma10',this)">👁 Sample answer</button><button class="btn btn-green btn-sm" onclick="finishM()">🏆 Complete!</button></div>
+      </div>
+
+      <div class="scene-card" id="m-done" style="display:none;">
+        <div style="padding:32px;text-align:center;">
+          <div style="font-size:44px;margin-bottom:10px;">🏆</div>
+          <div style="font-size:20px;font-weight:700;color:var(--green);margin-bottom:6px;">Excellent work!</div>
+          <div style="font-size:14px;color:var(--gray);">Using language from all four Module 1 lessons — that's real progress.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PART 5: QUICK-FIRE WRAP-UP ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 5 ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-navy">
+    <div class="card-head">
+      <div class="card-icon">⚡</div>
+      <div><div class="card-label">Part 5 · Wrap-up</div><div class="card-title">Quick-Fire Round</div></div>
+      <span class="card-badge">5 min</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray);margin-bottom:16px;">Choose A or B — trust your instinct!</p>
+
+      <div class="qf-card">
+        <div class="qf-q">1. &nbsp;"The report hasn't been sent yet, _____?"</div>
+        <div class="qf-choose">
+          <button class="qf-opt" onclick="qfPick(this,true,'qf1')">A — has it</button>
+          <button class="qf-opt" onclick="qfPick(this,false,'qf1')">B — hasn't it</button>
+        </div>
+        <div class="qf-exp" id="qf1">✅ <em>A — has it</em>. Negative statement → positive tag. "hasn't" → "has".</div>
+      </div>
+
+      <div class="qf-card">
+        <div class="qf-q">2. &nbsp;You missed a figure. Which is the most natural phrase?</div>
+        <div class="qf-choose">
+          <button class="qf-opt" onclick="qfPick(this,false,'qf2')">A — "What?"</button>
+          <button class="qf-opt" onclick="qfPick(this,true,'qf2')">B — "I'm sorry, I didn't quite catch that."</button>
+        </div>
+        <div class="qf-exp" id="qf2">✅ <em>B</em> — "I didn't quite catch" is polite and professional. "What?" is too abrupt for a formal meeting.</div>
+      </div>
+
+      <div class="qf-card">
+        <div class="qf-q">3. &nbsp;"Everyone agreed on the plan, _____?"</div>
+        <div class="qf-choose">
+          <button class="qf-opt" onclick="qfPick(this,false,'qf3')">A — did they</button>
+          <button class="qf-opt" onclick="qfPick(this,true,'qf3')">B — didn't they</button>
+        </div>
+        <div class="qf-exp" id="qf3">✅ <em>B — didn't they</em>. Positive statement → negative tag. "agreed" (past simple) → "didn't".</div>
+      </div>
+
+      <div class="qf-card">
+        <div class="qf-q">4. &nbsp;The director said: "We will delay the launch." Reported correctly as:</div>
+        <div class="qf-choose">
+          <button class="qf-opt" onclick="qfPick(this,false,'qf4')">A — "The director said they will delay the launch."</button>
+          <button class="qf-opt" onclick="qfPick(this,true,'qf4')">B — "The director said they would delay the launch."</button>
+        </div>
+        <div class="qf-exp" id="qf4">✅ <em>B</em> — In reported speech, "will" shifts back to "would".</div>
+      </div>
+
+      <div class="qf-card">
+        <div class="qf-q">5. &nbsp;The CEO proposed something complex. Before responding, you say:</div>
+        <div class="qf-choose">
+          <button class="qf-opt" onclick="qfPick(this,true,'qf5')">A — "If I understand correctly, you're proposing a full restructure?"</button>
+          <button class="qf-opt" onclick="qfPick(this,false,'qf5')">B — "Could you say that again?"</button>
+        </div>
+        <div class="qf-exp" id="qf5">✅ <em>A</em> — "If I understand correctly" confirms your interpretation. B is for when you missed something — here you heard it, you just want to confirm you understood.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ HOMEWORK ══ -->
+  </div>
+
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+
+<!-- ══ SLIDE 6 ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-orange">
+    <div class="card-head">
+      <div class="card-icon">📝</div>
+      <div><div class="card-label">Homework</div><div class="card-title">Practice at Home</div></div>
+      <span class="card-badge">15 min</span>
+    </div>
+    <div class="card-body">
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">✏️ Task 1 — Write the question tag</div>
+      <p style="font-size:14px;color:var(--gray);margin-bottom:14px;">Complete each sentence with the correct question tag. Write it in the box — don't just think it!</p>
+
+      <div class="qtag-hw-list">
+        <div class="qtag-hw-item">
+          <span class="qtag-hw-num">1</span>
+          <div class="qtag-hw-q">The meeting was postponed, <input class="qtag-inline" id="qa1i" type="text" placeholder="tag…">?</div>
+          <button class="err-reveal-btn" onclick="fillQtag(this,&quot;wasn't it&quot;,'qa1i')">Show answer</button>
+        </div>
+        <div class="qtag-hw-item">
+          <span class="qtag-hw-num">2</span>
+          <div class="qtag-hw-q">You've already reviewed the figures, <input class="qtag-inline" id="qa2i" type="text" placeholder="tag…">?</div>
+          <button class="err-reveal-btn" onclick="fillQtag(this,&quot;haven't you&quot;,'qa2i')">Show answer</button>
+        </div>
+        <div class="qtag-hw-item">
+          <span class="qtag-hw-num">3</span>
+          <div class="qtag-hw-q">I'm listed as the project lead, <input class="qtag-inline" id="qa3i" type="text" placeholder="tag…">?</div>
+          <button class="err-reveal-btn" onclick="fillQtag(this,&quot;aren't I&quot;,'qa3i')">Show answer</button>
+        </div>
+        <div class="qtag-hw-item">
+          <span class="qtag-hw-num">4</span>
+          <div class="qtag-hw-q">They won't cancel the project, <input class="qtag-inline" id="qa4i" type="text" placeholder="tag…">?</div>
+          <button class="err-reveal-btn" onclick="fillQtag(this,&quot;will they&quot;,'qa4i')">Show answer</button>
+        </div>
+        <div class="qtag-hw-item">
+          <span class="qtag-hw-num">5</span>
+          <div class="qtag-hw-q">She confirmed the deadline yesterday, <input class="qtag-inline" id="qa5i" type="text" placeholder="tag…">?</div>
+          <button class="err-reveal-btn" onclick="fillQtag(this,&quot;didn't she&quot;,'qa5i')">Show answer</button>
+        </div>
+        <div class="qtag-hw-item">
+          <span class="qtag-hw-num">6</span>
+          <div class="qtag-hw-q">We haven't reached a consensus yet, <input class="qtag-inline" id="qa6i" type="text" placeholder="tag…">?</div>
+          <button class="err-reveal-btn" onclick="fillQtag(this,&quot;have we&quot;,'qa6i')">Show answer</button>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">✏️ Task 2 — Write the response</div>
+      <p style="font-size:14px;color:var(--gray);margin-bottom:14px;">Read each meeting situation. Write a professional response using the phrases from this lesson. Aim for 1–2 sentences.</p>
+
+      <div class="qtag-hw-list">
+        <div class="qtag-hw-item-v">
+          <div class="qtag-hw-row"><span class="qtag-hw-num">1</span><div class="qtag-hw-q">A colleague gives a figure, but you didn't hear it clearly.</div></div>
+          <textarea class="qtag-field" rows="3" placeholder="Write your response…" style="width:100%;resize:vertical;margin-bottom:8px;"></textarea>
+          <button class="err-reveal-btn" onclick="toggleErr(this,'hw2a')">▶ Show sample</button>
+          <div class="qtag-answer" id="hw2a">💬 <em>"I'm sorry, I didn't quite catch that figure — could you say it again?"</em><br><span style="font-size:12px;color:var(--gray);">Uses: <strong>didn't quite catch</strong></span></div>
+        </div>
+        <div class="qtag-hw-item-v">
+          <div class="qtag-hw-row"><span class="qtag-hw-num">2</span><div class="qtag-hw-q">Someone says the project is "basically on track" — but you need a real update.</div></div>
+          <textarea class="qtag-field" rows="3" placeholder="Write your response…" style="width:100%;resize:vertical;margin-bottom:8px;"></textarea>
+          <button class="err-reveal-btn" onclick="toggleErr(this,'hw2b')">▶ Show sample</button>
+          <div class="qtag-answer" id="hw2b">💬 <em>"Could you be a bit more specific? 'Basically on track' is quite vague — what's the current status?"</em><br><span style="font-size:12px;color:var(--gray);">Uses: <strong>could you be more specific</strong> + <strong>vague</strong></span></div>
+        </div>
+        <div class="qtag-hw-item-v">
+          <div class="qtag-hw-row"><span class="qtag-hw-num">3</span><div class="qtag-hw-q">A manager announces a budget cut and a new deadline. You want to confirm what you heard.</div></div>
+          <textarea class="qtag-field" rows="3" placeholder="Write your response…" style="width:100%;resize:vertical;margin-bottom:8px;"></textarea>
+          <button class="err-reveal-btn" onclick="toggleErr(this,'hw2c')">▶ Show sample</button>
+          <div class="qtag-answer" id="hw2c">💬 <em>"If I understand correctly, you're proposing a 10% budget cut and moving the deadline to March — is that right?"</em><br><span style="font-size:12px;color:var(--gray);">Uses: <strong>if I understand correctly</strong> + echo question</span></div>
+        </div>
+        <div class="qtag-hw-item-v">
+          <div class="qtag-hw-row"><span class="qtag-hw-num">4</span><div class="qtag-hw-q">You want to check that a colleague received the updated report you sent this morning.</div></div>
+          <textarea class="qtag-field" rows="3" placeholder="Write your response…" style="width:100%;resize:vertical;margin-bottom:8px;"></textarea>
+          <button class="err-reveal-btn" onclick="toggleErr(this,'hw2d')">▶ Show sample</button>
+          <div class="qtag-answer" id="hw2d">💬 <em>"You received the updated report I sent this morning, didn't you?"</em><br><span style="font-size:12px;color:var(--gray);">Uses: <strong>question tag</strong></span></div>
+        </div>
+      </div>
+
+    </div>
+  
+    <!-- bottom nav -->
+    <div class="slide-bottom-nav">
+      <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+      <a class="slide-nav-btn" href="Lesson_05_Planning_Formal_Emails.html" style="text-decoration:none;">Lesson 5 →</a>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+const SLIDE_LABELS = ["Cover", "Part 1 · Warm-up", "Part 2 · Vocabulary", "Part 3 · Key Language", "Part 4 · Guided Speaking", "Part 5 · Wrap-up", "Homework"];
+const TOTAL_SLIDES = 7;
+let currentSlide = 0;
+
+function slideNav(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= TOTAL_SLIDES) return;
+  goToSlide(n);
+}
+
+function goToSlide(n) {
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateSlideUI();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function updateSlideUI() {
+  const prev = document.getElementById('slide-prev');
+  const next = document.getElementById('slide-next');
+  if (prev) prev.disabled = currentSlide === 0;
+  if (next) {
+    if (currentSlide === TOTAL_SLIDES - 1) {
+      next.disabled = false;
+      next.textContent = 'Lesson 5 →';
+      next.onclick = () => { window.location.href='Lesson_05_Planning_Formal_Emails.html'; };
+    } else {
+      next.disabled = false;
+      next.textContent = 'Next →';
+      next.onclick = () => slideNav(1);
+    }
+  }
+  const lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = SLIDE_LABELS[currentSlide];
+  const ctr = document.getElementById('slide-counter');
+  if (ctr) ctr.textContent = 'Slide ' + (currentSlide+1) + ' of ' + TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i < currentSlide) d.classList.add('done');
+    else if (i === currentSlide) d.classList.add('active');
+  });
+}
+
+function rateStar(id, n) {
+  ratings[id] = n;
+  document.getElementById('stars-'+id).querySelectorAll('.star-btn').forEach((s,i)=>{
+    s.classList.toggle('star-on', i < n);
+  });
+  if (ratings.r1>0 && ratings.r2>0 && ratings.r3>0)
+    document.getElementById('rate-reveal-btn').style.display = 'inline-flex';
+}
+
+function revealRating() {
+  document.getElementById('rate-results').style.display = 'block';
+  document.getElementById('rate-reveal-btn').style.display = 'none';
+}
+
+function toggleFU3() {
+  const fu = document.getElementById('wu-followups');
+  const btn = document.getElementById('fu3-btn');
+  const open = fu.classList.toggle('open');
+  btn.textContent = open ? '− Follow-up questions' : '+ Follow-up questions';
+}
+
+function sitPick(el, correct, sid) {
+  const opts = el.closest('.sit-match').querySelectorAll('.sit-opt');
+  if ([...opts].some(o => o.classList.contains('correct') || o.classList.contains('wrong'))) return;
+  opts.forEach(o => o.classList.add('locked'));
+  el.classList.add(correct ? 'correct' : 'wrong');
+  document.getElementById(sid).classList.add('show');
+}
+
+function mcPick(el,correct){const opts=el.closest('.mc-opts').querySelectorAll('.mc-opt');if([...opts].some(o=>o.classList.contains('correct')||o.classList.contains('wrong')))return;opts.forEach(o=>o.classList.add('locked'));if(correct){el.classList.add('correct');}else{el.classList.add('wrong');opts.forEach(o=>{if(o.onclick&&o.onclick.toString().includes('true'))o.classList.add('correct');});}}
+
+function showErr(btn){const ans=btn.nextElementSibling;const showing=ans.classList.contains('show');ans.classList.toggle('show');btn.textContent=showing?'▶ Show answer':'▼ Hide';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+function toggleMA(id,btn){const el=document.getElementById(id);if(el.classList.contains('show')){el.classList.remove('show');btn.textContent='👁 Sample answer';}else{el.classList.add('show');btn.textContent='🙈 Hide';}}
+
+function nextM(n){document.getElementById('m'+n).classList.remove('active');curM=n+1;document.getElementById('m'+curM).classList.add('active');updateMDots();document.getElementById('meeting-counter').textContent=`Situation ${curM} of ${totalM}`;}
+
+function finishM(){document.getElementById('m'+totalM).classList.remove('active');const done=document.getElementById('m-done');done.style.display='block';done.classList.add('active');document.getElementById('meeting-counter').textContent='Module 1 Complete! 🏆';document.querySelectorAll('#meeting-dots .scene-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done');});}
+
+function updateMDots(){document.querySelectorAll('#meeting-dots .scene-dot').forEach((d,i)=>{d.classList.remove('active','done');if(i<curM-1)d.classList.add('done');else if(i===curM-1)d.classList.add('active');});}
+
+function qfPick(el,correct,expId){const btns=el.closest('.qf-choose').querySelectorAll('.qf-opt');if([...btns].some(b=>b.classList.contains('qf-correct')||b.classList.contains('qf-wrong')))return;btns.forEach(b=>b.classList.add('locked'));document.getElementById(expId).classList.add('show');if(correct)el.classList.add('qf-correct');else{el.classList.add('qf-wrong');btns.forEach(b=>{if(b!==el)b.classList.add('qf-correct');});}}
+
+function toggleBB(btn,id){const el=document.getElementById(id);const showing=el.classList.contains('show');el.classList.toggle('show');btn.textContent=showing?'▶ Better version':'▼ Hide';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+function toggleErr(btn,id){const el=document.getElementById(id);const showing=el.classList.contains('show');el.classList.toggle('show');btn.textContent=showing?'▶ Show answer':'▼ Hide answer';btn.style.color=showing?'':'var(--green)';btn.style.borderColor=showing?'':'var(--green)';}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
+});
+const ratings = {r1:0,r2:0,r3:0};
+let curM=1;const totalM=10;
+
+function fillQtag(btn, answer, inputId) {
+  const inp = document.getElementById(inputId);
+  inp.value = answer;
+  inp.classList.add('filled');
+  btn.textContent = '✅ ' + answer;
+  btn.disabled = true;
+  btn.style.borderColor = 'var(--green)';
+  btn.style.color = 'var(--green)';
+}
+
+</script>
+</body>
+</html
+
+
+
+
+</body>
+</html>

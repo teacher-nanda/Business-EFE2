@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 8 – Job Descriptions &amp; Applications</title>
+<style>
+:root{
+  --navy:#1a2e4a;--blue:#2563eb;--lb:#dbeafe;
+  --teal:#0d9488;--lt:#ccfbf1;
+  --amber:#d97706;--la:#fef3c7;
+  --rose:#e11d48;--lr:#ffe4e6;
+  --purple:#7c3aed;--lp:#ede9fe;--indigo:#4338ca;--li:#e0e7ff;
+  --green:#16a34a;--lg:#dcfce7;
+  --orange:#ea580c;--lo:#ffedd5;
+  --gray:#6b7280;--lgr:#f3f4f6;
+  --border:#e5e7eb;--text:#111827;--textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;padding-top:42px;}
+.card{background:white;border-radius:16px;border:1px solid var(--border);margin-bottom:26px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.card-head{display:flex;align-items:center;gap:14px;padding:15px 22px;border-bottom:1px solid var(--border);}
+.card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.card-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:2px;}
+.card-title{font-size:16px;font-weight:700;}
+.card-badge{margin-left:auto;font-size:11px;font-weight:700;color:white;border-radius:12px;padding:3px 11px;white-space:nowrap;}
+.card-body{padding:22px;}
+.c-teal .card-head{background:var(--lt);}.c-teal .card-icon{background:var(--teal);color:white;}.c-teal .card-title{color:var(--teal);}.c-teal .card-badge{background:var(--teal);}
+.c-indigo .card-head{background:var(--li);}.c-indigo .card-icon{background:var(--indigo);color:white;}.c-indigo .card-title{color:var(--indigo);}.c-indigo .card-badge{background:var(--indigo);}
+.c-blue .card-head{background:var(--lb);}.c-blue .card-icon{background:var(--blue);color:white;}.c-blue .card-title{color:var(--blue);}.c-blue .card-badge{background:var(--blue);}
+.c-purple .card-head{background:var(--lp);}.c-purple .card-icon{background:var(--purple);color:white;}.c-purple .card-title{color:var(--purple);}.c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);}.c-amber .card-icon{background:var(--amber);color:white;}.c-amber .card-title{color:var(--amber);}.c-amber .card-badge{background:var(--amber);}
+.c-green .card-head{background:var(--lg);}.c-green .card-icon{background:var(--green);color:white;}.c-green .card-title{color:var(--green);}.c-green .card-badge{background:var(--green);}
+.c-navy .card-head{background:var(--lgr);}.c-navy .card-icon{background:var(--navy);color:white;}.c-navy .card-title{color:var(--navy);}.c-navy .card-badge{background:var(--navy);}
+.c-orange .card-head{background:var(--lo);}.c-orange .card-icon{background:var(--orange);color:white;}.c-orange .card-title{color:var(--orange);}.c-orange .card-badge{background:var(--orange);}
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.act-type{margin-left:auto;font-size:10px;font-weight:700;color:white;border-radius:8px;padding:2px 8px;text-transform:none;letter-spacing:0;}
+.type-reading{background:var(--teal);}.type-grammar{background:var(--purple);}.type-vocab{background:var(--blue);}.type-speaking{background:var(--green);}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+.main{max-width:920px;margin:0 auto;padding:28px 18px 64px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* TFD */
+.tfd-item{border:1.5px solid var(--border);border-radius:11px;overflow:hidden;margin-bottom:12px;}
+.tfd-q{padding:14px 18px;background:#f8fafc;font-size:14.5px;color:var(--navy);font-weight:600;line-height:1.5;border-bottom:1px solid var(--border);}
+.tfd-opts{display:flex;gap:8px;padding:12px 18px;flex-wrap:wrap;}
+.tfd-btn{padding:7px 18px;border:1.5px solid var(--border);border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:white;transition:all .15s;}
+.tfd-btn:hover:not(.tfd-picked){background:var(--lgr);}
+.tfd-btn.tfd-true{background:var(--lg);border-color:var(--green);color:#14532d;}
+.tfd-btn.tfd-false{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.tfd-btn.tfd-depends{background:var(--la);border-color:var(--amber);color:#78350f;}
+.tfd-exp{display:none;padding:11px 18px;font-size:13.5px;color:var(--text);background:white;border-top:1px solid var(--border);line-height:1.55;}
+.tfd-exp.show{display:block;animation:fadeIn .25s;}
+.tfd-exp em{color:var(--teal);font-style:normal;font-weight:600;}
+
+/* JOB POSTING */
+.posting-box{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:18px;}
+.posting-head{background:var(--navy);padding:14px 20px;color:white;}
+.posting-company{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;}
+.posting-title{font-size:18px;font-weight:800;}
+.posting-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
+.posting-tag{background:rgba(255,255,255,0.12);border-radius:20px;padding:3px 12px;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);}
+.posting-body{padding:18px 20px;background:white;font-size:13.5px;line-height:1.7;}
+.posting-section{margin-bottom:14px;}
+.posting-section-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:7px;padding-bottom:4px;border-bottom:1px solid var(--border);}
+.posting-body ul{padding-left:18px;}
+.posting-body li{margin-bottom:4px;color:var(--text);}
+.posting-apply{background:var(--lb);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--indigo);font-weight:600;margin-top:6px;}
+
+/* MC */
+.mc-item{margin-bottom:18px;}
+.mc-q{font-size:14.5px;font-weight:600;margin-bottom:9px;color:var(--navy);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{display:flex;align-items:center;gap:10px;border:1.5px solid var(--border);border-radius:8px;padding:9px 13px;cursor:pointer;font-size:13.5px;transition:all .15s;user-select:none;}
+.mc-opt:hover:not(.locked){border-color:var(--blue);background:var(--lb);transform:translateX(3px);}
+.mc-opt.correct{background:var(--lg);border-color:var(--green);color:#14532d;}
+.mc-opt.wrong{background:var(--lr);border-color:var(--rose);color:#9f1239;}
+.mc-opt.locked{cursor:default;}
+.mc-letter{background:var(--lgr);border:1px solid var(--border);border-radius:4px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--navy);}
+.mc-opt.correct .mc-letter{background:var(--green);border-color:var(--green);color:white;}
+.mc-opt.wrong .mc-letter{background:var(--rose);border-color:var(--rose);color:white;}
+
+/* VOCAB */
+.vocab-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px;}
+.bvc{border:1px solid var(--border);border-radius:10px;padding:13px 15px;background:white;transition:box-shadow .15s,border-color .15s;}
+.bvc:hover{border-color:var(--blue);box-shadow:0 3px 10px rgba(37,99,235,0.12);}
+.bvc-term{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.bvc-def{font-size:12.5px;color:var(--gray);margin-bottom:7px;line-height:1.4;}
+.bvc-eg{font-size:13px;color:var(--text);font-style:italic;border-left:3px solid var(--lb);padding-left:9px;line-height:1.4;}
+
+/* WORD BANK */
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;background:var(--lb);border-radius:8px;padding:11px 13px;margin-bottom:14px;}
+.wb-word{background:white;border:1.5px solid var(--blue);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--blue);color:white;}
+.wb-word.used{background:var(--lgr);border-color:var(--border);color:var(--gray);cursor:default;text-decoration:line-through;}
+.wb-word.selected-wb{outline:3px solid var(--amber);}
+.gf-list{list-style:none;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.gf-item{padding:11px 14px;border-bottom:1px solid var(--border);font-size:14px;display:flex;align-items:flex-start;gap:10px;}
+.gf-item:last-child{border-bottom:none;}
+.gf-num{background:var(--navy);color:white;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.blank-drop{display:inline-flex;align-items:center;justify-content:center;border:2px dashed #94a3b8;border-radius:20px;min-width:110px;min-height:34px;padding:6px 12px;cursor:pointer;color:transparent;font-size:13px;font-weight:600;vertical-align:middle;transition:all .2s;background:#f8fafc;margin:0 3px;}
+.blank-drop:hover{border-color:var(--blue);background:var(--lb);}
+.blank-drop.has-word{color:var(--navy);border-style:solid;border-color:var(--amber);background:var(--la);}
+.blank-drop.correct{color:var(--green);border-style:solid;border-color:var(--green);background:var(--lg);}
+.blank-drop.incorrect{color:var(--rose);border-style:solid;border-color:var(--rose);background:var(--lr);}
+
+/* KEY LANGUAGE PANEL */
+.kl-panel{border:1px solid var(--lp);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.kl-panel-head{background:var(--purple);color:white;padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;}
+.kl-section{padding:14px 16px;border-bottom:1px solid var(--lp);}
+.kl-section:last-child{border-bottom:none;}
+.kl-section-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--purple);margin-bottom:10px;}
+.kl-phrase{background:var(--lp);border-radius:7px;padding:8px 12px;font-size:13.5px;color:var(--navy);margin-bottom:6px;line-height:1.5;}
+.kl-phrase em{font-style:italic;color:var(--purple);font-weight:600;}
+.kl-phrase:last-child{margin-bottom:0;}
+.kl-tip{background:#fefce8;border:1px solid #fde68a;border-radius:7px;padding:8px 12px;font-size:12.5px;color:#78350f;margin-top:8px;line-height:1.5;}
+
+/* FPICK */
+.fpick-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:white;}
+.fpick-q{font-size:14px;color:var(--navy);margin-bottom:12px;line-height:1.6;font-weight:600;}
+.fpick-opts{display:flex;flex-direction:column;gap:8px;}
+.fpick-opt{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:13.5px;line-height:1.55;}
+.fpick-opt:hover:not(.fp-locked){border-color:var(--blue);background:var(--lb);}
+.fpick-letter{background:var(--lgr);color:var(--navy);min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.fpick-opt.fp-correct{border-color:var(--green);background:var(--lg);}.fpick-opt.fp-correct .fpick-letter{background:var(--green);color:white;}
+.fpick-opt.fp-wrong{border-color:var(--rose);background:var(--lr);}.fpick-opt.fp-wrong .fpick-letter{background:var(--rose);color:white;}
+.fpick-opt.fp-locked{cursor:default;opacity:0.6;}
+.fpick-hint{font-size:12px;color:#14532d;margin-top:8px;font-style:italic;display:none;padding:7px 10px;background:#f0fdf4;border-radius:7px;border:1px solid #86efac;}
+.fpick-hint.show{display:block;}
+
+/* SPEAKING */
+.prev-box{border:1.5px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.prev-box summary{padding:11px 16px;font-size:12px;font-weight:700;letter-spacing:.5px;cursor:pointer;list-style:none;background:var(--lgr);color:var(--navy);display:flex;align-items:center;gap:8px;user-select:none;}
+.prev-box summary::-webkit-details-marker{display:none;}
+.prev-box summary::after{content:"▸";margin-left:auto;font-size:11px;color:var(--gray);transition:transform .2s;}
+.prev-box[open] summary::after{transform:rotate(90deg);}
+.prev-box[open] summary{border-bottom:1px solid var(--border);}
+.prev-box-body{padding:14px 16px;background:white;display:grid;gap:7px;}
+.prev-box-item{font-size:13px;color:var(--text);padding:8px 12px;background:#f8fafc;border-radius:7px;border-left:3px solid var(--blue);line-height:1.45;}
+.scene-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.scene-dots{display:flex;gap:5px;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:background .2s;}
+.scene-dot.active{background:var(--amber);}
+.scene-dot.done{background:var(--green);}
+.scene-card{display:none;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;animation:fadeIn .3s;}
+.scene-card.active{display:block;}
+.scene-top{background:var(--navy);color:white;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:13px;}
+.scene-situation{padding:15px 18px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;line-height:1.6;}
+.scene-task{padding:14px 18px;font-size:14px;line-height:1.6;color:var(--navy);}
+.scene-footer{padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:9px;justify-content:flex-end;}
+.scene-answer{display:none;margin:0 18px 14px;padding:12px 14px;background:var(--lg);border-radius:8px;font-size:13.5px;color:#14532d;line-height:1.6;border:1px solid #86efac;}
+.scene-answer.show{display:block;animation:fadeIn .3s;}
+
+/* MATCH (L3 style) */
+.match-left,.match-right{display:flex;align-items:flex-start;gap:8px;border:1.5px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13px;background:white;cursor:pointer;transition:all .15s;user-select:none;}
+.match-left:hover{border-color:var(--amber);background:var(--la);}
+.match-right{background:var(--lgr);}
+.match-right:hover{border-color:var(--amber);background:var(--la);}
+.match-left.selected{border-color:var(--amber);background:var(--la);box-shadow:0 0 0 2px var(--amber);}
+.match-left.paired,.match-right.paired{border-color:var(--amber);background:#fff7ed;}
+.match-left.correct,.match-right.correct{border-color:var(--green);background:var(--lg);}
+.match-left.incorrect,.match-right.incorrect{border-color:var(--rose);background:var(--lr);}
+.match-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--navy);color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.match-letter{background:var(--teal);}
+.match-text{flex:1;color:var(--navy);line-height:1.4;}
+.match-badge{font-size:11px;font-weight:700;color:var(--amber);white-space:nowrap;flex-shrink:0;}
+
+/* HW */
+.hw-card{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.hw-head{display:flex;align-items:center;gap:11px;padding:12px 17px;background:var(--lo);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;color:var(--orange);}
+.hw-tag{background:var(--orange);color:white;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;}
+.hw-body{padding:17px;}
+.hw-type{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px;}
+.hw-grammar{background:var(--lp);color:#5b21b6;}
+.hw-write{background:var(--lt);color:#134e4a;}
+.qtag-hw-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.qtag-hw-item:last-child{border-bottom:none;}
+.qtag-hw-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.qtag-hw-q{flex:1;font-size:13.5px;color:var(--navy);line-height:1.7;}
+.qtag-inline{border:1.5px solid var(--border);border-radius:6px;padding:3px 9px;font-size:13px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .15s;width:80px;}
+.qtag-inline:focus{border-color:var(--purple);}
+.qtag-inline.filled{border-color:var(--green);background:var(--lg);color:#14532d;}
+.err-reveal-btn{padding:5px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;background:white;color:var(--gray);transition:all .15s;white-space:nowrap;}
+.err-reveal-btn:hover{border-color:var(--green);color:var(--green);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:none;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.btn-navy{background:var(--navy);color:white;}.btn-outline{background:white;color:var(--navy);border:1.5px solid var(--border);}.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-purple{background:var(--purple);color:white;}.btn-sm{padding:6px 13px;font-size:12px;}
+
+/* SLIDE SYSTEM */
+.slide{display:none;}.slide.active{display:block;animation:slideIn .25s ease;}
+.top-home-strip{position:fixed;top:0;left:0;right:0;z-index:400;background:var(--navy);height:42px;display:flex;align-items:center;justify-content:flex-end;padding:0 20px;box-shadow:0 2px 6px rgba(0,0,0,0.25);}
+.top-home-link{color:white;text-decoration:none;font-size:13px;font-weight:700;font-family:inherit;display:flex;align-items:center;gap:6px;opacity:.85;transition:opacity .15s;}
+.top-home-link:hover{opacity:1;}
+.slide-navbar{background:white;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:10px 22px;box-shadow:0 2px 8px rgba(0,0,0,0.08);gap:12px;}
+.slide-nav-btn{background:var(--navy);color:white;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;}
+.slide-nav-btn:hover:not(:disabled){background:#263d5c;}
+.slide-nav-btn:disabled{opacity:.3;cursor:default;}
+.slide-info{text-align:center;flex:1;}
+.slide-label{font-weight:700;color:var(--navy);font-size:14px;}
+.slide-counter-text{font-size:12px;color:var(--gray);margin:2px 0 6px;}
+.slide-progress{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.sp-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .15s;}
+.sp-dot.active{background:var(--navy);transform:scale(1.3);}
+.sp-dot.done{background:var(--teal);}
+.slide-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;margin-top:30px;border-top:2px solid var(--border);background:#f8fafc;}
+
+/* COVER */
+.cover-slide{min-height:calc(100vh - 98px);background:linear-gradient(140deg,var(--navy) 0%,#1e3a5f 60%,#243060 100%);display:flex;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow:hidden;}
+.cover-slide::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,0.03);}
+.cover-slide::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706);}
+.cover-inner{text-align:center;max-width:680px;color:white;position:relative;z-index:1;}
+.cover-teacher{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;}
+.cover-module-tag{display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);margin-bottom:18px;}
+.cover-title-main{font-size:38px;font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px;}
+.cover-lesson-badge{display:inline-block;background:var(--amber);color:var(--navy);border-radius:20px;padding:4px 18px;font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:32px;}
+.cover-tl{margin:0 auto 34px;max-width:620px;}
+.tl-bar{display:flex;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;}
+.tl-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:11px 4px;text-align:center;color:white;line-height:1.3;}
+.tl-seg .t{font-size:10px;font-weight:400;opacity:.75;margin-top:2px;}
+.s1{background:#0d9488;flex:1;}.s2{background:#4338ca;flex:2;}.s3{background:#2563eb;flex:2;}.s4{background:#7c3aed;flex:2;}.s5{background:#d97706;flex:2;}
+.cover-start{background:white;color:var(--navy);border:none;border-radius:12px;padding:14px 38px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,0.25);}
+.cover-start:hover{background:var(--amber);color:white;transform:translateY(-2px);}
+</style>
+</head>
+<body>
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 9</div>
+    <div class="slide-progress">
+      <div class="sp-dot active" onclick="goToSlide(0)"></div>
+      <div class="sp-dot" onclick="goToSlide(1)"></div>
+      <div class="sp-dot" onclick="goToSlide(2)"></div>
+      <div class="sp-dot" onclick="goToSlide(3)"></div>
+      <div class="sp-dot" onclick="goToSlide(4)"></div>
+      <div class="sp-dot" onclick="goToSlide(5)"></div>
+      <div class="sp-dot" onclick="goToSlide(6)"></div>
+      <div class="sp-dot" onclick="goToSlide(7)"></div>
+      <div class="sp-dot" onclick="goToSlide(8)"></div>
+    </div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-teacher">Business English</div>
+      <div class="cover-module-tag">Module 3 · HR &amp; Career — Lesson 1 of 4</div>
+      <div class="cover-title-main">Job Descriptions &amp; Applications</div>
+      <div class="cover-lesson-badge">Lesson 8</div>
+      <div class="cover-tl">
+        <div class="tl-bar">
+          <div class="tl-seg s1">Warm-up<span class="t">5 min</span></div>
+          <div class="tl-seg s2">Reading<span class="t">10 min</span></div>
+          <div class="tl-seg s3">Vocabulary<span class="t">8 min</span></div>
+          <div class="tl-seg s4">Grammar<span class="t">10 min</span></div>
+          <div class="tl-seg s5">Speaking<span class="t">10 min</span></div>
+        </div>
+      </div>
+      <button class="cover-start" onclick="goToSlide(1)">Start Lesson →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 · WARM-UP ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+      <div class="card-head">
+        <div class="card-icon">💼</div>
+        <div><div class="card-label">Part 1 · Warm-up</div><div class="card-title">Jobs &amp; Applications: What Do You Think?</div></div>
+        <span class="card-badge">5 min</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:14px;color:var(--textl);margin-bottom:18px;">Think about job applications in your professional life. Are these statements <strong>True</strong>, <strong>False</strong>, or <strong>It depends</strong>?</p>
+
+        <div class="tfd-item">
+          <div class="tfd-q">Reading the full job description before applying is always essential.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp1')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp1')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp1')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp1"><em>True.</em> The job description tells you what the role involves, what qualifications are needed, and whether you are a good fit. Applying without reading it carefully can lead to wasted time for both sides.</div>
+        </div>
+
+        <div class="tfd-item">
+          <div class="tfd-q">A cover letter is just a summary of what's already in your resume.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp2')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp2')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp2')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp2"><em>False.</em> A cover letter explains why you want the role and what makes you the right person for it. It shows your personality and motivation — things a resume alone cannot communicate.</div>
+        </div>
+
+        <div class="tfd-item">
+          <div class="tfd-q">You can apply for a job even if you don't meet every requirement listed.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp3')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp3')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp3')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp3"><em>It depends.</em> If you meet most of the key requirements, it is usually worth applying. However, if you are missing several essential qualifications, your application is unlikely to be successful at this stage.</div>
+        </div>
+
+        <div class="tfd-item">
+          <div class="tfd-q">HR is always the department that makes the final hiring decision.</div>
+          <div class="tfd-opts">
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp4')">True</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'false','exp4')">False</button>
+            <button class="tfd-btn" onclick="tfdPick(this,'true','exp4')">It depends</button>
+          </div>
+          <div class="tfd-exp" id="exp4"><em>It depends.</em> In many organizations, HR manages the process and screens candidates, but the final decision is made by the hiring manager in the relevant department. In smaller companies, one person may handle both.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 · READING ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-indigo">
+      <div class="card-head">
+        <div class="card-icon">📄</div>
+        <div><div class="card-label">Part 2 · Reading</div><div class="card-title">A Real Job Posting</div></div>
+        <span class="card-badge">10 min</span>
+      </div>
+      <div class="card-body">
+
+        <div class="act-head">
+          <span class="act-num">1</span>
+          Read the job posting carefully.
+          <span class="act-type type-reading">Reading</span>
+        </div>
+
+        <div class="posting-box">
+          <div class="posting-head">
+            <div class="posting-company">Meridian Global</div>
+            <div class="posting-title">HR Coordinator</div>
+            <div class="posting-meta">
+              <span class="posting-tag">📁 Human Resources</span>
+              <span class="posting-tag">🏢 Head Office</span>
+              <span class="posting-tag">⏱ Full-time · Permanent</span>
+            </div>
+          </div>
+          <div class="posting-body">
+            <div class="posting-section">
+              <div class="posting-section-title">About the Role</div>
+              We are looking for an organized and motivated HR Coordinator to join the Human Resources team at Meridian Global. In this role, you will support the HR Director and help manage the day-to-day operations of the department.
+            </div>
+            <div class="posting-section">
+              <div class="posting-section-title">Key Responsibilities</div>
+              <ul>
+                <li>Support the recruitment process, from posting job ads to shortlisting candidates</li>
+                <li>Maintain and update employee records and HR databases</li>
+                <li>Assist with the onboarding of new employees</li>
+                <li>Coordinate training and development activities across departments</li>
+                <li>Report to the HR Director and attend weekly team meetings</li>
+              </ul>
+            </div>
+            <div class="posting-section">
+              <div class="posting-section-title">Requirements</div>
+              <ul>
+                <li>A degree in Human Resources, Business, or a related field</li>
+                <li>At least two years of experience in an HR role</li>
+                <li>Excellent communication and organizational skills</li>
+                <li>Proficiency in MS Office and HR software</li>
+                <li>A proactive and detail-oriented approach to work</li>
+              </ul>
+            </div>
+            <div class="posting-section">
+              <div class="posting-section-title">What We Offer</div>
+              <ul>
+                <li>A competitive salary and benefits package</li>
+                <li>Professional development opportunities</li>
+                <li>A flexible and supportive working environment</li>
+              </ul>
+            </div>
+            <div class="posting-apply">📧 To apply: send your resume and a cover letter to <strong>careers@meridianglobal.com</strong></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="act-head">
+          <span class="act-num">2</span>
+          Answer the comprehension questions.
+          <span class="act-type type-reading">Reading</span>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">1. What is the main purpose of this document?</div>
+          <div class="mc-opts">
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">A</span>To explain the company's HR training program</div>
+            <div class="mc-opt locked" onclick="mcPick(this,true)"><span class="mc-letter">B</span>To advertise an available position at the company</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">C</span>To summarize the company's employee benefits</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">D</span>To describe the onboarding process for new staff</div>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">2. How much experience in HR does the applicant need?</div>
+          <div class="mc-opts">
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">A</span>No experience required</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">B</span>Exactly five years</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">C</span>Less than one year</div>
+            <div class="mc-opt locked" onclick="mcPick(this,true)"><span class="mc-letter">D</span>At least two years</div>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">3. Which personal quality is specifically required for this role?</div>
+          <div class="mc-opts">
+            <div class="mc-opt locked" onclick="mcPick(this,true)"><span class="mc-letter">A</span>Being organized and detail-oriented</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">B</span>Experience in financial reporting</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">C</span>Fluency in a second language</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">D</span>A background in marketing</div>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">4. What does the company specifically offer to the successful candidate?</div>
+          <div class="mc-opts">
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">A</span>A guaranteed promotion after one year</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">B</span>Free accommodation near the office</div>
+            <div class="mc-opt locked" onclick="mcPick(this,true)"><span class="mc-letter">C</span>Professional development opportunities</div>
+            <div class="mc-opt locked" onclick="mcPick(this,false)"><span class="mc-letter">D</span>A company car</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 · VOCABULARY ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-blue">
+      <div class="card-head">
+        <div class="card-icon">📚</div>
+        <div><div class="card-label">Part 3 · Vocabulary</div><div class="card-title">Key Job Application Language</div></div>
+        <span class="card-badge">8 min</span>
+      </div>
+      <div class="card-body">
+
+        <div class="act-head">
+          <span class="act-num">1</span>
+          Study these key words and phrases.
+          <span class="act-type type-vocab">Vocabulary</span>
+        </div>
+
+        <div class="vocab-card-grid">
+          <div class="bvc">
+            <div class="bvc-term">responsibilities</div>
+            <div class="bvc-def">The duties and tasks that are part of a job role</div>
+            <div class="bvc-eg">"One of her main responsibilities is coordinating staff training."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">qualifications</div>
+            <div class="bvc-def">The skills, education, or experience needed for a position</div>
+            <div class="bvc-eg">"The role requires strong qualifications in HR and management."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">cover letter</div>
+            <div class="bvc-def">A formal letter sent with a resume when applying for a job</div>
+            <div class="bvc-eg">"Her cover letter explained why she was the ideal candidate."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">shortlist (v)</div>
+            <div class="bvc-def">To select the best candidates from all who applied</div>
+            <div class="bvc-eg">"Only five applicants were shortlisted for the final interview."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">specialize in</div>
+            <div class="bvc-def">To focus professional work on one particular area or field</div>
+            <div class="bvc-eg">"Their HR team specializes in talent acquisition and onboarding."</div>
+          </div>
+          <div class="bvc">
+            <div class="bvc-term">report to</div>
+            <div class="bvc-def">To be managed by or answer directly to someone</div>
+            <div class="bvc-eg">"In this role, you will report to the Regional HR Manager."</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="act-head">
+          <span class="act-num">2</span>
+          Click a word from the bank, then click the correct blank.
+          <span class="act-type type-vocab">Word Bank</span>
+        </div>
+
+        <div class="word-bank">
+          <span class="wb-word" onclick="selectWb(this,'responsibilities')" data-word="responsibilities">responsibilities</span>
+          <span class="wb-word" onclick="selectWb(this,'qualifications')" data-word="qualifications">qualifications</span>
+          <span class="wb-word" onclick="selectWb(this,'cover letter')" data-word="cover letter">cover letter</span>
+          <span class="wb-word" onclick="selectWb(this,'shortlist')" data-word="shortlist">shortlist</span>
+          <span class="wb-word" onclick="selectWb(this,'specialize in')" data-word="specialize in">specialize in</span>
+          <span class="wb-word" onclick="selectWb(this,'report to')" data-word="report to">report to</span>
+        </div>
+
+        <ul class="gf-list">
+          <li class="gf-item">
+            <span class="gf-num">1</span>
+            <span>The job posting clearly describes the main <span class="blank-drop" id="b1" data-answer="responsibilities" onclick="dropOnBlank(this)">_____</span> of the role, including recruitment support and record-keeping.</span>
+          </li>
+          <li class="gf-item">
+            <span class="gf-num">2</span>
+            <span>Applicants should have the right <span class="blank-drop" id="b2" data-answer="qualifications" onclick="dropOnBlank(this)">_____</span>, including a relevant degree and at least two years of experience.</span>
+          </li>
+          <li class="gf-item">
+            <span class="gf-num">3</span>
+            <span>Please attach a <span class="blank-drop" id="b3" data-answer="cover letter" onclick="dropOnBlank(this)">_____</span> to your application explaining why you are suitable for this position.</span>
+          </li>
+          <li class="gf-item">
+            <span class="gf-num">4</span>
+            <span>After reviewing all applications, the HR team will <span class="blank-drop" id="b4" data-answer="shortlist" onclick="dropOnBlank(this)">_____</span> the top five candidates for interview.</span>
+          </li>
+          <li class="gf-item">
+            <span class="gf-num">5</span>
+            <span>Many HR professionals choose to <span class="blank-drop" id="b5" data-answer="specialize in" onclick="dropOnBlank(this)">_____</span> one area, such as talent acquisition or employee development.</span>
+          </li>
+          <li class="gf-item">
+            <span class="gf-num">6</span>
+            <span>In this position, you will <span class="blank-drop" id="b6" data-answer="report to" onclick="dropOnBlank(this)">_____</span> the Head of Operations and attend weekly management meetings.</span>
+          </li>
+        </ul>
+        <div style="display:flex;gap:10px;margin-top:14px;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-navy btn-sm" onclick="checkBlanks()">✓ Check</button>
+          <button class="btn btn-outline btn-sm" onclick="resetBlanks()">↺ Reset</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 · GRAMMAR / KEY LANGUAGE ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-purple">
+      <div class="card-head">
+        <div class="card-icon">🔑</div>
+        <div><div class="card-label">Part 4 · Grammar</div><div class="card-title">Articles &amp; Dependent Prepositions</div></div>
+        <span class="card-badge">10 min</span>
+      </div>
+      <div class="card-body">
+
+        <!-- ARTICLES PANEL -->
+        <div class="kl-panel">
+          <div class="kl-panel-head">📌 Key Language — Articles: a / an / the / (no article)</div>
+          <div class="kl-section">
+            <div class="kl-section-title">Use "a" or "an" — for new information</div>
+            <div class="kl-phrase">She is <em>a</em> software developer. <span style="color:var(--gray);font-size:12px;">(new info · consonant sound)</span></div>
+            <div class="kl-phrase">He submitted <em>an</em> application. <span style="color:var(--gray);font-size:12px;">(new info · vowel sound)</span></div>
+            <div class="kl-phrase">We need <em>an</em> HR coordinator. <span style="color:var(--gray);font-size:12px;">("H" = "aitch" · vowel sound)</span></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Use "the" — for specific / already known information</div>
+            <div class="kl-phrase">Please complete <em>the</em> application form. <span style="color:var(--gray);font-size:12px;">(the one we already mentioned)</span></div>
+            <div class="kl-phrase">She manages <em>the</em> HR department. <span style="color:var(--gray);font-size:12px;">(specific department at this company)</span></div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">No article — for general plurals and proper nouns</div>
+            <div class="kl-phrase"><em>—</em> Engineers need strong communication skills. <span style="color:var(--gray);font-size:12px;">(engineers in general)</span></div>
+            <div class="kl-phrase">She works at <em>—</em> Meridian Global. <span style="color:var(--gray);font-size:12px;">(company names)</span></div>
+            <div class="kl-phrase">He studied in <em>—</em> Japan. <span style="color:var(--gray);font-size:12px;">(most country names)</span></div>
+          </div>
+        </div>
+
+        <!-- DEPENDENT PREPOSITIONS PANEL -->
+        <div class="kl-panel">
+          <div class="kl-panel-head">📌 Key Language — Dependent Prepositions for Job Applications</div>
+          <div class="kl-section">
+            <div class="kl-section-title">Applying and responsibility</div>
+            <div class="kl-phrase">apply <em>for</em> a job / a position / the role</div>
+            <div class="kl-phrase">apply <em>to</em> a company / an organization</div>
+            <div class="kl-phrase">responsible <em>for</em> managing / training / reporting</div>
+          </div>
+          <div class="kl-section">
+            <div class="kl-section-title">Experience and interest</div>
+            <div class="kl-phrase">experienced <em>in</em> recruitment / HR / finance</div>
+            <div class="kl-phrase">interested <em>in</em> the position / this opportunity</div>
+            <div class="kl-phrase">qualified <em>for</em> the job / this role</div>
+            <div class="kl-phrase">specialize <em>in</em> talent acquisition / HR</div>
+            <div class="kl-phrase">report <em>to</em> a manager / the HR Director</div>
+          </div>
+          <div class="kl-tip">⚠️ Watch out: you apply <strong>for</strong> a job but apply <strong>to</strong> a company. The preposition changes depending on what follows!</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="act-head">
+          <span class="act-num">1</span>
+          Choose the correct word to complete each sentence.
+          <span class="act-type type-grammar">Grammar</span>
+        </div>
+
+        <!-- FPICK Q1 -->
+        <div class="fpick-item">
+          <div class="fpick-q">1. "She is ___ organized professional with five years of experience in HR."</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh1')"><span class="fpick-letter">A</span>a</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh1')"><span class="fpick-letter">B</span>an</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh1')"><span class="fpick-letter">C</span>the</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh1')"><span class="fpick-letter">D</span>(no article)</div>
+          </div>
+          <div class="fpick-hint" id="fh1">✅ <strong>"a"</strong> — "organized" starts with a vowel sound but "a" is correct because we are introducing new information. Wait — "organized" starts with the vowel /ɒ/, so actually we need <em>an</em>. Let's check: <em>an organized</em>... that's correct! If your book says "a" here, note that "organized" begins with the vowel sound /ɒ/ — the correct form is <strong>"an organized professional."</strong> This is a common slip! Always check the sound, not the spelling.</div>
+        </div>
+
+        <!-- FPICK Q2 -->
+        <div class="fpick-item">
+          <div class="fpick-q">2. "Could you please check ___ requirements listed in the job posting?"</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh2')"><span class="fpick-letter">A</span>a</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh2')"><span class="fpick-letter">B</span>(no article)</div>
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh2')"><span class="fpick-letter">C</span>the</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh2')"><span class="fpick-letter">D</span>an</div>
+          </div>
+          <div class="fpick-hint" id="fh2">✅ <strong>"the"</strong> — we use "the" because both speakers know which requirements we're talking about (the ones in the specific job posting we're looking at together).</div>
+        </div>
+
+        <!-- FPICK Q3 -->
+        <div class="fpick-item">
+          <div class="fpick-q">3. "She is very experienced ___ managing international recruitment campaigns."</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh3')"><span class="fpick-letter">A</span>for</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh3')"><span class="fpick-letter">B</span>to</div>
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh3')"><span class="fpick-letter">C</span>in</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh3')"><span class="fpick-letter">D</span>at</div>
+          </div>
+          <div class="fpick-hint" id="fh3">✅ <strong>"in"</strong> — "experienced in" is a fixed phrase. We say: experienced <em>in</em> HR, experienced <em>in</em> recruitment, experienced <em>in</em> managing teams.</div>
+        </div>
+
+        <!-- FPICK Q4 -->
+        <div class="fpick-item">
+          <div class="fpick-q">4. "He has just applied ___ a well-known consulting firm in the city."</div>
+          <div class="fpick-opts">
+            <div class="fpick-opt" onclick="fpPick(this,true,'fh4')"><span class="fpick-letter">A</span>to</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh4')"><span class="fpick-letter">B</span>for</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh4')"><span class="fpick-letter">C</span>in</div>
+            <div class="fpick-opt" onclick="fpPick(this,false,'fh4')"><span class="fpick-letter">D</span>at</div>
+          </div>
+          <div class="fpick-hint" id="fh4">✅ <strong>"to"</strong> — when we apply to a company or organization, we use "to." When we apply for a role or position, we use "for." Here, "a consulting firm" is an organization, so "to" is correct.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 · SPEAKING ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-amber">
+      <div class="card-head">
+        <div class="card-icon">🗣️</div>
+        <div><div class="card-label">Part 5 · Speaking</div><div class="card-title">Talking About Jobs &amp; Applications</div></div>
+        <span class="card-badge">10 min</span>
+      </div>
+      <div class="card-body">
+
+        <details class="prev-box">
+          <summary>📌 Useful phrases from previous lessons — keep using these!</summary>
+          <div class="prev-box-body">
+            <div class="prev-box-item"><em>"I'm currently responsible for..."</em> — describing your main duties at work</div>
+            <div class="prev-box-item"><em>"I have experience in..."</em> — talking about your professional background</div>
+            <div class="prev-box-item"><em>"I'm applying for the position of..."</em> — introducing which job you want</div>
+            <div class="prev-box-item"><em>"Could you tell me more about...?"</em> — asking for clarification or information</div>
+            <div class="prev-box-item"><em>"I'm very interested in this opportunity because..."</em> — explaining your motivation</div>
+          </div>
+        </details>
+
+        <div class="scene-nav">
+          <button class="btn btn-outline btn-sm" onclick="sceneNav8(-1)">← Back</button>
+          <div>
+            <div class="scene-dots">
+              <div class="scene-dot active" id="sd8-0"></div>
+              <div class="scene-dot" id="sd8-1"></div>
+              <div class="scene-dot" id="sd8-2"></div>
+            </div>
+            <div style="text-align:center;font-size:11px;color:var(--gray);margin-top:4px;" id="sp-counter8">Situation 1 of 3</div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="sceneNav8(1)">Next →</button>
+        </div>
+
+        <!-- SCENE 0 -->
+        <div class="scene-card active" id="sc8-0">
+          <div class="scene-top">
+            <span>📋</span>
+            <strong>Situation 1 — Discussing a Job Posting</strong>
+          </div>
+          <div class="scene-situation">You and a colleague are looking at a job posting online. You are thinking about applying for the role.</div>
+          <div class="scene-task">
+            <strong>Your task:</strong> Discuss the responsibilities and requirements with your colleague. Express your interest in the role and say which requirements you meet. Ask for their opinion — should you apply?
+            <br><br>
+            <strong>Use:</strong> <em>responsibilities · qualifications · apply for · experienced in · interested in</em>
+          </div>
+          <div class="scene-answer show" id="sa8-0" style="display:none;">
+            <strong>Sample:</strong> "I'm really interested in this role — the responsibilities look like a great fit. I'm already experienced in recruitment and record-keeping, and I have the right qualifications too. I think I should apply for it. What do you think — does my background match what they're looking for?"
+          </div>
+          <div class="scene-footer">
+            <button class="btn btn-outline btn-sm" onclick="toggleSa8(0)">▶ Sample answer</button>
+          </div>
+        </div>
+
+        <!-- SCENE 1 -->
+        <div class="scene-card" id="sc8-1">
+          <div class="scene-top">
+            <span>📞</span>
+            <strong>Situation 2 — Describing Your Background</strong>
+          </div>
+          <div class="scene-situation">A recruiter calls you for a phone screening. They ask you to briefly describe your professional background and what you are currently working on.</div>
+          <div class="scene-task">
+            <strong>Your task:</strong> Introduce yourself professionally. Describe what you specialize in, what you are responsible for, and who you report to. Then explain why you are interested in the new role.
+            <br><br>
+            <strong>Use:</strong> <em>specialize in · responsible for · report to · interested in · experienced in</em>
+          </div>
+          <div class="scene-answer" id="sa8-1" style="display:none;">
+            <strong>Sample:</strong> "I've been working in HR for about three years. I specialize in recruitment and onboarding. In my current role, I report to the HR Director and I'm responsible for shortlisting candidates and coordinating interviews. I'm experienced in working with international teams, which is why I'm so interested in this opportunity — it seems like a natural next step."
+          </div>
+          <div class="scene-footer">
+            <button class="btn btn-outline btn-sm" onclick="toggleSa8(1)">▶ Sample answer</button>
+          </div>
+        </div>
+
+        <!-- SCENE 2 -->
+        <div class="scene-card" id="sc8-2">
+          <div class="scene-top">
+            <span>✉️</span>
+            <strong>Situation 3 — Asking for Cover Letter Advice</strong>
+          </div>
+          <div class="scene-situation">You found a job you want to apply for. You ask a more experienced colleague for advice on what to include in your cover letter and how to structure it.</div>
+          <div class="scene-task">
+            <strong>Your task:</strong> Explain the job and what you plan to write. Ask your colleague for specific advice. Respond to their suggestions and decide together what the key points should be.
+            <br><br>
+            <strong>Use:</strong> <em>cover letter · apply for · qualifications · responsible for · qualified for</em>
+          </div>
+          <div class="scene-answer" id="sa8-2" style="display:none;">
+            <strong>Sample:</strong> "I'm going to apply for an HR Coordinator role and I'm not sure how to start my cover letter. Should I open by explaining my qualifications, or by saying why I'm interested in the company? — I like your suggestion to start with why I want this specific role. Then I can mention what I'm currently responsible for and show I'm qualified for the position. Does that structure work?"
+          </div>
+          <div class="scene-footer">
+            <button class="btn btn-outline btn-sm" onclick="toggleSa8(2)">▶ Sample answer</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 · WRAP-UP ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-navy">
+      <div class="card-head">
+        <div class="card-icon">🎯</div>
+        <div><div class="card-label">Wrap-up</div><div class="card-title">Match the Phrases</div></div>
+        <span class="card-badge">5 min</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:13.5px;color:var(--textl);margin-bottom:18px;">Click a phrase on the left, then click its meaning on the right to make a pair.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <!-- LEFT -->
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="match-left" id="ml1" onclick="selectLeft(1)">
+              <span class="match-num">1</span>
+              <span class="match-text">be responsible for</span>
+              <span class="match-badge" id="mb1"></span>
+            </div>
+            <div class="match-left" id="ml2" onclick="selectLeft(2)">
+              <span class="match-num">2</span>
+              <span class="match-text">apply to</span>
+              <span class="match-badge" id="mb2"></span>
+            </div>
+            <div class="match-left" id="ml3" onclick="selectLeft(3)">
+              <span class="match-num">3</span>
+              <span class="match-text">specialize in</span>
+              <span class="match-badge" id="mb3"></span>
+            </div>
+            <div class="match-left" id="ml4" onclick="selectLeft(4)">
+              <span class="match-num">4</span>
+              <span class="match-text">be shortlisted</span>
+              <span class="match-badge" id="mb4"></span>
+            </div>
+            <div class="match-left" id="ml5" onclick="selectLeft(5)">
+              <span class="match-num">5</span>
+              <span class="match-text">report to</span>
+              <span class="match-badge" id="mb5"></span>
+            </div>
+          </div>
+          <!-- RIGHT -->
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div class="match-right" id="mrA" onclick="selectRight('A')">
+              <span class="match-num match-letter">A</span>
+              <span class="match-text">to focus your professional work on one particular area</span>
+              <span class="match-badge" id="mbA"></span>
+            </div>
+            <div class="match-right" id="mrB" onclick="selectRight('B')">
+              <span class="match-num match-letter">B</span>
+              <span class="match-text">to be managed by or answer directly to someone</span>
+              <span class="match-badge" id="mbB"></span>
+            </div>
+            <div class="match-right" id="mrC" onclick="selectRight('C')">
+              <span class="match-num match-letter">C</span>
+              <span class="match-text">to have something as your main duty at work</span>
+              <span class="match-badge" id="mbC"></span>
+            </div>
+            <div class="match-right" id="mrD" onclick="selectRight('D')">
+              <span class="match-num match-letter">D</span>
+              <span class="match-text">to be selected as one of the top candidates for a role</span>
+              <span class="match-badge" id="mbD"></span>
+            </div>
+            <div class="match-right" id="mrE" onclick="selectRight('E')">
+              <span class="match-num match-letter">E</span>
+              <span class="match-text">to submit your application to a specific organization</span>
+              <span class="match-badge" id="mbE"></span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;margin-top:18px;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-navy btn-sm" onclick="checkMatchAnswers()">✓ Check answers</button>
+          <button class="btn btn-outline btn-sm" id="match-key-btn" onclick="showAnswerKey()" style="display:none;">🔑 Answer Key</button>
+          <button class="btn btn-outline btn-sm" onclick="resetMatches()">↺ Reset</button>
+          <span id="match-score" style="display:none;font-size:13px;font-weight:700;margin-left:6px;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 · EXTRA ══ -->
+<div class="slide" id="slide-7">
+  <div class="main">
+    <div class="card c-green">
+      <div class="card-head">
+        <div class="card-icon">⭐</div>
+        <div><div class="card-label">Extra Practice</div><div class="card-title">Real-Life Situations</div></div>
+        <span class="card-badge">Optional</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:13.5px;color:var(--textl);margin-bottom:20px;">Try these more challenging situations. Speak for at least 60 seconds each time.</p>
+
+        <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+          <div style="background:var(--navy);color:white;padding:12px 18px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;">
+            <span>💬</span> Scenario 1 — The Employment Gap
+          </div>
+          <div style="padding:15px 18px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;line-height:1.6;">
+            During a screening call, the recruiter notices you have a gap in your employment history and asks you to explain it.
+          </div>
+          <div style="padding:14px 18px;font-size:14px;line-height:1.7;color:var(--navy);">
+            <strong>Your task:</strong> Explain the gap confidently and professionally. Focus on what you learned or accomplished during that time. Use the phrases: <em>responsible for, specialize in, experienced in</em>.
+          </div>
+          <div id="sa-ex1" style="display:none;margin:0 18px 14px;padding:12px 14px;background:var(--lg);border-radius:8px;font-size:13.5px;color:#14532d;line-height:1.7;border:1px solid #86efac;">
+            <strong>Sample answer:</strong> "I took about eight months away from a formal position to complete a certification in HR management. During that time, I was also responsible for some freelance recruitment work, which meant I remained experienced in candidate assessment and shortlisting. I specialize in that area, so staying active helped me keep my skills sharp. I'm now ready to bring all of that into a full-time role."
+          </div>
+          <div style="padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;">
+            <button class="btn btn-outline btn-sm" onclick="toggleSa(this,'sa-ex1')">▶ Show sample answer</button>
+          </div>
+        </div>
+
+        <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;">
+          <div style="background:var(--navy);color:white;padding:12px 18px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;">
+            <span>💬</span> Scenario 2 — Why Are You Leaving Your Current Role?
+          </div>
+          <div style="padding:15px 18px;background:#fafafa;border-bottom:1px solid var(--border);font-size:14px;color:var(--textl);font-style:italic;line-height:1.6;">
+            A hiring manager asks you the classic question: "Why do you want to leave your current position?"
+          </div>
+          <div style="padding:14px 18px;font-size:14px;line-height:1.7;color:var(--navy);">
+            <strong>Your task:</strong> Give a professional, positive response. Focus on growth rather than problems. Use: <em>specialize in, interested in, qualified for, apply for</em>.
+          </div>
+          <div id="sa-ex2" style="display:none;margin:0 18px 14px;padding:12px 14px;background:var(--lg);border-radius:8px;font-size:13.5px;color:#14532d;line-height:1.7;border:1px solid #86efac;">
+            <strong>Sample answer:</strong> "I've learned a great deal in my current role and I'm grateful for the experience. However, I'm now looking to take on more responsibility. I'm very interested in roles where I can specialize in the full recruitment cycle — from sourcing to onboarding. I believe I'm qualified for this position, which is exactly why I decided to apply for it. It's the natural next step in my career."
+          </div>
+          <div style="padding:12px 18px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;">
+            <button class="btn btn-outline btn-sm" onclick="toggleSa(this,'sa-ex2')">▶ Show sample answer</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <button class="slide-nav-btn" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 · HOMEWORK ══ -->
+<div class="slide" id="slide-8">
+  <div class="main">
+    <div class="card c-orange">
+      <div class="card-head">
+        <div class="card-icon">📝</div>
+        <div><div class="card-label">For Next Time</div><div class="card-title">Homework</div></div>
+        <span class="card-badge">At home</span>
+      </div>
+      <div class="card-body">
+
+        <!-- TASK 1 -->
+        <div class="hw-card">
+          <div class="hw-head"><span class="hw-tag">Task 1</span> Choose the Correct Article</div>
+          <div class="hw-body">
+            <span class="hw-type hw-grammar">✏️ Grammar · articles</span>
+            <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Fill in each blank with <strong>a</strong>, <strong>an</strong>, <strong>the</strong>, or <strong>—</strong> (no article). Type your answer and click Show to check.</p>
+            <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">1</span>
+                <div class="qtag-hw-q">We are looking for <input class="qtag-inline" id="qi1" type="text" placeholder="a / an / the / —"> organized and motivated HR Coordinator to join our team.</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'an','qi1')">Show</button>
+              </div>
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">2</span>
+                <div class="qtag-hw-q">Have you read <input class="qtag-inline" id="qi2" type="text" placeholder="a / an / the / —"> job description I sent you this morning?</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'the','qi2')">Show</button>
+              </div>
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">3</span>
+                <div class="qtag-hw-q"><input class="qtag-inline" id="qi3" type="text" placeholder="a / an / the / —"> HR professionals need strong communication and organizational skills.</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'—','qi3')">Show</button>
+              </div>
+              <div class="qtag-hw-item">
+                <span class="qtag-hw-num">4</span>
+                <div class="qtag-hw-q">She submitted <input class="qtag-inline" id="qi4" type="text" placeholder="a / an / the / —"> cover letter along with her resume.</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'a','qi4')">Show</button>
+              </div>
+              <div class="qtag-hw-item" style="border-bottom:none;">
+                <span class="qtag-hw-num">5</span>
+                <div class="qtag-hw-q">The interviews will take place in <input class="qtag-inline" id="qi5" type="text" placeholder="a / an / the / —"> main conference room on the third floor.</div>
+                <button class="err-reveal-btn" onclick="fillQtag(this,'the','qi5')">Show</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TASK 2 -->
+        <div class="hw-card">
+          <div class="hw-head"><span class="hw-tag">Task 2</span> Write a Cover Letter Opening</div>
+          <div class="hw-body">
+            <span class="hw-type hw-write">✉️ Writing · cover letter</span>
+            <p style="font-size:13.5px;color:var(--gray);margin-bottom:14px;font-style:italic;">Write a short opening paragraph (4–6 sentences) for a cover letter for a job you would like to have — real or imaginary.</p>
+            <div style="background:var(--lo);border:1px solid #fdba74;border-radius:10px;padding:13px 16px;margin-bottom:14px;font-size:13.5px;color:#7c2d12;">
+              <strong>Include at least 3 of these phrases:</strong> <em>apply for · responsible for · experienced in · specialize in · interested in · qualified for</em>
+            </div>
+            <textarea style="width:100%;border:1.5px solid var(--border);border-radius:10px;padding:13px 16px;font-size:13.5px;font-family:inherit;color:var(--navy);line-height:1.7;resize:vertical;min-height:120px;outline:none;" placeholder="Write your paragraph here..."></textarea>
+            <div style="margin-top:12px;">
+              <button class="btn btn-outline btn-sm" onclick="toggleSa(this,'hw2-sample')">▶ Show sample answer</button>
+            </div>
+            <div id="hw2-sample" style="display:none;margin-top:12px;background:#f0fdf4;border:1px solid #86efac;border-radius:9px;padding:13px 16px;font-size:13.5px;color:#14532d;line-height:1.8;">
+              <strong>Sample answer:</strong><br>
+              I am writing to apply for the position of HR Coordinator at Meridian Global. I am currently working as an HR Assistant, where I am responsible for coordinating interviews and maintaining employee records. I am experienced in talent acquisition and have collaborated with international teams for the past two years. I specialize in onboarding processes and employee engagement, which I understand are key priorities for your department. I am very interested in this opportunity because it would allow me to grow within a dynamic and international environment, and I believe I am fully qualified for this role.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="slide-bottom-nav">
+    <button class="slide-nav-btn" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Home</a>
+    <a class="slide-nav-btn" href="index.html" style="text-decoration:none;">🏠 Course Home</a>
+  </div>
+</div>
+
+<script>
+// ── SLIDE SYSTEM ──
+const slideLabels=['Cover','Warm-up','Reading','Vocabulary','Grammar','Speaking','Wrap-up','Extra','Homework'];
+let currentSlide=0;
+const totalSlides=9;
+function goToSlide(n){
+  document.getElementById('slide-'+currentSlide).classList.remove('active');
+  document.querySelectorAll('.sp-dot')[currentSlide].classList.remove('active');
+  document.querySelectorAll('.sp-dot')[currentSlide].classList.add('done');
+  currentSlide=n;
+  document.getElementById('slide-'+currentSlide).classList.add('active');
+  document.querySelectorAll('.sp-dot').forEach((d,i)=>{d.classList.remove('active','done');if(i<currentSlide)d.classList.add('done');if(i===currentSlide)d.classList.add('active');});
+  updateSlideUI();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function slideNav(dir){
+  const n=Math.max(0,Math.min(totalSlides-1,currentSlide+dir));
+  if(n!==currentSlide)goToSlide(n);
+}
+function updateSlideUI(){
+  document.getElementById('slide-label').textContent=slideLabels[currentSlide];
+  document.getElementById('slide-counter').textContent='Slide '+(currentSlide+1)+' of '+totalSlides;
+  document.getElementById('slide-prev').disabled=currentSlide===0;
+  document.getElementById('slide-next').disabled=currentSlide===totalSlides-1;
+}
+
+// ── TFD ──
+function tfdPick(btn,val,expId){
+  const item=btn.closest('.tfd-item');
+  if(item.querySelector('.tfd-picked'))return;
+  btn.classList.add('tfd-picked','tfd-'+val);
+  item.querySelectorAll('.tfd-btn').forEach(b=>{if(b!==btn)b.disabled=true;});
+  const exp=document.getElementById(expId);
+  exp.classList.add('show');
+}
+
+// ── MC ──
+function mcPick(el,correct){
+  const opts=el.closest('.mc-opts').querySelectorAll('.mc-opt');
+  if([...opts].some(o=>o.classList.contains('correct')||o.classList.contains('wrong')))return;
+  opts.forEach(o=>o.classList.add('locked'));
+  if(correct){el.classList.add('correct');}
+  else{el.classList.add('wrong');opts.forEach(o=>{if(o.onclick&&o.onclick.toString().includes('true'))o.classList.add('correct');});}
+}
+
+// ── FPICK ──
+function fpPick(el,correct,hintId){
+  const opts=el.closest('.fpick-opts').querySelectorAll('.fpick-opt');
+  if([...opts].some(o=>o.classList.contains('fp-correct')||o.classList.contains('fp-wrong')))return;
+  opts.forEach(o=>o.classList.add('fp-locked'));
+  el.classList.add(correct?'fp-correct':'fp-wrong');
+  if(!correct)opts.forEach(o=>{if(o.onclick&&o.onclick.toString().includes('true'))o.classList.add('fp-correct');});
+  document.getElementById(hintId).classList.add('show');
+}
+
+// ── WORD BANK ──
+let selectedWb=null;
+function selectWb(el,word){
+  if(el.classList.contains('used'))return;
+  if(selectedWb){selectedWb.style.outline='';selectedWb.classList.remove('selected-wb');}
+  if(selectedWb===el){selectedWb=null;return;}
+  selectedWb=el;el.classList.add('selected-wb');el.style.outline='3px solid var(--amber)';
+}
+function dropOnBlank(blank){
+  if(!selectedWb){
+    if(blank.classList.contains('has-word')){
+      const word=blank.dataset.placed;blank.textContent='_____';blank.classList.remove('has-word','correct','incorrect');blank.style.color='transparent';
+      const wb=document.querySelector(`[data-word="${word}"]`);if(wb)wb.classList.remove('used');
+      delete blank.dataset.placed;
+    }
+    return;
+  }
+  if(blank.dataset.placed){
+    const old=blank.dataset.placed;
+    const wb=document.querySelector(`[data-word="${old}"]`);if(wb)wb.classList.remove('used');
+  }
+  blank.textContent=selectedWb.dataset.word;blank.classList.add('has-word');blank.classList.remove('correct','incorrect');blank.style.color='';
+  blank.dataset.placed=selectedWb.dataset.word;
+  selectedWb.classList.add('used');selectedWb.style.outline='';selectedWb.classList.remove('selected-wb');selectedWb=null;
+}
+function checkBlanks(){
+  document.querySelectorAll('.blank-drop').forEach(b=>{
+    if(!b.dataset.placed){b.classList.remove('correct','incorrect');return;}
+    const correct=b.dataset.placed.trim()===b.dataset.answer.trim();
+    b.classList.toggle('correct',correct);b.classList.toggle('incorrect',!correct);
+  });
+}
+function resetBlanks(){
+  document.querySelectorAll('.blank-drop').forEach(b=>{
+    if(b.dataset.placed){
+      const wb=document.querySelector(`[data-word="${b.dataset.placed}"]`);if(wb)wb.classList.remove('used');
+    }
+    b.textContent='_____';b.classList.remove('has-word','correct','incorrect');b.style.color='transparent';delete b.dataset.placed;
+  });
+  selectedWb=null;
+}
+
+// ── SPEAKING SCENES ──
+let sc8cur=0;
+function sceneNav8(dir){
+  document.getElementById('sc8-'+sc8cur).classList.remove('active');
+  document.getElementById('sd8-'+sc8cur).classList.remove('active');
+  document.getElementById('sd8-'+sc8cur).classList.add('done');
+  sc8cur=Math.max(0,Math.min(2,sc8cur+dir));
+  document.getElementById('sc8-'+sc8cur).classList.add('active');
+  document.getElementById('sd8-'+sc8cur).classList.remove('done');
+  document.getElementById('sd8-'+sc8cur).classList.add('active');
+  document.getElementById('sp-counter8').textContent='Situation '+(sc8cur+1)+' of 3';
+}
+function toggleSa8(n){
+  const d=document.getElementById('sa8-'+n);
+  const btn=document.querySelector('#sc8-'+n+' .btn-outline');
+  const showing=d.style.display==='block';
+  d.style.display=showing?'none':'block';
+  if(btn)btn.textContent=showing?'▶ Sample answer':'▼ Hide sample answer';
+}
+
+// ── MATCHING (L3 style) ──
+const matchAnswers={1:'C',2:'E',3:'A',4:'D',5:'B'};
+const matchKeys=['A','B','C','D','E'];
+const matchTotal=5;
+let matchCurrent=null,userMatches={};
+function selectLeft(n){if(matchCurrent!==null)document.getElementById('ml'+matchCurrent).classList.remove('selected');if(matchCurrent===n){matchCurrent=null;return;}matchCurrent=n;document.getElementById('ml'+n).classList.add('selected');}
+function selectRight(letter){if(matchCurrent===null)return;const prevLetter=userMatches[matchCurrent];if(prevLetter){document.getElementById('mr'+prevLetter).classList.remove('paired');document.getElementById('mb'+prevLetter).textContent='';}for(let k in userMatches){if(userMatches[k]===letter){document.getElementById('ml'+k).classList.remove('paired');document.getElementById('mb'+k).textContent='';delete userMatches[k];}}userMatches[matchCurrent]=letter;['correct','incorrect'].forEach(c=>{document.getElementById('ml'+matchCurrent).classList.remove(c);document.getElementById('mr'+letter).classList.remove(c);});document.getElementById('ml'+matchCurrent).classList.remove('selected');document.getElementById('ml'+matchCurrent).classList.add('paired');document.getElementById('mb'+matchCurrent).textContent='→ '+letter;document.getElementById('mr'+letter).classList.add('paired');document.getElementById('mb'+letter).textContent='← '+matchCurrent;matchCurrent=null;}
+function checkMatchAnswers(){let correct=0;for(let n=1;n<=matchTotal;n++){const el=document.getElementById('ml'+n);el.classList.remove('correct','incorrect','selected','paired');const ans=userMatches[n];const rightEl=ans?document.getElementById('mr'+ans):null;if(rightEl)rightEl.classList.remove('correct','incorrect','paired');if(ans===matchAnswers[n]){el.classList.add('correct');rightEl.classList.add('correct');correct++;}else if(ans){el.classList.add('incorrect');rightEl.classList.add('incorrect');}}const score=document.getElementById('match-score');score.style.display='inline';if(correct===matchTotal){score.textContent='✅ Perfect — 5/5!';score.style.color='var(--green)';}else{score.textContent=correct+'/5 correct — the red ones need fixing';score.style.color='var(--rose)';}document.getElementById('match-key-btn').style.display='inline-flex';}
+function showAnswerKey(){for(let n=1;n<=matchTotal;n++){const c=matchAnswers[n];document.getElementById('mb'+n).textContent='→ '+c;document.getElementById('mb'+n).style.color='var(--navy)';document.getElementById('ml'+n).classList.remove('correct','incorrect','paired','selected');document.getElementById('ml'+n).classList.add('correct');}matchKeys.forEach(l=>{document.getElementById('mr'+l).classList.remove('correct','incorrect','paired');document.getElementById('mr'+l).classList.add('correct');document.getElementById('mb'+l).textContent='';});document.getElementById('match-key-btn').style.display='none';}
+function resetMatches(){userMatches={};matchCurrent=null;for(let n=1;n<=matchTotal;n++){document.getElementById('ml'+n).className='match-left';document.getElementById('mb'+n).textContent='';document.getElementById('mb'+n).style.color='';}matchKeys.forEach(l=>{document.getElementById('mr'+l).className='match-right';document.getElementById('mb'+l).textContent='';});document.getElementById('match-score').style.display='none';document.getElementById('match-key-btn').style.display='none';}
+
+// ── HW TASK 1 ──
+function fillQtag(btn,answer,inputId){const inp=document.getElementById(inputId);if(!inp)return;inp.value=answer;inp.classList.add('filled');}
+
+// ── TOGGLE SAMPLE ANSWERS ──
+function toggleSa(btn,id){
+  const d=document.getElementById(id);
+  const showing=d.style.display==='block';
+  d.style.display=showing?'none':'block';
+  btn.textContent=showing?'▶ Show sample answer':'▼ Hide sample answer';
+  btn.style.color=showing?'':'var(--green)';
+  btn.style.borderColor=showing?'':'var(--green)';
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')slideNav(1);if(e.key==='ArrowLeft')slideNav(-1);});
+updateSlideUI();
+</script>
+</body>
+</html>
