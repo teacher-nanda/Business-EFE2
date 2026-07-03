@@ -455,7 +455,7 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text
   .top-home-strip {
     position: fixed; top: 0; left: 0; right: 0; z-index: 400;
     background: var(--navy); height: 42px;
-    display: flex; align-items: center; justify-content: flex-end;
+    display: flex; align-items: center; justify-content: flex-start;
     padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
   }
   .top-home-link {
@@ -465,10 +465,87 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text
   }
   .top-home-link:hover { opacity: 1; }
   body { padding-top: 42px; }
+
+/* ── BOTTOM-RIGHT BUTTONS ── */
+#lesson-btns{
+  position:fixed;bottom:22px;right:18px;z-index:500;
+  display:flex;flex-direction:row;gap:8px;align-items:center;
+}
+.action-btn{
+  background:var(--navy);color:#fff;border:none;border-radius:20px;
+  padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;
+  font-family:inherit;box-shadow:0 2px 10px rgba(0,0,0,0.22);
+  transition:all .2s;white-space:nowrap;
+}
+.action-btn:hover{background:#243d5c;box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+#notesBtn.panel-open{background:#0d5986;}
+
+/* ── NOTES PANEL ── */
+#notesPanel{
+  position:fixed;bottom:110px;right:18px;z-index:999;
+  width:340px;background:#fff;border-radius:14px;
+  box-shadow:0 8px 32px rgba(0,0,80,.18);padding:14px;
+  display:none;flex-direction:column;gap:10px;
+  border:2px solid var(--lb);
+}
+#notesPanel.open{display:flex;}
+.notes-toolbar{display:flex;gap:6px;align-items:center;padding-bottom:8px;border-bottom:2px solid var(--lb);}
+.notes-toolbar-label{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:.5px;margin-right:4px;}
+.notes-tbtn{
+  background:var(--lgr);border:1.5px solid var(--border);border-radius:6px;
+  padding:4px 11px;cursor:pointer;font-size:.85rem;font-weight:700;
+  transition:all .15s;color:var(--navy);font-family:inherit;
+}
+.notes-tbtn:hover{background:var(--lb);border-color:var(--blue);}
+#notesTA{
+  min-height:180px;max-height:220px;overflow-y:auto;
+  border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;
+  font-size:14px;line-height:1.6;outline:none;
+  font-family:'Segoe UI',Arial,sans-serif;color:var(--navy);
+}
+#notesTA:empty:before{content:attr(placeholder);color:#bbb;pointer-events:none;}
+#notesTA:focus{border-color:var(--blue);}
+.notes-actions{display:flex;gap:8px;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border);}
+.notes-clear-btn{
+  background:none;border:1.5px solid var(--border);border-radius:8px;
+  padding:6px 12px;font-size:12px;color:var(--gray);cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.notes-clear-btn:hover{color:var(--rose);border-color:var(--rose);}
+.slide-notes-print{display:none;}
+
+/* ── PRINT / PDF ── */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .top-home-strip,.slide-navbar,.slide-bottom-nav,#notesPanel{display:none!important;}
+  html,body{height:auto!important;overflow:visible!important;background:#fff!important;zoom:1!important;padding-top:0!important;}
+  body:not(.print-all) .slide{display:none!important;}
+  body:not(.print-all) .slide.active{
+    display:block!important;padding:20px 24px!important;page-break-after:always;
+  }
+  body.print-all .slide{
+    display:block!important;padding:20px 24px!important;page-break-after:always;
+  }
+  .slide *{flex:none!important;height:auto!important;min-height:0!important;max-height:none!important;}
+  .vocab-card-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;}
+  .slide-notes-print{display:block!important;margin-top:12px;padding:10px 14px;
+    border-top:2px solid #1a2e4a;background:#f0f7ff;border-radius:8px;
+    font-size:13px;line-height:1.6;color:#1a2e4a;}
+  .slide-notes-print-label{font-size:10px;font-weight:800;color:#1a2e4a;
+    text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+  body:not(.print-all) .slide.active::before,
+  body.print-all .slide::before{
+    content:"Business English · Lesson 1 – Meeting Essentials";
+    display:block!important;font-size:11px;color:#999;
+    font-family:'Segoe UI',Arial,sans-serif;
+    padding-bottom:6px;border-bottom:1px solid #ddd;margin-bottom:8px;
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<div id="lesson-btns"><button class="action-btn" onclick="downloadNotes()">📄 PDF Notes</button><button class="action-btn" id="notesBtn" onclick="toggleNotes()">📝 Notes</button></div>
 <!-- ══ SLIDE NAVBAR ══ -->
 <div class="slide-navbar">
   <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
@@ -1298,10 +1375,12 @@ function slideNav(dir) {
 }
 
 function goToSlide(n) {
+  saveCurrentNotes();
   document.getElementById('slide-' + currentSlide).classList.remove('active');
   currentSlide = n;
   document.getElementById('slide-' + currentSlide).classList.add('active');
   updateSlideUI();
+  loadNotes(n);
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
@@ -1477,12 +1556,106 @@ function checkNat(el, correct, expId) {
 }
 
 document.addEventListener('keydown', e => {
+  if (document.activeElement && document.activeElement.contentEditable === 'true') return;
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
   if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
 });
 let mSel = null;
 let wbSelected = null, wbSelectedEl = null;
 let curScene=1; const totalScenes=7;
+
+const notesData = {};
+function saveCurrentNotes() {
+  const ta = document.getElementById('notesTA');
+  if (ta) notesData[currentSlide] = ta.innerHTML;
+}
+function loadNotes(n) {
+  const ta = document.getElementById('notesTA');
+  if (ta) ta.innerHTML = notesData[n] || '';
+}
+function toggleNotes() {
+  const p = document.getElementById('notesPanel');
+  const b = document.getElementById('notesBtn');
+  if (!p || !b) return;
+  p.classList.toggle('open');
+  b.classList.toggle('panel-open', p.classList.contains('open'));
+}
+function notesFormat(cmd) {
+  const ta = document.getElementById('notesTA');
+  if (!ta) return;
+  ta.focus();
+  if (cmd === 'highlight') {
+    document.execCommand('styleWithCSS', false, true);
+    const col = document.queryCommandValue('BackColor');
+    const on = col.includes('255, 245, 157') || col.toLowerCase().includes('fff59d');
+    document.execCommand('hiliteColor', false, on ? 'transparent' : '#FFF59D');
+  } else {
+    document.execCommand(cmd, false, null);
+  }
+}
+function clearNotes() {
+  if (confirm('Clear notes for this slide?')) {
+    const ta = document.getElementById('notesTA');
+    if (ta) ta.innerHTML = '';
+    notesData[currentSlide] = '';
+  }
+}
+function downloadNotes() {
+  saveCurrentNotes();
+  var hasAny = false;
+  var cards = '';
+  var labels = (typeof SLIDE_LABELS !== 'undefined') ? SLIDE_LABELS : [];
+  labels.forEach(function(label, idx) {
+    var note = notesData[idx] || '';
+    if (!note.replace(/<[^>]*>/g,'').trim()) return;
+    hasAny = true;
+    cards += '<div class=\"card\"><div class=\"card-header\">Slide ' + (idx+1) + ' &mdash; ' + label + '</div><div class=\"card-body\">' + note + '</div></div>';
+  });
+  if (!hasAny) { alert('No notes to save yet!'); return; }
+  var lessonTitle = document.title.replace(/^Lesson \d+ [\u2013\-] /, '');
+  var date = new Date().toLocaleDateString('en-US', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var html = '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + lessonTitle + ' – Lesson Notes</title><style>'
+    + "body{font-family:'Segoe UI',system-ui,sans-serif;max-width:720px;margin:16px auto;color:#1C2B3A;padding:0 20px}"
+    + '.banner{padding:28px 32px;margin-bottom:20px;background:linear-gradient(135deg,#0A1628 0%,#1A3A6B 55%,#0E5A8A 100%);border-radius:12px;text-align:center}'
+    + '.banner-title{display:block;font-size:30px;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.2}'
+    + '.banner-sub{display:block;font-size:16px;color:rgba(255,255,255,.88);font-weight:500;margin-top:6px}'
+    + '.lesson-link{font-size:13px;color:#555;margin-bottom:18px;line-height:1.9;}'
+    + '.lesson-link a{color:#1a2e4a;font-weight:700;text-decoration:none;border-bottom:1.5px solid #1a2e4a;}'
+    + '.date{font-size:.95rem;color:#888;margin-bottom:14px}'
+    + '.card{border:1px solid #ddd;border-radius:10px;margin-bottom:14px;overflow:hidden}'
+    + '.card-header{background:#1a2e4a;color:#fff;padding:8px 16px;font-size:.9rem;font-weight:700;letter-spacing:.3px}'
+    + '.card-body{padding:12px 16px;font-size:1rem;line-height:1.7}'
+    + '.card-body [style*=\"background-color\"]{color:#1a1a1a!important}'
+    + '@media print{body{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{margin:1cm}}'
+    + '</style></head><body>'
+    + '<div class=\"banner\"><span class=\"banner-title\">' + lessonTitle + '</span><span class=\"banner-sub\">Business English with Teacher Nanda</span></div>'
+    + '<div class=\"date\">' + date + '</div>'
+    + '<p class=\"lesson-link\">Click here to access the lesson: <a href=\"'+'https://teacher-nanda.github.io/Business-EFE2/'+window.location.pathname.split('/').pop()+'\">'+'https://teacher-nanda.github.io/Business-EFE2/'+window.location.pathname.split('/').pop()+'</a></p>'
+    + cards
+    + '</body></html>';
+  var win = window.open('','_blank');
+  if (!win) { alert('Please allow pop-ups for this page.'); return; }
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){ win.print(); }, 400);
+}
+
 </script>
+
+<div id="notesPanel">
+  <div class="notes-toolbar">
+    <span class="notes-toolbar-label">FORMAT</span>
+    <button class="notes-tbtn" onclick="notesFormat('bold')"><b>B</b></button>
+    <button class="notes-tbtn" onclick="notesFormat('underline')"><u>U</u></button>
+    <button class="notes-tbtn" onclick="notesFormat('highlight')">🖊 HL</button>
+  </div>
+  <div id="notesTA" contenteditable="true" spellcheck="true" placeholder="Type your notes here…"></div>
+  <div class="notes-actions">
+    <button class="notes-clear-btn" onclick="clearNotes()">🗑 Clear</button>
+    <span style="font-size:11px;color:var(--gray);font-style:italic;">Save with 💾</span>
+  </div>
+</div>
+
 </body>
 </html>

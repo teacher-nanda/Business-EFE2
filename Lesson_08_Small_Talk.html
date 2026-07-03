@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 8 – Small Talk</title>
+<style>
+
+:root {
+  --navy:#1a2e4a; --blue:#2563eb; --lb:#dbeafe;
+  --teal:#0d9488; --lt:#ccfbf1;
+  --amber:#d97706; --la:#fef3c7;
+  --rose:#e11d48; --lr:#ffe4e6; --orange:#ea580c; --lo:#ffedd5;
+  --purple:#7c3aed; --lp:#ede9fe;
+  --indigo:#4338ca; --li:#e0e7ff;
+  --green:#16a34a; --lg:#dcfce7;
+  --gray:#6b7280; --lgr:#f3f4f6;
+  --border:#e5e7eb; --text:#111827; --textl:#6b7280;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f1f5f9;color:var(--text);font-size:15px;line-height:1.6;zoom:1.4;}
+
+/* ── TOP HOME STRIP ── */
+  .top-home-strip {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 400;
+    background: var(--navy); height: 42px;
+    display: flex; align-items: center; justify-content: flex-start;
+    padding: 0 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .top-home-link {
+    color: white; text-decoration: none; font-size: 13px; font-weight: 700;
+    font-family: inherit; display: flex; align-items: center; gap: 6px;
+    opacity: .85; transition: opacity .15s;
+  }
+  .top-home-link:hover { opacity: 1; }
+  body { padding-top: 42px; }
+
+/* ── BOTTOM-RIGHT BUTTONS ── */
+#lesson-btns{
+  position:fixed;bottom:22px;right:18px;z-index:500;
+  display:flex;flex-direction:row;gap:8px;align-items:center;
+}
+.action-btn{
+  background:var(--navy);color:#fff;border:none;border-radius:20px;
+  padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;
+  font-family:inherit;box-shadow:0 2px 10px rgba(0,0,0,0.22);
+  transition:all .2s;white-space:nowrap;
+}
+.action-btn:hover{background:#243d5c;box-shadow:0 4px 16px rgba(0,0,0,0.3);}
+#notesBtn.panel-open{background:#0d5986;}
+
+/* ── NOTES PANEL ── */
+#notesPanel{
+  position:fixed;bottom:68px;right:18px;z-index:999;
+  width:340px;background:#fff;border-radius:14px;
+  box-shadow:0 8px 32px rgba(0,0,80,.18);padding:14px;
+  display:none;flex-direction:column;gap:10px;
+  border:2px solid var(--lb);
+}
+#notesPanel.open{display:flex;}
+.notes-toolbar{display:flex;gap:6px;align-items:center;padding-bottom:8px;border-bottom:2px solid var(--lb);}
+.notes-toolbar-label{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:.5px;margin-right:4px;}
+.notes-tbtn{
+  background:var(--lgr);border:1.5px solid var(--border);border-radius:6px;
+  padding:4px 11px;cursor:pointer;font-size:.85rem;font-weight:700;
+  transition:all .15s;color:var(--navy);font-family:inherit;
+}
+.notes-tbtn:hover{background:var(--lb);border-color:var(--blue);}
+#notesTA{
+  min-height:180px;max-height:220px;overflow-y:auto;
+  border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;
+  font-size:14px;line-height:1.6;outline:none;
+  font-family:'Segoe UI',Arial,sans-serif;color:var(--navy);
+}
+#notesTA:empty:before{content:attr(placeholder);color:#bbb;pointer-events:none;}
+#notesTA:focus{border-color:var(--blue);}
+.notes-actions{display:flex;gap:8px;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border);}
+.notes-clear-btn{
+  background:none;border:1.5px solid var(--border);border-radius:8px;
+  padding:6px 12px;font-size:12px;color:var(--gray);cursor:pointer;transition:all .2s;font-family:inherit;
+}
+.notes-clear-btn:hover{color:var(--rose);border-color:var(--rose);}
+.slide-notes-print{display:none;}
+
+/* ── PRINT ── */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .top-home-strip,#lesson-btns,#notesPanel{display:none!important;}
+  html,body{zoom:1!important;padding-top:0!important;}
+}
+
+/* ── SLIDE NAVBAR ── */
+.slide-navbar {
+  background: white; border-bottom: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 22px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); gap: 12px;
+}
+.slide-nav-btn {
+  background: var(--navy); color: white; border: none; border-radius: 8px;
+  padding: 8px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: background .15s; white-space: nowrap;
+}
+.slide-nav-btn:hover:not(:disabled) { background: #263d5c; }
+.slide-nav-btn:disabled { opacity: .3; cursor: default; }
+.slide-info { text-align: center; flex: 1; }
+.slide-label { font-weight: 700; color: var(--navy); font-size: 14px; }
+.slide-counter-text { font-size: 12px; color: var(--gray); margin: 2px 0 6px; }
+.slide-progress { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.sp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .15s; }
+.sp-dot.active { background: var(--navy); transform: scale(1.3); }
+.sp-dot.done { background: var(--teal); }
+
+/* ── SLIDES ── */
+.slide { display: none; }
+.slide.active { display: block; animation: fadeIn .2s ease; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:translateY(0);} }
+
+/* ── COVER SLIDE ── */
+.cover-slide {
+  min-height: calc(100vh - 98px);
+  background: linear-gradient(140deg, var(--navy) 0%, #1e3a5f 60%, #0d5986 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 20px; position: relative; overflow: hidden;
+}
+.cover-slide::before {
+  content:''; position:absolute; top:-80px; right:-80px;
+  width:320px; height:320px; border-radius:50%;
+  background:rgba(255,255,255,0.04);
+}
+.cover-slide::after {
+  content:''; position:absolute; bottom:-60px; left:-60px;
+  width:240px; height:240px; border-radius:50%;
+  background:rgba(255,255,255,0.03);
+}
+.cover-inner {
+  text-align: center; color: white; position: relative; z-index: 1;
+}
+.cover-label {
+  font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 10px;
+}
+.cover-module {
+  display: inline-block; background: rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 5px 20px; font-size: 12px;
+  font-weight: 700; letter-spacing: .5px; margin-bottom: 28px; color: rgba(255,255,255,0.85);
+}
+.cover-title {
+  font-size: 48px; font-weight: 900; line-height: 1.05;
+  margin-bottom: 14px; letter-spacing: -.5px;
+}
+.cover-title .accent { color: #4ade80; }
+.cover-badge {
+  display: inline-block; background: var(--teal); color: white;
+  border-radius: 20px; padding: 6px 22px; font-size: 13px;
+  font-weight: 700; margin-top: 8px;
+}
+
+/* ── MAIN CARD ── */
+.main { max-width: 920px; margin: 0 auto; padding: 28px 18px 80px; }
+.card { background:white; border-radius:16px; border:1px solid var(--border); margin-bottom:26px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+.card-head { display:flex; align-items:center; gap:14px; padding:15px 22px; border-bottom:1px solid var(--border); }
+.card-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.card-label { font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--gray); margin-bottom:2px; }
+.card-title { font-size:16px; font-weight:700; }
+.card-badge { margin-left:auto; font-size:11px; font-weight:700; color:white; border-radius:12px; padding:3px 11px; white-space:nowrap; }
+.card-body { padding:22px; }
+.c-teal .card-head{background:var(--lt);} .c-teal .card-icon{background:var(--teal);color:white;} .c-teal .card-title{color:var(--teal);} .c-teal .card-badge{background:var(--teal);}
+.c-indigo .card-head{background:var(--li);} .c-indigo .card-icon{background:var(--indigo);color:white;} .c-indigo .card-title{color:var(--indigo);} .c-indigo .card-badge{background:var(--indigo);}
+.c-blue .card-head{background:var(--lb);} .c-blue .card-icon{background:var(--blue);color:white;} .c-blue .card-title{color:var(--blue);} .c-blue .card-badge{background:var(--blue);}
+.c-purple .card-head{background:var(--lp);} .c-purple .card-icon{background:var(--purple);color:white;} .c-purple .card-title{color:var(--purple);} .c-purple .card-badge{background:var(--purple);}
+.c-amber .card-head{background:var(--la);} .c-amber .card-icon{background:var(--amber);color:white;} .c-amber .card-title{color:var(--amber);} .c-amber .card-badge{background:var(--amber);}
+.c-navy .card-head{background:#eef0f3;} .c-navy .card-icon{background:var(--navy);color:white;} .c-navy .card-title{color:var(--navy);} .c-navy .card-badge{background:var(--navy);}
+.c-green .card-head{background:var(--lg);} .c-green .card-icon{background:var(--green);color:white;} .c-green .card-title{color:var(--green);} .c-green .card-badge{background:var(--green);}
+.c-orange .card-head{background:var(--lo);} .c-orange .card-icon{background:var(--orange);color:white;} .c-orange .card-title{color:var(--orange);} .c-orange .card-badge{background:var(--orange);}
+
+/* ── ACT HEAD ── */
+.act-head{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--lgr);border-radius:8px;margin-bottom:14px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--gray);}
+.act-num{background:var(--navy);color:white;min-width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.divider{height:1px;background:var(--border);margin:20px 0;}
+
+/* ── TFD ── */
+.tfd-item{display:flex;align-items:flex-start;gap:14px;padding:14px;border:1.5px solid var(--border);border-radius:10px;margin-bottom:10px;background:#fafafa;}
+.tfd-num{font-weight:700;color:var(--gray);font-size:13px;min-width:20px;margin-top:2px;}
+.tfd-text{flex:1;font-size:14px;line-height:1.5;}
+.tfd-btns{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;}
+.tfd-btn{border:1.5px solid var(--border);background:white;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;color:var(--text);}
+.tfd-btn:hover:not(.locked){border-color:var(--navy);color:var(--navy);}
+.tfd-btn.sel-t{background:#dcfce7;border-color:var(--green);color:#14532d;}
+.tfd-btn.sel-f{background:#ffe4e6;border-color:var(--rose);color:#9f1239;}
+.tfd-btn.sel-d{background:var(--la);border-color:var(--amber);color:#92400e;}
+.tfd-btn.locked{opacity:.6;cursor:default;}
+.tfd-exp{display:none;margin-top:10px;padding:9px 13px;border-radius:8px;font-size:13px;background:var(--lg);border:1px solid #86efac;color:#14532d;line-height:1.5;}
+.tfd-exp.show{display:block;}
+
+/* ── READING ── */
+.reading-passage{background:#fafafa;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;font-size:14px;line-height:1.75;}
+.reading-passage h3{font-size:16px;font-weight:700;color:var(--indigo);margin-bottom:10px;}
+.reading-passage p{margin-bottom:10px;}
+.mc-item{margin-bottom:16px;}
+.mc-q{font-size:14px;font-weight:600;margin-bottom:8px;color:var(--text);}
+.mc-opts{display:flex;flex-direction:column;gap:6px;}
+.mc-opt{padding:9px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:13.5px;cursor:pointer;background:white;transition:all .15s;font-family:inherit;text-align:left;}
+.mc-opt:hover:not(.locked){border-color:var(--indigo);background:var(--li);}
+.mc-opt.correct{background:#dcfce7!important;border-color:var(--green)!important;color:#14532d!important;}
+.mc-opt.wrong{background:#ffe4e6!important;border-color:var(--rose)!important;color:#9f1239!important;}
+.mc-opt.locked{cursor:default;}
+
+/* ── VOCAB CARDS ── */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:20px;}
+.vocab-card{border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;background:white;}
+.vocab-card .vc-term{font-size:15px;font-weight:800;color:var(--blue);margin-bottom:4px;}
+.vocab-card .vc-def{font-size:13px;color:var(--gray);margin-bottom:6px;font-style:italic;}
+.vocab-card .vc-ex{font-size:13px;color:var(--text);line-height:1.5;}
+.vocab-card .vc-ex em{font-style:italic;color:var(--blue);}
+
+/* ── WORD BANK ── */
+.wb-bank{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;padding:14px;background:var(--lb);border-radius:10px;}
+.wb-word{padding:6px 14px;background:white;border:1.5px solid var(--blue);border-radius:20px;font-size:13px;font-weight:700;color:#1e40af;cursor:pointer;transition:all .15s;user-select:none;}
+.wb-word:hover:not(.used){background:var(--lb);transform:translateY(-1px);}
+.wb-word.used{opacity:.35;cursor:default;}
+.wb-word.selected-wb{background:var(--blue);color:white;}
+.wb-sentence{font-size:14px;line-height:2.2;margin-bottom:8px;}
+.wb-blank{display:inline-block;min-width:130px;border-bottom:2.5px solid var(--blue);padding:0 8px;text-align:center;font-weight:700;color:var(--blue);cursor:pointer;position:relative;transition:all .15s;}
+.wb-blank:hover:not(.has-word){border-bottom-color:var(--navy);}
+.wb-blank.has-word{border-bottom-color:var(--green);}
+.wb-blank.correct{color:var(--green)!important;border-bottom-color:var(--green)!important;}
+.wb-blank.incorrect{color:var(--rose)!important;border-bottom-color:var(--rose)!important;}
+
+/* ── KEY LANGUAGE ── */
+.kl-panel{border-radius:12px;padding:16px 20px;margin-bottom:16px;}
+.kl-title{font-size:13.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;}
+.kl-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;font-size:13.5px;line-height:1.6;}
+.kl-tag{font-size:10.5px;font-weight:700;border-radius:6px;padding:2px 8px;white-space:nowrap;flex-shrink:0;}
+.kl-example{font-size:13px;color:var(--gray);font-style:italic;margin-left:24px;margin-bottom:10px;line-height:1.5;}
+
+/* ── FPICK ── */
+.fp-item{margin-bottom:18px;padding:14px;border:1.5px solid var(--border);border-radius:10px;background:#fafafa;}
+.fp-q{font-size:14px;font-weight:600;margin-bottom:10px;line-height:1.5;}
+.fp-opts{display:flex;gap:8px;flex-wrap:wrap;}
+.fp-opt{padding:7px 16px;border:1.5px solid var(--border);border-radius:8px;background:white;font-size:13.5px;cursor:pointer;transition:all .15s;font-family:inherit;font-weight:600;}
+.fp-opt:hover:not(.locked){border-color:var(--purple);background:var(--lp);}
+.fp-opt.correct{background:#dcfce7!important;border-color:var(--green)!important;color:#14532d!important;}
+.fp-opt.wrong{background:#ffe4e6!important;border-color:var(--rose)!important;color:#9f1239!important;}
+.fp-opt.locked{cursor:default;}
+.fp-hint{display:none;margin-top:10px;padding:9px 13px;background:var(--lp);border:1px solid #c4b5fd;border-radius:8px;font-size:13px;color:#4c1d95;line-height:1.5;}
+.fp-hint.show{display:block;}
+
+/* ── SPEAKING SCENES ── */
+.scene-nav-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px;}
+.scene-dot-row{display:flex;gap:5px;}
+.scene-dot{width:9px;height:9px;border-radius:50%;background:var(--border);transition:all .2s;cursor:pointer;}
+.scene-dot.active{background:var(--amber);transform:scale(1.3);}
+.scene-dot.done{background:var(--green);}
+.sc-nav-btn{background:var(--amber);color:white;border:none;border-radius:8px;padding:7px 16px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;}
+.sc-nav-btn:hover{background:#b45309;}
+.scene-block{display:none;}
+.scene-block.active{display:block;}
+.scene-card{border:1.5px solid var(--la);border-radius:12px;padding:18px;background:#fffbeb;margin-bottom:12px;}
+.scene-title{font-size:13px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.scene-prompt{font-size:14.5px;font-weight:600;color:var(--text);line-height:1.5;margin-bottom:10px;}
+.scene-hint{font-size:13px;color:var(--gray);font-style:italic;}
+.sa-box{display:none;margin-top:12px;padding:12px 15px;background:white;border:1.5px solid var(--amber);border-radius:8px;font-size:13.5px;line-height:1.6;color:var(--text);}
+.sa-box.show{display:block;}
+.sa-btn{margin-top:10px;background:none;border:1.5px solid var(--amber);color:var(--amber);border-radius:8px;padding:6px 14px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.sa-btn:hover{background:var(--amber);color:white;}
+
+/* ── PREV BOX ── */
+.prev-box{background:linear-gradient(135deg,#0d9488 0%,#0f766e 100%);border-radius:12px;padding:16px 20px;margin-top:16px;}
+.prev-box-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,0.7);margin-bottom:10px;}
+.prev-box-items{display:flex;flex-direction:column;gap:6px;}
+.prev-box-item{font-size:13px;color:white;line-height:1.5;padding:6px 10px;background:rgba(255,255,255,0.12);border-radius:6px;}
+.prev-box-item em{font-style:normal;font-weight:700;}
+
+/* ── MATCHING (L3 Ex4 style) ── */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.match-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray);margin-bottom:8px;}
+.match-left-item,.match-right-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;margin-bottom:8px;cursor:pointer;background:white;transition:all .15s;user-select:none;font-size:13.5px;}
+.match-left-item:hover:not(.matched),.match-right-item:hover:not(.matched){border-color:var(--navy);}
+.match-left-item.selected,.match-right-item.selected{background:var(--lb);border-color:var(--blue);}
+.match-left-item.matched,.match-right-item.matched{cursor:default;}
+.match-badge{font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;flex-shrink:0;}
+.match-left-item .match-badge{background:var(--navy);color:white;}
+.match-right-item .match-badge{background:var(--lb);color:var(--navy);}
+.match-left-item.matched .match-badge,.match-right-item.matched .match-badge{background:var(--green);color:white;}
+.match-wrong-flash{animation:wrongFlash .4s;}
+@keyframes wrongFlash{0%,100%{transform:translateX(0);}25%{transform:translateX(-4px);}75%{transform:translateX(4px);}}
+
+/* ── BOTTOM NAV ── */
+.slide-bottom-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;margin-top:24px;border-top:2px solid var(--border);background:#f8fafc;border-radius:0 0 16px 16px;}
+
+/* ── BUTTONS ── */
+.btn{border:none;border-radius:9px;padding:9px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;}
+.btn-primary{background:var(--navy);color:white;}
+.btn-primary:hover{background:#263d5c;}
+.btn-outline{background:none;border:1.5px solid var(--border);color:var(--gray);}
+.btn-outline:hover{border-color:var(--navy);color:var(--navy);}
+.btn-sm{padding:6px 14px;font-size:12px;}
+.btn-green{background:var(--green);color:white;}
+.btn-green:hover{background:#15803d;}
+.btn-center{display:flex;justify-content:center;gap:10px;margin-top:16px;}
+</style>
+</head>
+<body>
+
+<div class="top-home-strip"><a class="top-home-link" href="index.html">🏠 Home</a></div>
+<div id="lesson-btns">
+  <button class="action-btn" onclick="downloadNotes()">📄 PDF Notes</button>
+  <button class="action-btn" id="notesBtn" onclick="toggleNotes()">📝 Notes</button>
+</div>
+
+<!-- ══ SLIDE NAVBAR ══ -->
+<div class="slide-navbar">
+  <button class="slide-nav-btn" id="slide-prev" onclick="slideNav(-1)" disabled>← Prev</button>
+  <div class="slide-info">
+    <div class="slide-label" id="slide-label">Cover</div>
+    <div class="slide-counter-text" id="slide-counter">Slide 1 of 9</div>
+    <div class="slide-progress">
+      <div class="sp-dot active" onclick="goToSlide(0)" title="Cover"></div>
+      <div class="sp-dot" onclick="goToSlide(1)" title="Warm-up"></div>
+      <div class="sp-dot" onclick="goToSlide(2)" title="Reading"></div>
+      <div class="sp-dot" onclick="goToSlide(3)" title="Vocabulary"></div>
+      <div class="sp-dot" onclick="goToSlide(4)" title="Grammar"></div>
+      <div class="sp-dot" onclick="goToSlide(5)" title="Speaking"></div>
+      <div class="sp-dot" onclick="goToSlide(6)" title="Wrap-up"></div>
+      <div class="sp-dot" onclick="goToSlide(7)" title="Extra"></div>
+      <div class="sp-dot" onclick="goToSlide(8)" title="Homework"></div>
+    </div>
+  </div>
+  <button class="slide-nav-btn" id="slide-next" onclick="slideNav(1)">Next →</button>
+</div>
+
+<!-- ══ SLIDE 0 · COVER ══ -->
+<div class="slide active" id="slide-0">
+  <div class="cover-slide">
+    <div class="cover-inner">
+      <div class="cover-label">Business English with Teacher Nanda</div>
+      <div class="cover-module">Module 2 · Communication — Lesson 4 of 4</div>
+      <div class="cover-title">Small <span class="accent">Talk</span></div>
+      <div class="cover-badge">Lesson 8</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 1 · WARM-UP ══ -->
+<div class="slide" id="slide-1">
+  <div class="main">
+    <div class="card c-teal">
+      <div class="card-head">
+        <div class="card-icon">☀️</div>
+        <div>
+          <div class="card-label">Part 1</div>
+          <div class="card-title">Warm-up</div>
+        </div>
+        <span class="card-badge">True / False / It depends</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> What do you think? Choose True, False, or It depends for each statement.</div>
+
+        <div class="tfd-item" id="tfd-0">
+          <span class="tfd-num">1</span>
+          <div style="flex:1;">
+            <div class="tfd-text">Small talk is only for social situations — it doesn't belong in the workplace.</div>
+            <div class="tfd-btns">
+              <button class="tfd-btn" onclick="tfdPick(this,'F','exp-0')">True</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'F','exp-0')">False</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'F','exp-0')">It depends</button>
+            </div>
+            <div class="tfd-exp" id="exp-0">Small talk is an essential part of professional life. It builds rapport, eases tension before meetings, and strengthens working relationships. It very much belongs in the workplace!</div>
+          </div>
+        </div>
+
+        <div class="tfd-item" id="tfd-1">
+          <span class="tfd-num">2</span>
+          <div style="flex:1;">
+            <div class="tfd-text">Asking someone about their weekend is a good way to start a Monday morning conversation.</div>
+            <div class="tfd-btns">
+              <button class="tfd-btn" onclick="tfdPick(this,'D','exp-1')">True</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'D','exp-1')">False</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'D','exp-1')">It depends</button>
+            </div>
+            <div class="tfd-exp" id="exp-1">It depends on your relationship with the person and the workplace culture. It is generally a safe topic, but in some very formal environments people prefer to go straight to business.</div>
+          </div>
+        </div>
+
+        <div class="tfd-item" id="tfd-2">
+          <span class="tfd-num">3</span>
+          <div style="flex:1;">
+            <div class="tfd-text">You should avoid talking about the weather — it is too boring and meaningless.</div>
+            <div class="tfd-btns">
+              <button class="tfd-btn" onclick="tfdPick(this,'F','exp-2')">True</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'F','exp-2')">False</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'F','exp-2')">It depends</button>
+            </div>
+            <div class="tfd-exp" id="exp-2">Actually, talking about the weather is a classic and perfectly acceptable conversation opener in many cultures. It is neutral, universal, and non-controversial — exactly what small talk needs to be.</div>
+          </div>
+        </div>
+
+        <div class="tfd-item" id="tfd-3">
+          <span class="tfd-num">4</span>
+          <div style="flex:1;">
+            <div class="tfd-text">Good small talk skills can have a positive effect on your professional reputation.</div>
+            <div class="tfd-btns">
+              <button class="tfd-btn" onclick="tfdPick(this,'T','exp-3')">True</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'T','exp-3')">False</button>
+              <button class="tfd-btn" onclick="tfdPick(this,'T','exp-3')">It depends</button>
+            </div>
+            <div class="tfd-exp" id="exp-3">True! People who are good at small talk are often seen as approachable, confident, and socially intelligent. These qualities can help you build stronger networks and leave a great first impression.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 2 · READING ══ -->
+<div class="slide" id="slide-2">
+  <div class="main">
+    <div class="card c-indigo">
+      <div class="card-head">
+        <div class="card-icon">📖</div>
+        <div>
+          <div class="card-label">Part 2</div>
+          <div class="card-title">Reading</div>
+        </div>
+        <span class="card-badge">Article + Comprehension</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Read the article, then answer the comprehension questions below.</div>
+
+        <div class="reading-passage">
+          <h3>The Art of Small Talk at Work</h3>
+          <p>Small talk is the light, informal conversation that happens before a meeting begins, in the elevator, at the coffee machine, or during a lunch break. It may seem trivial, but researchers say it plays an important role in building trust and connection in the workplace.</p>
+          <p>Before remote work became so widespread, colleagues used to chat face-to-face much more often. Now, many professionals are not used to starting conversations without a screen in front of them. Getting used to making natural small talk can feel awkward at first, but the skill improves with practice and awareness.</p>
+          <p>Experts recommend keeping small talk light and positive. Safe topics include the weather, recent events, travel, food, and general work updates. Topics to avoid include salary, politics, religion, and personal relationships. The goal is to find common ground — something both people can relate to and enjoy discussing briefly.</p>
+          <p>One of the most important rules: listen as much as you speak. Asking a follow-up question shows genuine interest and keeps the conversation going naturally. And when it is time to end the conversation, a simple phrase like <em>"It was great catching up!"</em> or <em>"Let's do this again soon"</em> closes things warmly.</p>
+        </div>
+
+        <div class="act-head" style="margin-top:20px;"><span class="act-num">2</span> Choose the best answer for each question.</div>
+
+        <div class="mc-item">
+          <div class="mc-q">1. What is small talk, according to the article?</div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcPick(this,false)">A. A formal discussion about work goals and objectives</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">B. A conversation that happens only outside the office</button>
+            <button class="mc-opt" onclick="mcPick(this,true)">C. Light, informal conversation in everyday professional settings</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">D. A type of business meeting used to build new client relationships</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">2. Why do some professionals find small talk difficult today?</div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcPick(this,false)">A. They talk too much and have nothing interesting to say</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">B. They prefer formal meetings over casual conversations</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">C. They did not grow up speaking English as a first language</button>
+            <button class="mc-opt" onclick="mcPick(this,true)">D. They are not used to face-to-face conversation after more remote work</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">3. Which of the following is mentioned as a topic to AVOID in small talk?</div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcPick(this,true)">A. Salary</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">B. Travel</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">C. The weather</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">D. Food</button>
+          </div>
+        </div>
+
+        <div class="mc-item">
+          <div class="mc-q">4. What does the article say is one of the most important rules of small talk?</div>
+          <div class="mc-opts">
+            <button class="mc-opt" onclick="mcPick(this,false)">A. Always agree with the other person to keep things positive</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">B. Speak more than the other person so you stay in control</button>
+            <button class="mc-opt" onclick="mcPick(this,false)">C. Keep conversations to under two minutes to avoid awkwardness</button>
+            <button class="mc-opt" onclick="mcPick(this,true)">D. Listen as much as you speak and ask follow-up questions</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 3 · VOCABULARY ══ -->
+<div class="slide" id="slide-3">
+  <div class="main">
+    <div class="card c-blue">
+      <div class="card-head">
+        <div class="card-icon">📚</div>
+        <div>
+          <div class="card-label">Part 3</div>
+          <div class="card-title">Vocabulary</div>
+        </div>
+        <span class="card-badge">6 Key Phrases</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Study these small talk phrases and their meanings.</div>
+
+        <div class="vocab-grid">
+          <div class="vocab-card">
+            <div class="vc-term">break the ice</div>
+            <div class="vc-def">to start a conversation and make people feel comfortable</div>
+            <div class="vc-ex">She told a funny story to <em>break the ice</em> at the team meeting.</div>
+          </div>
+          <div class="vocab-card">
+            <div class="vc-term">catch up</div>
+            <div class="vc-def">to talk with someone you haven't seen recently</div>
+            <div class="vc-ex">Let's have coffee next week and <em>catch up</em> on everything.</div>
+          </div>
+          <div class="vocab-card">
+            <div class="vc-term">bring up</div>
+            <div class="vc-def">to introduce a topic into a conversation</div>
+            <div class="vc-ex">Don't <em>bring up</em> last year's budget issues at the client dinner.</div>
+          </div>
+          <div class="vocab-card">
+            <div class="vc-term">common ground</div>
+            <div class="vc-def">shared interests or opinions between two people</div>
+            <div class="vc-ex">We found <em>common ground</em> when we both mentioned we love hiking.</div>
+          </div>
+          <div class="vocab-card">
+            <div class="vc-term">keep in touch</div>
+            <div class="vc-def">to stay in contact with someone</div>
+            <div class="vc-ex">It was great meeting you — let's <em>keep in touch</em>!</div>
+          </div>
+          <div class="vocab-card">
+            <div class="vc-term">make conversation</div>
+            <div class="vc-def">to chat with someone, often to fill a silence</div>
+            <div class="vc-ex">I find it hard to <em>make conversation</em> with people I've just met.</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="act-head"><span class="act-num">2</span> Complete the sentences using the phrases from the box above. Click a phrase, then click a blank.</div>
+
+        <div class="wb-bank" id="wb-bank-8">
+          <span class="wb-word" onclick="selectWb(this,'break the ice')">break the ice</span>
+          <span class="wb-word" onclick="selectWb(this,'catch up')">catch up</span>
+          <span class="wb-word" onclick="selectWb(this,'bring up')">bring up</span>
+          <span class="wb-word" onclick="selectWb(this,'common ground')">common ground</span>
+          <span class="wb-word" onclick="selectWb(this,'keep in touch')">keep in touch</span>
+          <span class="wb-word" onclick="selectWb(this,'make conversation')">make conversation</span>
+        </div>
+
+        <div class="wb-sentence">1. I always ask about the weather to <span class="wb-blank" id="b1" data-answer="break the ice" onclick="dropOnBlank(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> when I meet new clients.</div>
+        <div class="wb-sentence">2. We haven't spoken in months — let's <span class="wb-blank" id="b2" data-answer="catch up" onclick="dropOnBlank(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> over lunch!</div>
+        <div class="wb-sentence">3. Please don't <span class="wb-blank" id="b3" data-answer="bring up" onclick="dropOnBlank(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> the deadline problem in front of the client.</div>
+        <div class="wb-sentence">4. We found <span class="wb-blank" id="b4" data-answer="common ground" onclick="dropOnBlank(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> when we discovered we had both studied abroad.</div>
+        <div class="wb-sentence">5. It was great working with your team — let's <span class="wb-blank" id="b5" data-answer="keep in touch" onclick="dropOnBlank(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>!</div>
+        <div class="wb-sentence">6. He finds it difficult to <span class="wb-blank" id="b6" data-answer="make conversation" onclick="dropOnBlank(this)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> at networking events.</div>
+
+        <div class="btn-center">
+          <button class="btn btn-green btn-sm" onclick="checkBlanks(['b1','b2','b3','b4','b5','b6'],'wb-bank-8')">✔ Check Answers</button>
+          <button class="btn btn-outline btn-sm" onclick="resetBlanks(['b1','b2','b3','b4','b5','b6'],'wb-bank-8')">↺ Reset</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 4 · GRAMMAR ══ -->
+<div class="slide" id="slide-4">
+  <div class="main">
+    <div class="card c-purple">
+      <div class="card-head">
+        <div class="card-icon">📐</div>
+        <div>
+          <div class="card-label">Part 4</div>
+          <div class="card-title">Grammar</div>
+        </div>
+        <span class="card-badge">Used to · Be used to · Get used to</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Study the key language, then do the practice exercise below.</div>
+
+        <div class="kl-panel" style="background:var(--lp);border:1.5px solid #c4b5fd;">
+          <div class="kl-title" style="color:var(--purple);">🔷 used to + infinitive — past habits &amp; states</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--purple);color:white;">past habit</span> We <strong>used to</strong> have weekly team meetings in person.</div>
+          <div class="kl-example">➜ This no longer happens. It was a regular past habit.</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--purple);color:white;">negative</span> I <strong>didn't use to</strong> enjoy networking events.</div>
+          <div class="kl-example">➜ No "d" in questions and negatives: <em>use to</em>, not <em>used to</em>.</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--purple);color:white;">question</span> Did you <strong>use to</strong> work in an open-plan office?</div>
+        </div>
+
+        <div class="kl-panel" style="background:#f0fdf4;border:1.5px solid #86efac;">
+          <div class="kl-title" style="color:var(--green);">🔶 be used to + noun/gerund — already familiar</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--green);color:white;">state</span> I <strong>am used to</strong> working long hours.</div>
+          <div class="kl-example">➜ It is normal for me. I am already comfortable with it.</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--green);color:white;">example</span> She <strong>is used to</strong> the new office layout.</div>
+        </div>
+
+        <div class="kl-panel" style="background:#fff7ed;border:1.5px solid #fed7aa;">
+          <div class="kl-title" style="color:var(--orange);">🔸 get used to + noun/gerund — becoming familiar</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--orange);color:white;">process</span> I am slowly <strong>getting used to</strong> the new software.</div>
+          <div class="kl-example">➜ I am in the process of becoming comfortable with it.</div>
+          <div class="kl-row"><span class="kl-tag" style="background:var(--orange);color:white;">example</span> It takes time to <strong>get used to</strong> a new routine.</div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="act-head"><span class="act-num">2</span> Choose the correct option to complete each sentence.</div>
+
+        <div class="fp-item">
+          <div class="fp-q">1. We _____ have a quiet open-plan office, but they hired thirty new people last month!</div>
+          <div class="fp-opts">
+            <button class="fp-opt" onclick="fpPick(this,true,'hint-1')">A. used to</button>
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-1')">B. are used to</button>
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-1')">C. are getting used to</button>
+          </div>
+          <div class="fp-hint" id="hint-1">✅ <strong>used to</strong> — describes a past state that no longer exists. The office was quiet before; now it is not.</div>
+        </div>
+
+        <div class="fp-item">
+          <div class="fp-q">2. Are you _____ working from home yet, or do you still miss the office?</div>
+          <div class="fp-opts">
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-2')">A. used to</button>
+            <button class="fp-opt" onclick="fpPick(this,true,'hint-2')">B. getting used to</button>
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-2')">C. use to</button>
+          </div>
+          <div class="fp-hint" id="hint-2">✅ <strong>getting used to</strong> — asks whether the process of becoming comfortable is complete. "Are you <em>getting used to</em> it?" means "Is it becoming normal for you?"</div>
+        </div>
+
+        <div class="fp-item">
+          <div class="fp-q">3. Don't worry about the noise — she _____ working in busy environments. It doesn't bother her.</div>
+          <div class="fp-opts">
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-3')">A. used to</button>
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-3')">B. is getting used to</button>
+            <button class="fp-opt" onclick="fpPick(this,true,'hint-3')">C. is used to</button>
+          </div>
+          <div class="fp-hint" id="hint-3">✅ <strong>is used to</strong> — she is already familiar and comfortable. The process is complete. "It doesn't bother her" confirms she is already adapted.</div>
+        </div>
+
+        <div class="fp-item">
+          <div class="fp-q">4. He _____ travel every week for work, but now he manages everything remotely.</div>
+          <div class="fp-opts">
+            <button class="fp-opt" onclick="fpPick(this,true,'hint-4')">A. used to</button>
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-4')">B. is used to</button>
+            <button class="fp-opt" onclick="fpPick(this,false,'hint-4')">C. gets used to</button>
+          </div>
+          <div class="fp-hint" id="hint-4">✅ <strong>used to</strong> — describes a past habit (weekly travel) that no longer happens. The phrase "but now" signals a change from the past.</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 5 · SPEAKING ══ -->
+<div class="slide" id="slide-5">
+  <div class="main">
+    <div class="card c-amber">
+      <div class="card-head">
+        <div class="card-icon">💬</div>
+        <div>
+          <div class="card-label">Part 5</div>
+          <div class="card-title">Speaking</div>
+        </div>
+        <span class="card-badge">3 Situations</span>
+      </div>
+      <div class="card-body">
+
+        <div class="scene-nav-bar">
+          <div class="scene-dot-row" id="scene-dots-8">
+            <div class="scene-dot active" onclick="goToScene8(1)"></div>
+            <div class="scene-dot" onclick="goToScene8(2)"></div>
+            <div class="scene-dot" onclick="goToScene8(3)"></div>
+          </div>
+          <span id="scene-counter-8" style="font-size:12px;font-weight:700;color:var(--gray);">Situation 1 of 3</span>
+          <button class="sc-nav-btn" id="scene-next-btn-8" onclick="nextScene8()">Next situation →</button>
+        </div>
+
+        <!-- SCENE 1 -->
+        <div class="scene-block active" id="sc8-1">
+          <div class="scene-card">
+            <div class="scene-title">Situation 1 · Reconnecting</div>
+            <div class="scene-prompt">You run into a colleague in the hallway who returned from parental leave three weeks ago. You haven't had the chance to talk. Start the conversation, ask how things are going, and mention one change at work they might not know about.</div>
+            <div class="scene-hint">💡 Use: <em>"Long time no see!"</em> / <em>"How are you finding it?"</em> / <em>"Things have changed a lot since you left."</em></div>
+            <button class="sa-btn" onclick="toggleSa8(this,'sa8-1')">👁 Sample answer</button>
+            <div class="sa-box" id="sa8-1">
+              "Hey, welcome back! Long time no see — how have you been? How are you finding it, being back? It must feel strange after so long at home... By the way, things have changed a bit since you left — we moved to a new project management system. You'll get used to it quickly, though. Let me know if you need any help!"
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENE 2 -->
+        <div class="scene-block" id="sc8-2">
+          <div class="scene-card">
+            <div class="scene-title">Situation 2 · Meeting a client early</div>
+            <div class="scene-prompt">You are in the conference room waiting for a meeting to start. A client arrives ten minutes early. Make small talk to fill the time before others arrive. Find some common ground and keep the conversation light.</div>
+            <div class="scene-hint">💡 Use: <em>"Did you have any trouble finding us?"</em> / <em>"How are things over at [company]?"</em> / <em>"Have you been to this area before?"</em></div>
+            <button class="sa-btn" onclick="toggleSa8(this,'sa8-2')">👁 Sample answer</button>
+            <div class="sa-box" id="sa8-2">
+              "Thanks for coming in! Did you have any trouble finding the office? The parking around here used to be much easier — it's gotten quite busy lately. Can I get you a coffee or some water while we wait? How are things going over at your end? I heard you recently launched a new product line — that must be keeping everyone busy!"
+            </div>
+          </div>
+        </div>
+
+        <!-- SCENE 3 -->
+        <div class="scene-block" id="sc8-3">
+          <div class="scene-card">
+            <div class="scene-title">Situation 3 · Monday morning chat</div>
+            <div class="scene-prompt">It's Monday morning. A colleague mentions they spent the weekend moving to a new apartment. Ask two follow-up questions, share something briefly about your own weekend, and end the conversation naturally before heading to your desk.</div>
+            <div class="scene-hint">💡 Use: <em>"Oh wow, that's exciting!"</em> / <em>"How are you finding the new neighborhood?"</em> / <em>"Anyway, let's catch up properly later!"</em></div>
+            <button class="sa-btn" onclick="toggleSa8(this,'sa8-3')">👁 Sample answer</button>
+            <div class="sa-box" id="sa8-3">
+              "Oh wow, big weekend! How did the move go? And how are you finding the new neighborhood — is it much further from work? My weekend was pretty quiet by comparison — I just visited my family and did some cooking. Nothing exciting! Anyway, you must be exhausted. Let's catch up properly over lunch — I want to hear all about it!"
+            </div>
+          </div>
+        </div>
+
+        <!-- PREV BOX -->
+        <div class="prev-box">
+          <div class="prev-box-title">💡 Useful phrases</div>
+          <div class="prev-box-items">
+            <div class="prev-box-item"><em>"How are you finding it?"</em> — asking someone how they are adapting to something new</div>
+            <div class="prev-box-item"><em>"Long time no see!"</em> — greeting someone you haven't spoken to in a while</div>
+            <div class="prev-box-item"><em>"Things have changed a lot since..."</em> — introducing a topic about workplace changes</div>
+            <div class="prev-box-item"><em>"Anyway, let's catch up properly soon!"</em> — wrapping up a conversation warmly</div>
+            <div class="prev-box-item"><em>"I'm slowly getting used to it."</em> — talking about adapting to something new</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 6 · WRAP-UP ══ -->
+<div class="slide" id="slide-6">
+  <div class="main">
+    <div class="card c-navy">
+      <div class="card-head">
+        <div class="card-icon">✅</div>
+        <div>
+          <div class="card-label">Wrap-up</div>
+          <div class="card-title">Matching</div>
+        </div>
+        <span class="card-badge">5 Pairs</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Match each small talk opener (1–5) to the most natural response (A–E). Click a number, then click a letter.</div>
+
+        <div class="match-grid">
+          <div>
+            <div class="match-col-label">Opener</div>
+            <div class="match-left-item" id="mL1" onclick="matchClick(this,'L',1)">
+              <span class="match-badge">1</span> "So, how was your weekend?"
+            </div>
+            <div class="match-left-item" id="mL2" onclick="matchClick(this,'L',2)">
+              <span class="match-badge">2</span> "Have you met our new marketing manager yet?"
+            </div>
+            <div class="match-left-item" id="mL3" onclick="matchClick(this,'L',3)">
+              <span class="match-badge">3</span> "I hear you've just moved to a new place!"
+            </div>
+            <div class="match-left-item" id="mL4" onclick="matchClick(this,'L',4)">
+              <span class="match-badge">4</span> "Are you getting used to the new open-plan office?"
+            </div>
+            <div class="match-left-item" id="mL5" onclick="matchClick(this,'L',5)">
+              <span class="match-badge">5</span> "We should catch up properly sometime!"
+            </div>
+          </div>
+          <div>
+            <div class="match-col-label">Response</div>
+            <div class="match-right-item" id="mR-A" onclick="matchClick(this,'R','A')">
+              <span class="match-badge">A</span> "Not yet — I should introduce myself!"
+            </div>
+            <div class="match-right-item" id="mR-B" onclick="matchClick(this,'R','B')">
+              <span class="match-badge">B</span> "Yes! Let's grab coffee next week."
+            </div>
+            <div class="match-right-item" id="mR-C" onclick="matchClick(this,'R','C')">
+              <span class="match-badge">C</span> "Yes, it's great — much closer to work."
+            </div>
+            <div class="match-right-item" id="mR-D" onclick="matchClick(this,'R','D')">
+              <span class="match-badge">D</span> "Really relaxing — I went hiking with some friends."
+            </div>
+            <div class="match-right-item" id="mR-E" onclick="matchClick(this,'R','E')">
+              <span class="match-badge">E</span> "Slowly! The noise takes some getting used to."
+            </div>
+          </div>
+        </div>
+
+        <div id="match-score" style="margin-top:14px;font-size:14px;font-weight:700;color:var(--navy);min-height:24px;"></div>
+        <div class="btn-center">
+          <button class="btn btn-green btn-sm" onclick="checkMatch8()">✔ Check Answers</button>
+          <button class="btn btn-outline btn-sm" id="ans-key-btn-8" style="display:none;" onclick="showAnsKey8()">🔑 Answer Key</button>
+          <button class="btn btn-outline btn-sm" onclick="resetMatch8()">↺ Reset</button>
+        </div>
+        <div id="ans-key-8" style="display:none;margin-top:12px;padding:12px 16px;background:var(--lgr);border-radius:10px;font-size:13.5px;line-height:1.9;">
+          <strong>Answer Key:</strong> 1 → D &nbsp;|&nbsp; 2 → A &nbsp;|&nbsp; 3 → C &nbsp;|&nbsp; 4 → E &nbsp;|&nbsp; 5 → B
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 7 · EXTRA ══ -->
+<div class="slide" id="slide-7">
+  <div class="main">
+    <div class="card c-green">
+      <div class="card-head">
+        <div class="card-icon">⭐</div>
+        <div>
+          <div class="card-label">Extra Activity</div>
+          <div class="card-title">If there's time</div>
+        </div>
+        <span class="card-badge">Discussion</span>
+      </div>
+      <div class="card-body">
+        <div class="act-head"><span class="act-num">1</span> Think about and discuss the following situation.</div>
+
+        <div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:12px;padding:18px;margin-bottom:16px;">
+          <div style="font-size:14.5px;font-weight:700;color:var(--green);margin-bottom:10px;">🌐 Networking Event</div>
+          <p style="font-size:14px;line-height:1.6;margin-bottom:10px;">You are attending a company networking event. You don't know many people there. How do you start conversations? What topics would you bring up? What would you avoid? And how would you end a conversation politely if you want to move on and talk to someone else?</p>
+          <p style="font-size:13px;color:var(--gray);font-style:italic;">Think about: opening lines · safe topics · follow-up questions · polite exits</p>
+        </div>
+
+        <button class="sa-btn" style="border-color:var(--green);color:var(--green);" onclick="toggleSa(this,'sa-extra-8')">👁 Sample answer</button>
+        <div class="sa-box" id="sa-extra-8" style="border-color:var(--green);">
+          <strong>Opening:</strong> I'd start with something simple like <em>"Hi, I don't think we've met — I'm [name], I work in the [department] team."</em><br><br>
+          <strong>Safe topics:</strong> I'd ask about their role, how long they've been with the company, or what projects they're working on. If the event has food or drinks, that's always an easy topic too!<br><br>
+          <strong>Topics to avoid:</strong> Salary, office politics, personal relationships, or anything controversial.<br><br>
+          <strong>Polite exit:</strong> <em>"It's been really great talking to you — I'm going to grab another drink, but let's keep in touch! Here's my card."</em>
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SLIDE 8 · HOMEWORK ══ -->
+<div class="slide" id="slide-8">
+  <div class="main">
+    <div class="card c-orange">
+      <div class="card-head">
+        <div class="card-icon">📝</div>
+        <div>
+          <div class="card-label">Homework</div>
+          <div class="card-title">For next time</div>
+        </div>
+        <span class="card-badge">2 Tasks</span>
+      </div>
+      <div class="card-body">
+
+        <div class="act-head"><span class="act-num">Task 1</span> Complete with <strong>used to</strong>, <strong>be used to</strong>, or <strong>get used to</strong>.</div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+
+          <div style="font-size:14px;line-height:2;">
+            1. We <input type="text" class="hw-input" id="hw1" placeholder="________" style="border:none;border-bottom:2px solid var(--orange);background:transparent;font-size:14px;font-weight:700;width:160px;outline:none;text-align:center;color:var(--navy);">
+            have a small team, but now there are over fifty people in the department.
+          </div>
+
+          <div style="font-size:14px;line-height:2;">
+            2. Are you <input type="text" class="hw-input" id="hw2" placeholder="________" style="border:none;border-bottom:2px solid var(--orange);background:transparent;font-size:14px;font-weight:700;width:190px;outline:none;text-align:center;color:var(--navy);">
+            the new schedule yet, or does it still feel strange?
+          </div>
+
+          <div style="font-size:14px;line-height:2;">
+            3. Don't worry about the noise — he <input type="text" class="hw-input" id="hw3" placeholder="________" style="border:none;border-bottom:2px solid var(--orange);background:transparent;font-size:14px;font-weight:700;width:190px;outline:none;text-align:center;color:var(--navy);">
+            working in busy places.
+          </div>
+
+          <div style="font-size:14px;line-height:2;">
+            4. She <input type="text" class="hw-input" id="hw4" placeholder="________" style="border:none;border-bottom:2px solid var(--orange);background:transparent;font-size:14px;font-weight:700;width:160px;outline:none;text-align:center;color:var(--navy);">
+            commute by bus, but she bought a car last year.
+          </div>
+
+          <div style="font-size:14px;line-height:2;">
+            5. It took a few weeks, but I'm finally <input type="text" class="hw-input" id="hw5" placeholder="________" style="border:none;border-bottom:2px solid var(--orange);background:transparent;font-size:14px;font-weight:700;width:210px;outline:none;text-align:center;color:var(--navy);">
+            working from home.
+          </div>
+        </div>
+
+        <div class="btn-center">
+          <button class="btn btn-green btn-sm" onclick="checkHW()">✔ Check Answers</button>
+          <button class="btn btn-outline btn-sm" onclick="resetHW()">↺ Reset</button>
+        </div>
+        <div id="hw-feedback" style="margin-top:10px;font-size:13px;min-height:20px;"></div>
+
+        <div class="divider"></div>
+
+        <div class="act-head"><span class="act-num">Task 2</span> Write a short small talk exchange (4–6 turns) between two colleagues who haven't spoken since one of them returned from a business trip abroad. Use at least two of the phrases from this lesson.</div>
+
+        <textarea rows="7" style="width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px;font-size:13.5px;font-family:'Segoe UI',Arial,sans-serif;resize:vertical;color:var(--text);line-height:1.7;" placeholder="Write your dialogue here..."></textarea>
+
+        <button class="sa-btn" style="border-color:var(--orange);color:var(--orange);margin-top:10px;" onclick="toggleSa(this,'sa-hw2-8')">👁 Sample answer</button>
+        <div class="sa-box" id="sa-hw2-8" style="border-color:var(--orange);">
+          <strong>Ana:</strong> Hey, welcome back! Long time no see — how was the trip?<br>
+          <strong>Ben:</strong> It was great, thanks! Exhausting, but really productive. I'm still getting used to the time difference!<br>
+          <strong>Ana:</strong> Ha, I can imagine! Did you manage to do any sightseeing while you were there?<br>
+          <strong>Ben:</strong> A little bit — we visited a market on the last evening. It was amazing.<br>
+          <strong>Ana:</strong> That sounds wonderful. We should catch up properly — maybe over lunch this week?<br>
+          <strong>Ben:</strong> I'd love that. Let's find a time!
+        </div>
+
+      </div>
+    </div>
+    <div class="slide-bottom-nav">
+      <button class="btn btn-outline" onclick="slideNav(-1);window.scrollTo({top:0,behavior:'instant'})">← Prev</button>
+      <button class="btn btn-primary" onclick="slideNav(1);window.scrollTo({top:0,behavior:'instant'})">🏠 Course Home</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NOTES PANEL ══ -->
+<div id="notesPanel">
+  <div class="notes-toolbar">
+    <span class="notes-toolbar-label">FORMAT</span>
+    <button class="notes-tbtn" onclick="notesFormat('bold')"><b>B</b></button>
+    <button class="notes-tbtn" onclick="notesFormat('underline')"><u>U</u></button>
+    <button class="notes-tbtn" onclick="notesFormat('highlight')">🖊 HL</button>
+  </div>
+  <div id="notesTA" contenteditable="true" spellcheck="true" placeholder="Type your notes here…"></div>
+  <div class="notes-actions">
+    <button class="notes-clear-btn" onclick="clearNotes()">🗑 Clear</button>
+    <span style="font-size:11px;color:var(--gray);font-style:italic;">Save with 📄</span>
+  </div>
+</div>
+
+<script>
+const SLIDE_LABELS = ["Cover","Part 1 · Warm-up","Part 2 · Reading","Part 3 · Vocabulary","Part 4 · Grammar","Part 5 · Speaking","Wrap-up","Extra Activity","Homework"];
+const TOTAL_SLIDES = 9;
+let currentSlide = 0;
+
+/* ── NAVIGATION ── */
+function slideNav(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= TOTAL_SLIDES) return;
+  goToSlide(n);
+}
+function goToSlide(n) {
+  saveCurrentNotes();
+  document.getElementById('slide-' + currentSlide).classList.remove('active');
+  currentSlide = n;
+  document.getElementById('slide-' + currentSlide).classList.add('active');
+  updateSlideUI();
+  loadNotes(n);
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+function updateSlideUI() {
+  const prev = document.getElementById('slide-prev');
+  const next = document.getElementById('slide-next');
+  if (prev) prev.disabled = currentSlide === 0;
+  if (next) {
+    if (currentSlide === TOTAL_SLIDES - 1) {
+      next.disabled = false; next.textContent = '🏠 Course Home';
+      next.onclick = () => { window.location.href='index.html'; };
+    } else {
+      next.disabled = false; next.textContent = 'Next →';
+      next.onclick = () => slideNav(1);
+    }
+  }
+  const lbl = document.getElementById('slide-label');
+  if (lbl) lbl.textContent = SLIDE_LABELS[currentSlide];
+  const ctr = document.getElementById('slide-counter');
+  if (ctr) ctr.textContent = 'Slide ' + (currentSlide+1) + ' of ' + TOTAL_SLIDES;
+  document.querySelectorAll('.sp-dot').forEach((d, i) => {
+    d.classList.remove('active','done');
+    if (i < currentSlide) d.classList.add('done');
+    else if (i === currentSlide) d.classList.add('active');
+  });
+}
+// Fix last slide bottom nav Course Home
+document.querySelector('#slide-8 .slide-bottom-nav button:last-child').onclick = () => { window.location.href='index.html'; };
+
+/* ── TFD ── */
+function tfdPick(btn, correct, expId) {
+  const item = btn.closest('.tfd-item');
+  const btns = item.querySelectorAll('.tfd-btn');
+  if ([...btns].some(b => b.classList.contains('sel-t','sel-f','sel-d'))) return;
+  btns.forEach(b => b.classList.add('locked'));
+  const labels = ['T','F','D'];
+  const classes = ['sel-t','sel-f','sel-d'];
+  const idx = [...btns].indexOf(btn);
+  btn.classList.add(classes[idx]);
+  document.getElementById(expId).classList.add('show');
+}
+
+/* ── MC PICK ── */
+function mcPick(el, correct) {
+  const opts = el.closest('.mc-opts').querySelectorAll('.mc-opt');
+  if ([...opts].some(o => o.classList.contains('correct') || o.classList.contains('wrong'))) return;
+  opts.forEach(o => o.classList.add('locked'));
+  if (correct) { el.classList.add('correct'); }
+  else {
+    el.classList.add('wrong');
+    opts.forEach(o => { if (o.onclick && o.onclick.toString().includes('true')) o.classList.add('correct'); });
+  }
+}
+
+/* ── WORD BANK ── */
+let wbSelected = null, wbSelectedEl = null;
+function selectWb(el, word) {
+  if (el.classList.contains('used')) return;
+  if (wbSelectedEl) wbSelectedEl.classList.remove('selected-wb');
+  if (wbSelectedEl === el) { wbSelected=null; wbSelectedEl=null; return; }
+  wbSelected = word; wbSelectedEl = el;
+  el.classList.add('selected-wb');
+}
+function dropOnBlank(blank) {
+  if (blank.classList.contains('has-word')) {
+    const old = blank.dataset.filled;
+    blank.textContent = ''; blank.dataset.filled = '';
+    blank.classList.remove('has-word','correct','incorrect');
+    blank.style.borderBottomColor = '';
+    document.querySelectorAll('.wb-word').forEach(w => {
+      if (w.textContent === old) { w.classList.remove('used'); }
+    });
+  }
+  if (wbSelected) {
+    blank.textContent = wbSelected; blank.dataset.filled = wbSelected;
+    blank.classList.add('has-word');
+    if (wbSelectedEl) { wbSelectedEl.classList.remove('selected-wb'); wbSelectedEl.classList.add('used'); }
+    wbSelected = null; wbSelectedEl = null;
+  }
+}
+function checkBlanks(ids, bankId) {
+  let correct = 0;
+  ids.forEach(id => {
+    const blank = document.getElementById(id);
+    if (!blank.classList.contains('has-word')) return;
+    const ans = (blank.dataset.answer || '').toLowerCase().trim();
+    const filled = (blank.dataset.filled || '').toLowerCase().trim();
+    if (filled === ans) { blank.classList.add('correct'); blank.classList.remove('incorrect'); correct++; }
+    else { blank.classList.add('incorrect'); blank.classList.remove('correct'); }
+  });
+}
+function resetBlanks(ids, bankId) {
+  ids.forEach(id => {
+    const blank = document.getElementById(id);
+    blank.textContent = ''; blank.dataset.filled = '';
+    blank.classList.remove('has-word','correct','incorrect');
+    blank.style.borderBottomColor = '';
+  });
+  document.querySelectorAll('#'+bankId+' .wb-word').forEach(w => w.classList.remove('used','selected-wb'));
+  wbSelected = null; wbSelectedEl = null;
+}
+
+/* ── FPICK ── */
+function fpPick(el, correct, hintId) {
+  const opts = el.closest('.fp-opts').querySelectorAll('.fp-opt');
+  if ([...opts].some(o => o.classList.contains('correct') || o.classList.contains('wrong'))) return;
+  opts.forEach(o => o.classList.add('locked'));
+  if (correct) { el.classList.add('correct'); }
+  else {
+    el.classList.add('wrong');
+    opts.forEach(o => { if (o.onclick && o.onclick.toString().includes('true')) o.classList.add('correct'); });
+  }
+  document.getElementById(hintId).classList.add('show');
+}
+
+/* ── SPEAKING SCENES ── */
+let curScene8 = 1; const totalScenes8 = 3;
+function goToScene8(n) {
+  document.getElementById('sc8-' + curScene8).classList.remove('active');
+  curScene8 = n;
+  document.getElementById('sc8-' + curScene8).classList.add('active');
+  document.getElementById('scene-counter-8').textContent = 'Situation ' + curScene8 + ' of ' + totalScenes8;
+  updateSceneDots8();
+  const btn = document.getElementById('scene-next-btn-8');
+  btn.textContent = curScene8 === totalScenes8 ? '✅ Done' : 'Next situation →';
+  btn.onclick = curScene8 === totalScenes8 ? null : nextScene8;
+}
+function nextScene8() {
+  if (curScene8 < totalScenes8) goToScene8(curScene8 + 1);
+}
+function updateSceneDots8() {
+  document.querySelectorAll('#scene-dots-8 .scene-dot').forEach((d,i) => {
+    d.classList.remove('active','done');
+    if (i < curScene8-1) d.classList.add('done');
+    else if (i === curScene8-1) d.classList.add('active');
+  });
+}
+function toggleSa8(btn, id) {
+  const box = document.getElementById(id);
+  const showing = box.classList.contains('show');
+  box.classList.toggle('show');
+  btn.textContent = showing ? '👁 Sample answer' : '🙈 Hide';
+}
+function toggleSa(btn, id) {
+  const box = document.getElementById(id);
+  const showing = box.classList.contains('show');
+  box.classList.toggle('show');
+  btn.textContent = showing ? '👁 Sample answer' : '🙈 Hide';
+}
+
+/* ── MATCHING ── */
+const matchAnswers8 = {1:'D', 2:'A', 3:'C', 4:'E', 5:'B'};
+let mSel8 = null;
+function matchClick(el, side, id) {
+  if (el.classList.contains('matched')) return;
+  if (mSel8 && mSel8.side === side) {
+    document.getElementById(mSel8.elId).classList.remove('selected');
+    if (mSel8.elId === el.id) { mSel8=null; return; }
+  }
+  el.classList.add('selected');
+  if (!mSel8) { mSel8 = {side, id, elId: el.id}; return; }
+  // Try to match
+  const lNum = side==='L' ? id : mSel8.id;
+  const rLet = side==='R' ? id : mSel8.id;
+  const lEl = document.getElementById('mL' + lNum);
+  const rEl = document.getElementById('mR-' + rLet);
+  if (matchAnswers8[lNum] === rLet) {
+    lEl.classList.add('matched'); rEl.classList.add('matched');
+    lEl.classList.remove('selected'); rEl.classList.remove('selected');
+    const col = ['#dcfce7','#dbeafe','#ede9fe','#fef3c7','#ffe4e6'][lNum-1];
+    lEl.style.background = col; rEl.style.background = col;
+  } else {
+    lEl.classList.add('match-wrong-flash'); rEl.classList.add('match-wrong-flash');
+    setTimeout(()=>{lEl.classList.remove('match-wrong-flash','selected');rEl.classList.remove('match-wrong-flash','selected');},400);
+  }
+  mSel8 = null;
+}
+function checkMatch8() {
+  const total = Object.keys(matchAnswers8).length;
+  const matched = document.querySelectorAll('.match-left-item.matched').length;
+  document.getElementById('match-score').textContent = matched === total
+    ? '🎉 All correct!' : matched + ' of ' + total + ' matched correctly.';
+  if (matched === total) { document.getElementById('ans-key-btn-8').style.display='none'; }
+  else { document.getElementById('ans-key-btn-8').style.display='inline-block'; }
+}
+function showAnsKey8() {
+  document.getElementById('ans-key-8').style.display='block';
+  document.getElementById('ans-key-btn-8').style.display='none';
+}
+function resetMatch8() {
+  ['mL1','mL2','mL3','mL4','mL5'].forEach(id => {
+    const el=document.getElementById(id);
+    el.classList.remove('matched','selected');el.style.background='';
+  });
+  ['mR-A','mR-B','mR-C','mR-D','mR-E'].forEach(id => {
+    const el=document.getElementById(id);
+    el.classList.remove('matched','selected');el.style.background='';
+  });
+  document.getElementById('match-score').textContent='';
+  document.getElementById('ans-key-btn-8').style.display='none';
+  document.getElementById('ans-key-8').style.display='none';
+  mSel8=null;
+}
+
+/* ── HOMEWORK CHECK ── */
+const hwAnswers = {
+  hw1: ['used to'],
+  hw2: ['used to', 'getting used to'],
+  hw3: ['is used to', "is used to"],
+  hw4: ['used to'],
+  hw5: ['used to', 'getting used to']
+};
+function checkHW() {
+  let correct = 0, total = 5;
+  Object.entries(hwAnswers).forEach(([id, accepted]) => {
+    const inp = document.getElementById(id);
+    const val = inp.value.trim().toLowerCase();
+    const ok = accepted.some(a => val === a.toLowerCase());
+    inp.style.borderBottomColor = ok ? 'var(--green)' : 'var(--rose)';
+    inp.style.color = ok ? 'var(--green)' : 'var(--rose)';
+    if (ok) correct++;
+  });
+  document.getElementById('hw-feedback').innerHTML =
+    correct === total ? '<span style="color:var(--green);font-weight:700;">✅ All correct! Well done.</span>'
+    : '<span style="color:var(--rose);font-weight:700;">' + correct + '/' + total + ' correct. Check the ones in red and try again.</span>';
+}
+function resetHW() {
+  ['hw1','hw2','hw3','hw4','hw5'].forEach(id => {
+    const inp = document.getElementById(id);
+    inp.value=''; inp.style.borderBottomColor=''; inp.style.color='';
+  });
+  document.getElementById('hw-feedback').innerHTML='';
+}
+
+/* ── NOTES ── */
+const notesData = {};
+function saveCurrentNotes() {
+  const ta = document.getElementById('notesTA');
+  if (ta) notesData[currentSlide] = ta.innerHTML;
+}
+function loadNotes(n) {
+  const ta = document.getElementById('notesTA');
+  if (ta) ta.innerHTML = notesData[n] || '';
+}
+function toggleNotes() {
+  const p = document.getElementById('notesPanel');
+  const b = document.getElementById('notesBtn');
+  if (!p || !b) return;
+  p.classList.toggle('open');
+  b.classList.toggle('panel-open', p.classList.contains('open'));
+}
+function notesFormat(cmd) {
+  const ta = document.getElementById('notesTA');
+  if (!ta) return;
+  ta.focus();
+  if (cmd === 'highlight') {
+    document.execCommand('styleWithCSS', false, true);
+    const col = document.queryCommandValue('BackColor');
+    const on = col.includes('255, 245, 157') || col.toLowerCase().includes('fff59d');
+    document.execCommand('hiliteColor', false, on ? 'transparent' : '#FFF59D');
+  } else {
+    document.execCommand(cmd, false, null);
+  }
+}
+function clearNotes() {
+  if (confirm('Clear notes for this slide?')) {
+    const ta = document.getElementById('notesTA');
+    if (ta) ta.innerHTML = '';
+    notesData[currentSlide] = '';
+  }
+}
+
+/* ── PDF NOTES ── */
+function downloadNotes() {
+  saveCurrentNotes();
+  var hasAny = false;
+  var cards = '';
+  var labels = (typeof SLIDE_LABELS !== 'undefined') ? SLIDE_LABELS : [];
+  labels.forEach(function(label, idx) {
+    var note = notesData[idx] || '';
+    if (!note.replace(/<[^>]*>/g,'').trim()) return;
+    hasAny = true;
+    cards += '<div class="card"><div class="card-header">Slide ' + (idx+1) + ' &mdash; ' + label + '</div><div class="card-body">' + note + '</div></div>';
+  });
+  if (!hasAny) { alert('No notes to save yet!'); return; }
+  var lessonTitle = document.title.replace(/^Lesson \d+ [–\-] /, '');
+  var date = new Date().toLocaleDateString('en-US', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>' + lessonTitle + ' – Lesson Notes</title><style>'
+    + "body{font-family:'Segoe UI',system-ui,sans-serif;max-width:720px;margin:16px auto;color:#1C2B3A;padding:0 20px}"
+    + '.banner{padding:28px 32px;margin-bottom:20px;background:linear-gradient(135deg,#0A1628 0%,#1A3A6B 55%,#0E5A8A 100%);border-radius:12px;text-align:center}'
+    + '.banner-title{display:block;font-size:30px;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.2}'
+    + '.banner-sub{display:block;font-size:16px;color:rgba(255,255,255,.88);font-weight:500;margin-top:6px}'
+    + '.lesson-link{font-size:13px;color:#555;margin-bottom:18px;line-height:1.9;}'
+    + '.lesson-link a{color:#1a2e4a;font-weight:700;text-decoration:none;border-bottom:1.5px solid #1a2e4a;}'
+    + '.date{font-size:.95rem;color:#888;margin-bottom:14px}'
+    + '.card{border:1px solid #ddd;border-radius:10px;margin-bottom:14px;overflow:hidden}'
+    + '.card-header{background:#1a2e4a;color:#fff;padding:8px 16px;font-size:.9rem;font-weight:700;letter-spacing:.3px}'
+    + '.card-body{padding:12px 16px;font-size:1rem;line-height:1.7}'
+    + '.card-body [style*="background-color"]{color:#1a1a1a!important}'
+    + '@media print{body{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{margin:1cm}}'
+    + '</style></head><body>'
+    + '<div class="banner"><span class="banner-title">' + lessonTitle + '</span><span class="banner-sub">Business English with Teacher Nanda</span></div>'
+    + '<div class="date">' + date + '</div>'
+    + '<p class="lesson-link">Click here to access the lesson: <a href="'+'https://teacher-nanda.github.io/Business-EFE2/'+window.location.pathname.split('/').pop()+'">'+'https://teacher-nanda.github.io/Business-EFE2/'+window.location.pathname.split('/').pop()+'</a></p>'
+    + cards
+    + '</body></html>';
+  var win = window.open('','_blank');
+  if (!win) { alert('Please allow pop-ups for this page.'); return; }
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){ win.print(); }, 400);
+}
+
+/* ── KEYBOARD ── */
+document.addEventListener('keydown', e => {
+  if (document.activeElement && document.activeElement.contentEditable === 'true') return;
+  if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') slideNav(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   slideNav(-1);
+});
+</script>
+</body>
+</html>
