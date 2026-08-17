@@ -265,6 +265,9 @@ Use `Lesson_03_Business_Around_the_World.html`'s `downloadNotes()`/`clearAllNote
   - Exception: `HW 1 – Title`, `HW 2 – Title`, etc. — this is the lesson's own homework numbering (see "HW Slide Numbering" above), not a book citation, and stays as-is.
 - Applies to `slideLabels` entries too (used for the dot-nav tooltips) — labels should read the same as the on-slide title, with no numbering prefix.
 - This was a real correction (2026-08-17): `index.html` had "Unit X" pills on every lesson card, and several lessons had book-numbered titles (`6.1`, `6.2`…) baked into both the `<h2>` and `slideLabels`. Both were removed. Do not reintroduce either pattern in new lessons.
+- **No meta/course framing either.** Never write "Welcome to Level 2," "Welcome to the course," "in this unit you will learn," or anything that talks *about* the book, the level, or the course structure. The student should only ever see the language content itself — never be reminded there's a book behind it.
+- **Do not invent Warm-Up content.** A Warm-Up slide is only allowed when it is directly grounded in real material — e.g. a photo-discussion prompt that mirrors the book's own opening image (see `Lesson_01_Meeting_New_Colleagues.html`), or a genuine review bridge that quizzes students on phrases actually taught in the *immediately preceding* lesson (see `Lesson_02_Everyday_Work_Activities.html`'s "Formal or Informal?" slide). Never fabricate a generic trivia quiz with made-up sentences just to have an opening slide — this was a real correction (2026-08-17, EFE2 Lesson 1: a fabricated "Welcome to Level 2!" quiz was removed). If there's nothing genuine to warm up with (e.g. the very first lesson of a course, or a book unit that opens straight into Key Language), skip the Warm-Up slide entirely and go straight from Cover into the first real content slide — this is exactly what `Lesson_03_Business_Around_the_World.html` and `Lesson_04_The_Office_Asking_Questions.html` do.
+- **Before building a new lesson, check the equivalent slides in already-built lessons for the same course** (e.g. Lessons 1–4) to confirm the pattern being followed is real precedent, not an assumption.
 
 ---
 
@@ -312,5 +315,5 @@ function woReset(exId){ /* restores original scrambled bank, clears built + colo
 
 ---
 
-*Last updated: 2026-08-17 (No Book References rule added — no unit numbers, no book-section numbering in titles/labels; Word-Order/Sentence-Building Exercises pattern added — clickable word chips, not free typing, reference implementation in Lesson 4)*
+*Last updated: 2026-08-17 (No Book References rule expanded — no meta/course framing, no fabricated Warm-Up quizzes, check precedent in existing lessons before building; no unit numbers, no book-section numbering in titles/labels; Word-Order/Sentence-Building Exercises pattern added — clickable word chips, not free typing, reference implementation in Lesson 4)*
 *2026-08-14: Notes Panel — added mandatory paste-sanitizer to prevent invisible pasted text; always-visible #pdfBtn pattern, mandatory loadNotes()-on-navigation to prevent notes bleeding across slides, highlight-readability CSS fix, downloadNotes() spec*

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business English for Everyone — Level 2</title>
+<style>
+:root {
+  --navy:#1a2e4a; --blue:#2563eb; --lb:#dbeafe;
+  --teal:#0d9488; --lt:#ccfbf1;
+  --amber:#d97706; --la:#fef3c7;
+  --rose:#e11d48; --lr:#ffe4e6;
+  --green:#16a34a; --lg:#dcfce7;
+  --purple:#7c3aed; --lp:#ede9fe;
+  --orange:#ea580c; --lo:#ffedd5;
+  --indigo:#4338ca; --li:#e0e7ff;
+  --gray:#6b7280; --lgr:#f3f4f6;
+  --border:#e5e7eb; --text:#111827;
+
+  /* Module accent colours */
+  --m1:#2563eb; --m2:#0d9488; --m3:#d97706;
+  --m4:#7c3aed; --m5:#16a34a; --m6:#e11d48;
+  --m7:#ea580c; --m8:#4338ca;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,Arial,sans-serif;background:#f0f4f8;color:var(--text);font-size:15px;line-height:1.6;zoom:1.35;}
+
+/* ─── HERO ─── */
+.hero{
+  background:var(--navy);
+  position:relative;overflow:hidden;
+  padding:44px 48px 36px;
+}
+.hero::before{
+  content:'';position:absolute;
+  top:-100px;right:-120px;
+  width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(37,99,235,.18) 0%,transparent 70%);
+}
+.hero::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,#0d9488,#2563eb,#7c3aed,#d97706,#e11d48);
+}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1;}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;padding:4px 14px;margin-bottom:18px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);
+}
+.hero-title{font-size:34px;font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.15;margin-bottom:8px;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px;}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap;}
+.stat{text-align:left;}
+.stat-val{font-size:24px;font-weight:800;color:#fff;line-height:1;}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:2px;}
+
+/* ─── PROGRESS BAR ─── */
+.progress-strip{background:#fff;border-bottom:1px solid var(--border);padding:12px 48px;}
+.progress-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;gap:16px;}
+.progress-label{font-size:11px;font-weight:700;color:var(--gray);white-space:nowrap;text-transform:uppercase;letter-spacing:.5px;}
+.progress-track{flex:1;height:8px;background:var(--lgr);border-radius:20px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--teal),var(--blue));width:0%;}
+.progress-pct{font-size:12px;font-weight:700;color:var(--navy);white-space:nowrap;}
+
+/* ─── MAIN ─── */
+.main{max-width:1000px;margin:0 auto;padding:32px 18px 72px;}
+
+/* ─── MODULE SECTION ─── */
+.mod-section{margin-bottom:36px;}
+.mod-hd{display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--border);}
+.mod-badge{
+  display:flex;align-items:center;justify-content:center;
+  min-width:48px;height:48px;border-radius:14px;
+  font-size:20px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.mod-info{}
+.mod-num{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);}
+.mod-name{font-size:19px;font-weight:800;color:var(--navy);}
+.mod-count{margin-left:auto;font-size:11px;font-weight:600;color:var(--gray);background:var(--lgr);border-radius:20px;padding:3px 12px;white-space:nowrap;}
+
+/* ─── LESSON GRID ─── */
+.lessons{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:13px;}
+
+/* ─── LESSON CARD ─── */
+.lcard{
+  background:#fff;border:1.5px solid var(--border);border-radius:14px;
+  overflow:hidden;position:relative;
+  text-decoration:none;color:var(--text);display:block;
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.lcard.available:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,0.1);
+}
+.lcard.coming{opacity:.55;cursor:default;}
+.lcard-accent{height:4px;width:100%;}
+.lcard-body{padding:16px 17px 14px;}
+.lcard-top{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.lcard-num{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gray);
+}
+.lcard-title{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.35;}
+.lcard-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:10.5px;padding:2px 9px;border-radius:8px;font-weight:600;white-space:nowrap;}
+.tag-vocab{background:#dbeafe;color:#1e40af;}
+.tag-gram{background:#ede9fe;color:#6d28d9;}
+.tag-speak{background:#dcfce7;color:#15803d;}
+.tag-write{background:#fef3c7;color:#92400e;}
+.tag-read{background:#ccfbf1;color:#134e4a;}
+.tag-listen{background:#ffe4e6;color:#9f1239;}
+
+/* Lock overlay */
+.lock-badge{
+  position:absolute;top:12px;right:14px;
+  font-size:11px;font-weight:700;color:rgba(0,0,0,0.25);
+  background:rgba(0,0,0,0.05);border-radius:8px;padding:2px 7px;
+}
+.available .lcard-accent{opacity:1;}
+.coming .lcard-accent{opacity:.4;}
+
+/* ─── MODULE ACCENT COLOURS ─── */
+.m1 .lcard-accent,.m1 .mod-badge{background:var(--m1);}
+.m2 .lcard-accent,.m2 .mod-badge{background:var(--m2);}
+.m3 .lcard-accent,.m3 .mod-badge{background:var(--m3);}
+.m4 .lcard-accent,.m4 .mod-badge{background:var(--m4);}
+.m5 .lcard-accent,.m5 .mod-badge{background:var(--m5);}
+.m6 .lcard-accent,.m6 .mod-badge{background:var(--m6);}
+.m7 .lcard-accent,.m7 .mod-badge{background:var(--m7);}
+.m8 .lcard-accent,.m8 .mod-badge{background:var(--m8);}
+
+.m1 .available:hover{border-color:var(--m1);}
+.m2 .available:hover{border-color:var(--m2);}
+.m3 .available:hover{border-color:var(--m3);}
+.m4 .available:hover{border-color:var(--m4);}
+.m5 .available:hover{border-color:var(--m5);}
+.m6 .available:hover{border-color:var(--m6);}
+.m7 .available:hover{border-color:var(--m7);}
+.m8 .available:hover{border-color:var(--m8);}
+
+/* ─── FOOTER ─── */
+.footer{text-align:center;font-size:12px;color:var(--gray);padding:20px;border-top:1px solid var(--border);margin-top:16px;}
+.footer strong{color:var(--navy);}
+
+/* ── PRINT / SAVE AS PDF ─────────────────────────── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { background: #fff !important; color: #111 !important; }
+  .hero-title, .stat-val, .stat-lbl, .hero * { color: #111 !important; }
+  .hero { background: #1A4A8C !important; }
+  .hero-title { color: #fff !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">📚 Complete Course</div>
+    <h1 class="hero-title">Business English for Everyone</h1>
+  </div>
+</div>
+
+<!-- ══ PROGRESS ══ -->
+<div class="progress-strip">
+  <div class="progress-inner">
+    <span class="progress-label">Course Progress</span>
+    <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+    <span class="progress-pct" id="ppct"></span>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 1 — INTRODUCTIONS & FIRST IMPRESSIONS
+══════════════════════════════════════════════════ -->
+<div class="mod-section m1">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">👋</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 1</div>
+      <div class="mod-name">Introductions &amp; First Impressions</div>
+    </div>
+    <div class="mod-count">1 lesson</div>
+  </div>
+  <div class="lessons">
+
+    <a class="lcard available" href="Lesson_01_Introductions.html">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 01</span>
+        </div>
+        <div class="lcard-title">Introductions</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 02</span>
+        </div>
+        <div class="lcard-title">Getting to Know Colleagues</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 2 — WORKPLACE CHANGES & REPORTS
+══════════════════════════════════════════════════ -->
+<div class="mod-section m2">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">🔄</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 2</div>
+      <div class="mod-name">Workplace Changes &amp; Reports</div>
+    </div>
+    <div class="mod-count">3 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 03</span>
+        </div>
+        <div class="lcard-title">Departments, Roles &amp; Talking About Changes</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 04</span>
+        </div>
+        <div class="lcard-title">Delegating Tasks</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 05</span>
+        </div>
+        <div class="lcard-title">Money, Finance &amp; Writing a Report</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-write">Writing</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 3 — COMMUNICATION & TECHNOLOGY
+══════════════════════════════════════════════════ -->
+<div class="mod-section m3">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">💬</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 3</div>
+      <div class="mod-name">Communication &amp; Technology</div>
+    </div>
+    <div class="mod-count">4 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 06</span>
+        </div>
+        <div class="lcard-title">Making Apologies</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 07</span>
+        </div>
+        <div class="lcard-title">Communication Technology &amp; Making Plans by Email</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-write">Writing</span>
+          <span class="tag tag-gram">Grammar</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 08</span>
+        </div>
+        <div class="lcard-title">Keeping Clients Informed</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-write">Writing</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 09</span>
+        </div>
+        <div class="lcard-title">Informal Communication</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 4 — PRODUCTION & MARKETING
+══════════════════════════════════════════════════ -->
+<div class="mod-section m4">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">🏭</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 4</div>
+      <div class="mod-name">Production &amp; Marketing</div>
+    </div>
+    <div class="mod-count">4 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 10</span>
+        </div>
+        <div class="lcard-title">Production &amp; Describing a Process</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 11</span>
+        </div>
+        <div class="lcard-title">Describing a Product</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 12</span>
+        </div>
+        <div class="lcard-title">Marketing, Advertising &amp; Marketing a Product</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 13</span>
+        </div>
+        <div class="lcard-title">Advertising &amp; Branding</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-write">Writing</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 5 — SKILLS, ADVICE & EVENTS
+══════════════════════════════════════════════════ -->
+<div class="mod-section m5">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">🎯</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 5</div>
+      <div class="mod-name">Skills, Advice &amp; Events</div>
+    </div>
+    <div class="mod-count">4 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 14</span>
+        </div>
+        <div class="lcard-title">Advice &amp; Suggestions</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 15</span>
+        </div>
+        <div class="lcard-title">Management, Leadership &amp; Talking About Abilities</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 16</span>
+        </div>
+        <div class="lcard-title">Comparing &amp; Contrasting</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 17</span>
+        </div>
+        <div class="lcard-title">Planning Events</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 6 — MEETINGS & REPORTING
+══════════════════════════════════════════════════ -->
+<div class="mod-section m6">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">🗣️</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 6</div>
+      <div class="mod-name">Meetings &amp; Reporting</div>
+    </div>
+    <div class="mod-count">4 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 18</span>
+        </div>
+        <div class="lcard-title">Meetings &amp; What People Said</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 19</span>
+        </div>
+        <div class="lcard-title">What People Asked</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 20</span>
+        </div>
+        <div class="lcard-title">Reporting Quantities</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 21</span>
+        </div>
+        <div class="lcard-title">Checking Information</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 7 — CAREERS & APPLICATIONS
+══════════════════════════════════════════════════ -->
+<div class="mod-section m7">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">💼</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 7</div>
+      <div class="mod-name">Careers &amp; Applications</div>
+    </div>
+    <div class="mod-count">5 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 22</span>
+        </div>
+        <div class="lcard-title">Industries &amp; Job Descriptions</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 23</span>
+        </div>
+        <div class="lcard-title">Applying for a Job</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-write">Writing</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 24</span>
+        </div>
+        <div class="lcard-title">Job Interviews</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 25</span>
+        </div>
+        <div class="lcard-title">Business Idioms &amp; Working Relationships</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 26</span>
+        </div>
+        <div class="lcard-title">Career Outcomes</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODULE 8 — PRESENTATIONS & NEGOTIATIONS
+══════════════════════════════════════════════════ -->
+<div class="mod-section m8">
+  <div class="mod-hd">
+    <div class="mod-badge" style="color:white;">📊</div>
+    <div class="mod-info">
+      <div class="mod-num">Module 8</div>
+      <div class="mod-name">Presentations &amp; Negotiations</div>
+    </div>
+    <div class="mod-count">8 lessons</div>
+  </div>
+  <div class="lessons">
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 27</span>
+        </div>
+        <div class="lcard-title">Presentation Equipment &amp; Structuring a Presentation</div>
+        <div class="lcard-tags">
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 28</span>
+        </div>
+        <div class="lcard-title">Developing an Argument</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 29</span>
+        </div>
+        <div class="lcard-title">Pitching a Product</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 30</span>
+        </div>
+        <div class="lcard-title">Talking About Facts &amp; Figures</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-listen">Listening</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 31</span>
+        </div>
+        <div class="lcard-title">Negotiating Politely</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 32</span>
+        </div>
+        <div class="lcard-title">Emphasizing Your Opinion</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 33</span>
+        </div>
+        <div class="lcard-title">Discussing Conditions</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+    <div class="lcard coming">
+      <div class="lcard-accent"></div>
+      <div class="lcard-body">
+        <div class="lcard-top">
+          <span class="lcard-num">Lesson 34</span>
+        </div>
+        <div class="lcard-title">Discussing Problems</div>
+        <div class="lcard-tags">
+          <span class="tag tag-gram">Grammar</span>
+          <span class="tag tag-vocab">Vocabulary</span>
+          <span class="tag tag-speak">Speaking</span>
+        </div>
+      </div>
+      <div class="lock-badge">🔒 Soon</div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="footer">
+  <strong>Business English for Everyone · Level 2 · B1</strong><br>
+  Based on the DK Business English for Everyone coursebook · 34 lessons · 8 modules
+</div>
+
+<script>
+// Count available lessons for progress bar
+const total = 34;
+const done = document.querySelectorAll('.lcard.available').length;
+const pct = Math.round((done / total) * 100);
+document.getElementById('pfill').style.width = pct + '%';
+document.getElementById('ppct').textContent = done + ' / ' + total + ' lessons';
+</script>
+
+</body>
+</html>

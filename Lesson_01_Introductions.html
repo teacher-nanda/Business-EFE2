@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEfE L2 – Lesson 1 – Introductions</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-ui,sans-serif;background:#0A1A14;}
+#deck{position:relative;width:100vw;height:100vh;overflow:hidden;}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .4s ease;background:#FAFAF8;display:flex;flex-direction:column;}
+.slide.active{opacity:1;pointer-events:all;}
+.slide-main{flex:1;overflow-y:auto;width:100%;display:flex;flex-direction:column;padding-bottom:60px;}
+#nav{position:fixed;bottom:0;left:0;right:0;z-index:500;height:52px;background:rgba(10,26,20,.96);display:flex;align-items:center;justify-content:center;gap:14px;backdrop-filter:blur(6px);}
+#nav button{background:rgba(255,255,255,.12);color:#fff;border:none;padding:7px 22px;border-radius:20px;cursor:pointer;font-size:.95rem;font-weight:600;transition:background .2s;}
+#nav button:hover:not(:disabled){background:rgba(255,255,255,.25);}
+#nav button:disabled{opacity:.3;cursor:default;}
+#counter{color:rgba(255,255,255,.7);font-size:.9rem;min-width:60px;text-align:center;}
+#dots{display:flex;align-items:center;gap:5px;overflow:hidden;flex:1;justify-content:center;}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:all .2s;flex-shrink:0;}
+.dot.active{background:#2FBF8F;transform:scale(1.4);}
+#notesBtn{position:fixed;top:14px;right:22px;z-index:1000;background:rgba(10,26,20,.88);color:#fff;border:none;padding:9px 20px;border-radius:22px;cursor:pointer;font-size:.92rem;font-weight:600;letter-spacing:.02em;transition:background .2s;backdrop-filter:blur(4px);}
+#notesBtn:hover{background:rgba(10,26,20,1);}
+#pdfBtn{position:fixed;top:14px;right:140px;z-index:1000;background:rgba(10,26,20,.88);color:#fff;border:none;padding:9px 20px;border-radius:22px;cursor:pointer;font-size:.92rem;font-weight:600;letter-spacing:.02em;transition:background .2s;backdrop-filter:blur(4px);}
+#pdfBtn:hover{background:rgba(10,26,20,1);}
+#notesPanel{position:fixed;top:54px;right:22px;z-index:999;width:360px;max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s ease,width .35s ease,left .35s ease,top .35s ease;opacity:0;border-radius:14px;}
+#notesPanel.open{max-height:320px;opacity:1;}
+#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(10,26,20,.7);border-radius:10px 10px 0 0;}
+#notesToolbar button{background:rgba(255,255,255,.12);border:none;border-radius:5px;color:#fff;font-size:.85rem;padding:3px 9px;cursor:pointer;font-family:inherit;transition:background .15s;}
+#notesToolbar button:hover{background:rgba(255,255,255,.25);}
+#notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:rgba(10,26,20,.92);color:#fff;font-family:inherit;backdrop-filter:blur(6px);box-sizing:border-box;overflow-y:auto;}
+#notesTA:empty::before{content:attr(data-placeholder);color:rgba(255,255,255,.4);pointer-events:none;}
+#notesTA [style*="background-color"]{color:#1a1a1a!important;}
+#notesPanel.cover{left:50%;right:auto;top:56px;transform:translateX(-50%);width:min(760px,94vw);max-height:calc(100vh - 110px)!important;display:flex;flex-direction:column;}
+#notesPanel.cover #notesTA{min-height:calc(100vh - 210px)!important;max-height:calc(100vh - 210px)!important;overflow-y:auto;}
+#homeBtn{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:1000;display:none;background:rgba(10,26,20,.88);color:#fff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center;transition:background .2s;backdrop-filter:blur(4px);}
+#homeBtn:hover{background:rgba(20,90,60,.95);}
+.banner{width:100%;padding:13px 28px;font-size:1.1rem;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.banner-pill{margin-left:auto;font-size:.82rem;font-weight:600;background:rgba(255,255,255,.2);padding:3px 12px;border-radius:20px;}
+.content{padding:24px 48px 20px;flex:1;}
+h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
+.instruction{font-size:1.08rem;color:#1C2B3A;margin-bottom:10px;font-weight:700;}
+.inst-light{font-size:1.05rem;color:#1C2B3A;margin-bottom:10px;font-weight:400;}
+#s1{background:linear-gradient(145deg,#04150E 0%,#0E5C3E 45%,#2FBF8F 100%);}
+.title-inner{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;gap:10px;position:relative;}
+.title-label{font-size:1.1rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:500;}
+.title-sub{font-size:1.15rem;color:rgba(255,255,255,.75);margin-top:4px;}
+.title-main{font-size:3.2rem;font-weight:900;color:#fff;line-height:1.1;margin:14px 0 8px;}
+.title-accent{display:inline-block;color:#F5D93A;}
+.grammar-theory{background:#EEF7F0;border-left:5px solid #1A5C2A;border-radius:0 14px 14px 0;padding:18px 22px;margin:12px 0;font-size:1.06rem;line-height:1.7;color:#0A1E0F;}
+.grammar-theory h3{font-size:1.05rem;font-weight:800;color:#1A5C2A;margin-bottom:10px;}
+.grammar-theory .form-table{width:100%;border-collapse:collapse;margin:10px 0;}
+.grammar-theory .form-table th{padding:8px 12px;background:#1A5C2A;color:#fff;font-size:1.05rem;font-weight:700;text-align:left;}
+.grammar-theory .form-table td{padding:8px 12px;border:1px solid #c8e0cc;font-size:1.05rem;}
+.grammar-theory .form-table td:first-child{font-weight:700;color:#1A5C2A;background:#DFF0E2;}
+.example-box{background:#F0FAF3;border:2px solid #2E8B57;border-radius:12px;padding:14px 20px;margin:12px 0;font-size:1.06rem;line-height:1.7;}
+.example-box strong{color:#1A5C2A;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px;}
+.col-section{display:flex;flex-direction:column;gap:10px;}
+.ex-row{background:#F4F8FA;border-radius:10px;padding:12px 16px;font-size:1.06rem;line-height:1.7;color:#1C2B3A;border-left:3px solid #c8e0cc;}
+.ex-num{font-weight:800;color:#1A5C2A;margin-right:6px;}
+.ans-input{display:inline-block;border:none;border-bottom:2px solid #1A7A4A;background:transparent;font-size:1.05rem;font-family:inherit;font-weight:700;color:#1C2B3A;width:200px;padding:2px 4px;outline:none;text-align:center;}
+.ans-input.correct{color:#1A7A4A;border-bottom-color:#1A7A4A;background:rgba(26,122,74,.08);border-radius:4px;}
+.ans-input.wrong{color:#C4614A;border-bottom-color:#C4614A;background:rgba(196,97,74,.1);border-radius:4px;}
+.tfng-row{background:#F4F8FA;border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px;font-size:1.06rem;color:#1C2B3A;flex-wrap:wrap;}
+.tfng-q{flex:1;min-width:200px;}
+.tfng-btns{display:flex;gap:6px;}
+.tfng-btn{padding:5px 12px;border-radius:20px;border:2px solid #ccc;background:#f0f0f0;color:#555;font-size:1rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:inherit;}
+.tfng-btn:hover{border-color:#1A7A4A;}
+.tfng-btn.sel{background:#1A4A8C;color:#fff;border-color:#1A4A8C;}
+.tfng-btn.correct{background:#1A7A4A;color:#fff;border-color:#1A7A4A;}
+.tfng-btn.wrong{background:#C4614A;color:#fff;border-color:#C4614A;}
+.mc-question{margin-bottom:10px;}
+.mc-q-text{font-size:1.05rem;font-weight:700;color:#0A2010;margin-bottom:5px;}
+.mc-q-num{color:#1A5C2A;}
+.mc-opts{display:flex;flex-direction:row;gap:8px;flex-wrap:wrap;}
+.mc-opt{background:#F4F8FA;border:2px solid #dde;border-radius:8px;padding:4px 12px;font-size:1.05rem;color:#1C2B3A;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s;flex:0 0 auto;}
+.mc-opt:hover{border-color:#1A5080;background:#EEF5FA;}
+.mc-opt.mc-sel{background:#1A4A8C;border-color:#1A4A8C;color:#fff;}
+.mc-opt.mc-ok{background:#1A7A4A;border-color:#1A7A4A;color:#fff;}
+.mc-opt.mc-bad{background:#C4614A;border-color:#C4614A;color:#fff;}
+.word-bank{display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px;background:#F5F0FF;border-radius:10px;margin:10px 0;border:1px solid #C5A8E0;}
+.wb-chip{background:#EEF5FA;color:#1C2B3A;font-weight:700;padding:6px 16px;border-radius:20px;font-size:1rem;cursor:pointer;transition:all .15s;border:1.5px solid #C5A8E0;user-select:none;display:inline-block;}
+.wb-chip:hover{opacity:.85;}
+.wb-used{text-decoration:line-through;opacity:.55;}
+#s-hw{background:linear-gradient(145deg,#04150E 0%,#0E5C3E 60%,#2FBF8F 100%);}
+.hw-btns{display:flex;gap:10px;margin-top:16px;}
+.btn-check{background:#1A5C2A;color:#fff;border:none;padding:9px 22px;border-radius:20px;cursor:pointer;font-size:1rem;font-weight:700;transition:background .2s;}
+.btn-check:hover{background:#154A22;}
+.btn-reset{background:transparent;color:#C4614A;border:2px solid #C4614A;padding:7px 20px;border-radius:20px;cursor:pointer;font-size:1rem;font-weight:700;transition:all .2s;}
+.btn-reset:hover{background:#C4614A;color:#fff;}
+.note-callout{background:#FFF8E8;border:1px solid #E8D080;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:1.05rem;color:#5A4000;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.review-card{background:#F0FAF3;border-radius:12px;padding:16px 18px;border-top:4px solid #1A7A4A;}
+.review-card h3{font-size:1rem;font-weight:800;color:#1A5C2A;margin-bottom:8px;}
+.review-card ul{padding-left:18px;font-size:1rem;line-height:1.8;color:#1C2B3A;}
+.speak-card{background:#F0EEF8;border-radius:14px;padding:16px 18px;border-left:4px solid #5A2A8C;margin-bottom:12px;}
+.speak-card .speak-num{font-weight:800;color:#4A1A7A;margin-bottom:6px;font-size:1rem;}
+.speak-card .speak-q{font-size:1.1rem;color:#1C2B3A;line-height:1.5;}
+.speak-card .speak-ex{font-size:1.02rem;color:#555;font-style:italic;margin-top:0;max-height:0;overflow:hidden;transition:max-height .35s ease,margin-top .2s ease;}
+.speak-card .speak-ex.open{max-height:140px;margin-top:8px;}
+.speak-toggle{background:none;border:1px solid #C8A0D8;border-radius:14px;color:#7A2A5A;font-size:.98rem;font-weight:700;cursor:pointer;padding:3px 12px;margin-top:8px;transition:background .15s;}
+.speak-toggle:hover{background:#F0D8EB;}
+.dlg-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.dlg-bubble{background:#EEF5FA;border:2px solid #1A5080;border-radius:14px 14px 14px 2px;padding:10px 16px;font-size:1.06rem;color:#1C2B3A;max-width:560px;}
+.dlg-bubble strong{color:#1A5080;}
+.dlg-note{font-size:.92rem;color:#7A6A3A;font-style:italic;padding-top:6px;max-width:220px;}
+.cross-word{cursor:pointer;padding:2px 8px;border-radius:5px;border:2px solid #ccc;background:#f0f0f0;font-weight:700;font-size:1.05rem;transition:all .15s;user-select:none;}
+.cross-word:hover{border-color:#C45020;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}60%{transform:translateX(6px);}}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  html,body{background:#fff!important;overflow:visible!important;height:auto!important;}
+  .slide{position:relative!important;opacity:1!important;display:block!important;page-break-after:always;width:100%!important;height:auto!important;overflow:visible!important;background:#fff!important;}
+  .banner{color:#fff!important;}
+  #nav,#notesBtn,#pdfBtn,#notesPanel,#homeBtn{display:none!important;}
+}
+</style>
+</head>
+<body>
+<button id="homeBtn" onclick="goTo(0)">🏠</button>
+<button id="pdfBtn" onclick="downloadNotes()" title="Save all your notes as a PDF">📄 PDF Notes</button>
+<button id="notesBtn" onclick="toggleNotes()">📝 Notes</button>
+<div id="notesPanel">
+  <div id="notesToolbar">
+    <button onclick="notesFormat('bold')"><b>B</b></button>
+    <button onclick="notesFormat('underline')"><u>U</u></button>
+    <span style="width:1px;background:rgba(255,255,255,.2);margin:2px 3px;display:inline-block;height:18px;vertical-align:middle;"></span>
+    <button onclick="notesHilite('#FFE600')" style="background:#FFE600;color:#333;border-radius:50%;width:24px;height:24px;padding:0;font-size:1rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;">●</button>
+    <button onclick="notesHilite('#AAFFC3')" style="background:#AAFFC3;color:#333;border-radius:50%;width:24px;height:24px;padding:0;font-size:1rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;">●</button>
+    <button onclick="notesHilite('#FFB3C1')" style="background:#FFB3C1;color:#333;border-radius:50%;width:24px;height:24px;padding:0;font-size:1rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;">●</button>
+    <button onclick="notesHilite('#BFE0FF')" style="background:#BFE0FF;color:#333;border-radius:50%;width:24px;height:24px;padding:0;font-size:1rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;">●</button>
+    <span style="width:1px;background:rgba(255,255,255,.2);margin:2px 3px;display:inline-block;height:18px;vertical-align:middle;"></span>
+    <button onclick="clearAllNotes()" title="Erase every note in this lesson" style="background:rgba(255,90,90,.3);">🗑 Clear all</button>
+  </div>
+  <div id="notesTA" contenteditable="true" data-placeholder="Type your notes here…"></div>
+</div>
+
+<div id="deck">
+
+<!-- ══════════════════════════ s1 COVER ══════════════════════════ -->
+<div class="slide active" id="s1">
+  <div class="title-inner">
+    <div class="title-label">Business English</div>
+    <div class="title-sub">with teacher Nanda</div>
+    <div class="title-main"><span class="title-accent">Introductions</span></div>
+  </div>
+  <button onclick="location.href='index.html'" style="position:absolute;bottom:70px;left:32px;background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.4);padding:10px 22px;border-radius:22px;cursor:pointer;font-size:1.05rem;font-weight:700;backdrop-filter:blur(4px);">🏠 Course Home</button>
+  <button onclick="goToId('s-hw')" style="position:absolute;bottom:70px;right:32px;background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.4);padding:10px 22px;border-radius:22px;cursor:pointer;font-size:1.05rem;font-weight:700;backdrop-filter:blur(4px);">📝 Homework</button>
+</div>
+
+<!-- ══════════════════════════ s2 · KEY LANGUAGE: INTRODUCING YOURSELF AND OTHERS ══════════════════════════ -->
+<div class="slide" id="s2">
+  <div class="banner" style="background:#1A5080;color:#fff;">🔑 Key Language</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Key Language: Introducing Yourself and Others</h2>
+      <p class="inst-light">It is common to shake hands with new colleagues and introduce yourself.</p>
+      <div class="dlg-row">
+        <div class="dlg-bubble"><strong>You must be</strong> Eric from the UK. Carl has told me a lot about you.</div>
+        <div class="dlg-note">Use when you meet someone you have heard about.</div>
+      </div>
+      <div class="dlg-row">
+        <div class="dlg-bubble"><strong>I think we met</strong> in Mumbai, didn't we? I'm Max from HTB Engineering.</div>
+        <div class="dlg-note">Use when you think you may have met before.</div>
+      </div>
+      <div class="dlg-row">
+        <div class="dlg-bubble">Hello, I don't think we've met. <strong>I'm Osric.</strong></div>
+        <div class="dlg-note">Use when you meet someone for the first time.</div>
+      </div>
+      <p class="inst-light" style="margin-top:16px;">It is polite to introduce people you know but who do not know each other.</p>
+      <div class="dlg-row">
+        <div class="dlg-bubble">Tony, <strong>this is</strong> Hayao from our Japanese office. Hayao, <strong>meet</strong> Tony, our new director of marketing.</div>
+        <div class="dlg-note">When you know both parties, introduce each one separately, saying both their names.</div>
+      </div>
+      <div class="dlg-row">
+        <div class="dlg-bubble">Victoria, <strong>I'd like to introduce you to</strong> Faisal. — Nice to meet you. <strong>How do you do?</strong></div>
+        <div class="dlg-note">"How do you do?" is quite formal.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s4 · MATCH THE BEGINNINGS TO THE ENDINGS ══════════════════════════ -->
+<div class="slide" id="s3">
+  <div class="banner" style="background:#1A5C2A;color:#fff;">📐 Grammar</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Match the Beginnings of the Introductions to the Correct Endings</h2>
+      <p class="instruction">Click a beginning, then click the ending that completes it.</p>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:6px;">
+        <div id="s4-qs" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <div id="s4-as" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+      <div class="hw-btns" style="margin-top:14px;">
+        <button class="btn-check" onclick="checkS4()">✅ Check</button>
+        <button class="btn-reset" onclick="resetS4()">↺ Reset</button>
+      </div>
+      <div id="s4-result" style="margin-top:10px;font-size:1.05rem;font-weight:700;min-height:1.4em;text-align:center;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s5 · FILL IN THE GAPS ══════════════════════════ -->
+<div class="slide" id="s4">
+  <div class="banner" style="background:#1A5C2A;color:#fff;">📐 Grammar</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Fill in the Gaps Using the Words in the Panel</h2>
+      <p class="instruction">Fill in each gap using a word from the panel below.</p>
+      <div id="s5-example"></div>
+      <div id="s5-rows" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <div style="margin-top:12px;">
+        <div style="font-size:.82rem;font-weight:700;color:#1A5C2A;margin-bottom:6px;">Word panel (some words may be used more than once):</div>
+        <div id="s5-bank" class="word-bank"></div>
+      </div>
+      <div class="hw-btns" style="margin-top:14px;">
+        <button class="btn-check" onclick="checkS5()">✅ Check</button>
+        <button class="btn-reset" onclick="resetS5()">↺ Reset</button>
+      </div>
+      <div id="s5-result" style="margin-top:10px;font-size:1.05rem;font-weight:700;min-height:1.4em;text-align:center;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s6 · DELEGATES AT A CONFERENCE (TRUE / FALSE / NOT GIVEN) ══════════════════════════ -->
+<div class="slide" id="s5">
+  <div class="banner" style="background:#0E7A8A;color:#fff;">📖 Reading</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Read the Conversation and Answer the Questions</h2>
+      <div style="background:#EEF5FA;border-radius:10px;padding:10px 14px;margin:10px 0;font-size:1.05rem;color:#1A3A60;">
+        Delegates at a conference are introducing themselves.
+      </div>
+      <div class="dlg-row">
+        <div class="dlg-bubble"><strong>Jared:</strong> Hi, I'm Jared. I work in our Lima office.<br><strong>Sasha:</strong> Nice to meet you, Jared. I'm Sasha — I don't think we've met before.<br><strong>Jared:</strong> This is Daniel — he shares an office with me in Lima.<br><strong>Daniel:</strong> Hi Sasha, great to meet you. Is this your first conference?<br><strong>Sasha:</strong> No, I came last year too. I work with our new product team — it's an exciting one, but a really expensive one to develop!</div>
+      </div>
+      <div class="note-callout" style="margin-top:10px;">
+        <span>ℹ️</span>
+        <span>Mark each statement as True, False, or Not Given based only on what the conversation says.</span>
+      </div>
+      <div id="s6-qs" style="margin-top:8px;"></div>
+      <div class="hw-btns" style="margin-top:14px;">
+        <button class="btn-check" onclick="checkS6()">✅ Check</button>
+        <button class="btn-reset" onclick="resetS6()">↺ Reset</button>
+      </div>
+      <div id="s6-result" style="margin-top:10px;font-size:1.05rem;font-weight:700;min-height:1.4em;text-align:center;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s7 · KEY LANGUAGE: PRESENT SIMPLE AND PRESENT CONTINUOUS ══════════════════════════ -->
+<div class="slide" id="s6">
+  <div class="banner" style="background:#1A5080;color:#fff;">🔑 Key Language</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Key Language: The Present Simple and the Present Continuous</h2>
+      <p class="inst-light">The present simple is used to describe something that happens in general, or is part of a routine. The present continuous describes something that is happening right now, and will be continuing for a limited time.</p>
+      <div class="example-box" style="text-align:center;font-size:1.2rem;">
+        I don't usually <strong style="color:#1A5C2A;">enjoy</strong> networking, but I'<strong style="color:#7A2A5A;">m enjoying</strong> this conference.
+      </div>
+      <div class="grammar-theory" style="margin-top:14px;">
+        <table class="form-table">
+          <tr><th>Present simple</th><td>the same as the base form of the verb without "to" (add "-s"/"-es" for he/she/it).</td></tr>
+          <tr><th>Present continuous</th><td>add "be" before the verb and "-ing" to the verb.</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s8 · READ THE ARTICLE AND ANSWER THE QUESTIONS ══════════════════════════ -->
+<div class="slide" id="s7">
+  <div class="banner" style="background:#0E7A8A;color:#fff;">📖 Reading</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Read the Article and Answer the Questions</h2>
+      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:20px;">
+        <div style="background:#F4F0E4;border-radius:12px;padding:16px 18px;color:#2A2010;">
+          <div style="font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7A2A5A;">Career Ladder</div>
+          <div style="font-size:1.3rem;font-weight:900;margin-top:4px;">Making Connections</div>
+          <div style="font-size:.85rem;font-weight:700;margin-bottom:10px;font-style:italic;">How to network better if you're shy</div>
+          <div style="font-size:.88rem;line-height:1.6;">Networking doesn't necessarily mean talking to hundreds of people at a conference. A few good connections are much better than meeting lots of people who you will never hear from again. Start by chatting to ex-colleagues or old friends. Ask what they are doing now and share your experiences.<br><br>One common habit of shy people is to constantly apologize for everything. Apologizing all of the time looks unprofessional and shows a lack of confidence in yourself. Instead of saying sorry, remember to smile, maintain eye contact, ask questions, and, of course, exchange business cards.</div>
+        </div>
+        <div>
+          <div id="s8-qs"></div>
+          <div class="hw-btns">
+            <button class="btn-check" onclick="checkS8()">✓ Check Answers</button>
+            <button class="btn-reset" onclick="resetS8()">↺ Reset</button>
+          </div>
+          <div id="s8-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s9 · REWRITE THE SENTENCES, CORRECTING THE ERRORS ══════════════════════════ -->
+<div class="slide" id="s8">
+  <div class="banner" style="background:#1A5C2A;color:#fff;">📐 Grammar</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Rewrite the Sentences, Correcting the Errors</h2>
+      <p class="instruction">Each sentence has one verb-form error. Type the correct sentence.</p>
+      <div class="two-col" id="s9-cols">
+        <div class="col-section" id="s9-left"></div>
+        <div class="col-section" id="s9-right"></div>
+      </div>
+      <div class="hw-btns" style="margin-top:14px;">
+        <button class="btn-check" onclick="checkS9()">✅ Check</button>
+        <button class="btn-reset" onclick="resetS9()">↺ Reset</button>
+      </div>
+      <div id="s9-result" style="margin-top:10px;font-size:1.05rem;font-weight:700;min-height:1.4em;text-align:center;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s10 · CROSS OUT THE INCORRECT WORDS ══════════════════════════ -->
+<div class="slide" id="s9">
+  <div class="banner" style="background:#7A2A5A;color:#fff;">💬 Speaking</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Cross Out the Incorrect Words in Each Sentence, Then Say the Sentences Out Loud</h2>
+      <p class="instruction">Click the correct word — the incorrect one will be crossed out automatically.</p>
+      <div id="s10-example"></div>
+      <div class="two-col" style="gap:14px;margin-top:4px;">
+        <div class="col-section" id="s10-left"></div>
+        <div class="col-section" id="s10-right"></div>
+      </div>
+      <div class="hw-btns" style="margin-top:14px;">
+        <button class="btn-check" onclick="checkS10()">✅ Check</button>
+        <button class="btn-reset" onclick="resetS10()">↺ Reset</button>
+      </div>
+      <div id="s10-result" style="margin-top:10px;font-size:1.05rem;font-weight:700;min-height:1.4em;text-align:center;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s11 · GUIDED SPEAKING: INTRODUCE YOURSELF ══════════════════════════ -->
+<div class="slide" id="s10">
+  <div class="banner" style="background:#7A2A5A;color:#fff;">💬 Guided Speaking</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>Introduce Yourself</h2>
+      <p class="inst-light">Imagine you're on your first day at a new company. Answer each prompt out loud. Click "Sample answer" to compare.</p>
+      <div id="s11-cards"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s12 · LESSON REVIEW ══════════════════════════ -->
+<div class="slide" id="s11">
+  <div class="banner" style="background:#2E2A6B;color:#fff;">🔁 Review</div>
+  <div class="slide-main">
+    <div class="content" style="padding:18px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>What have we learned? 📚</h2>
+      <div class="review-grid" style="margin-top:14px;">
+        <div class="review-card" style="border-top-color:#1A5080;grid-column:span 2;">
+          <h3 style="color:#1A5080;">🤝 Introducing Yourself and Others</h3>
+          <ul style="display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;">
+            <li><strong>You must be</strong> Eric from the UK.</li>
+            <li><strong>I think we met</strong> in Mumbai.</li>
+            <li>I don't think we've met. <strong>I'm Osric.</strong></li>
+            <li><strong>I'd like to introduce you to</strong> Faisal.</li>
+          </ul>
+        </div>
+        <div class="review-card" style="border-top-color:#1A7A4A;">
+          <h3 style="color:#1A7A4A;">🔗 Present Simple</h3>
+          <ul>
+            <li>Routines and general facts</li>
+            <li>I <strong>enjoy</strong> networking.</li>
+          </ul>
+        </div>
+        <div class="review-card" style="border-top-color:#1A7A4A;">
+          <h3 style="color:#1A7A4A;">🔗 Present Continuous</h3>
+          <ul>
+            <li>Happening right now, temporary</li>
+            <li>I'<strong>m enjoying</strong> this conference.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:18px;background:linear-gradient(135deg,#EEF7F0,#D8F0E0);border-radius:14px;padding:16px 22px;border-left:5px solid #1A7A4A;font-size:1.1rem;color:#0A2010;font-style:italic;line-height:1.6;">
+        "Hi, I don't think we've met. I'm Nanda — I <strong>work</strong> in the marketing department, and I'<strong>m really enjoying</strong> this conference so far!"
+      </div>
+      <div class="hw-btns" style="justify-content:center;margin-top:20px;">
+        <button class="btn-check" onclick="goToId('s-hw')" style="font-size:1rem;padding:12px 32px;">📝 Go to Homework →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s-hw">
+  <div class="title-inner">
+    <div class="title-main" style="font-size:2.8rem;"><span class="title-accent">Homework</span></div>
+    <div class="title-sub" style="font-size:1.3rem;margin-top:6px;">Introductions</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s-hw1 · HW 1 FILL IN THE GAPS ══════════════════════════ -->
+<div class="slide" id="s-hw1">
+  <div class="banner" style="background:#6B2737;color:#fff;">📝 Homework</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 1 – Fill in the Gaps Using the Words in the Panel</h2>
+      <p class="inst-light">Fill in each gap using a word from the panel below.</p>
+      <div id="hw1-example"></div>
+      <div id="hw1-rows" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <div style="margin-top:12px;">
+        <div style="font-size:.82rem;font-weight:700;color:#6B2737;margin-bottom:6px;">Word panel (some words may be used more than once):</div>
+        <div id="hw1-bank" class="word-bank"></div>
+      </div>
+      <div class="hw-btns">
+        <button class="btn-check" onclick="checkHW1()">✓ Check Answers</button>
+        <button class="btn-reset" onclick="resetHW1()">↺ Reset</button>
+      </div>
+      <div id="hw1-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s-hw2 · HW 2 MATCH THE BEGINNINGS TO THE ENDINGS ══════════════════════════ -->
+<div class="slide" id="s-hw2">
+  <div class="banner" style="background:#6B2737;color:#fff;">📝 Homework</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 2 – Match the Beginnings of the Introductions to the Correct Endings</h2>
+      <p class="inst-light">Click a beginning, then click the ending that completes it.</p>
+      <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:6px;">
+        <div id="hw2-qs" style="display:flex;flex-direction:column;gap:8px;"></div>
+        <div id="hw2-as" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+      <div class="hw-btns">
+        <button class="btn-check" onclick="checkHW2()">✓ Check Answers</button>
+        <button class="btn-reset" onclick="resetHW2()">↺ Reset</button>
+      </div>
+      <div id="hw2-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s-hw3 · HW 3 READING: TRUE / FALSE / NOT GIVEN ══════════════════════════ -->
+<div class="slide" id="s-hw3">
+  <div class="banner" style="background:#6B2737;color:#fff;">📝 Homework</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 3 – Read the Article and Answer the Questions</h2>
+      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:20px;">
+        <div style="background:#F4F0E4;border-radius:12px;padding:16px 18px;color:#2A2010;">
+          <div style="font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7A2A5A;">Essential Skills</div>
+          <div style="font-size:1.3rem;font-weight:900;margin-top:4px;">Meeting and Greeting</div>
+          <div style="font-size:.85rem;font-weight:700;margin-bottom:10px;font-style:italic;">Meeting new people isn't always easy, but it's an essential skill for a young business professional.</div>
+          <div style="font-size:.88rem;line-height:1.6;">Whether you're looking for a new job, hope to grow your business, or just want to find new clients, you need to talk to the right people. It doesn't always lead to success, but it can provide a great first step. So, what's the best way to start talking?<br><br>Talk about your recent experience: "I'm working with some great software engineers at the moment" is a great way to start. You can tell them about your personal life and interests: "I play golf with my friend on the weekend" might be a good starter. But you shouldn't talk about things that are too personal. If you ask someone how much money they earn, they might be offended! Another good idea is to talk about one of your clients: "I often work with ElectroSan, an exciting new Japanese start-up." You will soon find that the person you're talking to wants to know more…</div>
+        </div>
+        <div>
+          <div id="hw3-qs"></div>
+          <div class="hw-btns">
+            <button class="btn-check" onclick="checkHW3()">✓ Check Answers</button>
+            <button class="btn-reset" onclick="resetHW3()">↺ Reset</button>
+          </div>
+          <div id="hw3-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s-hw4 · HW 4 REWRITE THE SENTENCES, CORRECTING THE ERRORS ══════════════════════════ -->
+<div class="slide" id="s-hw4">
+  <div class="banner" style="background:#6B2737;color:#fff;">📝 Homework</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 4 – Rewrite the Sentences, Correcting the Errors</h2>
+      <p class="inst-light">Each sentence has one verb-form error. Type the correct sentence.</p>
+      <div class="two-col" id="hw4-cols">
+        <div class="col-section" id="hw4-left"></div>
+        <div class="col-section" id="hw4-right"></div>
+      </div>
+      <div class="hw-btns">
+        <button class="btn-check" onclick="checkHW4()">✓ Check Answers</button>
+        <button class="btn-reset" onclick="resetHW4()">↺ Reset</button>
+      </div>
+      <div id="hw4-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ s-hw5 · HW 5 CROSS OUT THE INCORRECT WORDS ══════════════════════════ -->
+<div class="slide" id="s-hw5">
+  <div class="banner" style="background:#6B2737;color:#fff;">📝 Homework</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>HW 5 – Cross Out the Incorrect Words, Then Say the Sentences Out Loud</h2>
+      <p class="instruction">Click the correct word — the incorrect one will be crossed out automatically.</p>
+      <div id="hw5-example"></div>
+      <div class="two-col">
+        <div class="col-section" id="hw5-left"></div>
+        <div class="col-section" id="hw5-right"></div>
+      </div>
+      <div class="hw-btns">
+        <button class="btn-check" onclick="checkHW5()">✓ Check Answers</button>
+        <button class="btn-reset" onclick="resetHW5()">↺ Reset</button>
+      </div>
+      <div id="hw5-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<div id="nav">
+  <button id="prevBtn" onclick="goTo(current-1)">◀ Prev</button>
+  <div id="dots"></div>
+  <span id="counter">1 / 1</span>
+  <button id="nextBtn" onclick="goTo(current+1)">Next ▶</button>
+</div>
+
+<script>
+/* ═══ SLIDE IDS & LABELS ═══ */
+var slideIds = ["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10","s11","s-hw","s-hw1","s-hw2","s-hw3","s-hw4","s-hw5"];
+var slideLabels = [
+  "Cover",
+  "Key Language: Introducing Yourself and Others",
+  "Match the Beginnings to the Endings",
+  "Fill in the Gaps",
+  "Reading: Delegates at a Conference",
+  "Key Language: Present Simple and Present Continuous",
+  "Reading: Making Connections",
+  "Rewrite the Sentences",
+  "Cross Out the Incorrect Words",
+  "Guided Speaking: Introduce Yourself",
+  "Lesson Review",
+  "Homework",
+  "HW 1 — Fill in the Gaps",
+  "HW 2 — Match the Beginnings to the Endings",
+  "HW 3 — Reading: Meeting and Greeting",
+  "HW 4 — Rewrite the Sentences",
+  "HW 5 — Cross Out the Incorrect Words"
+];
+
+/* ═══ NAVIGATION ═══ */
+var slides, dotsEl, current = 0;
+function norm(s){ return s.trim().toLowerCase().replace(/[.!?,;:]+$/,'').replace(/\s+/g,' '); }
+function goTo(n){
+  saveNotes();
+  document.getElementById('homeBtn').style.display = n===0?'none':'flex';
+  slides[current].classList.remove('active');
+  dotsEl.children[current].classList.remove('active');
+  current = Math.max(0,Math.min(n,slides.length-1));
+  slides[current].classList.add('active');
+  dotsEl.children[current].classList.add('active');
+  scrollDot(current);
+  document.getElementById('counter').textContent = (current+1)+' / '+slides.length;
+  document.getElementById('prevBtn').disabled = current===0;
+  document.getElementById('nextBtn').disabled = current===slides.length-1;
+  var _panel = document.getElementById('notesPanel');
+  if(current===0){ if(notesOpen) _panel.classList.add('cover'); }
+  else { _panel.classList.remove('cover'); }
+  if(notesOpen) loadNotes();
+}
+function goToId(id){ goTo(slideIds.indexOf(id)); }
+function scrollDot(i){ var d=dotsEl.children[i]; if(d) d.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'}); }
+function saveNotes(){ try{ localStorage.setItem('notes_efe2l1_'+current, document.getElementById('notesTA').innerHTML); }catch(e){} }
+function loadNotes(){ try{ document.getElementById('notesTA').innerHTML = localStorage.getItem('notes_efe2l1_'+current)||''; }catch(e){} }
+(function(){var t=document.getElementById('notesTA');if(t)t.addEventListener('paste',function(e){e.preventDefault();var text=(e.clipboardData||window.clipboardData).getData('text/plain');document.execCommand('insertText',false,text);});})();
+var notesOpen = false;
+function toggleNotes(){
+  notesOpen = !notesOpen;
+  var p=document.getElementById('notesPanel');
+  p.classList.toggle('open', notesOpen);
+  if(current===0) p.classList.toggle('cover', notesOpen);
+  if(notesOpen) loadNotes();
+  document.getElementById('notesBtn').textContent = notesOpen ? '✕ Close' : '📝 Notes';
+}
+function notesFormat(cmd){ document.execCommand(cmd); document.getElementById('notesTA').focus(); }
+function notesHilite(c){ document.execCommand('hiliteColor',false,c); document.getElementById('notesTA').focus(); }
+function clearAllNotes(){if(confirm('Clear ALL notes for this whole lesson? This cannot be undone.')){try{for(var i=localStorage.length-1;i>=0;i--){var k=localStorage.key(i);if(k&&k.indexOf('notes_efe2l1_')===0)localStorage.removeItem(k);}}catch(e){}var t=document.getElementById('notesTA');if(t)t.innerHTML='';}}
+function downloadNotes(){
+  saveNotes();
+  var hasAny=false, cards='';
+  slideIds.forEach(function(sid, idx){
+    var note=''; try{ note=localStorage.getItem('notes_efe2l1_'+idx)||''; }catch(e){}
+    if(!note.replace(/<[^>]*>/g,'').trim()) return;
+    hasAny=true;
+    cards += '<div class="card"><div class="card-header">Slide '+(idx+1)+' &mdash; '+slideLabels[idx]+'</div><div class="card-body">'+note+'</div></div>';
+  });
+  if(!hasAny){ alert('No notes to save yet!'); return; }
+  var date=new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var html='<!DOCTYPE html><html><head><meta charset="utf-8"><title>BEfE L2 Lesson 1 Notes</title><style>'
+    +"body{font-family:'Segoe UI',system-ui,sans-serif;max-width:720px;margin:16px auto;color:#1C2B3A;padding:0 20px}"
+    +'h1{font-size:1.5rem;color:#1A4A8C;margin-bottom:4px}'
+    +'.date{font-size:.9rem;color:#888;margin-bottom:14px}'
+    +'.card{border:1px solid #ddd;border-radius:10px;margin-bottom:12px;overflow:hidden}'
+    +'.card-header{background:#1A4A8C;color:#fff;padding:7px 14px;font-size:.88rem;font-weight:700}'
+    +'.card-body{padding:12px 14px;font-size:.97rem;line-height:1.7}'
+    +'.card-body [style*="background-color"]{color:#1a1a1a!important}'
+    +'@media print{body{margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}@page{margin:1cm}}'
+    +'.lesson-url{font-size:.88rem;color:#1A4A8C;margin-bottom:4px}'
+    +'</style></head><body>'
+    +'<h1>Business English for Everyone &ndash; Lesson 1 Notes</h1>'
+    +'<div class="lesson-url"><a href="https://teacher-nanda.github.io/Business-EFE2/Lesson_01_Introductions.html" style="color:#1A4A8C;">https://teacher-nanda.github.io/Business-EFE2/Lesson_01_Introductions.html</a></div>'
+    +'<div class="date">'+date+'</div>'+cards+'</body></html>';
+  var win=window.open('','_blank');
+  if(!win){ alert('Please allow pop-ups for this page.'); return; }
+  win.document.write(html); win.document.close(); win.focus();
+  setTimeout(function(){win.print();},400);
+}
+
+/* keyboard navigation */
+document.addEventListener('keydown', function(e){
+  var tag = document.activeElement ? document.activeElement.tagName : '';
+  if(tag==='INPUT'||tag==='TEXTAREA'||document.activeElement.contentEditable==='true') return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') goTo(current+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goTo(current-1);
+});
+
+/* ═══ shared helper: Q&A click-match module ═══ */
+var qamState = {};
+function qamBuild(exId, qContainerId, aContainerId, pairs, resultId, exampleQ, exampleA){
+  qamState[exId] = { pairs:pairs, qContainerId:qContainerId, aContainerId:aContainerId, resultId:resultId,
+    exampleQ:exampleQ, exampleA:exampleA, match:{}, sel:null, checked:false };
+  qamRender(exId);
+}
+function qamRender(exId){
+  var st=qamState[exId];
+  var qEl=document.getElementById(st.qContainerId); var aEl=document.getElementById(st.aContainerId);
+  qEl.innerHTML=''; aEl.innerHTML='';
+  if(st.exampleQ){
+    var exQ=document.createElement('div');
+    exQ.style.cssText='background:#FFF4EE;border:2px solid #C45020;border-radius:10px;padding:9px 12px;font-size:1rem;color:#1C2B3A;';
+    exQ.innerHTML='<strong style="color:#C45020;">Example</strong> — '+st.exampleQ;
+    qEl.appendChild(exQ);
+  }
+  st.pairs.forEach(function(item,i){
+    var isSel=(st.sel===i); var mAi=st.match[i]; var isM=(mAi!==undefined);
+    var border=isSel?'#F5893A':(isM?'#1A5080':'#dde');
+    if(st.checked&&isM) border=(mAi===i)?'#1A7A4A':'#C4614A';
+    var card=document.createElement('div');
+    card.style.cssText='background:#F4F8FA;border:2px solid '+border+';border-radius:10px;padding:9px 12px;cursor:pointer;font-size:1rem;color:#1C2B3A;transition:border-color .15s;';
+    card.innerHTML='<strong style="color:#1A5080;">'+(i+1)+'.</strong> '+item.q
+      + (isM? '<div style="margin-top:6px;font-size:.9rem;font-weight:700;color:'+(st.checked?(mAi===i?'#1A7A4A':'#C4614A'):'#1A5080')+';">↳ '+st.pairs[mAi].a+'</div>' : '');
+    card.onclick=function(){ st.sel=(st.sel===i)?null:i; qamRender(exId); };
+    qEl.appendChild(card);
+  });
+  if(st.exampleA){
+    var exA=document.createElement('div');
+    exA.style.cssText='background:#f0f0f0;border:2px solid #ccc;border-radius:10px;padding:9px 12px;font-size:1rem;color:#aaa;text-decoration:line-through;';
+    exA.textContent=st.exampleA;
+    aEl.appendChild(exA);
+  }
+  var usedA={}; Object.keys(st.match).forEach(function(k){ usedA[st.match[k]]=true; });
+  st.pairs.forEach(function(item,ai){
+    var isUsed=!!usedA[ai];
+    var chip=document.createElement('div');
+    if(isUsed){ chip.style.cssText='background:#f0f0f0;border:2px solid #ddd;border-radius:10px;padding:9px 12px;font-size:1rem;color:#bbb;text-decoration:line-through;'; }
+    else {
+      chip.style.cssText='background:#EEF5FA;border:2px solid #8BB0D0;border-radius:10px;padding:9px 12px;font-size:1rem;color:#1C2B3A;cursor:pointer;transition:background .15s;';
+      chip.onclick=function(){ if(st.sel===null) return; st.match[st.sel]=ai; st.sel=null; st.checked=false; document.getElementById(st.resultId).textContent=''; qamRender(exId); };
+    }
+    chip.textContent=item.a;
+    aEl.appendChild(chip);
+  });
+}
+function qamCheck(exId){
+  var st=qamState[exId];
+  var note=document.getElementById(st.resultId);
+  if(Object.keys(st.match).length<st.pairs.length){ note.textContent='Match all the items first!'; note.style.color='#C4614A'; return; }
+  var score=0;
+  st.pairs.forEach(function(item,i){ if(st.match[i]===i) score++; });
+  st.checked=true; qamRender(exId);
+  note.textContent=score+' / '+st.pairs.length+' correct';
+  note.style.color=score===st.pairs.length?'#1A7A4A':'#C4614A';
+}
+function qamReset(exId){
+  var st=qamState[exId]; st.match={}; st.sel=null; st.checked=false;
+  document.getElementById(st.resultId).textContent='';
+  qamRender(exId);
+}
+
+/* ═══ shared helper: cross-out module ═══ */
+var xoState = {};
+var xoBtn='border:2px solid #BDD4F0;border-radius:8px;padding:4px 14px;font-size:1.05rem;font-weight:700;cursor:pointer;background:#fff;color:#1C2B3A;font-family:inherit;transition:all .15s;';
+function xoBuild(exId, leftId, rightId, items, resultId){
+  xoState[exId] = { items:items, leftId:leftId, rightId:rightId, resultId:resultId, sel:{} };
+  var left=document.getElementById(leftId); var right=document.getElementById(rightId);
+  left.innerHTML=''; right.innerHTML='';
+  items.forEach(function(item,i){
+    var row=document.createElement('div');
+    row.style.cssText='background:#F8F8FF;border-radius:12px;border:1.5px solid #DDE5F0;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;';
+    row.innerHTML='<span style="font-size:1.05rem;font-weight:800;color:#1A5080;min-width:20px;flex-shrink:0;">'+(i+1)+'.</span>'
+      +(item.pre?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.pre+'</span>':'')
+      +'<button id="'+exId+'-a-'+i+'" onclick="xoPick(\''+exId+'\','+i+',\'a\')" style="'+xoBtn+'">'+item.a+'</button>'
+      +'<span style="color:#888;font-size:1.05rem;">/</span>'
+      +'<button id="'+exId+'-b-'+i+'" onclick="xoPick(\''+exId+'\','+i+',\'b\')" style="'+xoBtn+'">'+item.b+'</button>'
+      +(item.post?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.post+'</span>':'');
+    (i<Math.ceil(items.length/2)?left:right).appendChild(row);
+  });
+  document.getElementById(resultId).textContent='';
+}
+function xoReset1(exId,i){ ['a','b'].forEach(function(x){ var b=document.getElementById(exId+'-'+x+'-'+i); if(b) b.style.cssText=xoBtn; }); }
+function xoPick(exId,i,v){
+  var st=xoState[exId];
+  var other=v==='a'?'b':'a';
+  xoReset1(exId,i); st.sel[i]=v;
+  var cb=document.getElementById(exId+'-'+v+'-'+i); var wb=document.getElementById(exId+'-'+other+'-'+i);
+  if(cb){cb.style.background='#EEF7F0';cb.style.color='#1A5C2A';cb.style.borderColor='#1A7A4A';}
+  if(wb){wb.style.background='#f5f5f5';wb.style.color='#bbb';wb.style.borderColor='#e0e0e0';wb.style.textDecoration='line-through';wb.style.opacity='.6';}
+}
+function xoCheck(exId){
+  var st=xoState[exId];
+  var score=0;
+  st.items.forEach(function(item,i){
+    if(st.sel[i]===undefined) return;
+    var ok=st.sel[i]!==item.wrong;
+    if(ok){ score++; }
+    else {
+      var sel=document.getElementById(exId+'-'+st.sel[i]+'-'+i);
+      var other=st.sel[i]==='a'?'b':'a';
+      var oth=document.getElementById(exId+'-'+other+'-'+i);
+      if(sel){sel.style.background='#FCEEED';sel.style.color='#C4614A';sel.style.borderColor='#C4614A';sel.style.textDecoration='none';sel.style.opacity='1';}
+      if(oth){oth.style.cssText=xoBtn;}
+    }
+  });
+  var res=document.getElementById(st.resultId);
+  res.innerHTML = score===st.items.length
+    ? '<span style="color:#1A7A4A;">✅ Perfect! '+score+'/'+st.items.length+'</span>'
+    : '<span style="color:#C0392B;">'+score+'/'+st.items.length+' — Try again!</span>';
+}
+function xoResetAll(exId){
+  var st=xoState[exId];
+  xoBuild(exId, st.leftId, st.rightId, st.items, st.resultId);
+}
+
+/* ═══ shared helper: TFNG module ═══ */
+var tfngState = {};
+function tfngBuild(exId, containerId, items, resultId){
+  tfngState[exId] = { items:items, containerId:containerId, resultId:resultId, sel:{} };
+  var el=document.getElementById(containerId); el.innerHTML='';
+  items.forEach(function(item,i){
+    var row=document.createElement('div'); row.className='tfng-row';
+    row.innerHTML='<span class="tfng-q"><strong class="ex-num">'+(i+1)+'.</strong> '+item.q+'</span>'
+      +'<div class="tfng-btns">'
+      +'<button class="tfng-btn" id="'+exId+'-T-'+i+'" onclick="tfngPick(\''+exId+'\','+i+',\'T\')">True</button>'
+      +'<button class="tfng-btn" id="'+exId+'-F-'+i+'" onclick="tfngPick(\''+exId+'\','+i+',\'F\')">False</button>'
+      +'<button class="tfng-btn" id="'+exId+'-N-'+i+'" onclick="tfngPick(\''+exId+'\','+i+',\'N\')">Not given</button>'
+      +'</div>';
+    el.appendChild(row);
+  });
+  document.getElementById(resultId).textContent='';
+}
+function tfngPick(exId,i,v){
+  var st=tfngState[exId]; st.sel[i]=v;
+  ['T','F','N'].forEach(function(x){ document.getElementById(exId+'-'+x+'-'+i).className='tfng-btn'+(x===v?' sel':''); });
+}
+function tfngCheck(exId){
+  var st=tfngState[exId]; var score=0;
+  st.items.forEach(function(item,i){
+    ['T','F','N'].forEach(function(x){ document.getElementById(exId+'-'+x+'-'+i).className='tfng-btn'; });
+    if(st.sel[i]===undefined) return;
+    var ok=st.sel[i]===item.ans;
+    document.getElementById(exId+'-'+item.ans+'-'+i).className='tfng-btn correct';
+    if(!ok) document.getElementById(exId+'-'+st.sel[i]+'-'+i).className='tfng-btn wrong';
+    if(ok) score++;
+  });
+  var res=document.getElementById(st.resultId);
+  res.textContent=score+' / '+st.items.length+' correct'+(score===st.items.length?' — Great job! 🎉':'');
+  res.style.color=score===st.items.length?'#1A7A4A':'#C4614A';
+}
+function tfngReset(exId){
+  var st=tfngState[exId]; st.sel={};
+  tfngBuild(exId, st.containerId, st.items, st.resultId);
+}
+
+/* ═══ shared helper: typed gap-fill with word bank ═══ */
+var gfState = {};
+function gfBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, exampleId){
+  gfState[exId] = { items:items, rowsId:rowsId, resultId:resultId };
+  if(exampleId && exampleHtml){ document.getElementById(exampleId).innerHTML=exampleHtml; }
+  var rows=document.getElementById(rowsId); rows.innerHTML='';
+  items.forEach(function(item,i){
+    var row=document.createElement('div'); row.className='ex-row'; row.style.borderLeftColor='#0E5C7A';
+    row.style.cssText+='display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+    row.innerHTML='<span class="ex-num">'+(i+1)+'.</span>'
+      +'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.pre+'</span>'
+      +'<input type="text" id="'+exId+'-inp-'+i+'" class="ans-input">'
+      +'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.post+'</span>';
+    rows.appendChild(row);
+  });
+  if(bankId){
+    var bank=document.getElementById(bankId); bank.innerHTML='';
+    bankWords.forEach(function(w){
+      var c=document.createElement('span'); c.className='wb-chip'; c.style.cursor='default'; c.textContent=w;
+      bank.appendChild(c);
+    });
+  }
+  document.getElementById(resultId).textContent='';
+}
+function gfCheck(exId){
+  var st=gfState[exId]; var score=0;
+  st.items.forEach(function(item,i){
+    var inp=document.getElementById(exId+'-inp-'+i); if(!inp) return;
+    var ok=item.ans.some(function(a){ return norm(inp.value)===norm(a); });
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+    if(ok) score++;
+  });
+  var res=document.getElementById(st.resultId);
+  res.textContent=score+' / '+st.items.length+' correct'+(score===st.items.length?' — Great job! 🎉':'');
+  res.style.color=score===st.items.length?'#1A7A4A':'#C4614A';
+}
+function gfReset(exId){
+  var st=gfState[exId];
+  st.items.forEach(function(item,i){
+    var inp=document.getElementById(exId+'-inp-'+i);
+    if(inp){ inp.value=''; inp.classList.remove('correct','wrong'); }
+  });
+  document.getElementById(st.resultId).textContent='';
+}
+
+/* ═══ shared helper: typed rewrite (two-col) ═══ */
+var rwState = {};
+function rwBuild(exId, leftId, rightId, items, resultId, exampleHtml){
+  rwState[exId] = { items:items, resultId:resultId };
+  var left=document.getElementById(leftId); var right=document.getElementById(rightId);
+  left.innerHTML=''; right.innerHTML='';
+  if(exampleHtml){
+    var ex=document.createElement('div'); ex.className='ex-row';
+    ex.style.cssText='border-left-color:#C45020;background:#FFF4EE;';
+    ex.innerHTML=exampleHtml;
+    left.appendChild(ex);
+  }
+  var half=Math.ceil(items.length/2);
+  items.forEach(function(item,i){
+    var row=document.createElement('div'); row.className='ex-row'; row.style.borderLeftColor='#0E5C7A';
+    row.innerHTML='<span class="ex-num">'+(i+1)+'.</span> '+item.q
+      +'<input type="text" id="'+exId+'-inp-'+i+'" class="ans-input" style="display:block;width:100%;margin-top:8px;text-align:left;">';
+    (i<half?left:right).appendChild(row);
+  });
+  document.getElementById(resultId).textContent='';
+}
+function rwCheck(exId){
+  var st=rwState[exId]; var score=0;
+  st.items.forEach(function(item,i){
+    var inp=document.getElementById(exId+'-inp-'+i); if(!inp) return;
+    var ans = Array.isArray(item.ans)?item.ans:[item.ans];
+    var ok=ans.some(function(a){ return norm(inp.value)===norm(a); });
+    inp.classList.toggle('correct', ok);
+    inp.classList.toggle('wrong', !ok);
+    if(ok) score++;
+  });
+  var res=document.getElementById(st.resultId);
+  res.textContent=score+' / '+st.items.length+' correct'+(score===st.items.length?' — Great job! 🎉':'');
+  res.style.color=score===st.items.length?'#1A7A4A':'#C4614A';
+}
+function rwReset(exId, leftId, rightId, exampleHtml){
+  var st=rwState[exId];
+  rwBuild(exId, leftId, rightId, st.items, st.resultId, exampleHtml);
+}
+
+/* ═══ S4 — Match the Beginnings to the Endings (in-lesson) ═══ */
+var s4Pairs = [
+  { q:"Simone, I'd like to introduce you to", a:"Gerald, our new sales manager." },
+  { q:"Hello. I don't think we've", a:"met. My name's Jana." },
+  { q:"You must be Selma from the", a:"Chicago branch. Great to meet you." },
+  { q:"Hi, Omar. I think we", a:"met at the conference in Dubai last year." },
+  { q:"My boss has told me", a:"so much about your work." },
+  { q:"This is Colin from IT.", a:"Colin, meet Liam. He's joining our team soon." }
+];
+function buildS4(){ qamBuild('s4','s4-qs','s4-as',s4Pairs,'s4-result',"Peter, Philippe, I'm not sure","if you have met each other."); }
+function checkS4(){ qamCheck('s4'); }
+function resetS4(){ qamReset('s4'); }
+
+/* ═══ S5 — Fill in the Gaps (in-lesson) ═══ */
+var s5Items = [
+  { pre:"I'd like to", post:"you to Marco from IT.", ans:["introduce"] },
+  { pre:"You", post:"be Paola from Madrid.", ans:["must"] },
+  { pre:"Gloria,", post:"Julia, our new secretary.", ans:["meet"] },
+  { pre:"Have you two", post:"each other before?", ans:["met"] },
+  { pre:"Great to", post:"you again!", ans:["see"] },
+  { pre:"", post:"to meet you, Antonio.", ans:["Nice"] },
+  { pre:"Sanjay has", post:"me all about you.", ans:["told"] },
+  { pre:"I don't", post:"we've met before, have we?", ans:["think"] },
+  { pre:"It's a", post:"to meet you.", ans:["pleasure"] }
+];
+var s5Bank = ["pleasure","see","told","met","must","think","meet","introduce","Nice"];
+function buildS5(){ gfBuild('s5','s5-rows','s5-bank',s5Items,s5Bank,'s5-result','<strong>Example:</strong> How do you <span style="color:#1A5C2A;font-weight:700;">do</span>? I\'m Christophe from BlueTech.','s5-example'); }
+function checkS5(){ gfCheck('s5'); }
+function resetS5(){ gfReset('s5'); }
+
+/* ═══ S6 — Reading: Delegates at a Conference (TFNG, in-lesson) ═══ */
+var s6Items = [
+  { q:"Jared works in the Lima office.", ans:"T" },
+  { q:"Daniel and Sasha have not met before.", ans:"T" },
+  { q:"Daniel shares an office with Jared.", ans:"T" },
+  { q:"Their new product is expensive.", ans:"T" },
+  { q:"Sasha works in Lima.", ans:"N" },
+  { q:"This is Sasha's first conference.", ans:"F" }
+];
+function buildS6(){ tfngBuild('s6','s6-qs',s6Items,'s6-result'); }
+function checkS6(){ tfngCheck('s6'); }
+function resetS6(){ tfngReset('s6'); }
+
+/* ═══ S8 — Read the Article: Making Connections (MC, in-lesson) ═══ */
+var s8Data = [
+  { q:"What word is used for making connections?", opts:["Networking","Sharing","Dividing"], ans:"Networking" },
+  { q:"What kind of people is the article aimed at?", opts:["Shy","Confident","Intelligent"], ans:"Shy" },
+  { q:"What types of connections are useful?", opts:["New ones","Good ones","Lots of them"], ans:"Good ones" },
+  { q:"Who might be useful people to talk to?", opts:["Ex-colleagues","Recruiters","Family"], ans:"Ex-colleagues" },
+  { q:"What do shy people do a lot?", opts:["Lie","Say sorry","Say thank you"], ans:"Say sorry" },
+  { q:"What does apologizing a lot make you seem?", opts:["Confident","Worried","Unprofessional"], ans:"Unprofessional" },
+  { q:"Where should you look when talking to people?", opts:["Their eyes","Their feet","Their mouths"], ans:"Their eyes" }
+];
+var s8Sel={};
+function buildS8(){
+  s8Sel={};
+  var el=document.getElementById('s8-qs'); el.innerHTML='';
+  s8Data.forEach(function(item,i){
+    var block=document.createElement('div'); block.className='mc-question';
+    var optsHtml = item.opts.map(function(o){
+      return '<div class="mc-opt" id="s8-'+i+'-'+o.replace(/[\s\W]/g,'_')+'" onclick="s8Pick('+i+',\''+o.replace(/'/g,"\\'")+'\')">'+o+'</div>';
+    }).join('');
+    block.innerHTML = '<div class="mc-q-text"><span class="mc-q-num">'+(i+1)+'.</span> '+item.q+'</div>'
+      + '<div class="mc-opts">'+optsHtml+'</div>';
+    el.appendChild(block);
+  });
+  document.getElementById('s8-result').textContent='';
+}
+function s8Pick(i,opt){
+  s8Sel[i]=opt;
+  s8Data[i].opts.forEach(function(o){
+    var b=document.getElementById('s8-'+i+'-'+o.replace(/[\s\W]/g,'_'));
+    b.className='mc-opt'+(o===opt?' mc-sel':'');
+  });
+}
+function checkS8(){
+  var score=0;
+  s8Data.forEach(function(item,i){
+    item.opts.forEach(function(o){
+      var b=document.getElementById('s8-'+i+'-'+o.replace(/[\s\W]/g,'_'));
+      b.className='mc-opt';
+    });
+    if(s8Sel[i]===undefined) return;
+    var ok=s8Sel[i]===item.ans;
+    var b=document.getElementById('s8-'+i+'-'+s8Sel[i].replace(/[\s\W]/g,'_'));
+    b.className='mc-opt '+(ok?'mc-ok':'mc-bad');
+    if(ok) score++;
+  });
+  var res=document.getElementById('s8-result');
+  res.textContent=score+' / '+s8Data.length+' correct'+(score===s8Data.length?' — Great job! 🎉':'');
+  res.style.color=score===s8Data.length?'#1A7A4A':'#C4614A';
+}
+function resetS8(){ buildS8(); }
+
+/* ═══ S9 — Rewrite the Sentences, Correcting the Errors (in-lesson) ═══ */
+var s9Data = [
+  { q:"Hi James. I'm Vanisha. I don't think we are meeting before.", ans:["I don't think we've met before."] },
+  { q:"Ashley, I'd like introduce you to my colleague Neil.", ans:["I'd like to introduce you to my colleague Neil."] },
+  { q:"I enjoying the presentations. Are you?", ans:["I'm enjoying the presentations. Are you?"] },
+  { q:"Nice to meet you Bethany. How do you doing?", ans:["Nice to meet you Bethany. How are you doing?"] }
+];
+function buildS9(){ rwBuild('s9','s9-left','s9-right',s9Data,'s9-result','<span class="ex-num" style="color:#C45020;">Example</span> I am being happy to finally meet you, Zoe.<br><strong style="color:#C45020;">I\'m happy to finally meet you, Zoe.</strong>'); }
+function checkS9(){ rwCheck('s9'); }
+function resetS9(){ rwReset('s9','s9-left','s9-right','<span class="ex-num" style="color:#C45020;">Example</span> I am being happy to finally meet you, Zoe.<br><strong style="color:#C45020;">I\'m happy to finally meet you, Zoe.</strong>'); }
+
+/* ═══ S10 — Cross Out the Incorrect Words (in-lesson) ═══ */
+var s10Data = [
+  { pre:"Hello Frank.", a:"Are you enjoying", b:"do you enjoy", post:"the conference?", wrong:"b" },
+  { pre:"Wilfred, I'd like you to", a:"meet", b:"be meeting", post:"Roger, our new press officer.", wrong:"b" },
+  { pre:"Serena, it's really great to", a:"see", b:"seeing", post:"you again after so long.", wrong:"b" },
+  { pre:"I usually enjoy workshops, but I am not", a:"find", b:"finding", post:"this one interesting.", wrong:"a" }
+];
+function buildS10(){
+  document.getElementById('s10-example').innerHTML =
+    '<div style="background:#FFF4EE;border:1.5px solid #C45020;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">'
+    +'<span style="font-size:1.05rem;font-weight:800;color:#C45020;flex-shrink:0;">Example</span>'
+    +'<span style="font-size:1.05rem;color:#1C2B3A;">I\'m sorry, how</span>'
+    +'<button style="'+xoBtn+'background:#EEF7F0;color:#1A5C2A;border-color:#1A7A4A;pointer-events:none;">do you say</button>'
+    +'<span style="color:#888;font-size:1.05rem;">/</span>'
+    +'<button style="'+xoBtn+'background:#f5f5f5;color:#bbb;border-color:#e0e0e0;text-decoration:line-through;opacity:.6;pointer-events:none;">are you saying</button>'
+    +'<span style="font-size:1.05rem;color:#1C2B3A;">your name again?</span></div>';
+  xoBuild('s10','s10-left','s10-right',s10Data,'s10-result');
+}
+function checkS10(){ xoCheck('s10'); }
+function resetS10(){ xoResetAll('s10'); }
+
+/* ═══ S11 — Guided Speaking: Introduce Yourself ═══ */
+var s11Data = [
+  { q:"How would you introduce yourself to someone you're meeting for the first time?", sample:"Hello, I don't think we've met. I'm Nanda — I work in the marketing department." },
+  { q:"How would you greet a colleague you think you might have met before?", sample:"I think we met at the conference last year, didn't we? I'm Nanda from the design team." },
+  { q:"How would you introduce two colleagues who don't know each other?", sample:"Maria, this is Tom from our São Paulo office. Tom, meet Maria — she's our new operations manager." },
+  { q:"What would you say if someone told you they'd heard a lot about you?", sample:"Nice to finally meet you! I've heard a lot about you too." }
+];
+function buildS11(){
+  var el=document.getElementById('s11-cards'); el.innerHTML='';
+  s11Data.forEach(function(item,i){
+    var card=document.createElement('div'); card.className='speak-card';
+    card.innerHTML='<div class="speak-num">Question '+(i+1)+'</div>'
+      +'<div class="speak-q">'+item.q+'</div>'
+      +'<div class="speak-ex" id="s11-ex-'+i+'">💡 '+item.sample+'</div>'
+      +'<button class="speak-toggle" onclick="s11Toggle('+i+')" id="s11-btn-'+i+'">👁 Sample answer</button>';
+    el.appendChild(card);
+  });
+}
+function s11Toggle(i){
+  var ex=document.getElementById('s11-ex-'+i); var btn=document.getElementById('s11-btn-'+i);
+  var open=ex.classList.toggle('open');
+  btn.textContent = open ? '🙈 Hide' : '👁 Sample answer';
+}
+
+/* ═══ HW1 — Fill in the Gaps ═══ */
+var hw1Items = [
+  { pre:"I'd like to", post:"you to Marco from IT.", ans:["introduce"] },
+  { pre:"You", post:"be Paola from Madrid.", ans:["must"] },
+  { pre:"Gloria,", post:"Julia, our new secretary.", ans:["meet"] },
+  { pre:"Have you two", post:"each other before?", ans:["met"] },
+  { pre:"Great to", post:"you again!", ans:["see"] },
+  { pre:"", post:"to meet you, Antonio.", ans:["Nice"] },
+  { pre:"Sanjay has", post:"me all about you.", ans:["told"] },
+  { pre:"I don't", post:"we've met before, have we?", ans:["think"] },
+  { pre:"It's a", post:"to meet you.", ans:["pleasure"] }
+];
+var hw1Bank = ["pleasure","see","told","met","must","think","meet","introduce","Nice"];
+function buildHW1(){ gfBuild('hw1','hw1-rows','hw1-bank',hw1Items,hw1Bank,'hw1-result','<strong>Example:</strong> How do you <span style="color:#1A5C2A;font-weight:700;">do</span>? I\'m Christophe from BlueTech.','hw1-example'); }
+function checkHW1(){ gfCheck('hw1'); }
+function resetHW1(){ gfReset('hw1'); }
+
+/* ═══ HW2 — Match the Beginnings to the Endings ═══ */
+var hw2Pairs = [
+  { q:"Simone, I'd like to introduce you to", a:"Gerald, our new sales manager." },
+  { q:"Hello. I don't think we've", a:"met. My name's Jana." },
+  { q:"You must be Selma from the", a:"Chicago branch. Great to meet you." },
+  { q:"Hi, Omar. I think we", a:"met at the conference in Dubai last year." },
+  { q:"My boss has told me", a:"so much about your work." },
+  { q:"This is Colin from IT.", a:"Colin, meet Liam. He's joining our team soon." }
+];
+function buildHW2(){ qamBuild('hw2','hw2-qs','hw2-as',hw2Pairs,'hw2-result',"Peter, Philippe, I'm not sure","if you have met each other."); }
+function checkHW2(){ qamCheck('hw2'); }
+function resetHW2(){ qamReset('hw2'); }
+
+/* ═══ HW3 — Reading: Meeting and Greeting (TFNG) ═══ */
+var hw3Items = [
+  { q:"Meeting people will always make you successful.", ans:"F" },
+  { q:"You should talk about your recent experience.", ans:"T" },
+  { q:"The author thinks food is a good topic of conversation.", ans:"N" },
+  { q:"You shouldn't ask how much someone earns.", ans:"T" },
+  { q:"The author suggests talking about your education.", ans:"N" },
+  { q:"The author says that you shouldn't talk about clients.", ans:"F" }
+];
+function buildHW3(){ tfngBuild('hw3','hw3-qs',hw3Items,'hw3-result'); }
+function checkHW3(){ tfngCheck('hw3'); }
+function resetHW3(){ tfngReset('hw3'); }
+
+/* ═══ HW4 — Rewrite the Sentences, Correcting the Errors ═══ */
+var hw4Data = [
+  { q:"I am catching the train to work at 8:15am each morning.", ans:["I catch the train to work at 8:15am each morning."] },
+  { q:"We are having a new printer that is difficult to use.", ans:["We have a new printer that is difficult to use."] },
+  { q:"I working at the Guangdong branch all this August.", ans:["I'm working at the Guangdong branch all this August."] },
+  { q:"Sanchez is knowing Katie because they worked together.", ans:["Sanchez knows Katie because they worked together."] },
+  { q:"Do you enjoying this presentation? I think it's great.", ans:["Are you enjoying this presentation? I think it's great.","Do you enjoy this presentation? I think it's great."] },
+  { q:"Tim isn't knowing Anna from the Montevideo branch.", ans:["Tim doesn't know Anna from the Montevideo branch."] },
+  { q:"Marek is liking the new furniture we bought for the office.", ans:["Marek likes the new furniture we bought for the office."] },
+  { q:"How are you spelling your name?", ans:["How do you spell your name?"] },
+  { q:"The meeting usually is take only half an hour.", ans:["The meeting usually takes only half an hour."] },
+  { q:"Doug is really enjoy the conference this year.", ans:["Doug is really enjoying the conference this year."] },
+  { q:"I'd like introduce you to my manager, José Rodriguez.", ans:["I'd like to introduce you to my manager, José Rodriguez."] },
+  { q:"Clara working from 8:30 to 4:30 on Thursdays and Fridays.", ans:["Clara works from 8:30 to 4:30 on Thursdays and Fridays."] }
+];
+function buildHW4(){ rwBuild('hw4','hw4-left','hw4-right',hw4Data,'hw4-result','<span class="ex-num" style="color:#C45020;">Example</span> I staying at the hotel on Park Lane all this week.<br><strong style="color:#C45020;">I\'m staying at the hotel on Park Lane all this week.</strong>'); }
+function checkHW4(){ rwCheck('hw4'); }
+function resetHW4(){ rwReset('hw4','hw4-left','hw4-right','<span class="ex-num" style="color:#C45020;">Example</span> I staying at the hotel on Park Lane all this week.<br><strong style="color:#C45020;">I\'m staying at the hotel on Park Lane all this week.</strong>'); }
+
+/* ═══ HW5 — Cross Out the Incorrect Words ═══ */
+var hw5Data = [
+  { pre:"Our company", a:"is having", b:"have", post:"some difficulties at the moment.", wrong:"a" },
+  { pre:"Pablo, I'd like you to", a:"meet", b:"meeting", post:"my wife, Elvira.", wrong:"b" },
+  { pre:"I usually hate conferences, but I", a:"enjoy", b:"am enjoying", post:"this one a lot.", wrong:"a" },
+  { pre:"I", a:"have", b:"am having", post:"two children, a son and a daughter.", wrong:"b" },
+  { pre:"Michael,", a:"I like", b:"I'd like", post:"to introduce you to Michelle.", wrong:"a" },
+  { pre:"I", a:"don't think", b:"am not thinking", post:"we've met before, have we?", wrong:"b" },
+  { pre:"It's so great", a:"to see", b:"see", post:"you again after such a long time.", wrong:"b" },
+  { pre:"How", a:"do you pronounce", b:"are you pronouncing", post:"your last name?", wrong:"b" },
+  { pre:"You must", a:"be", b:"being", post:"Harold from Copenhagen. Nice to meet you.", wrong:"b" },
+  { pre:"Hi, I think we met in Oslo,", a:"aren't we?", b:"didn't we?", post:"", wrong:"a" }
+];
+function buildHW5(){
+  document.getElementById('hw5-example').innerHTML =
+    '<div style="background:#FFF4EE;border:1.5px solid #C45020;border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">'
+    +'<span style="font-size:1.05rem;font-weight:800;color:#C45020;flex-shrink:0;">Example</span>'
+    +'<span style="font-size:1.05rem;color:#1C2B3A;">Raul</span>'
+    +'<button style="'+xoBtn+'background:#f5f5f5;color:#bbb;border-color:#e0e0e0;text-decoration:line-through;opacity:.6;pointer-events:none;">presents</button>'
+    +'<span style="color:#888;font-size:1.05rem;">/</span>'
+    +'<button style="'+xoBtn+'background:#EEF7F0;color:#1A5C2A;border-color:#1A7A4A;pointer-events:none;">is presenting</button>'
+    +'<span style="font-size:1.05rem;color:#1C2B3A;">at the moment.</span></div>';
+  xoBuild('hw5','hw5-left','hw5-right',hw5Data,'hw5-result');
+}
+function checkHW5(){ xoCheck('hw5'); }
+function resetHW5(){ xoResetAll('hw5'); }
+
+/* ═══ INIT ═══ */
+window.addEventListener('DOMContentLoaded',function(){
+  slides=slideIds.map(function(id){ return document.getElementById(id); });
+  dotsEl=document.getElementById('dots');
+  slides.forEach(function(s,i){
+    var d=document.createElement('div'); d.className='dot';
+    d.title=slideLabels[i]||'';
+    d.onclick=function(){ goTo(i); };
+    dotsEl.appendChild(d);
+  });
+  buildS4(); buildS5(); buildS6(); buildS8(); buildS9(); buildS10(); buildS11();
+  buildHW1(); buildHW2(); buildHW3(); buildHW4(); buildHW5();
+  goTo(0);
+});
+</script>
+</body>
+</html>
