@@ -23,6 +23,12 @@ This file is the single source of truth for all design and UX decisions across B
   - N=5 → `i < 2` → left: Example+2 (3 blocks), right: 3 (3 blocks) — equal total ✓
   - N=11 → `i < 5` → left: Example+5 (6 blocks), right: 6 (6 blocks) — equal total ✓
 
+### Slide title position — never override
+Every content slide's `.content` div uses the standard, unmodified layout: `padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);` with the `<h2>` as the first element inside it. **Never add `display:flex`, `flex-direction:column`, `justify-content:center`, or any other rule that vertically centers or repositions content** — even for image-only or short slides. Every slide's title must land in the exact same position as every other slide. If a slide looks sparse, that's fine; do not "fix" it by centering — that breaks visual consistency across the deck.
+
+### Never use `placeholder="..."` on inputs
+**No `<input>` in any exercise may have a `placeholder` attribute — ever, in any lesson, in any course.** Leave the input empty by default; do not hint the expected format or answer via placeholder text (e.g. no `placeholder="do/does"`, no `placeholder="?"`, no `placeholder="…"`). This is a permanent, non-negotiable rule. (The notes panel's `data-placeholder` on `#notesTA`, a `contenteditable` div and not a form input, is the one exception — it is UI chrome, not an exercise.)
+
 ### HW Slide Structure
 Every HW slide must have:
 1. Banner: `📝 Homework` (no slide numbers, no pills)
@@ -282,14 +288,21 @@ A single generic module (`woBuild` / `woRender` / `woAdd` / `woRemove` / `woChec
 
 ```js
 var woState = {};
-function woBuild(exId, containerId, items, resultId){
-  woState[exId] = { items:items, containerId:containerId, resultId:resultId,
+function woBuild(exId, leftId, rightId, items, resultId, exampleHtml, exampleFullWidthId){
+  var n = items.length, isOdd = n % 2 !== 0, leftCount = isOdd ? Math.floor(n/2) : n/2;
+  woState[exId] = { items:items, leftId:leftId, rightId:rightId, resultId:resultId,
+    exampleHtml: exampleHtml||null, exampleInColumn: isOdd, leftCount: leftCount,
     bank: items.map(function(it){return it.words.slice();}),
     built: items.map(function(){return [];}), checked:false, ok:[] };
+  if(!isOdd && exampleFullWidthId && exampleHtml){
+    var fw=document.getElementById(exampleFullWidthId); if(fw) fw.innerHTML=exampleHtml;
+  }
   woRender(exId);
 }
-function woRender(exId){ /* renders one .wo-row per item: a .wo-zone (built words, click to remove)
-                             above a .wo-bank (remaining words, click to add) */ }
+function woRender(exId){ /* splits items into left.slice(0,leftCount) / right.slice(leftCount) per the
+                             Columns — Example placement and split rule; renders one .wo-row per item
+                             (a .wo-zone of built words above a .wo-bank of remaining words) into the
+                             matching column; ODD N prepends exampleHtml to the left column's innerHTML */ }
 function woAdd(exId,i,wi){ /* move word from bank[i] to built[i] */ }
 function woRemove(exId,i,wi){ /* move word from built[i] back to bank[i] */ }
 function woCheck(exId){ /* compares norm(built[i].join(' ')) to norm(item.ans); colors each .wo-zone green/red */ }
@@ -297,9 +310,11 @@ function woReset(exId){ /* restores original scrambled bank, clears built + colo
 ```
 
 - `items` = `[{ words: ["scrambled","word","tokens"], ans: "The correct sentence." }, ...]`. Word tokens already carry their sentence-position punctuation (e.g. `"open?"`, `"Are"`) so `built.join(' ')` reproduces the answer string exactly when in the right order.
+- **Word-order exercises are two-column exercises and MUST follow the exact same "Columns — Example placement and split" rule as every other exercise type** — this is not optional and not exercise-type-specific. HTML uses `<div class="two-col"><div class="col-section" id="xx-wo-left"></div><div class="col-section" id="xx-wo-right"></div></div>`, never a single full-width container.
+  - **ODD N** (e.g. N=5, N=7): the Example box is passed as `exampleHtml` and is rendered as the first block inside the LEFT column (`woRender` prepends it) — never as a separate full-width div above the grid. `leftCount = floor(N/2)` real items go left (below the example), `ceil(N/2)` go right. N=5 → left: Example+2, right: 3. N=7 → left: Example+3, right: 4.
+  - **EVEN N**: pass `exampleFullWidthId` pointing at a dedicated `<div id="xx-example">` placed above the `.two-col` grid; the example is NOT counted in either column. `N/2` items left, `N/2` right.
 - One `woBuild(...)` call per exercise slide (in-lesson or homework) — call it from that exercise's own `buildXX()` wrapper so `checkXX()`/`resetXX()` can stay as the `onclick` targets already used elsewhere (`checkXX(){ woCheck('xx'); }`).
 - CSS classes: `.wo-row` (card), `.wo-num`, `.wo-zone` (dashed drop target, `.wo-correct`/`.wo-wrong` after Check), `.wo-bank`, `.wo-chip` (`font-size:1.05rem` — never smaller, per the Typography rule).
-- Include a static, non-interactive **Example** box above the exercise (same pattern as other exercise types) showing the scrambled words, an arrow, and the correct sentence — so students see the mechanic before attempting item 1.
 - On Check: color each `.wo-zone` green (correct order) or red (wrong order) — do not reveal the correct order for wrong items, consistent with the "Do NOT reveal the correct answer" rule under Check/Correction Behaviour.
 
 ---
@@ -315,5 +330,6 @@ function woReset(exId){ /* restores original scrambled bank, clears built + colo
 
 ---
 
-*Last updated: 2026-08-17 (No Book References rule expanded — no meta/course framing, no fabricated Warm-Up quizzes, check precedent in existing lessons before building; no unit numbers, no book-section numbering in titles/labels; Word-Order/Sentence-Building Exercises pattern added — clickable word chips, not free typing, reference implementation in Lesson 4)*
+*Last updated: 2026-08-17 (Word-Order exercises now explicitly follow the odd/even column-split rule like every other exercise type, with example placement spec for both cases; added explicit "never override title position" rule and a permanent, non-negotiable ban on `placeholder=` attributes on any exercise input)*
+*2026-08-17 (earlier): No Book References rule expanded — no meta/course framing, no fabricated Warm-Up quizzes, check precedent in existing lessons before building; no unit numbers, no book-section numbering in titles/labels; Word-Order/Sentence-Building Exercises pattern added — clickable word chips, not free typing, reference implementation in Lesson 4*
 *2026-08-14: Notes Panel — added mandatory paste-sanitizer to prevent invisible pasted text; always-visible #pdfBtn pattern, mandatory loadNotes()-on-navigation to prevent notes bleeding across slides, highlight-readability CSS fix, downloadNotes() spec*
