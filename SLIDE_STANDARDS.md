@@ -203,7 +203,17 @@ text-decoration:line-through; opacity:0.6;
 
 ## Example Boxes
 
+**The Example must ALWAYS be built from the exact same markup/classes as a real exercise item of that exercise type — never a generic quote-style callout.** The only allowed difference between the Example and a real item is color/accent (typically the orange `#C45020` accent) and that it's non-interactive/pre-solved. This is not optional and applies to every exercise type, not just some:
+
+- **Cross-out exercises** (reference: `s11`/`hw56` in `Lesson_04_The_Office_Asking_Questions.html`): the Example reuses the exact same button style (`s11Btn`/`hw56Btn`) as the real word-choice buttons, just recolored — correct option green (`#EEF7F0`/`#1A7A4A`), wrong option struck-through gray — with `pointer-events:none` since it's not clickable.
+- **Match exercises** (`qamBuild`): the Example reuses the same card style as a real question card (`background:#F4F8FA` pattern), just with the orange border/label, per `exampleQ`/`exampleA`.
+- **Mark-the-correct-sentence exercises** (`s13`/similar): the Example reuses the same option-card style, correct one green with a ✓, wrong one struck through gray.
+- **Word-order / sentence-building exercises** (`wo*` module): the Example is a real `.wo-row` — same `.wo-num` (labelled `Ex.` instead of a number), same `.wo-zone`, same `.wo-chip` markup — with the words already placed in the correct order and recolored orange (`border-color:#C45020`, chip text `#C45020`). **Never** a plain `<div><strong>Example:</strong> scrambled words → answer</div>` callout — that breaks visual symmetry with the real rows in the same column and was a real bug caught in Lesson 4 slide 4 (fixed 2026-08-20).
+- **Fill-in-the-gap / word-bank exercises** (`wbBuild`, `gfBuild`): the Example is a real sentence row (`ex-row`/blank+pre/post text), not a floating quote box, with the blank already filled in and recolored.
+- The ONLY case where a plain quote-style callout (the box shown below) is acceptable is for exercise types that have no natural "row" or "card" unit of their own — e.g. a single free-standing explanatory example that isn't one of a repeated list of items.
+
 ```html
+<!-- Only for exercise types with no per-item row/card structure of their own -->
 <div style="background:#FFF4EE; border-left:3px solid #C45020; border-radius:10px; padding:8px 14px; margin-bottom:12px; font-size:1.05rem;">
   <strong>Example:</strong> ...
 </div>
@@ -211,7 +221,10 @@ text-decoration:line-through; opacity:0.6;
 - Font: always `1.05rem` minimum.
 - Background: `#FFF4EE` (warm cream).
 - Border: orange left border (`#C45020`).
-- Label: `<strong>Example:</strong>` — always say "Example", never "a" or a number.
+- Label: `<strong>Example:</strong>` — always say "Example", never "a" or a number (row-based examples use `Ex.` in the item-number slot instead, to fit the row's own numbering column).
+
+### Symmetry with column split
+Because the Example lives inside the left column (per the odd-N column-split rule), it must read as one row among equals, not a visually distinct callout — this is what keeps the left column looking symmetrical with the right column instead of top-heavy with a mismatched block before the real items start.
 
 ---
 
@@ -354,7 +367,8 @@ function woReset(exId){ /* restores original scrambled bank, clears built + colo
 
 ---
 
-*Last updated: 2026-08-19 (Matching exercises must use explicit `answerOrder` to follow the book's printed right-column order, never "solved" order; word-bank fill-gap exercises must be click-based with the bank positioned before the sentence rows, reference module `wbBuild`; short/key-word titles must not drop info — it must reappear in the instruction line; added mandatory page-image + answer-key verification workflow since PDF text extraction misses image-based exercises)*
+*Last updated: 2026-08-20 (Example Boxes rule rewritten: the Example must always reuse the exact same row/card markup and classes as a real item of that exercise type, only recolored — never a generic quote-style callout — this applies to every exercise type including word-order; fixed a real violation in Lesson 4 slide 4 where the word-order Example broke column symmetry)*
+*2026-08-19: Matching exercises must use explicit `answerOrder` to follow the book's printed right-column order, never "solved" order; word-bank fill-gap exercises must be click-based with the bank positioned before the sentence rows, reference module `wbBuild`; short/key-word titles must not drop info — it must reappear in the instruction line; added mandatory page-image + answer-key verification workflow since PDF text extraction misses image-based exercises*
 *2026-08-17: Word-Order exercises now explicitly follow the odd/even column-split rule like every other exercise type, with example placement spec for both cases; added explicit "never override title position" rule and a permanent, non-negotiable ban on `placeholder=` attributes on any exercise input*
 *2026-08-17 (earlier): No Book References rule expanded — no meta/course framing, no fabricated Warm-Up quizzes, check precedent in existing lessons before building; no unit numbers, no book-section numbering in titles/labels; Word-Order/Sentence-Building Exercises pattern added — clickable word chips, not free typing, reference implementation in Lesson 4*
 *2026-08-14: Notes Panel — added mandatory paste-sanitizer to prevent invisible pasted text; always-visible #pdfBtn pattern, mandatory loadNotes()-on-navigation to prevent notes bleeding across slides, highlight-readability CSS fix, downloadNotes() spec*
