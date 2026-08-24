@@ -25,7 +25,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 #pdfBtn:hover{background:rgba(10,26,20,1);}
 #notesPanel{position:fixed;top:54px;right:22px;z-index:999;width:360px;max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s ease,width .35s ease,left .35s ease,top .35s ease;opacity:0;border-radius:14px;}
 #notesPanel.open{max-height:320px;opacity:1;}
-#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(10,26,20,.7);border-radius:10px 10px 0 0;}
+.notes-drag-handle{cursor:move;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px 10px 0 0;background:rgba(10,26,20,.85);border-bottom:1px solid rgba(255,255,255,.15);font-size:10px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:.6px;user-select:none;touch-action:none;}
+.notes-drag-handle .grip{font-size:12px;letter-spacing:1px;color:rgba(255,255,255,.35);}
+#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(10,26,20,.7);border-radius:0;}
 #notesToolbar button{background:rgba(255,255,255,.12);border:none;border-radius:5px;color:#fff;font-size:.85rem;padding:3px 9px;cursor:pointer;font-family:inherit;transition:background .15s;}
 #notesToolbar button:hover{background:rgba(255,255,255,.25);}
 #notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:rgba(10,26,20,.92);color:#fff;font-family:inherit;backdrop-filter:blur(6px);box-sizing:border-box;overflow-y:auto;}
@@ -124,6 +126,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
 <button id="pdfBtn" onclick="downloadNotes()" title="Save all your notes as a PDF">📄 PDF Notes</button>
 <button id="notesBtn" onclick="toggleNotes()">📝 Notes</button>
 <div id="notesPanel">
+  <div class="notes-drag-handle" id="notesDragHandle"><span class="grip">⠿⠿</span> DRAG TO MOVE</div>
   <div id="notesToolbar">
     <button onclick="notesFormat('bold')"><b>B</b></button>
     <button onclick="notesFormat('underline')"><u>U</u></button>
@@ -571,6 +574,66 @@ function toggleNotes(){
   if(notesOpen) loadNotes();
   document.getElementById('notesBtn').textContent = notesOpen ? '✕ Close' : '📝 Notes';
 }
+/* ═══ draggable notes panel ═══ */
+(function(){
+  var panel = document.getElementById('notesPanel');
+  var handle = document.getElementById('notesDragHandle');
+  if(!panel || !handle) return;
+  var POS_KEY = 'notes_efe2l1_pos';
+  var dragging = false, offsetX = 0, offsetY = 0;
+  function clampAndApply(x, y){
+    var maxX = window.innerWidth - panel.offsetWidth - 8;
+    var maxY = window.innerHeight - panel.offsetHeight - 8;
+    x = Math.max(8, Math.min(x, Math.max(8, maxX)));
+    y = Math.max(8, Math.min(y, Math.max(8, maxY)));
+    panel.style.left = x + 'px';
+    panel.style.top = y + 'px';
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+    panel.style.transform = 'none';
+  }
+  function onDown(e){
+    dragging = true;
+    panel.style.transition = 'none';
+    var rect = panel.getBoundingClientRect();
+    var pt = e.touches ? e.touches[0] : e;
+    offsetX = pt.clientX - rect.left;
+    offsetY = pt.clientY - rect.top;
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    document.addEventListener('touchmove', onMove, {passive:false});
+    document.addEventListener('touchend', onUp);
+    e.preventDefault();
+  }
+  function onMove(e){
+    if(!dragging) return;
+    var pt = e.touches ? e.touches[0] : e;
+    clampAndApply(pt.clientX - offsetX, pt.clientY - offsetY);
+    if(e.touches) e.preventDefault();
+  }
+  function onUp(){
+    if(!dragging) return;
+    dragging = false;
+    panel.style.transition = '';
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onUp);
+    try{
+      var rect = panel.getBoundingClientRect();
+      localStorage.setItem(POS_KEY, JSON.stringify({left:rect.left, top:rect.top}));
+    }catch(err){}
+  }
+  handle.addEventListener('mousedown', onDown);
+  handle.addEventListener('touchstart', onDown, {passive:false});
+  window.addEventListener('resize', function(){
+    if(panel.style.left){ var r=panel.getBoundingClientRect(); clampAndApply(r.left, r.top); }
+  });
+  try{
+    var saved = JSON.parse(localStorage.getItem(POS_KEY) || 'null');
+    if(saved) clampAndApply(saved.left, saved.top);
+  }catch(err){}
+})();
 function notesFormat(cmd){ document.execCommand(cmd); document.getElementById('notesTA').focus(); }
 function notesHilite(c){ document.execCommand('hiliteColor',false,c); document.getElementById('notesTA').focus(); }
 function clearAllNotes(){if(confirm('Clear ALL notes for this whole lesson? This cannot be undone.')){try{for(var i=localStorage.length-1;i>=0;i--){var k=localStorage.key(i);if(k&&k.indexOf('notes_efe2l1_')===0)localStorage.removeItem(k);}}catch(e){}var t=document.getElementById('notesTA');if(t)t.innerHTML='';}}
@@ -862,7 +925,7 @@ function wbBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, 
     row.style.cssText+='display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
     row.innerHTML='<span class="ex-num">'+(i+1)+'.</span>'
       +(item.pre?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.pre+'</span>':'')
-      +'<span id="'+exId+'-blank-'+i+'" onclick="wbClickBlank(\''+exId+'\','+i+')" style="min-width:80px;display:inline-block;border-bottom:2.5px solid #8BB0D0;text-align:center;font-weight:700;color:#1A5C2A;cursor:pointer;padding-bottom:2px;">?</span>'
+      +'<span id="'+exId+'-blank-'+i+'" onclick="wbClickBlank(\''+exId+'\','+i+')" style="min-width:80px;min-height:1.3em;display:inline-block;border-bottom:2.5px solid #8BB0D0;text-align:center;font-weight:700;color:#1A5C2A;cursor:pointer;padding-bottom:2px;"></span>'
       +(item.post?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.post+'</span>':'');
     rows.appendChild(row);
   });
@@ -885,7 +948,7 @@ function wbSelectWord(exId,w){
   if(st.sel===w){ st.sel=null; wbChipState(exId,w, wbPlacedAt(st,w)!==null?'used':'free'); return; }
   if(st.sel) wbChipState(exId,st.sel, wbPlacedAt(st,st.sel)!==null?'used':'free');
   var oldI = wbPlacedAt(st,w);
-  if(oldI!==null){ document.getElementById(exId+'-blank-'+oldI).textContent='?'; delete st.placed[oldI]; }
+  if(oldI!==null){ document.getElementById(exId+'-blank-'+oldI).textContent=''; delete st.placed[oldI]; }
   st.sel=w; wbChipState(exId,w,'selected');
 }
 function wbClickBlank(exId,i){
