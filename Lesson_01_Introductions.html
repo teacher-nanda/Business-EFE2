@@ -25,16 +25,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 #pdfBtn:hover{background:rgba(10,26,20,1);}
 #notesPanel{position:fixed;top:54px;right:22px;z-index:999;width:360px;max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s ease,width .35s ease,left .35s ease,top .35s ease;opacity:0;border-radius:14px;}
 #notesPanel.open{max-height:320px;opacity:1;}
-.notes-drag-handle{cursor:move;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px 10px 0 0;background:rgba(10,26,20,.85);border-bottom:1px solid rgba(255,255,255,.15);font-size:10px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:.6px;user-select:none;touch-action:none;}
-.notes-drag-handle .grip{font-size:12px;letter-spacing:1px;color:rgba(255,255,255,.35);}
-#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(10,26,20,.7);border-radius:0;}
-#notesToolbar button{background:rgba(255,255,255,.12);border:none;border-radius:5px;color:#fff;font-size:.85rem;padding:3px 9px;cursor:pointer;font-family:inherit;transition:background .15s;}
-#notesToolbar button:hover{background:rgba(255,255,255,.25);}
-#notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:rgba(10,26,20,.92);color:#fff;font-family:inherit;backdrop-filter:blur(6px);box-sizing:border-box;overflow-y:auto;}
-#notesTA:empty::before{content:attr(data-placeholder);color:rgba(255,255,255,.4);pointer-events:none;}
+.notes-drag-handle{cursor:move;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px 10px 0 0;background:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.08);font-size:10px;font-weight:800;color:rgba(0,0,0,.4);letter-spacing:.6px;user-select:none;touch-action:none;}
+.notes-drag-handle .grip{font-size:12px;letter-spacing:1px;color:rgba(0,0,0,.25);}
+#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(0,0,0,.015);border-radius:0;border-bottom:1px solid rgba(0,0,0,.06);}
+#notesToolbar button{background:rgba(0,0,0,.05);border:none;border-radius:5px;color:#1a2e4a;font-size:.85rem;padding:3px 9px;cursor:pointer;font-family:inherit;transition:background .15s;}
+#notesToolbar button:hover{background:rgba(0,0,0,.1);}
+#notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:#ffffff;color:#1a1a1a;font-family:inherit;box-sizing:border-box;overflow-y:auto;}
+#notesTA:empty::before{content:attr(data-placeholder);color:rgba(0,0,0,.35);pointer-events:none;}
 #notesTA [style*="background-color"]{color:#1a1a1a!important;}
 #notesPanel.cover{left:50%;right:auto;top:56px;transform:translateX(-50%);width:min(760px,94vw);max-height:calc(100vh - 110px)!important;display:flex;flex-direction:column;}
-#notesPanel.cover #notesTA{min-height:calc(100vh - 210px)!important;max-height:calc(100vh - 210px)!important;overflow-y:auto;}
+#notesPanel.cover #notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:#ffffff;color:#1a1a1a;font-family:inherit;box-sizing:border-box;overflow-y:auto;}
 #homeBtn{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:1000;display:none;background:rgba(10,26,20,.88);color:#fff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center;transition:background .2s;backdrop-filter:blur(4px);}
 #homeBtn:hover{background:rgba(20,90,60,.95);}
 .banner{width:100%;padding:13px 28px;font-size:1.1rem;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;gap:10px;flex-shrink:0;}
@@ -573,6 +573,14 @@ function toggleNotes(){
   p.classList.toggle('open', notesOpen);
   if(current===0) p.classList.toggle('cover', notesOpen);
   if(notesOpen) loadNotes();
+  if(!notesOpen){
+    p.style.left = '';
+    p.style.top = '';
+    p.style.right = '';
+    p.style.bottom = '';
+    p.style.transform = '';
+    try{ localStorage.removeItem('notes_efe2l1_pos'); }catch(e){}
+  }
   document.getElementById('notesBtn').textContent = notesOpen ? '✕ Close' : '📝 Notes';
 }
 /* ═══ draggable notes panel ═══ */
