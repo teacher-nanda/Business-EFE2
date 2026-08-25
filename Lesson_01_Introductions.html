@@ -25,16 +25,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Segoe UI',system-u
 #pdfBtn:hover{background:rgba(10,26,20,1);}
 #notesPanel{position:fixed;top:54px;right:22px;z-index:999;width:360px;max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s ease,width .35s ease,left .35s ease,top .35s ease;opacity:0;border-radius:14px;}
 #notesPanel.open{max-height:320px;opacity:1;}
-.notes-drag-handle{cursor:move;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px 10px 0 0;background:rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.08);font-size:10px;font-weight:800;color:rgba(0,0,0,.4);letter-spacing:.6px;user-select:none;touch-action:none;}
-.notes-drag-handle .grip{font-size:12px;letter-spacing:1px;color:rgba(0,0,0,.25);}
-#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(0,0,0,.015);border-radius:0;border-bottom:1px solid rgba(0,0,0,.06);}
-#notesToolbar button{background:rgba(0,0,0,.05);border:none;border-radius:5px;color:#1a2e4a;font-size:.85rem;padding:3px 9px;cursor:pointer;font-family:inherit;transition:background .15s;}
-#notesToolbar button:hover{background:rgba(0,0,0,.1);}
-#notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:#ffffff;color:#1a1a1a;font-family:inherit;box-sizing:border-box;overflow-y:auto;}
-#notesTA:empty::before{content:attr(data-placeholder);color:rgba(0,0,0,.35);pointer-events:none;}
+.notes-drag-handle{cursor:move;display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:10px 10px 0 0;background:rgba(10,26,20,.85);border-bottom:1px solid rgba(255,255,255,.15);font-size:10px;font-weight:800;color:rgba(255,255,255,.55);letter-spacing:.6px;user-select:none;touch-action:none;}
+.notes-drag-handle .grip{font-size:12px;letter-spacing:1px;color:rgba(255,255,255,.35);}
+#notesToolbar{display:flex;gap:5px;padding:6px 10px;background:rgba(10,26,20,.7);border-radius:0;}
+#notesToolbar button{background:rgba(255,255,255,.12);border:none;border-radius:5px;color:#fff;font-size:.85rem;padding:3px 9px;cursor:pointer;font-family:inherit;transition:background .15s;}
+#notesToolbar button:hover{background:rgba(255,255,255,.25);}
+#notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:rgba(10,26,20,.92);color:#fff;font-family:inherit;backdrop-filter:blur(6px);box-sizing:border-box;overflow-y:auto;}
+#notesTA:empty::before{content:attr(data-placeholder);color:rgba(255,255,255,.4);pointer-events:none;}
 #notesTA [style*="background-color"]{color:#1a1a1a!important;}
 #notesPanel.cover{left:50%;right:auto;top:56px;transform:translateX(-50%);width:min(760px,94vw);max-height:calc(100vh - 110px)!important;display:flex;flex-direction:column;}
-#notesPanel.cover #notesTA{width:100%;min-height:220px;max-height:260px;padding:14px;border:none;border-radius:0 0 14px 14px;outline:none;font-size:1rem;line-height:1.55;background:#ffffff;color:#1a1a1a;font-family:inherit;box-sizing:border-box;overflow-y:auto;}
+#notesPanel.cover #notesTA{min-height:calc(100vh - 210px)!important;max-height:calc(100vh - 210px)!important;overflow-y:auto;}
 #homeBtn{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:1000;display:none;background:rgba(10,26,20,.88);color:#fff;border:none;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;align-items:center;justify-content:center;transition:background .2s;backdrop-filter:blur(4px);}
 #homeBtn:hover{background:rgba(20,90,60,.95);}
 .banner{width:100%;padding:13px 28px;font-size:1.1rem;font-weight:700;letter-spacing:.03em;display:flex;align-items:center;gap:10px;flex-shrink:0;}
@@ -193,10 +193,10 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>Fill in the Gaps</h2>
       <p class="instruction">Fill in the gaps using the words in the panel to complete the introductions.</p>
-      <div id="s5-example"></div>
       <div style="margin-bottom:10px;">
         <div id="s5-bank" class="word-bank"></div>
       </div>
+      <div id="s5-example"></div>
       <div id="s5-rows" style="display:flex;flex-direction:column;gap:8px;"></div>
       <div class="hw-btns" style="margin-top:14px;">
         <button class="btn-check" onclick="checkS5()">✅ Check</button>
@@ -214,34 +214,12 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>Listen and Answer</h2>
       <p class="instruction">Listen to the audio and answer the questions below.</p>
-      <div style="background:#EEF5FA;border-radius:10px;padding:10px 14px;margin:14px 0;font-size:1.05rem;color:#1A3A60;">
-        Delegates at a conference are introducing themselves.
-      </div>
-      <div class="note-callout" style="margin:14px 0;">
-        <span>🎧</span>
-        <span>Audio for this exercise isn't available yet — read the conversation below with your teacher, then answer the questions.</span>
-      </div>
-      <div class="dlg-row" style="margin-bottom:10px;">
-        <div class="dlg-bubble"><strong>Sasha:</strong> Hi, I'm Sasha. I work in our Lima office.</div>
-      </div>
-      <div class="dlg-row" style="margin-bottom:10px;">
-        <div class="dlg-bubble"><strong>Jared:</strong> Great to see you again, Sasha! I'm still based in the Madrid office these days.</div>
-      </div>
-      <div class="dlg-row" style="margin-bottom:10px;">
-        <div class="dlg-bubble"><strong>Sasha:</strong> Good to see you too! This is Daniel — he's joining the conference for the first time this year.</div>
-      </div>
-      <div class="dlg-row" style="margin-bottom:10px;">
-        <div class="dlg-bubble"><strong>Daniel:</strong> Hi Sasha, great to meet you. I don't think we've met before.</div>
-      </div>
-      <div class="dlg-row" style="margin-bottom:10px;">
-        <div class="dlg-bubble"><strong>Sasha:</strong> No, I don't think we have! Are you enjoying it so far?</div>
-      </div>
-      <div class="dlg-row" style="margin-bottom:18px;">
-        <div class="dlg-bubble"><strong>Daniel:</strong> Yes — I'm looking forward to hearing more about your new product team.</div>
-      </div>
-      <div class="note-callout" style="margin-bottom:14px;">
-        <span>ℹ️</span>
-        <span>Example: "Jared has met Sasha before." → <strong>True</strong>. Mark each statement below as True, False, or Not Given.</span>
+      <img src="ChatGPT Image Aug 24, 2026, 02_18_17 PM.png" alt="Delegates at a conference are introducing themselves" style="width:100%;max-width:720px;border-radius:12px;margin:6px 0 12px;display:block;">
+      <div style="background:linear-gradient(135deg,#EAF5F8,#D4EEF5);border:2px solid #14607A;border-radius:12px;padding:12px 20px;margin-bottom:14px;display:flex;align-items:center;gap:14px;">
+        <span style="font-size:2rem;flex-shrink:0;">🎧</span>
+        <audio controls style="flex:1;width:100%;accent-color:#14607A;">
+          <source src="1_4.mp3" type="audio/mpeg">
+        </audio>
       </div>
       <div id="s6-qs" style="margin-top:8px;display:flex;flex-direction:column;gap:6px;"></div>
       <div class="hw-btns" style="margin-top:14px;">
@@ -259,11 +237,8 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
   <div class="slide-main">
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>Present Simple &amp; Continuous</h2>
-      <p class="inst-light">The present simple is used to describe something that happens in general, or is part of a routine. The present continuous describes something that is happening right now, and will be continuing for a limited time.</p>
-      <div class="img-placeholder" style="margin-top:14px;">
-        <div class="img-icon">🖼️</div>
-        <div>Image placeholder — Key Language: The Present Simple and the Present Continuous</div>
-      </div>
+      <p class="inst-light">The <strong style="color:#1A7A4A;">present simple</strong> is used to describe something that happens in general, or is part of a routine. The <strong style="color:#0E7A8A;">present continuous</strong> describes something that is happening right now, and will be continuing for a limited time.</p>
+      <img src="ChatGPT Image Aug 24, 2026, 02_40_18 PM.png" alt="I don't usually enjoy networking, but I'm enjoying this conference. Present simple is the same as the base form of the verb without &quot;to.&quot; Present continuous is formed by adding &quot;be&quot; before the verb and &quot;-ing&quot; to the verb." style="width:100%;max-width:880px;border-radius:12px;margin-top:14px;display:block;">
     </div>
   </div>
 </div>
@@ -283,9 +258,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
           <div style="font-size:.88rem;line-height:1.6;">Networking doesn't necessarily mean talking to hundreds of people at a conference. A few good connections are much better than meeting lots of people who you will never hear from again. Start by chatting to ex-colleagues or old friends. Ask what they are doing now and share your experiences.<br><br>One common habit of shy people is to constantly apologize for everything. Apologizing all of the time looks unprofessional and shows a lack of confidence in yourself. Instead of saying sorry, remember to smile, maintain eye contact, ask questions, and, of course, exchange business cards.</div>
         </div>
         <div>
-          <div style="background:#f0f0f0;border-radius:8px;padding:8px 12px;margin-bottom:8px;font-size:.95rem;color:#888;">
-            <strong style="color:#C45020;">Example</strong> — What word is used for making connections? <span style="text-decoration:line-through;">Networking</span>
-          </div>
+          <div id="s8-example"></div>
           <div id="s8-qs"></div>
           <div class="hw-btns">
             <button class="btn-check" onclick="checkS8()">✓ Check Answers</button>
@@ -305,6 +278,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>Rewrite the Sentences</h2>
       <p class="instruction">Rewrite the sentences, correcting the errors. Each sentence has one verb-form error.</p>
+      <div id="s9-example"></div>
       <div class="two-col" id="s9-cols">
         <div class="col-section" id="s9-left"></div>
         <div class="col-section" id="s9-right"></div>
@@ -323,8 +297,8 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
   <div class="banner" style="background:#7A2A5A;color:#fff;">💬 Speaking</div>
   <div class="slide-main">
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
-      <h2>Cross Out the Incorrect Words</h2>
-      <p class="instruction">Cross out the incorrect words in each sentence, then say the sentences out loud. Click the correct word — the incorrect one will be crossed out automatically.</p>
+      <h2>Choose the Correct Word</h2>
+      <p class="instruction">Click the correct word.</p>
       <div id="s10-example"></div>
       <div class="two-col" style="gap:14px;margin-top:4px;">
         <div class="col-section" id="s10-left"></div>
@@ -406,10 +380,10 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 1 – Fill in the Gaps</h2>
       <p class="inst-light">Fill in the gaps using the words in the panel to complete the introductions.</p>
-      <div id="hw1-example"></div>
       <div style="margin-bottom:10px;">
         <div id="hw1-bank" class="word-bank"></div>
       </div>
+      <div id="hw1-example"></div>
       <div id="hw1-rows" style="display:flex;flex-direction:column;gap:8px;"></div>
       <div class="hw-btns">
         <button class="btn-check" onclick="checkHW1()">✓ Check Answers</button>
@@ -474,6 +448,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 4 – Rewrite the Sentences</h2>
       <p class="inst-light">Rewrite the sentences, correcting the errors. Each sentence has one verb-form error.</p>
+      <div id="hw4-example"></div>
       <div class="two-col" id="hw4-cols">
         <div class="col-section" id="hw4-left"></div>
         <div class="col-section" id="hw4-right"></div>
@@ -492,8 +467,8 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
   <div class="banner" style="background:#6B2737;color:#fff;">📝 Homework</div>
   <div class="slide-main">
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
-      <h2>HW 5 – Cross Out the Incorrect Words</h2>
-      <p class="instruction">Cross out the incorrect words in each sentence, then say the sentences out loud. Click the correct word — the incorrect one will be crossed out automatically.</p>
+      <h2>HW 5 – Choose the Correct Word</h2>
+      <p class="instruction">Click the correct word.</p>
       <div id="hw5-example"></div>
       <div class="two-col">
         <div class="col-section" id="hw5-left"></div>
@@ -529,7 +504,7 @@ var slideLabels = [
   "Present Simple & Continuous",
   "Making Connections",
   "Rewrite the Sentences",
-  "Cross Out the Incorrect Words",
+  "Choose the Correct Word",
   "Guided Speaking: Introduce Yourself",
   "Lesson Review",
   "Homework",
@@ -537,7 +512,7 @@ var slideLabels = [
   "HW 2 — Introductions Practice",
   "HW 3 — Meeting and Greeting",
   "HW 4 — Rewrite the Sentences",
-  "HW 5 — Cross Out the Incorrect Words"
+  "HW 5 — Choose the Correct Word"
 ];
 
 /* ═══ NAVIGATION ═══ */
@@ -702,7 +677,8 @@ function qamRender(exId){
   if(st.exampleQ){
     var exQ=document.createElement('div');
     exQ.style.cssText='background:#FFF4EE;border:2px solid #C45020;border-radius:10px;padding:9px 12px;font-size:1rem;color:#1C2B3A;';
-    exQ.innerHTML='<strong style="color:#C45020;">Example</strong> — '+st.exampleQ;
+    exQ.innerHTML='<strong style="color:#C45020;">Example</strong> — '+st.exampleQ
+      + (st.exampleA ? '<div style="margin-top:6px;font-size:.9rem;font-weight:700;color:#C45020;">↳ '+st.exampleA+'</div>' : '');
     qEl.appendChild(exQ);
   }
   st.pairs.forEach(function(item,i){
@@ -832,9 +808,17 @@ function xoResetAll(exId){
 
 /* ═══ shared helper: TFNG module ═══ */
 var tfngState = {};
-function tfngBuild(exId, containerId, items, resultId){
-  tfngState[exId] = { items:items, containerId:containerId, resultId:resultId, sel:{} };
+function tfngBuild(exId, containerId, items, resultId, exampleQ, exampleAns){
+  tfngState[exId] = { items:items, containerId:containerId, resultId:resultId, sel:{}, exampleQ:exampleQ, exampleAns:exampleAns };
   var el=document.getElementById(containerId); el.innerHTML='';
+  var labelMap={T:'True',F:'False',N:'Not given'};
+  if(exampleQ && exampleAns){
+    var exRow=document.createElement('div'); exRow.className='tfng-row';
+    exRow.style.cssText='border-left:3px solid #C45020;background:#FFF4EE;';
+    exRow.innerHTML='<span class="tfng-q"><strong class="ex-num" style="color:#C45020;">Ex.</strong> '+exampleQ+'</span>'
+      +'<div class="tfng-btns"><button class="tfng-btn correct" style="pointer-events:none;">'+labelMap[exampleAns]+'</button></div>';
+    el.appendChild(exRow);
+  }
   items.forEach(function(item,i){
     var row=document.createElement('div'); row.className='tfng-row';
     row.innerHTML='<span class="tfng-q"><strong class="ex-num">'+(i+1)+'.</strong> '+item.q+'</span>'
@@ -867,7 +851,7 @@ function tfngCheck(exId){
 }
 function tfngReset(exId){
   var st=tfngState[exId]; st.sel={};
-  tfngBuild(exId, st.containerId, st.items, st.resultId);
+  tfngBuild(exId, st.containerId, st.items, st.resultId, st.exampleQ, st.exampleAns);
 }
 
 /* ═══ shared helper: typed gap-fill with word bank ═══ */
@@ -930,7 +914,12 @@ function wbChipState(exId,w,state){
 function wbPlacedAt(st,w){ var found=null; Object.keys(st.placed).forEach(function(i){ if(st.placed[i]===w) found=parseInt(i,10); }); return found; }
 function wbBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, exampleId, usedWords){
   wbState[exId] = { items:items, rowsId:rowsId, bankId:bankId, resultId:resultId, bankWords:bankWords, exampleHtml:exampleHtml, exampleId:exampleId, usedWords:usedWords||[], sel:null, placed:{} };
-  if(exampleId && exampleHtml){ document.getElementById(exampleId).innerHTML = exampleHtml; }
+  if(exampleId && exampleHtml){
+    var exEl = document.getElementById(exampleId);
+    exEl.className = 'ex-row';
+    exEl.style.cssText = 'border-left-color:#C45020;display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+    exEl.innerHTML = '<span class="ex-num" style="color:#C45020;">Ex.</span>'+exampleHtml;
+  }
   var rows=document.getElementById(rowsId); rows.innerHTML='';
   items.forEach(function(item,i){
     var row=document.createElement('div'); row.className='ex-row'; row.style.borderLeftColor='#0E5C7A';
@@ -993,22 +982,30 @@ function wbReset(exId){
 
 /* ═══ shared helper: typed rewrite (two-col) ═══ */
 var rwState = {};
-function rwBuild(exId, leftId, rightId, items, resultId, exampleHtml){
+function rwBuild(exId, leftId, rightId, items, resultId, exampleHtml, exampleFullWidthId){
   rwState[exId] = { items:items, resultId:resultId };
   var left=document.getElementById(leftId); var right=document.getElementById(rightId);
   left.innerHTML=''; right.innerHTML='';
-  if(exampleHtml){
+  var n=items.length, isOdd=(n%2!==0), leftCount=isOdd?Math.floor(n/2):n/2;
+  function buildExRow(){
     var ex=document.createElement('div'); ex.className='ex-row';
     ex.style.cssText='border-left-color:#C45020;background:#FFF4EE;';
     ex.innerHTML=exampleHtml;
-    left.appendChild(ex);
+    return ex;
   }
-  var half=Math.ceil(items.length/2);
+  if(exampleHtml){
+    if(isOdd){
+      left.appendChild(buildExRow());
+    } else if(exampleFullWidthId){
+      var fw=document.getElementById(exampleFullWidthId);
+      if(fw){ fw.innerHTML=''; fw.appendChild(buildExRow()); }
+    }
+  }
   items.forEach(function(item,i){
     var row=document.createElement('div'); row.className='ex-row'; row.style.borderLeftColor='#0E5C7A';
     row.innerHTML='<span class="ex-num">'+(i+1)+'.</span> '+item.q
       +'<input type="text" id="'+exId+'-inp-'+i+'" class="ans-input" style="display:block;width:100%;margin-top:8px;text-align:left;">';
-    (i<half?left:right).appendChild(row);
+    (i<leftCount?left:right).appendChild(row);
   });
   document.getElementById(resultId).textContent='';
 }
@@ -1026,9 +1023,9 @@ function rwCheck(exId){
   res.textContent=score+' / '+st.items.length+' correct'+(score===st.items.length?' — Great job! 🎉':'');
   res.style.color=score===st.items.length?'#1A7A4A':'#C4614A';
 }
-function rwReset(exId, leftId, rightId, exampleHtml){
+function rwReset(exId, leftId, rightId, exampleHtml, exampleFullWidthId){
   var st=rwState[exId];
-  rwBuild(exId, leftId, rightId, st.items, st.resultId, exampleHtml);
+  rwBuild(exId, leftId, rightId, st.items, st.resultId, exampleHtml, exampleFullWidthId);
 }
 
 /* ═══ S4 — Match the Beginnings to the Endings (in-lesson) ═══ */
@@ -1052,7 +1049,7 @@ var s5Items = [
   { pre:"Have you two", post:"each other before?", ans:["met"] }
 ];
 var s5Bank = ["introduce","meet","our","met","see"];
-function buildS5(){ wbBuild('s5','s5-rows','s5-bank',s5Items,s5Bank,'s5-result','<strong>Example:</strong> You <span style="color:#1A5C2A;font-weight:700;">must</span> be Joe Smith.','s5-example',['must']); }
+function buildS5(){ wbBuild('s5','s5-rows','s5-bank',s5Items,s5Bank,'s5-result','You <span style="color:#C45020;font-weight:700;">must</span> be Joe Smith.','s5-example',['must']); }
 function checkS5(){ wbCheck('s5'); }
 function resetS5(){ wbReset('s5'); }
 
@@ -1064,7 +1061,7 @@ var s6Items = [
   { q:"Their new product is expensive.", ans:"N" },
   { q:"Sasha works in Lima.", ans:"T" }
 ];
-function buildS6(){ tfngBuild('s6','s6-qs',s6Items,'s6-result'); }
+function buildS6(){ tfngBuild('s6','s6-qs',s6Items,'s6-result',"Jared has met Sasha before.","T"); }
 function checkS6(){ tfngCheck('s6'); }
 function resetS6(){ tfngReset('s6'); }
 
@@ -1079,8 +1076,18 @@ var s8Data = [
   { q:"What should you give contacts?", opts:["Money","Gifts","Your business card"], ans:"Your business card" }
 ];
 var s8Sel={};
+var s8Example = { q:"What word is used for making connections?", opts:["Networking","Sharing","Dividing"], ans:"Networking" };
 function buildS8(){
   s8Sel={};
+  var exEl=document.getElementById('s8-example');
+  if(exEl){
+    var exOptsHtml = s8Example.opts.map(function(o){
+      var cls = o===s8Example.ans ? 'mc-opt mc-ok' : 'mc-opt';
+      return '<div class="'+cls+'" style="pointer-events:none;">'+o+(o===s8Example.ans?' ✓':'')+'</div>';
+    }).join('');
+    exEl.innerHTML = '<div class="mc-question"><div class="mc-q-text"><span class="mc-q-num" style="color:#C45020;">Ex.</span> '+s8Example.q+'</div>'
+      + '<div class="mc-opts">'+exOptsHtml+'</div></div>';
+  }
   var el=document.getElementById('s8-qs'); el.innerHTML='';
   s8Data.forEach(function(item,i){
     var block=document.createElement('div'); block.className='mc-question';
@@ -1126,9 +1133,9 @@ var s9Data = [
   { q:"I enjoying the presentations. Are you?", ans:["I am enjoying the presentations. Are you?","I'm enjoying the presentations. Are you?"] },
   { q:"Nice to meet you Bethany. How do you doing?", ans:["Nice to meet you Bethany. How do you do?"] }
 ];
-function buildS9(){ rwBuild('s9','s9-left','s9-right',s9Data,'s9-result','<span class="ex-num" style="color:#C45020;">Example</span> I am being happy to finally meet you, Zoe.<br><strong style="color:#C45020;">I\'m happy to finally meet you, Zoe.</strong>'); }
+function buildS9(){ rwBuild('s9','s9-left','s9-right',s9Data,'s9-result','<span class="ex-num" style="color:#C45020;">Example</span> I am being happy to finally meet you, Zoe.<br><strong style="color:#C45020;">I\'m happy to finally meet you, Zoe.</strong>','s9-example'); }
 function checkS9(){ rwCheck('s9'); }
-function resetS9(){ rwReset('s9','s9-left','s9-right','<span class="ex-num" style="color:#C45020;">Example</span> I am being happy to finally meet you, Zoe.<br><strong style="color:#C45020;">I\'m happy to finally meet you, Zoe.</strong>'); }
+function resetS9(){ rwReset('s9','s9-left','s9-right','<span class="ex-num" style="color:#C45020;">Example</span> I am being happy to finally meet you, Zoe.<br><strong style="color:#C45020;">I\'m happy to finally meet you, Zoe.</strong>','s9-example'); }
 
 /* ═══ S10 — Cross Out the Incorrect Words (in-lesson) ═══ */
 var s10Data = [
@@ -1188,7 +1195,7 @@ var hw1Items = [
   { pre:"It's a", post:"to meet you.", ans:["pleasure"] }
 ];
 var hw1Bank = ["pleasure","see","told","met","must","think","meet","introduce","Nice"];
-function buildHW1(){ wbBuild('hw1','hw1-rows','hw1-bank',hw1Items,hw1Bank,'hw1-result','<strong>Example:</strong> How do you <span style="color:#1A5C2A;font-weight:700;">do</span>? I\'m Christophe from BlueTech.','hw1-example',['do']); }
+function buildHW1(){ wbBuild('hw1','hw1-rows','hw1-bank',hw1Items,hw1Bank,'hw1-result','How do you <span style="color:#C45020;font-weight:700;">do</span>? I\'m Christophe from BlueTech.','hw1-example',['do']); }
 function checkHW1(){ wbCheck('hw1'); }
 function resetHW1(){ wbReset('hw1'); }
 
@@ -1211,10 +1218,10 @@ var hw3Items = [
   { q:"You should talk about your recent experience.", ans:"T" },
   { q:"The author thinks food is a good topic of conversation.", ans:"N" },
   { q:"You shouldn't ask how much someone earns.", ans:"T" },
-  { q:"The author suggests talking about your education.", ans:"F" },
+  { q:"The author suggests talking about your education.", ans:"N" },
   { q:"The author says that you shouldn't talk about clients.", ans:"F" }
 ];
-function buildHW3(){ tfngBuild('hw3','hw3-qs',hw3Items,'hw3-result'); }
+function buildHW3(){ tfngBuild('hw3','hw3-qs',hw3Items,'hw3-result',"Meeting new people is an essential skill for a business professional.","T"); }
 function checkHW3(){ tfngCheck('hw3'); }
 function resetHW3(){ tfngReset('hw3'); }
 
@@ -1233,9 +1240,9 @@ var hw4Data = [
   { q:"I'd like introduce you to my manager, José Rodriguez.", ans:["I'd like to introduce you to my manager, José Rodriguez."] },
   { q:"Clara working from 8:30 to 4:30 on Thursdays and Fridays.", ans:["Clara works from 8:30 to 4:30 on Thursdays and Fridays."] }
 ];
-function buildHW4(){ rwBuild('hw4','hw4-left','hw4-right',hw4Data,'hw4-result','<span class="ex-num" style="color:#C45020;">Example</span> I staying at the hotel on Park Lane all this week.<br><strong style="color:#C45020;">I\'m staying at the hotel on Park Lane all this week.</strong>'); }
+function buildHW4(){ rwBuild('hw4','hw4-left','hw4-right',hw4Data,'hw4-result','<span class="ex-num" style="color:#C45020;">Example</span> I staying at the hotel on Park Lane all this week.<br><strong style="color:#C45020;">I\'m staying at the hotel on Park Lane all this week.</strong>','hw4-example'); }
 function checkHW4(){ rwCheck('hw4'); }
-function resetHW4(){ rwReset('hw4','hw4-left','hw4-right','<span class="ex-num" style="color:#C45020;">Example</span> I staying at the hotel on Park Lane all this week.<br><strong style="color:#C45020;">I\'m staying at the hotel on Park Lane all this week.</strong>'); }
+function resetHW4(){ rwReset('hw4','hw4-left','hw4-right','<span class="ex-num" style="color:#C45020;">Example</span> I staying at the hotel on Park Lane all this week.<br><strong style="color:#C45020;">I\'m staying at the hotel on Park Lane all this week.</strong>','hw4-example'); }
 
 /* ═══ HW5 — Cross Out the Incorrect Words ═══ */
 var hw5Data = [
