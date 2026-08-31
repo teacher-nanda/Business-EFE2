@@ -942,11 +942,11 @@ function wbChipState(exId,w,state){
 function wbPlacedAt(st,w){ var found=null; Object.keys(st.placed).forEach(function(i){ if(st.placed[i]===w) found=parseInt(i,10); }); return found; }
 function wbBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, exampleId, usedWords, splitIds){
   wbState[exId] = { items:items, rowsId:rowsId, bankId:bankId, resultId:resultId, bankWords:bankWords, exampleHtml:exampleHtml, exampleId:exampleId, usedWords:usedWords||[], splitIds:splitIds||null, sel:null, placed:{} };
-  if(exampleId && exampleHtml){
-    var exEl = document.getElementById(exampleId);
-    exEl.className = 'ex-row';
-    exEl.style.cssText = 'border-left-color:#C45020;display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
-    exEl.innerHTML = '<span class="ex-num" style="color:#C45020;">Ex.</span>'+exampleHtml;
+  function buildExRow(){
+    var ex=document.createElement('div'); ex.className='ex-row';
+    ex.style.cssText='border-left-color:#C45020;display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
+    ex.innerHTML='<span class="ex-num" style="color:#C45020;">Ex.</span>'+exampleHtml;
+    return ex;
   }
   function buildRow(item,i){
     var row=document.createElement('div'); row.className='ex-row'; row.style.borderLeftColor='#0E5C7A';
@@ -957,15 +957,32 @@ function wbBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, 
       +(item.post?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.post+'</span>':'');
     return row;
   }
-  /* Long word-bank exercises (per SLIDE_STANDARDS.md Columns rule) split into two columns —
-     leftCount = ceil(N/2), matching the same split convention as the xoBuild/cross-out module,
-     since the wbBuild Example lives in its own full-width container, not inside either column. */
+  /* Columns rule (SLIDE_STANDARDS.md): EVEN N → example is full-width above the two columns
+     (equal N/2 + N/2 split); ODD N → example lives INSIDE the left column at the top, and the
+     split is floor(N/2) left items + ceil(N/2) right items so left(example+floor)=right(ceil). */
   if(splitIds){
     var leftEl=document.getElementById(splitIds.leftId); var rightEl=document.getElementById(splitIds.rightId);
     leftEl.innerHTML=''; rightEl.innerHTML='';
-    var leftCount=Math.ceil(items.length/2);
-    items.forEach(function(item,i){ (i<leftCount?leftEl:rightEl).appendChild(buildRow(item,i)); });
+    var isOdd = items.length % 2 !== 0;
+    if(exampleId && exampleHtml){ var exDiv=document.getElementById(exampleId); if(exDiv) exDiv.innerHTML=''; }
+    if(isOdd && exampleHtml){
+      leftEl.appendChild(buildExRow());
+      var leftCount=Math.floor(items.length/2);
+      items.forEach(function(item,i){ (i<leftCount?leftEl:rightEl).appendChild(buildRow(item,i)); });
+    } else {
+      if(exampleId && exampleHtml){
+        var exEl=document.getElementById(exampleId);
+        exEl.appendChild(buildExRow());
+      }
+      var leftCount2=Math.ceil(items.length/2);
+      items.forEach(function(item,i){ (i<leftCount2?leftEl:rightEl).appendChild(buildRow(item,i)); });
+    }
   } else {
+    if(exampleId && exampleHtml){
+      var exEl2 = document.getElementById(exampleId);
+      exEl2.innerHTML='';
+      exEl2.appendChild(buildExRow());
+    }
     var rows=document.getElementById(rowsId); rows.innerHTML='';
     items.forEach(function(item,i){ rows.appendChild(buildRow(item,i)); });
   }
@@ -1261,7 +1278,7 @@ var hw3Items = [
   { q:"You should talk about your recent experiences.", ans:"T" },
   { q:"The author thinks food is a good topic of conversation.", ans:"N" },
   { q:"You shouldn't ask how much someone earns.", ans:"T" },
-  { q:"The author suggests talking about your education.", ans:"N" },
+  { q:"The author suggests talking about your education.", ans:"F" },
   { q:"The author says that you shouldn't talk about clients.", ans:"F" }
 ];
 function buildHW3(){ tfngBuild('hw3','hw3-qs',hw3Items,'hw3-result',"The author says that meeting people is easy.","N"); }
