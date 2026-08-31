@@ -74,11 +74,11 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
 .tfng-btn.sel{background:#1A4A8C;color:#fff;border-color:#1A4A8C;}
 .tfng-btn.correct{background:#1A7A4A;color:#fff;border-color:#1A7A4A;}
 .tfng-btn.wrong{background:#C4614A;color:#fff;border-color:#C4614A;}
-.mc-question{margin-bottom:10px;}
-.mc-q-text{font-size:1.05rem;font-weight:700;color:#0A2010;margin-bottom:5px;}
+.mc-question{margin-bottom:20px;}
+.mc-q-text{font-size:1.05rem;font-weight:700;color:#0A2010;margin-bottom:9px;line-height:1.5;}
 .mc-q-num{color:#1A5C2A;}
-.mc-opts{display:flex;flex-direction:row;gap:8px;flex-wrap:wrap;}
-.mc-opt{background:#F4F8FA;border:2px solid #dde;border-radius:8px;padding:4px 12px;font-size:1.05rem;color:#1C2B3A;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s;flex:0 0 auto;}
+.mc-opts{display:flex;flex-direction:row;gap:10px;flex-wrap:wrap;}
+.mc-opt{background:#F4F8FA;border:2px solid #dde;border-radius:8px;padding:7px 14px;font-size:1.05rem;color:#1C2B3A;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s;flex:0 0 auto;line-height:1.4;}
 .mc-opt:hover{border-color:#1A5080;background:#EEF5FA;}
 .mc-opt.mc-sel{background:#1A4A8C;border-color:#1A4A8C;color:#fff;}
 .mc-opt.mc-ok{background:#1A7A4A;border-color:#1A7A4A;color:#fff;}
@@ -101,7 +101,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
 .speak-card{background:#F0EEF8;border-radius:14px;padding:16px 18px;border-left:4px solid #5A2A8C;margin-bottom:12px;}
 .speak-card .speak-num{font-weight:800;color:#4A1A7A;margin-bottom:6px;font-size:1rem;}
 .speak-card .speak-q{font-size:1.1rem;color:#1C2B3A;line-height:1.5;}
-.speak-card .speak-ex{font-size:1.02rem;color:#555;font-style:italic;margin-top:0;max-height:0;overflow:hidden;transition:max-height .35s ease,margin-top .2s ease;}
+.speak-card .speak-ex{font-size:1.06rem;color:#555;font-style:italic;margin-top:0;max-height:0;overflow:hidden;transition:max-height .35s ease,margin-top .2s ease;}
 .speak-card .speak-ex.open{max-height:140px;margin-top:8px;}
 .speak-toggle{background:none;border:1px solid #C8A0D8;border-radius:14px;color:#7A2A5A;font-size:.98rem;font-weight:700;cursor:pointer;padding:3px 12px;margin-top:8px;transition:background .15s;}
 .speak-toggle:hover{background:#F0D8EB;}
@@ -152,6 +152,27 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
   </div>
   <button onclick="location.href='index.html'" style="position:absolute;bottom:70px;left:32px;background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.4);padding:10px 22px;border-radius:22px;cursor:pointer;font-size:1.05rem;font-weight:700;backdrop-filter:blur(4px);">🏠 Course Home</button>
   <button onclick="goToId('s-hw')" style="position:absolute;bottom:70px;right:32px;background:rgba(255,255,255,.18);color:#fff;border:2px solid rgba(255,255,255,.4);padding:10px 22px;border-radius:22px;cursor:pointer;font-size:1.05rem;font-weight:700;backdrop-filter:blur(4px);">📝 Homework</button>
+</div>
+
+<!-- ══════════════════════════ s1b · WARM-UP: WHAT WOULD YOU SAY? ══════════════════════════ -->
+<div class="slide" id="s1b">
+  <div class="banner" style="background:#B8860B;color:#fff;">🔥 Warm-Up</div>
+  <div class="slide-main">
+    <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
+      <h2>What Would You Say?</h2>
+      <p class="inst-light">Before we start, think about how you introduce yourself and others. Read each situation and say your response out loud.</p>
+      <div style="background:linear-gradient(135deg,#FFF7E6,#FFEAC2);border-radius:16px;padding:16px 18px;border:2px solid #F0C060;">
+        <div id="s1b-cards"></div>
+      </div>
+      <div style="margin-top:16px;background:linear-gradient(135deg,#2E2A6B,#4A3F9A);border-radius:16px;padding:18px 22px;color:#fff;box-shadow:0 4px 14px rgba(46,42,107,.25);">
+        <div style="font-size:1.05rem;font-weight:800;letter-spacing:.03em;margin-bottom:8px;">💬 Talk About It</div>
+        <div style="font-size:1.05rem;line-height:1.7;opacity:.95;">
+          <div style="margin-bottom:6px;"><strong style="color:#F5893A;">1.</strong> How do you usually introduce yourself to someone new at work?</div>
+          <div><strong style="color:#F5893A;">2.</strong> Have you ever had to introduce two people who didn't know each other? What did you say?</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ══════════════════════════ s2 · KEY LANGUAGE: INTRODUCING YOURSELF AND OTHERS ══════════════════════════ -->
@@ -250,23 +271,23 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>Making Connections</h2>
       <p class="instruction">Read the article and answer the questions.</p>
-      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:20px;align-items:start;">
         <div style="background:#F4F0E4;border-radius:12px;padding:16px 18px;color:#2A2010;">
-          <div style="font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7A2A5A;">Career Ladder</div>
+          <div style="font-size:1.05rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7A2A5A;">Career Ladder</div>
           <div style="font-size:1.3rem;font-weight:900;margin-top:4px;">Making Connections</div>
-          <div style="font-size:.85rem;font-weight:700;margin-bottom:10px;font-style:italic;">How to network better if you're shy</div>
-          <div style="font-size:.88rem;line-height:1.6;">Networking doesn't necessarily mean talking to hundreds of people at a conference. A few good connections are much better than meeting lots of people who you will never hear from again. Start by chatting to ex-colleagues or old friends. Ask what they are doing now and share your experiences.<br><br>One common habit of shy people is to constantly apologize for everything. Apologizing all of the time looks unprofessional and shows a lack of confidence in yourself. Instead of saying sorry, remember to smile, maintain eye contact, ask questions, and, of course, exchange business cards.</div>
+          <div style="font-size:1.06rem;font-weight:700;margin-bottom:10px;font-style:italic;">How to network better if you're shy</div>
+          <div style="font-size:1.06rem;line-height:1.85;">Networking doesn't necessarily mean talking to hundreds of people at a conference. A few good connections are much better than meeting lots of people who you will never hear from again. Start by chatting to ex-colleagues or old friends. Ask what they are doing now and share your experiences.<br><br>One common habit of shy people is to constantly apologize for everything. Apologizing all of the time looks unprofessional and shows a lack of confidence in yourself. Instead of saying sorry, remember to smile, maintain eye contact, ask questions, and, of course, exchange business cards.</div>
         </div>
-        <div>
+        <div style="max-height:390px;overflow-y:auto;padding-right:6px;">
           <div id="s8-example"></div>
           <div id="s8-qs"></div>
-          <div class="hw-btns">
-            <button class="btn-check" onclick="checkS8()">✓ Check Answers</button>
-            <button class="btn-reset" onclick="resetS8()">↺ Reset</button>
-          </div>
-          <div id="s8-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
         </div>
       </div>
+      <div class="hw-btns" style="margin-top:14px;">
+        <button class="btn-check" onclick="checkS8()">✓ Check Answers</button>
+        <button class="btn-reset" onclick="resetS8()">↺ Reset</button>
+      </div>
+      <div id="s8-result" style="margin-top:10px;font-weight:700;font-size:1.05rem;"></div>
     </div>
   </div>
 </div>
@@ -423,10 +444,10 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
       <p class="inst-light">Read the article and answer the questions.</p>
       <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:20px;">
         <div style="background:#F4F0E4;border-radius:12px;padding:16px 18px;color:#2A2010;">
-          <div style="font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7A2A5A;">Essential Skills</div>
+          <div style="font-size:1.05rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7A2A5A;">Essential Skills</div>
           <div style="font-size:1.3rem;font-weight:900;margin-top:4px;">Meeting and Greeting</div>
-          <div style="font-size:.85rem;font-weight:700;margin-bottom:10px;font-style:italic;">Meeting new people isn't always easy, but it's an essential skill for a young business professional.</div>
-          <div style="font-size:.88rem;line-height:1.6;">Whether you're looking for a new job, hope to grow your business, or just want to find new clients, you need to talk to the right people. It doesn't always lead to success, but it can provide a great first step. So, what's the best way to start talking?<br><br>Talk about your recent experience: "I'm working with some great software engineers at the moment" is a great way to start. You can tell them about your personal life and interests: "I play golf with my friend on the weekend" might be a good starter. But you shouldn't talk about things that are too personal. If you ask someone how much money they earn, they might be offended! Another good idea is to talk about one of your clients: "I often work with ElectroSan, an exciting new Japanese start-up." You will soon find that the person you're talking to wants to know more…</div>
+          <div style="font-size:1.06rem;font-weight:700;margin-bottom:10px;font-style:italic;">Meeting new people isn't always easy, but it's an essential skill for a young business professional.</div>
+          <div style="font-size:1.06rem;line-height:1.6;">Whether you're looking for a new job, hope to grow your business, or just want to find new clients, you need to talk to the right people. It doesn't always lead to success, but it can provide a great first step. So, what's the best way to start talking?<br><br>Talk about your recent experience: "I'm working with some great software engineers at the moment" is a great way to start. You can tell them about your personal life and interests: "I play golf with my friend on the weekend" might be a good starter. But you shouldn't talk about things that are too personal. If you ask someone how much money they earn, they might be offended! Another good idea is to talk about one of your clients: "I often work with ElectroSan, an exciting new Japanese start-up." You will soon find that the person you're talking to wants to know more…</div>
         </div>
         <div>
           <div id="hw3-qs"></div>
@@ -494,9 +515,10 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
 
 <script>
 /* ═══ SLIDE IDS & LABELS ═══ */
-var slideIds = ["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10","s11","s-hw","s-hw1","s-hw2","s-hw3","s-hw4","s-hw5"];
+var slideIds = ["s1","s1b","s2","s3","s4","s5","s6","s7","s8","s9","s10","s11","s-hw","s-hw1","s-hw2","s-hw3","s-hw4","s-hw5"];
 var slideLabels = [
   "Cover",
+  "Warm-Up: What Would You Say?",
   "Introductions",
   "Introductions Practice",
   "Fill in the Gaps",
@@ -778,7 +800,7 @@ function xoPick(exId,i,v){
   var other=v==='a'?'b':'a';
   xoReset1(exId,i); st.sel[i]=v;
   var cb=document.getElementById(exId+'-'+v+'-'+i); var wb=document.getElementById(exId+'-'+other+'-'+i);
-  if(cb){cb.style.background='#EEF7F0';cb.style.color='#1A5C2A';cb.style.borderColor='#1A7A4A';}
+  if(cb){cb.style.background='#EAF1FB';cb.style.color='#1A4A8C';cb.style.borderColor='#1A4A8C';}
   if(wb){wb.style.background='#f5f5f5';wb.style.color='#bbb';wb.style.borderColor='#e0e0e0';wb.style.textDecoration='line-through';wb.style.opacity='.6';}
 }
 function xoCheck(exId){
@@ -787,11 +809,14 @@ function xoCheck(exId){
   st.items.forEach(function(item,i){
     if(st.sel[i]===undefined) return;
     var ok=st.sel[i]!==item.wrong;
-    if(ok){ score++; }
-    else {
-      var sel=document.getElementById(exId+'-'+st.sel[i]+'-'+i);
-      var other=st.sel[i]==='a'?'b':'a';
-      var oth=document.getElementById(exId+'-'+other+'-'+i);
+    var sel=document.getElementById(exId+'-'+st.sel[i]+'-'+i);
+    var other=st.sel[i]==='a'?'b':'a';
+    var oth=document.getElementById(exId+'-'+other+'-'+i);
+    if(ok){
+      score++;
+      if(sel){sel.style.background='#EEF7F0';sel.style.color='#1A5C2A';sel.style.borderColor='#1A7A4A';sel.style.textDecoration='none';sel.style.opacity='1';}
+      if(oth){oth.style.cssText=xoBtn;}
+    } else {
       if(sel){sel.style.background='#FCEEED';sel.style.color='#C4614A';sel.style.borderColor='#C4614A';sel.style.textDecoration='none';sel.style.opacity='1';}
       if(oth){oth.style.cssText=xoBtn;}
     }
@@ -1067,12 +1092,12 @@ function resetS6(){ tfngReset('s6'); }
 
 /* ═══ S8 — Read the Article: Making Connections (MC, in-lesson) ═══ */
 var s8Data = [
-  { q:"What kind of people is the article aimed at?", opts:["Shy","Confident","Intelligent"], ans:"Shy" },
-  { q:"What types of connections are useful?", opts:["New ones","Good ones","Lots of them"], ans:"Good ones" },
-  { q:"Who might be useful people to talk to?", opts:["Ex-colleagues","Recruiters","Family"], ans:"Ex-colleagues" },
-  { q:"What do shy people do a lot?", opts:["Lie","Say sorry","Say thank you"], ans:"Say sorry" },
-  { q:"What does apologizing a lot make you seem?", opts:["Confident","Worried","Unprofessional"], ans:"Unprofessional" },
-  { q:"Where should you look when talking to people?", opts:["Their eyes","Their feet","Their mouths"], ans:"Their eyes" },
+  { q:"Who is this article written for?", opts:["Shy people","Confident people","Managers"], ans:"Shy people" },
+  { q:"According to the article, what kind of connections matter most?", opts:["New ones","Good ones","As many as possible"], ans:"Good ones" },
+  { q:"Who does the article suggest talking to first?", opts:["Ex-colleagues","Recruiters","Family"], ans:"Ex-colleagues" },
+  { q:"What common habit do shy people have, according to the article?", opts:["Lying","Apologizing too much","Saying thank you"], ans:"Apologizing too much" },
+  { q:"What impression does apologizing too much give?", opts:["Confidence","Worry","Unprofessionalism"], ans:"Unprofessionalism" },
+  { q:"What should you do with your eyes when talking to someone?", opts:["Maintain eye contact","Look at their feet","Look away"], ans:"Maintain eye contact" },
   { q:"What should you give contacts?", opts:["Money","Gifts","Your business card"], ans:"Your business card" }
 ];
 var s8Sel={};
@@ -1128,8 +1153,8 @@ function resetS8(){ buildS8(); }
 
 /* ═══ S9 — Rewrite the Sentences, Correcting the Errors (in-lesson) ═══ */
 var s9Data = [
-  { q:"Hi James. I'm Vanisha. I don't think we are meeting before.", ans:["Hi James. I'm Vanisha. I don't think we've met before.","I don't think we've met before."] },
-  { q:"Ashley, I'd like introduce you to my colleague Neil.", ans:["Ashley, I'd like to introduce you to my colleague Neil.","I'd like to introduce you to my colleague Neil."] },
+  { q:"Hi James. I'm Vanisha. I don't think we are meeting before.", ans:["Hi James. I'm Vanisha. I don't think we've met before.","I don't think we've met before.","Hi James. I'm Vanisha. I don't think we have met before.","I don't think we have met before."] },
+  { q:"Ashley, I'd like introduce you to my colleague Neil.", ans:["Ashley, I'd like to introduce you to my colleague Neil.","I'd like to introduce you to my colleague Neil.","Ashley, I would like to introduce you to my colleague Neil.","I would like to introduce you to my colleague Neil."] },
   { q:"I enjoying the presentations. Are you?", ans:["I am enjoying the presentations. Are you?","I'm enjoying the presentations. Are you?"] },
   { q:"Nice to meet you Bethany. How do you doing?", ans:["Nice to meet you Bethany. How do you do?"] }
 ];
@@ -1281,10 +1306,36 @@ window.addEventListener('DOMContentLoaded',function(){
     d.onclick=function(){ goTo(i); };
     dotsEl.appendChild(d);
   });
-  buildS4(); buildS5(); buildS6(); buildS8(); buildS9(); buildS10(); buildS11();
+  buildS1b(); buildS4(); buildS5(); buildS6(); buildS8(); buildS9(); buildS10(); buildS11();
   buildHW1(); buildHW2(); buildHW3(); buildHW4(); buildHW5();
   goTo(0);
 });
+
+/* ═══ S1b — Warm-Up: What Would You Say? ═══ */
+var s1bData = [
+  { q:"You walk into a work event and see someone standing alone that you don't know. What would you say to introduce yourself?", sample:"Hi, I don't think we've met — I'm Nanda. Do you work here too?" },
+  { q:"You need to introduce two coworkers who have never met. What would you say?", sample:"Maria, this is Tom — he just joined the sales team. Tom, this is Maria, our project manager." },
+  { q:"A client says, \"I think we spoke on the phone last week.\" You don't quite remember. What do you say?", sample:"I think you're right — was that about the new contract? Sorry, remind me your name again?" },
+  { q:"Someone replies \"Nice to meet you too\" after you introduce yourself. How would you continue the conversation?", sample:"So, how long have you been working here? / What's your role in the team?" }
+];
+function buildS1b(){
+  var el=document.getElementById('s1b-cards'); if(!el) return;
+  el.innerHTML='';
+  s1bData.forEach(function(item,i){
+    var card=document.createElement('div'); card.className='speak-card';
+    card.innerHTML='<div class="speak-num">Situation '+(i+1)+'</div>'
+      +'<div class="speak-q">'+item.q+'</div>'
+      +'<div class="speak-ex" id="s1b-ex-'+i+'">💡 '+item.sample+'</div>'
+      +'<button class="speak-toggle" onclick="s1bToggle('+i+')" id="s1b-btn-'+i+'">👁 Sample answer</button>';
+    el.appendChild(card);
+  });
+}
+function s1bToggle(i){
+  var ex=document.getElementById('s1b-ex-'+i); var btn=document.getElementById('s1b-btn-'+i);
+  var open=ex.classList.toggle('open');
+  btn.textContent = open ? '🙈 Hide' : '👁 Sample answer';
+}
+function resetS1b(){ buildS1b(); }
 </script>
 </body>
 </html>
