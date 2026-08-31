@@ -160,16 +160,16 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
   <div class="slide-main">
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>What Would You Say?</h2>
-      <p class="inst-light">Before we start, think about how you introduce yourself and others. Read each situation and say your response out loud.</p>
-      <div style="background:linear-gradient(135deg,#FFF7E6,#FFEAC2);border-radius:16px;padding:16px 18px;border:2px solid #F0C060;">
-        <div id="s1b-cards"></div>
-      </div>
-      <div style="margin-top:16px;background:linear-gradient(135deg,#2E2A6B,#4A3F9A);border-radius:16px;padding:18px 22px;color:#fff;box-shadow:0 4px 14px rgba(46,42,107,.25);">
-        <div style="font-size:1.05rem;font-weight:800;letter-spacing:.03em;margin-bottom:8px;">💬 Talk About It</div>
-        <div style="font-size:1.05rem;line-height:1.7;opacity:.95;">
-          <div style="margin-bottom:6px;"><strong style="color:#F5893A;">1.</strong> How do you usually introduce yourself to someone new at work?</div>
-          <div><strong style="color:#F5893A;">2.</strong> Have you ever had to introduce two people who didn't know each other? What did you say?</div>
+      <p class="inst-light">Before we start, think about how you introduce yourself and others.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;">
+        <div style="background:linear-gradient(135deg,#2E2A6B,#4A3F9A);border-radius:16px;padding:18px 22px;color:#fff;box-shadow:0 4px 14px rgba(46,42,107,.25);">
+          <div style="font-size:1.05rem;font-weight:800;letter-spacing:.03em;margin-bottom:8px;">💬 Talk About It</div>
+          <div style="font-size:1.05rem;line-height:1.7;opacity:.95;">
+            <div style="margin-bottom:6px;"><strong style="color:#F5893A;">1.</strong> How do you usually introduce yourself to someone new at work?</div>
+            <div><strong style="color:#F5893A;">2.</strong> Have you ever had to introduce two people who didn't know each other? What would you say?</div>
+          </div>
         </div>
+        <img src="vitaly-gariev-jEpZNyFSQwQ-unsplash.jpg" alt="Two colleagues shaking hands during an introduction" style="width:100%;border-radius:16px;display:block;">
       </div>
     </div>
   </div>
@@ -321,9 +321,9 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
       <h2>Choose the Correct Word</h2>
       <p class="instruction">Click the correct word.</p>
       <div id="s10-example"></div>
-      <div class="two-col" style="gap:14px;margin-top:4px;">
-        <div class="col-section" id="s10-left"></div>
-        <div class="col-section" id="s10-right"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px;">
+        <div class="col-section" id="s10-left" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div class="col-section" id="s10-right" style="display:flex;flex-direction:column;gap:10px;"></div>
       </div>
       <div class="hw-btns" style="margin-top:14px;">
         <button class="btn-check" onclick="checkS10()">✅ Check</button>
@@ -341,7 +341,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2>Introduce Yourself</h2>
       <p class="inst-light">Imagine you're on your first day at a new company. Answer each prompt out loud. Click "Sample answer" to compare.</p>
-      <div id="s11-cards"></div>
+      <div id="s11-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;"></div>
     </div>
   </div>
 </div>
@@ -378,7 +378,7 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
         </div>
       </div>
       <div style="margin-top:18px;background:linear-gradient(135deg,#EEF7F0,#D8F0E0);border-radius:14px;padding:16px 22px;border-left:5px solid #1A7A4A;font-size:1.1rem;color:#0A2010;font-style:italic;line-height:1.6;">
-        "Hi, I don't think we've met. I'm Nanda — I <strong>work</strong> in the marketing department, and I'<strong>m really enjoying</strong> this conference so far!"
+        "Hi, I don't think we've met. I'm Alex — I <strong>work</strong> in the marketing department, and I'<strong>m really enjoying</strong> this conference so far!"
       </div>
       <div class="hw-btns" style="justify-content:center;margin-top:20px;">
         <button class="btn-check" onclick="goToId('s-hw')" style="font-size:1rem;padding:12px 32px;">📝 Go to Homework →</button>
@@ -401,11 +401,14 @@ h2{font-size:1.85rem;font-weight:800;color:#0A0502;margin-bottom:14px;}
     <div class="content" style="padding:16px 36px 20px;overflow-y:auto;max-height:calc(100vh - 118px);">
       <h2 style="font-size:1.75rem;font-weight:800;margin-bottom:6px;color:#0A2010;">HW 1 – Fill in the Gaps</h2>
       <p class="inst-light">Fill in the gaps using the words in the panel to complete the introductions.</p>
-      <div style="margin-bottom:10px;">
-        <div id="hw1-bank" class="word-bank"></div>
+      <div style="margin-bottom:10px;position:sticky;top:0;z-index:5;">
+        <div id="hw1-bank" class="word-bank" style="box-shadow:0 2px 8px rgba(0,0,0,.08);"></div>
       </div>
       <div id="hw1-example"></div>
-      <div id="hw1-rows" style="display:flex;flex-direction:column;gap:8px;"></div>
+      <div class="two-col" id="hw1-cols">
+        <div class="col-section" id="hw1-left"></div>
+        <div class="col-section" id="hw1-right"></div>
+      </div>
       <div class="hw-btns">
         <button class="btn-check" onclick="checkHW1()">✓ Check Answers</button>
         <button class="btn-reset" onclick="resetHW1()">↺ Reset</button>
@@ -937,32 +940,47 @@ function wbChipState(exId,w,state){
   else { c.classList.remove('wb-used'); c.style.background=''; c.style.color=''; c.style.borderColor=''; c.style.transform='scale(1)'; }
 }
 function wbPlacedAt(st,w){ var found=null; Object.keys(st.placed).forEach(function(i){ if(st.placed[i]===w) found=parseInt(i,10); }); return found; }
-function wbBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, exampleId, usedWords){
-  wbState[exId] = { items:items, rowsId:rowsId, bankId:bankId, resultId:resultId, bankWords:bankWords, exampleHtml:exampleHtml, exampleId:exampleId, usedWords:usedWords||[], sel:null, placed:{} };
+function wbBuild(exId, rowsId, bankId, items, bankWords, resultId, exampleHtml, exampleId, usedWords, splitIds){
+  wbState[exId] = { items:items, rowsId:rowsId, bankId:bankId, resultId:resultId, bankWords:bankWords, exampleHtml:exampleHtml, exampleId:exampleId, usedWords:usedWords||[], splitIds:splitIds||null, sel:null, placed:{} };
   if(exampleId && exampleHtml){
     var exEl = document.getElementById(exampleId);
     exEl.className = 'ex-row';
     exEl.style.cssText = 'border-left-color:#C45020;display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
     exEl.innerHTML = '<span class="ex-num" style="color:#C45020;">Ex.</span>'+exampleHtml;
   }
-  var rows=document.getElementById(rowsId); rows.innerHTML='';
-  items.forEach(function(item,i){
+  function buildRow(item,i){
     var row=document.createElement('div'); row.className='ex-row'; row.style.borderLeftColor='#0E5C7A';
     row.style.cssText+='display:flex;align-items:center;gap:8px;flex-wrap:wrap;';
     row.innerHTML='<span class="ex-num">'+(i+1)+'.</span>'
       +(item.pre?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.pre+'</span>':'')
       +'<span id="'+exId+'-blank-'+i+'" onclick="wbClickBlank(\''+exId+'\','+i+')" style="min-width:80px;min-height:1.3em;display:inline-block;border-bottom:2.5px solid #8BB0D0;text-align:center;font-weight:700;color:#1A5C2A;cursor:pointer;padding-bottom:2px;"></span>'
       +(item.post?'<span style="font-size:1.05rem;color:#1C2B3A;">'+item.post+'</span>':'');
-    rows.appendChild(row);
-  });
+    return row;
+  }
+  /* Long word-bank exercises (per SLIDE_STANDARDS.md Columns rule) split into two columns —
+     leftCount = ceil(N/2), matching the same split convention as the xoBuild/cross-out module,
+     since the wbBuild Example lives in its own full-width container, not inside either column. */
+  if(splitIds){
+    var leftEl=document.getElementById(splitIds.leftId); var rightEl=document.getElementById(splitIds.rightId);
+    leftEl.innerHTML=''; rightEl.innerHTML='';
+    var leftCount=Math.ceil(items.length/2);
+    items.forEach(function(item,i){ (i<leftCount?leftEl:rightEl).appendChild(buildRow(item,i)); });
+  } else {
+    var rows=document.getElementById(rowsId); rows.innerHTML='';
+    items.forEach(function(item,i){ rows.appendChild(buildRow(item,i)); });
+  }
   var bank=document.getElementById(bankId); bank.innerHTML='';
   /* words already spent on the static example (e.g. "must" in "You must be Joe Smith.") are shown
-     in the panel exactly as the book prints them — struck through, non-clickable — never omitted. */
-  (usedWords||[]).forEach(function(w){
-    var c=document.createElement('span'); c.className='wb-chip wb-used'; c.style.cursor='default'; c.textContent=w;
-    bank.appendChild(c);
-  });
+     struck through, non-clickable — never omitted, and never reordered: bankWords must be the FULL
+     row-major book panel order (including the used word at its real printed position), with
+     usedWords just marking which of those words render as struck/disabled in place. */
+  var usedSet={}; (usedWords||[]).forEach(function(w){ usedSet[w]=true; });
   bankWords.forEach(function(w){
+    if(usedSet[w]){
+      var u=document.createElement('span'); u.className='wb-chip wb-used'; u.style.cursor='default'; u.textContent=w;
+      bank.appendChild(u);
+      return;
+    }
     var c=document.createElement('span'); c.className='wb-chip'; c.id=exId+'-chip-'+w.replace(/[^a-zA-Z0-9]/g,'_'); c.textContent=w;
     c.addEventListener('click', function(){ wbSelectWord(exId,w); });
     bank.appendChild(c);
@@ -1002,7 +1020,7 @@ function wbCheck(exId){
 }
 function wbReset(exId){
   var st=wbState[exId];
-  wbBuild(exId, st.rowsId, st.bankId, st.items, st.bankWords, st.resultId, st.exampleHtml, st.exampleId, st.usedWords);
+  wbBuild(exId, st.rowsId, st.bankId, st.items, st.bankWords, st.resultId, st.exampleHtml, st.exampleId, st.usedWords, st.splitIds);
 }
 
 /* ═══ shared helper: typed rewrite (two-col) ═══ */
@@ -1073,7 +1091,7 @@ var s5Items = [
   { pre:"I'd like to", post:"you to Karl.", ans:["introduce"] },
   { pre:"Have you two", post:"each other before?", ans:["met"] }
 ];
-var s5Bank = ["introduce","meet","our","met","see"];
+var s5Bank = ["must","introduce","meet","our","met","see"];
 function buildS5(){ wbBuild('s5','s5-rows','s5-bank',s5Items,s5Bank,'s5-result','You <span style="color:#C45020;font-weight:700;">must</span> be Joe Smith.','s5-example',['must']); }
 function checkS5(){ wbCheck('s5'); }
 function resetS5(){ wbReset('s5'); }
@@ -1164,7 +1182,7 @@ function resetS9(){ rwReset('s9','s9-left','s9-right','<span class="ex-num" styl
 
 /* ═══ S10 — Cross Out the Incorrect Words (in-lesson) ═══ */
 var s10Data = [
-  { pre:"Hello Frank.", a:"Are you enjoying", b:"do you enjoy", post:"the conference?", wrong:"b" },
+  { pre:"Hello Frank.", a:"Are you enjoying", b:"Do you enjoy", post:"the conference?", wrong:"b" },
   { pre:"Wilfred, I'd like you to", a:"meet", b:"be meeting", post:"Roger, our new press officer.", wrong:"b" },
   { pre:"Serena, it's really great to", a:"see", b:"seeing", post:"you again after so long.", wrong:"b" },
   { pre:"I usually enjoy workshops, but I am not", a:"find", b:"finding", post:"this one interesting.", wrong:"a" }
@@ -1185,8 +1203,8 @@ function resetS10(){ xoResetAll('s10'); }
 
 /* ═══ S11 — Guided Speaking: Introduce Yourself ═══ */
 var s11Data = [
-  { q:"How would you introduce yourself to someone you're meeting for the first time?", sample:"Hello, I don't think we've met. I'm Nanda — I work in the marketing department." },
-  { q:"How would you greet a colleague you think you might have met before?", sample:"I think we met at the conference last year, didn't we? I'm Nanda from the design team." },
+  { q:"How would you introduce yourself to someone you're meeting for the first time?", sample:"Hello, I don't think we've met. I'm Alex — I work in the marketing department." },
+  { q:"How would you greet a colleague you think you might have met before?", sample:"I think we met at the conference last year, didn't we? I'm Jordan from the design team." },
   { q:"How would you introduce two colleagues who don't know each other?", sample:"Maria, this is Tom from our São Paulo office. Tom, meet Maria — she's our new operations manager." },
   { q:"What would you say if someone told you they'd heard a lot about you?", sample:"Nice to finally meet you! I've heard a lot about you too." }
 ];
@@ -1219,8 +1237,8 @@ var hw1Items = [
   { pre:"I don't", post:"we've met before, have we?", ans:["think"] },
   { pre:"It's a", post:"to meet you.", ans:["pleasure"] }
 ];
-var hw1Bank = ["pleasure","see","told","met","must","think","meet","introduce","Nice"];
-function buildHW1(){ wbBuild('hw1','hw1-rows','hw1-bank',hw1Items,hw1Bank,'hw1-result','How do you <span style="color:#C45020;font-weight:700;">do</span>? I\'m Christophe from BlueTech.','hw1-example',['do']); }
+var hw1Bank = ["pleasure","see","do","told","met","must","think","meet","introduce","Nice"];
+function buildHW1(){ wbBuild('hw1',null,'hw1-bank',hw1Items,hw1Bank,'hw1-result','How do you <span style="color:#C45020;font-weight:700;">do</span>? I\'m Christophe from BlueTech.','hw1-example',['do'],{leftId:'hw1-left',rightId:'hw1-right'}); }
 function checkHW1(){ wbCheck('hw1'); }
 function resetHW1(){ wbReset('hw1'); }
 
@@ -1306,36 +1324,11 @@ window.addEventListener('DOMContentLoaded',function(){
     d.onclick=function(){ goTo(i); };
     dotsEl.appendChild(d);
   });
-  buildS1b(); buildS4(); buildS5(); buildS6(); buildS8(); buildS9(); buildS10(); buildS11();
+  buildS4(); buildS5(); buildS6(); buildS8(); buildS9(); buildS10(); buildS11();
   buildHW1(); buildHW2(); buildHW3(); buildHW4(); buildHW5();
   goTo(0);
 });
 
-/* ═══ S1b — Warm-Up: What Would You Say? ═══ */
-var s1bData = [
-  { q:"You walk into a work event and see someone standing alone that you don't know. What would you say to introduce yourself?", sample:"Hi, I don't think we've met — I'm Nanda. Do you work here too?" },
-  { q:"You need to introduce two coworkers who have never met. What would you say?", sample:"Maria, this is Tom — he just joined the sales team. Tom, this is Maria, our project manager." },
-  { q:"A client says, \"I think we spoke on the phone last week.\" You don't quite remember. What do you say?", sample:"I think you're right — was that about the new contract? Sorry, remind me your name again?" },
-  { q:"Someone replies \"Nice to meet you too\" after you introduce yourself. How would you continue the conversation?", sample:"So, how long have you been working here? / What's your role in the team?" }
-];
-function buildS1b(){
-  var el=document.getElementById('s1b-cards'); if(!el) return;
-  el.innerHTML='';
-  s1bData.forEach(function(item,i){
-    var card=document.createElement('div'); card.className='speak-card';
-    card.innerHTML='<div class="speak-num">Situation '+(i+1)+'</div>'
-      +'<div class="speak-q">'+item.q+'</div>'
-      +'<div class="speak-ex" id="s1b-ex-'+i+'">💡 '+item.sample+'</div>'
-      +'<button class="speak-toggle" onclick="s1bToggle('+i+')" id="s1b-btn-'+i+'">👁 Sample answer</button>';
-    el.appendChild(card);
-  });
-}
-function s1bToggle(i){
-  var ex=document.getElementById('s1b-ex-'+i); var btn=document.getElementById('s1b-btn-'+i);
-  var open=ex.classList.toggle('open');
-  btn.textContent = open ? '🙈 Hide' : '👁 Sample answer';
-}
-function resetS1b(){ buildS1b(); }
 </script>
 </body>
 </html>
