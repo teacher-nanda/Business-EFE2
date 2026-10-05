@@ -1,0 +1,13 @@
+# macOS / system junk
+.DS_Store
+.fuse_hidden*
+*.bak
+*.bak2
+*.lock.bak
+
+# Backup copies of lessons (local safety net only)
+*backup*
+*BACKUP*
+
+# Course book PDFs: kept locally for building lessons, NOT published
+*.pdf
