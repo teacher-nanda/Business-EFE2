@@ -336,9 +336,32 @@ Every lesson file must ship with a fully-featured notes panel — not just the "
 - If nothing was written, `alert('No notes to save yet!')` and stop.
 - Otherwise builds a standalone printable HTML document (own `<style>`, one `.card` per slide with notes, `.card-header` = `Slide N — label`, `.card-body` = the saved note HTML), opens it in a new tab, and calls `window.print()` after a short delay.
 - The exported page's own CSS **must force ALL note text to a dark, readable color, not just highlighted spans**: `.card-body,.card-body *{color:#1a1a1a!important}`. Plain/bold/underlined text typed into `#notesTA` can carry an inline white/light `color` inline style copied over from the live dark panel (browsers sometimes bake the computed color into a `<span style="color:...">` when `execCommand('bold')`/`('underline')` wraps a text run, and any such span is preserved verbatim in the saved note HTML) — a narrower selector that only targets `[style*="background-color"]` (i.e. only highlighted text) leaves this untouched, so unhighlighted or bold/underlined sentences render invisible (white-on-white) in the exported PDF even though the highlighted words in the same note look fine. Real bug, 2026-08-31: a user-generated PDF from Business-HR Lesson 2 showed entire sentences missing — only the highlighted words survived, everything else was white text on the page's white background. Fixed across all 24 lesson files with `downloadNotes()` (7 Business-EFE1 lessons + Business-EFE2 Lesson 1 + all 16 Business-HR lessons) by widening the selector from `.card-body [style*="background-color"]` to `.card-body,.card-body *`, which forces dark text everywhere inside a note regardless of what inline color it happens to carry, while leaving `background-color` (the highlight itself) untouched. This is a permanent, blanket rule — never narrow this selector back down to only highlighted spans.
-- Include a link back to the lesson's GitHub Pages URL (`https://teacher-nanda.github.io/Business-EFE1/<filename>.html`) near the top of the exported page.
+- The top of the exported page opens with a `.notes-banner` gradient-card intro, not a bare heading — see "PDF Notes Export — banner intro" below (added 2026-10-02) for the exact markup/CSS and the link-back rule.
 
 Use `Lesson_03_Business_Around_the_World.html`'s `downloadNotes()`/`clearAllNotes()` as the reference implementation — copy and adapt the lesson number and `localStorage` prefix, don't rewrite from scratch.
+
+---
+
+## PDF Notes Export — banner intro
+
+> Added 2026-10-02 at explicit request. See Business-EFE1's `SLIDE_STANDARDS.md` for the full writeup, exact markup/CSS, and changelog entry — summarized here since this is a shared, cross-course rule.
+
+The `downloadNotes()` export's old plain `<h1>` + small link line is replaced everywhere with a styled gradient `.notes-banner` card:
+
+```html
+<div class="notes-banner">
+  <span class="nb-title">[Lesson Title] Notes</span>
+  <span class="nb-line">You can find your notes from class here.</span>
+  <span class="nb-line">If you want to review the lesson content and try the homework activities, <a href="[LESSON_URL]" target="_blank">click here</a>.</span>
+</div>
+```
+```css
+.notes-banner{padding:26px 30px;margin-bottom:20px;background:linear-gradient(135deg,#0A1628 0%,#1A3A6B 55%,#0E5A8A 100%);border-radius:12px;text-align:center}
+.notes-banner .nb-title{display:block;font-size:26px;font-weight:900;color:#fff;margin-bottom:12px;line-height:1.25}
+.notes-banner .nb-line{display:block;font-size:15px;color:rgba(255,255,255,.9);font-weight:500;line-height:1.6;margin-top:4px}
+.notes-banner .nb-line a{color:#6FD1FF;font-weight:800;text-decoration:underline}
+```
+`[LESSON_URL]` stays dynamic (never a hardcoded filename) — `'https://teacher-nanda.github.io/Business-EFE2/'+window.location.pathname.split('/').pop()` for this course. Applied to `Lesson_01_Introductions.html` on 2026-10-02.
 
 ---
 
