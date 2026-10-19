@@ -780,6 +780,15 @@
 </div></div>
 </div>
 
+<div class="slide" id="s-sp1">
+<div class="banner banner-speaking">💬 Speaking</div>
+<div class="slide-main"><div class="content">
+<h2>Speaking break: then and now</h2>
+<p class="instruction">Talk to your teacher about change at work. Use “used to” and “get used to”. Click the button when you have said it.</p>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>What did you use to do in your first job that you do not do now?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>What was difficult to get used to when you started your current job?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>What is something at work that you are used to now, but that was new to you before?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Ask your teacher: “What did you use to do at work that you do not do now?”<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+</div></div>
+</div>
+
 <div class="slide" id="s-pron">
   <div class="banner banner-pron">🔊 Pronunciation</div>
   <div class="slide-main"><div class="content">
@@ -986,8 +995,8 @@
 
 <script>
 /* ===================== SLIDE NAV DATA ===================== */
-var slideIds = ["s1", "s-lead", "s-m1", "s-g1", "s-cb43", "s-cb44", "s-cb45", "s-pron", "s-cb46", "s-cb47a", "s-cb47b", "s-cb48", "s-cb49", "s-free", "s-review", "hw-cover", "hw-1", "hw-2", "hw-3", "hw-4", "hw-5"];
-var slideLabels = ["Cover", "Warm-Up – Then and Now", "Meaning – Used To, Get Used To, Be Used To", "Grammar – Form", "Grammar – Mark the Correct Sentences", "Listening – Number the Pictures", "Grammar – Word Order", "Pronunciation – Used To", "Grammar – Phrases That Mean the Same", "Reading – It's Good to Talk", "Reading – True, False, Not Given", "Speaking – Best Reply", "Speaking – Choose, Then Say It", "Speaking – Small Talk", "Lesson Review", "Homework Cover", "HW1 – Mark the Correct Sentences", "HW2 – Word Order", "HW3 – Phrases That Mean the Same", "HW4 – Best Reply", "HW5 – Choose, Then Say It"];
+var slideIds = ["s1", "s-lead", "s-m1", "s-g1", "s-cb43", "s-cb44", "s-cb45", "s-sp1", "s-pron", "s-cb46", "s-cb47a", "s-cb47b", "s-cb48", "s-cb49", "s-free", "s-review", "hw-cover", "hw-1", "hw-2", "hw-3", "hw-4", "hw-5"];
+var slideLabels = ["Cover", "Warm-Up – Then and Now", "Meaning – Used To, Get Used To, Be Used To", "Grammar – Form", "Grammar – Mark the Correct Sentences", "Listening – Number the Pictures", "Grammar – Word Order", "Speaking Break – Then and Now", "Pronunciation – Used To", "Grammar – Phrases That Mean the Same", "Reading – It's Good to Talk", "Reading – True, False, Not Given", "Speaking – Best Reply", "Speaking – Choose, Then Say It", "Speaking – Small Talk", "Lesson Review", "Homework Cover", "HW1 – Mark the Correct Sentences", "HW2 – Word Order", "HW3 – Phrases That Mean the Same", "HW4 – Best Reply", "HW5 – Choose, Then Say It"];
 var slides = Array.from(document.querySelectorAll('.slide'));
 var current = 0;
 var notesStoreKey = 'befeNotes::U04-Talking-about-changes::' + document.title;
@@ -1586,7 +1595,7 @@ document.addEventListener('input', function(e){ if (e.target && e.target.dataset
 
 var DEAL_LABEL = 'Small talk card';
 var DEAL = [
-  {head:'Lift', title:'Monday morning', lines:['You are in the lift with your teacher, a colleague from another floor.'], goal:'Make small talk. Ask about the weekend and the weather.'},
+  {head:'Elevator', title:'Monday morning', lines:['You are in the elevator with your teacher, a colleague from another floor.'], goal:'Make small talk. Ask about the weekend and the weather.'},
   {head:'Coffee machine', title:'The new commute', lines:['Your teacher has just started a new job and a long commute.'], goal:'Ask how they are getting used to it. Say what you used to do.'},
   {head:'Team lunch', title:'Hobbies', lines:['You are having lunch with your teacher, a new teammate.'], goal:'Find out about their hobbies. Say what you used to do in your free time.'},
   {head:'Conference break', title:'Films and books', lines:['You meet your teacher, a delegate you do not know.'], goal:'Talk about a film or a book you both know. Avoid politics, religion and money.'},

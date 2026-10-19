@@ -21,7 +21,7 @@ slide('s1', 'Cover', '''<div class="slide active" id="s1">
   <div class="cv-card a" aria-hidden="true">You must be Eric from the UK.</div>
   <div class="cv-card b" aria-hidden="true">I'd like to introduce you to Faisal.</div>
   <div class="cv-card c" aria-hidden="true">Great to see you again!</div>
-  <div class="cv-card d" aria-hidden="true">How do you do?</div>
+  <div class="cv-card d" aria-hidden="true">Pleased to meet you.</div>
   <div class="title-inner">
     <div class="title-label">Conversational English</div>
     <div class="title-sub">with teacher Nanda</div>
@@ -41,10 +41,10 @@ slide('s-lead', 'Warm-Up – Registration Desk', '''<div class="slide" id="s-lea
     <p class="instruction">You've arrived at a business conference. Fill in your delegate badge, then introduce yourself to me.</p>
     <div class="lead-grid">
       <div class="bd-form">
-        <label for="bd-name">First name</label><input id="bd-name" maxlength="16" autocomplete="off" placeholder="e.g. Marta" oninput="bdUpdate()">
-        <label for="bd-role">Job title</label><input id="bd-role" maxlength="34" autocomplete="off" placeholder="e.g. Finance manager" oninput="bdUpdate()">
-        <label for="bd-company">Company</label><input id="bd-company" maxlength="34" autocomplete="off" placeholder="e.g. HTB Engineering" oninput="bdUpdate()">
-        <label for="bd-ask">Ask me about&hellip;</label><input id="bd-ask" maxlength="44" autocomplete="off" placeholder="a topic you enjoy talking about" oninput="bdUpdate()">
+        <label for="bd-name">First name</label><input id="bd-name" maxlength="16" autocomplete="off" oninput="bdUpdate()">
+        <label for="bd-role">Job title</label><input id="bd-role" maxlength="34" autocomplete="off" oninput="bdUpdate()">
+        <label for="bd-company">Company</label><input id="bd-company" maxlength="34" autocomplete="off" oninput="bdUpdate()">
+        <label for="bd-ask">Ask me about&hellip;</label><input id="bd-ask" maxlength="44" autocomplete="off" oninput="bdUpdate()">
         <p class="bd-tip"><b>Ask me about&hellip;</b> is a topic you would be happy to talk about with a new contact: your work, a project, your city, a hobby or a goal.<br>For example: <i>my team's new project</i> &middot; <i>working in logistics</i> &middot; <i>learning English for meetings</i> &middot; <i>cycling in Brasília</i></p>
       </div>
       <div class="badge" id="bd-live">
@@ -78,6 +78,36 @@ slide('s-lead2', 'Warm-Up – Would You Rather?', '''<div class="slide" id="s-le
              wyr(1, 'introduce yourself to a stranger', 'wait for someone to introduce you'),
              wyr(2, 'go to a huge conference with 500 delegates', 'go to a small workshop with 15 people'),
              wyr(3, 'remember everyone\'s name but forget their job', 'remember everyone\'s job but forget their name')))
+
+slide('s-l1', 'Listening – Key Language', '''<div class="slide" id="s-l1">
+  %s
+  <div class="slide-main"><div class="content">
+    <h2>Listen: people meet and introduce each other</h2>
+    <p class="instruction">Listen to the audio. Then try to summarize it in your own words.</p>
+    %s
+    <div class="two-up" style="margin-top:6px;">
+      <div class="scene"><p style="margin:0 0 6px;"><b>1. Tell me what you understood</b></p>
+        <p style="margin:0;">Who is talking? Who knows whom? Where do people say they met? It is OK if you do not understand everything.</p></div>
+      <div class="scene"><p style="margin:0 0 6px;"><b>2. Check your understanding</b></p>
+        <ul class="ccq-list" style="margin:0;">%s</ul></div>
+    </div>
+    <div class="btn-row" style="justify-content:flex-start;margin-top:14px;">
+      <button class="btn-akey" onclick="toggleSuggested('l1-script')">📄 Show / hide the transcript</button>
+    </div>
+    <div class="akey-box" id="l1-script" style="background:#fff;">
+      <p style="margin:0 0 8px;"><b>Transcript</b> &mdash; listen again and read at the same time.</p>
+      <p style="margin:0 0 8px;"><b>1.</b> You must be Eric from the UK. Carl has told me a lot about you.</p>
+      <p style="margin:0 0 8px;"><b>2.</b> I think we met in Mumbai, didn&rsquo;t we? I&rsquo;m Max from HTB Engineering. &ndash; Great to see you again!</p>
+      <p style="margin:0 0 8px;"><b>3.</b> Hello, I don&rsquo;t think we&rsquo;ve met. I&rsquo;m Osric. &ndash; Hi Osric. Laura.</p>
+      <p style="margin:0 0 8px;"><b>4.</b> Tony, this is Hayao from our Japanese office.<br>Hayao, meet Tony, our new director of marketing.</p>
+      <p style="margin:0;"><b>5.</b> Victoria, I&rsquo;d like to introduce you to Faisal. I&rsquo;m not sure you two have met each other.<br>Nice to meet you. &ndash; How do you do?</p>
+    </div>
+  </div></div>
+</div>''' % (banner('listening'), audio('cb1.1', top=True),
+             ccq('How many short conversations do you hear?', 'Five.') +
+             ccq('Has the speaker in the first conversation met Eric before?', 'No. Carl has told the speaker about him.') +
+             ccq('In the second conversation, where do they think they met?', 'In Mumbai.') +
+             ccq('Who is introduced to Faisal?', 'Victoria.')))
 
 # ------------------------------------------------------------------ 4 MEANING: THREE FIRST MOMENTS (book 1.1, top)
 def scene(target, cols, say_a, say_b=None, shake=False):
@@ -117,25 +147,23 @@ slide('s-m2', 'Vocabulary – Introducing Other People', '''<div class="slide" i
     <p class="instruction">It is polite to introduce people you know but who do not know each other.</p>
     <div class="two-up">
       <div class="scene"><div class="sc-figs">%s</div>
-        <div class="say">Tony, this is Hayao from our Japanese office.</div>
-        <div class="say b">Hayao, meet Tony our new director of marketing.</div>
+        <div class="say" style="border-left-color:#0F766E;">Tony, this is Hayao from our Japanese office.<br>Hayao, meet Tony, our new director of marketing.</div>
         <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">When you know both parties, introduce each one separately, saying both their names.</p></div>
       <div class="scene"><div class="sc-figs">%s</div>
-        <div class="say">Victoria, I'd like to introduce you to Faisal.</div>
-        <div class="say b">I'm not sure you two have met each other.</div>
-        <div class="say">Nice to meet you.</div>
-        <div class="say b">How do you do?</div>
-        <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">Say a polite response when you are introduced. &ldquo;How do you do?&rdquo; is quite formal.</p></div>
+        <div class="say" style="border-left-color:#1B3A57;">Victoria, I'd like to introduce you to Faisal.<br>I'm not sure you two have met each other.</div>
+        <div class="say" style="border-left-color:#B8892B;">Nice to meet you.</div>
+        <div class="say" style="border-left-color:#0F766E;">Pleased to meet you.</div>
+        <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">Say a polite response when you are introduced.</p></div>
     </div>
     <div class="two-up" style="margin-top:18px;">
       %s%s
     </div>
     %s
   </div></div>
-</div>''' % (banner('vocab'), figs([TEAL, INK, BRASS]), figs([BRASS, INK, TEAL]),
+</div>''' % (banner('vocab'), figs([TEAL, INK, BRASS]), figs([INK, BRASS, TEAL]),
              reveal_card('Tony and Hayao do not know each other. Who knows both of them?', 'The speaker. That is why the speaker says both names, one sentence for each person.'),
-             reveal_card('Is &ldquo;How do you do?&rdquo; a real question about someone\'s health?', 'No. It is a polite, formal greeting when you are introduced. You can answer &ldquo;Nice to meet you&rdquo; or &ldquo;How do you do?&rdquo;'),
-             audio('cb1.1')))
+             reveal_card('Which replies can you use when you are introduced?', '&ldquo;Nice to meet you.&rdquo; or &ldquo;Pleased to meet you.&rdquo;'),
+             ''))
 
 # ------------------------------------------------------------------ 6 CB 1.2 MATCH
 def mrow(side, pair, text, num=None, example=False):
@@ -298,6 +326,39 @@ slide('s-g2', 'Grammar – Form', '''<div class="slide" id="s-g2">
   </div></div>
 </div>''' % banner('grammar'))
 
+
+# ------------------------------------------------------------------ EXTRA PRACTICE + SPEAKING BREAKS (between teaching slides)
+def _xrow(n, pre, a, b, correct, post, group):
+    bs = ' <span class="circ-sep">/</span> '.join('<button class="circ-opt" data-group="%s" data-correct="%s" onclick="circPick(this)">%s</button>' % (group, correct, c) for c in (a, b))
+    return '<div class="ex-row"><span class="circ-num">%d</span>%s %s %s</div>' % (n, pre, bs, post)
+def _xspeak(sid, label, h2, instr, items):
+    rows = ''.join('<div class="ex-row"><span class="circ-num">%d</span>%s<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle(\'done\')">🗣 I said it</button></div>' % (i + 1, t) for i, t in enumerate(items))
+    slide(sid, label, '''<div class="slide" id="%s">
+  %s
+  <div class="slide-main"><div class="content">
+    <h2>%s</h2>
+    <p class="instruction">%s</p>
+    %s
+  </div></div>
+</div>''' % (sid, banner('speaking'), h2, instr, rows))
+XR = [("Our sales team", 'travels', 'is traveling', 'travels', "to Madrid every month."), ("Please be quiet. The director", 'gives', 'is giving', 'is giving', "a presentation."),
+      ("I", 'know', 'am knowing', 'know', "your manager."), ("Right now we", 'test', 'are testing', 'are testing', "the new software."),
+      ("He usually", 'starts', 'is starting', 'starts', "work at 8:00."), ("She", 'thinks', 'is thinking', 'is thinking', "about moving to another department at the moment.")]
+slide('s-x1', 'Extra – Simple or Continuous?', '''<div class="slide" id="s-x1">
+  %s
+  <div class="slide-main"><div class="content">
+    <h2>Simple or continuous?</h2>
+    <p class="instruction">Cross out the incorrect word or words in each sentence. Think: is it a habit, a state, or happening now?</p>
+    <div id="x1">%s</div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkCircSlide('x1')">Check Answers</button>
+      <button class="btn-reset" onclick="resetCircSlide('x1')">Reset</button>
+    </div>
+  </div></div>
+</div>''' % (banner('grammar'), ''.join(_xrow(i + 1, p, a, b, c, post, 'x1-%d' % (i + 1)) for i, (p, a, b, c, post) in enumerate(XR))))
+_xspeak('s-x2', 'Speaking Break – Habits and Right Now', 'Speaking break: habits and right now', 'Talk to your teacher. Use the present simple for habits and the present continuous for what is happening now. Click the button when you have said it.',
+        ['What do you usually do on Monday mornings at work?', 'What are you working on at the moment? Tell me about one project.', 'Do you know many people at your company? Who do you know best?', 'What do you think about networking events? Are you enjoying this course?'])
+
 # ------------------------------------------------------------------ 11 SMALL WORDS THAT MATTER
 def chunk(title, rule, lines):
     ls = ''.join('<div class="say">%s</div>' % l for l in lines)
@@ -317,6 +378,9 @@ slide('s-g3', 'Grammar – Small Words That Matter', '''<div class="slide" id="s
              chunk('meet, met, have met', 'did + base verb; the past form is &ldquo;met&rdquo;; have + met.', ['Did you %s Ana yesterday?' % H('meet'), 'We %s last year.' % H('met'), 'Have they %s your manager?' % H('met')]),
              chunk('Checking with a question tag', 'The tag repeats the auxiliary: did&rarr;didn\'t we? &nbsp; are&rarr;aren\'t you?', ['I think we met in Mumbai, %s' % H('didn\'t we?'), 'You\'re from Lima, %s' % H('aren\'t you?')])
              ))
+
+_xspeak('s-x3', 'Speaking Break – Make the Introductions', 'Speaking break: make the introductions', 'Imagine you are at a conference. Say these to your teacher. Click the button when you have said it.',
+        ['Say you are happy to meet your teacher. (&ldquo;It&rsquo;s a pleasure to&hellip;&rdquo;)', 'Introduce yourself politely. (&ldquo;I&rsquo;d like to introduce myself&hellip;&rdquo;)', 'You think you know who your teacher is. Check. (&ldquo;You must be&hellip;&rdquo;)', 'You think you met before. Check with a question tag. (&ldquo;We met in&hellip;, didn&rsquo;t we?&rdquo;)'])
 
 # ------------------------------------------------------------------ 12 PRONUNCIATION
 def stress_line(html):
