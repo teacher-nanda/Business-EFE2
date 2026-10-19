@@ -637,6 +637,12 @@
   .vgrid.two.tight .vc-top { justify-content:space-between; } .vgrid.two.tight .vc-ic { font-size:1.3rem; }
 
 
+/* ---- typesetting rule: line-height 1.5 everywhere ---- */
+body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-note, .gram-mistake, .gram-box p, .glossary-box p,
+.akey-box, .akey-box p, .article-box p, .form-row, .dc-line, .dc-goal, .vc-def, .rc-a, .rc-q, .bd-tip, .ccq-answer, .big-sent .say-btn,
+.classify-chip, .circ-opt, .match-item, .inst-light, .discuss-list, .check-item, .pc-v { line-height:1.5 !important; }
+.sent-br { display:block; }
+
 </style>
 </head>
 <body>
@@ -677,7 +683,7 @@
   <div class="banner banner-leadin">🎯 Warm-Up</div>
   <div class="slide-main"><div class="content">
     <h2>Your career snapshot</h2>
-    <p class="instruction">A new colleague asks about your work history. Fill in your career snapshot, then tell me the story.</p>
+    <p class="instruction">A new colleague asks about your work history.<br>Fill in your career snapshot, then tell me the story.</p>
     
     <div class="lead-grid">
       <div class="bd-form">
@@ -701,7 +707,7 @@
   <div class="banner banner-leadin">🎯 Warm-Up</div>
   <div class="slide-main"><div class="content">
     <h2>Would you rather&hellip;?</h2>
-    <p class="instruction">Choose one. Then tell me why.</p>
+    <p class="instruction">Choose one.<br>Then tell me why.</p>
     <div class="ex-row" style="margin-bottom:18px;"><span class="circ-num">1</span><button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr1" onclick="circPick(this)">work for a huge company</button> <b style="margin:0 6px;">or</b> <button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr1" onclick="circPick(this)">work for a small team</button></div><div class="ex-row" style="margin-bottom:18px;"><span class="circ-num">2</span><button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr2" onclick="circPick(this)">have one job for 20 years</button> <b style="margin:0 6px;">or</b> <button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr2" onclick="circPick(this)">change jobs every three years</button></div><div class="ex-row" style="margin-bottom:18px;"><span class="circ-num">3</span><button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr3" onclick="circPick(this)">tell a new colleague about your past jobs</button> <b style="margin:0 6px;">or</b> <button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr3" onclick="circPick(this)">hear about their past jobs</button></div>
   </div></div>
 </div>
@@ -711,7 +717,7 @@
   <div class="slide-main"><div class="content">
     <h2>Finished, or in progress?</h2>
     
-    <p class="instruction" style="margin-bottom:12px;">Talking about your past work experience is a good way to get to know your colleagues. Click a sentence, then click the box where it belongs.</p>
+    <p class="instruction" style="margin-bottom:12px;">Talking about your past work experience is a good way to get to know your colleagues.<br>Click a sentence, then click the box where it belongs.</p>
     <div id="s-m1-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="simple" onclick="classifyPick(this)">I fixed computers.</button><button class="classify-chip" data-ans="continuous" onclick="classifyPick(this)">I was working 60 hours a week before I came here.</button><button class="classify-chip" data-ans="simple" onclick="classifyPick(this)">I ran my own construction company.</button><button class="classify-chip" data-ans="continuous" onclick="classifyPick(this)">At 9am yesterday I was writing a report.</button><button class="classify-chip" data-ans="simple" onclick="classifyPick(this)">I was a legal assistant.</button><button class="classify-chip" data-ans="continuous" onclick="classifyPick(this)">While I was waiting, the manager arrived.</button></div>
     <div id="s-m1-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="simple" onclick="classifyTarget(this)"><h4><b>Past simple</b><br>a single, completed action, a past habit, or a state that was true for a time</h4></div><div class="classify-col" data-target="continuous" onclick="classifyTarget(this)"><h4><b>Past continuous</b><br>an ongoing action that was in progress at a certain time in the past</h4></div></div>
     <div class="btn-row">
@@ -729,7 +735,7 @@
     <h2>How we build them</h2>
     
     
-    <p style="margin:0 0 4px;">The past simple is usually formed by adding &ldquo;-ed&rdquo; to the base form of the verb. The past continuous is formed by adding &ldquo;was&rdquo; or &ldquo;were&rdquo; in front of the verb, and &ldquo;-ing&rdquo; to the end of the verb.</p>
+    <p style="margin:0 0 4px;">The past simple is usually formed by adding &ldquo;-ed&rdquo; to the base form of the verb.<br>The past continuous is formed by adding &ldquo;was&rdquo; or &ldquo;were&rdquo; in front of the verb, and &ldquo;-ing&rdquo; to the end of the verb.</p>
     <div class="pz-row"><div class="pz "><span class="pz-k">Subject</span><span class="pz-v">I</span></div><div class="pz a"><span class="pz-k">Past continuous</span><span class="pz-v">was working</span></div><div class="pz "><span class="pz-k">Rest of clause</span><span class="pz-v">60 hours a week</span></div><div class="pz b"><span class="pz-k">Past simple</span><span class="pz-v">before I came here.</span></div></div>
     <div class="form-grid">
       <div class="form-card"><h4>Past simple</h4>
@@ -763,7 +769,7 @@
 <div class="banner banner-speaking">💬 Speaking</div>
 <div class="slide-main"><div class="content">
 <h2>Speaking break: your work story</h2>
-<p class="instruction">Talk to your teacher. Use the past simple for finished jobs and the past continuous for what was in progress. Click the button when you have said it.</p>
+<p class="instruction">Answer the questions about you.<br>Use the past simple for finished jobs and the past continuous for actions in progress.</p>
 <div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Tell me about a job you had in the past. What did you do there?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>What were you doing a year ago? Where were you working or studying?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Think about the day you got your current job. What were you doing when you heard the news?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Now ask me three questions about my past. Use “Did you…?” and “Were you…ing…?”<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
 </div></div>
 </div>
@@ -774,7 +780,7 @@
     <h2>A polite way to ask</h2>
     
     
-    <p class="instruction" style="margin-bottom:10px;">You may hear people ask questions about a present situation in the past tense. This makes the question more polite. The past tense is also sometimes used to make a polite request.</p>
+    <p class="instruction" style="margin-bottom:10px;">You may hear people ask questions about a present situation in the past tense.<br>This makes the question more polite.<br>The past tense is also sometimes used to make a polite request.</p>
     <div class="two-up">
       <div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#0F766E"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#0F766E"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#0F766E"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div><div class="say">Did you want a tour of the office?</div>
         <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">&ldquo;Do&rdquo; becomes &ldquo;Did&rdquo; to make the question in past tense.</p></div>
@@ -805,7 +811,7 @@
 <div class="banner banner-speaking">💬 Speaking</div>
 <div class="slide-main"><div class="content">
 <h2>Speaking break: sound polite</h2>
-<p class="instruction">Say these to your teacher, a new colleague. Use the past tense to sound polite.</p>
+<p class="instruction">Say these sentences to a new colleague.<br>Use the past tense to sound polite.</p>
 <div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Offer your colleague some more coffee. (“Did you want…?”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Ask for help with a report. (“I was wondering if you could…”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Ask whether your colleague wanted a tour of the office.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Say you want to ask about the history of the company. (“I wanted to ask…”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
 </div></div>
 </div>
@@ -815,7 +821,7 @@
   <div class="slide-main"><div class="content">
     <h2>Is there a date?</h2>
     
-    <p class="instruction" style="margin-bottom:12px;">The present perfect simple is used to talk about events in the recent past that still have an effect on the present moment. Click a sentence, then click the box where it belongs.</p>
+    <p class="instruction" style="margin-bottom:12px;">The present perfect simple is used to talk about events in the recent past that still have an effect on the present moment.<br>Click a sentence, then click the box where it belongs.</p>
     <div id="s-m3-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="present perfect" onclick="classifyPick(this)">I have worked in a few different teams.</button><button class="classify-chip" data-ans="past simple" onclick="classifyPick(this)">I worked in a small team in 2005.</button><button class="classify-chip" data-ans="present perfect" onclick="classifyPick(this)">I haven't worked in a team before.</button><button class="classify-chip" data-ans="past simple" onclick="classifyPick(this)">We moved offices last March.</button><button class="classify-chip" data-ans="present perfect" onclick="classifyPick(this)">He has just finished the report.</button><button class="classify-chip" data-ans="past simple" onclick="classifyPick(this)">She left the company in 2019.</button></div>
     <div id="s-m3-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="present perfect" onclick="classifyTarget(this)"><h4><b>Present perfect</b><br>no date is specified</h4></div><div class="classify-col" data-target="past simple" onclick="classifyTarget(this)"><h4><b>Past simple</b><br>a specific date is given</h4></div></div>
     <div class="btn-row">
@@ -865,7 +871,7 @@
 <div class="banner banner-speaking">💬 Speaking</div>
 <div class="slide-main"><div class="content">
 <h2>Speaking break: interview your colleague</h2>
-<p class="instruction">Ask your teacher these questions with the present perfect, then listen to the answer. Then answer them yourself.</p>
+<p class="instruction">Ask these questions with the present perfect, then answer them about you.</p>
 <div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Ask: “Have you ever worked in a team?” Then ask a follow-up question.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Ask how long your colleague has worked here. (“How long have you…?”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Ask about something your colleague has just finished.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Now your turn. Tell me one thing you have done at work this year, and one thing you have not done yet.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
 </div></div>
 </div>
@@ -891,7 +897,7 @@
 <div class="banner banner-listening">🎧 Listening</div>
 <div class="slide-main"><div class="content">
 <h2>Two colleagues talk about their past</h2>
-<p class="instruction">Listen to the audio and answer the questions. Two colleagues are discussing their past experience.</p>
+<p class="instruction">Listen to the audio and answer the questions.<br>Two colleagues are discussing their past experience.</p>
 <div class="audio-box top"><audio controls="" preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_9.mp3"></audio></div><div class="img-placeholder ph-small"><span class="ip-icon">🎧</span>Photo: two colleagues talking in an office</div>
 
 <div class="fixed-two-col" id="cb29"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>This is Suzi's first day at the company.<br/><span style="margin-left:34px;display:inline-block;"><span class="circ-opt struck">True</span><span class="circ-opt is-example">False</span><span class="circ-opt struck">Not given</span></span></div><div class="ex-row"><span class="circ-num">1</span>Suzi's previous company was smaller.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="cb29-1" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="cb29-1" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="cb29-1" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">2</span>Suzi has always worked in HR.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="False" data-group="cb29-2" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="False" data-group="cb29-2" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="False" data-group="cb29-2" onclick="circPick(this)">Not given</button></span></div></div><div><div class="ex-row"><span class="circ-num">3</span>Jack has worked for CIE for six years.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="Not given" data-group="cb29-3" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="Not given" data-group="cb29-3" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="Not given" data-group="cb29-3" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">4</span>Jack has never worked for another company.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="cb29-4" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="cb29-4" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="cb29-4" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">5</span>Jack and Suzi always work the same days.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="Not given" data-group="cb29-5" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="Not given" data-group="cb29-5" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="Not given" data-group="cb29-5" onclick="circPick(this)">Not given</button></span></div></div></div>
@@ -906,13 +912,13 @@
   <div class="banner banner-reading">📖 Reading</div>
   <div class="slide-main"><div class="content">
     <h2>Before you read</h2>
-    <p class="instruction">Talk to your teacher first. Then go to the next slide to read.</p>
+    <p class="instruction">Discuss the questions and the prediction.<br>Then go to the next slide to read.</p>
     
     <div class="two-up">
       <div class="scene"><p style="margin:0 0 6px;"><b>Talk about it</b></p>
         <p style="margin:0;">1. Where do people talk at your workplace: the coffee machine, the elevator, the kitchen?<br>2. Have you ever learned something important from a short chat with a colleague?<br>3. Is it easy or difficult for you to start a conversation with a new colleague?</p></div>
       <div class="scene"><p style="margin:0 0 6px;"><b>Predict</b></p>
-        <p style="margin:0;">The article is called &ldquo;The best meeting happens at the coffee machine&rdquo;. What do you think it says? Write down two ideas, then read to check.</p></div>
+        <p style="margin:0;">The article is called &ldquo;The best meeting happens at the coffee machine&rdquo;.<br>What do you think it says?<br>Write down two ideas, then read to check.</p></div>
     </div>
   </div></div>
 </div>
@@ -921,7 +927,7 @@
   <div class="banner banner-reading">📖 Reading</div>
   <div class="slide-main"><div class="content">
     <h2>The best meeting happens at the coffee machine</h2>
-    <p class="instruction">Read the article. Is it close to your ideas? (This article was written for this course.)</p>
+    <p class="instruction">Read the article.<br>Is it close to your ideas?<br>(This article was written for this course.)</p>
     <div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee&mdash;and her whole team</p><p>When Elena Novak joined a logistics company in Rotterdam last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Elena was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Poland. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.</p><p>Elena has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;</p></div>
   </div></div>
 </div>
@@ -948,7 +954,7 @@
     <p class="instruction">Choose the correct answer for each question.</p>
     <div style="margin-bottom:14px;"><div class="btn-row" style="justify-content:flex-start;margin-top:0;"><button class="btn-akey" onclick="toggleSuggested('rd-art2')">📖 Show / hide the article</button></div><div class="akey-box" id="rd-art2" style="background:#fff;padding:0;border:0;"><div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee&mdash;and her whole team</p><p>When Elena Novak joined a logistics company in Rotterdam last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Elena was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Poland. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.</p><p>Elena has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;</p></div></div></div>
     
-    <div class="fixed-two-col" id="rdm"><div><div class="ex-row"><span class="circ-num">1</span>What is the main idea of the article?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">Short, informal chats can help colleagues connect.</button><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">Formal meetings are the best way to make friends.</button><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">New employees should eat lunch alone.</button></span></div><div class="ex-row"><span class="circ-num">2</span>Why was Elena&rsquo;s colleague interested in her?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She had a lot of international experience.</button><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She worked in the finance department.</button><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She was the new manager.</button></span></div></div><div><div class="ex-row"><span class="circ-num">3</span>What does &ldquo;I wasn&rsquo;t looking for a project&rdquo; mean?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She did not plan to find a project.</button><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She could not find her project.</button><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She did not like projects.</button></span></div></div></div>
+    <div class="fixed-two-col" id="rdm"><div><div class="ex-row"><span class="circ-num">1</span>What is the main idea of the article?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">Formal meetings are the best way to make friends.</button><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">Short, informal chats can help colleagues connect.</button><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">New employees should eat lunch alone.</button></span></div><div class="ex-row"><span class="circ-num">2</span>Why was Elena&rsquo;s colleague interested in her?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She worked in the finance department.</button><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She was the new manager.</button><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She had a lot of international experience.</button></span></div></div><div><div class="ex-row"><span class="circ-num">3</span>What does &ldquo;I wasn&rsquo;t looking for a project&rdquo; mean?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She did not plan to find a project.</button><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She could not find her project.</button><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She did not like projects.</button></span></div></div></div>
     <div class="btn-row">
       <button class="btn-check" onclick="checkCircSlide('rdm')">Check Answers</button>
       <button class="btn-reset" onclick="resetCircSlide('rdm')">Reset</button>
@@ -961,7 +967,7 @@
   <div class="banner banner-reading">📖 Reading</div>
   <div class="slide-main"><div class="content">
     <h2>Words from the article</h2>
-    <p class="instruction">Find the word in the article and type it in the gap. (Hint: look at paragraphs 1, 3 and 4.)</p>
+    <p class="instruction">Find the word in the article and type it in the gap.<br>(Hint: look at paragraphs 1, 3 and 4.)</p>
     <div style="margin-bottom:14px;"><div class="btn-row" style="justify-content:flex-start;margin-top:0;"><button class="btn-akey" onclick="toggleSuggested('rd-art3')">📖 Show / hide the article</button></div><div class="akey-box" id="rd-art3" style="background:#fff;padding:0;border:0;"><div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee&mdash;and her whole team</p><p>When Elena Novak joined a logistics company in Rotterdam last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Elena was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Poland. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.</p><p>Elena has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;</p></div></div></div>
     
     <div class="fixed-two-col" id="rdv"><div><div class="ex-row"><span class="circ-num">1</span>If nobody notices you, you feel ______: <input class="ans-input wide" data-ans="invisible" data-alt="" aria-label="answer 1"></div><div class="ex-row"><span class="circ-num">2</span>The way furniture and rooms are arranged in an office is its ______: <input class="ans-input wide" data-ans="layout" data-alt="" aria-label="answer 2"></div></div><div><div class="ex-row"><span class="circ-num">3</span>A project with people from several departments is a ______: <input class="ans-input wide" data-ans="cross-department" data-alt="" aria-label="answer 3"></div><div class="ex-row"><span class="circ-num">4</span>An activity to help people who do not know each other start talking is an ______: <input class="ans-input wide" data-ans="ice-breaker" data-alt="" aria-label="answer 4"></div></div></div>
@@ -977,7 +983,7 @@
 <div class="banner banner-speaking">💬 Speaking</div>
 <div class="slide-main"><div class="content">
 <h2>Speaking break: what do you think?</h2>
-<p class="instruction">Discuss with your teacher. Use the past and the present perfect from this unit.</p>
+<p class="instruction">Answer the questions about you.<br>Use the past and the present perfect from this unit.</p>
 <div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Have you ever had a conversation at work that changed something for you? What happened?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>What were you doing the last time you met a new colleague?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Would conversation corners work in your company? Why, or why not?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Elena has led two projects since she joined. What has your company done recently to help people meet?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
 </div></div>
 </div>
@@ -1001,7 +1007,7 @@
   <div class="banner banner-speaking">💬 Speaking</div>
   <div class="slide-main"><div class="content">
     <h2>Coffee-machine catch-up</h2>
-    <p class="instruction">Your teacher is a new colleague. Take a card, then start the conversation and find out about their work history.</p>
+    <p class="instruction">Your teacher is a new colleague.<br>Take a card, then start the conversation and find out about their work history.</p>
     <div class="deal-wrap">
       <div class="deal-card" id="deal-card"><div class="dc-head">Coffee machine card</div>
         <div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div></div>
@@ -1022,7 +1028,7 @@
     <div class="check-list" id="ck-list"><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Past simple and past continuous</span><span class="ck-ic">⚙️</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Sharing past experiences</span><span class="ck-ic">🗂️</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Talking about past experiences</span><span class="ck-ic">🧩</span></button></div>
     <div class="win-banner" id="ck-win">You are ready for the next unit.</div>
     
-    <p class="instruction" style="margin-top:22px;">Tell me about your career one more time. What can you say now that you could not say before?</p>
+    <p class="instruction" style="margin-top:22px;">Tell me about your career one more time.<br>What can you say now that you could not say before?</p>
   </div></div>
 </div>
 
@@ -1065,7 +1071,7 @@
   <div class="banner banner-hw">📝 Homework</div>
   <div class="slide-main"><div class="content">
     <h2>HW3 — Beginnings and endings</h2>
-    <p class="instruction">Match the beginnings of the sentences to the correct endings. Click one on the left, then one on the right.</p>
+    <p class="instruction">Match the beginnings of the sentences to the correct endings.<br>Click one on the left, then one on the right.</p>
     <div class="match-wrap compact" id="hw-3-match">
       <div><div class="match-item example-pair"><span class="example-badge">✓</span>Claire was working at a bank</div><div class="match-item" data-side="left" data-pair="1" onclick="matchPick(this)"><span class="circ-num">1</span>Jim was preparing a presentation</div><div class="match-item" data-side="left" data-pair="2" onclick="matchPick(this)"><span class="circ-num">2</span>I've worked at this company</div><div class="match-item" data-side="left" data-pair="3" onclick="matchPick(this)"><span class="circ-num">3</span>Chris had to wait for a taxi for</div><div class="match-item" data-side="left" data-pair="4" onclick="matchPick(this)"><span class="circ-num">4</span>Tim moved to New York</div><div class="match-item" data-side="left" data-pair="5" onclick="matchPick(this)"><span class="circ-num">5</span>I ran my own software company</div><div class="match-item" data-side="left" data-pair="6" onclick="matchPick(this)"><span class="circ-num">6</span>In 2013, our company</div></div>
       <div><div class="match-item" data-side="right" data-pair="2" onclick="matchPick(this)">for more than ten years.</div><div class="match-item" data-side="right" data-pair="3" onclick="matchPick(this)">more than an hour.</div><div class="match-item example-pair">when she received a new job offer.</div><div class="match-item" data-side="right" data-pair="1" onclick="matchPick(this)">when his boss entered the room.</div><div class="match-item" data-side="right" data-pair="5" onclick="matchPick(this)">before I started working here.</div><div class="match-item" data-side="right" data-pair="6" onclick="matchPick(this)">bought a smaller Canadian software firm.</div><div class="match-item" data-side="right" data-pair="4" onclick="matchPick(this)">when he was transferred to the US office.</div></div>
@@ -1671,6 +1677,7 @@ function playClip(btn){
   }catch(e){}
 }
 
+function SS(t){ return String(t).replace(/([.?!])\s+(?=[A-Z])/g,'$1<br>'); }
 /* ===================== TYPED ANSWERS: forgiving comparison ===================== */
 /* ignores capitals, punctuation, curly apostrophes and extra spaces (overrides the generic version) */
 function norm(s){
@@ -1687,8 +1694,8 @@ function dealNext(){
   var d = DEAL[i];
   var card = document.getElementById('deal-card');
   card.innerHTML = '<div class="dc-head">' + DEAL_LABEL + ' · ' + d.head + '</div><div class="dc-body"><p class="dc-setting">' + d.title + '</p>' +
-    d.lines.map(function(l){ return '<p class="dc-line">' + l + '</p>'; }).join('') +
-    '<div class="dc-goal"><b>Your goal</b>' + d.goal + '</div></div>';
+    d.lines.map(function(l){ return '<p class="dc-line">' + SS(l) + '</p>'; }).join('') +
+    '<div class="dc-goal"><b>Your goal</b>' + SS(d.goal) + '</div></div>';
   card.classList.remove('flip'); void card.offsetWidth; card.classList.add('flip');
   dealCount++;
   document.getElementById('deal-count').textContent = 'Cards played: ' + dealCount;
