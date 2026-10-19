@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 — Getting to know colleagues</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Segoe UI', system-ui, sans-serif; background:#0A0A0A; }
+  #deck { position:relative; width:100%; height:100vh; overflow:hidden; }
+  .slide {
+    position:absolute; inset:0; opacity:0; pointer-events:none;
+    transition:opacity .35s ease; overflow-y:auto; min-height:100vh;
+    display:flex; flex-direction:column; background:#fff;
+  }
+  .slide.active { opacity:1; pointer-events:auto; }
+
+  /* ===== COVER / HW COVER ===== */
+  #s1, #hw-cover {
+    background: linear-gradient(135deg, #180B08 0%, #3D1810 30%, #6B2318 55%, #8B3A1E 75%, #C44D1E 100%);
+    align-items:center; justify-content:center;
+  }
+  .title-inner { position:relative; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px; }
+  .title-label { text-transform:uppercase; letter-spacing:.18em; font-size:1.1rem; font-weight:500; color:rgba(255,255,255,.65); margin-bottom:10px; }
+  .title-sub { font-size:1.15rem; font-weight:400; color:rgba(255,255,255,.75); margin-bottom:26px; }
+  .title-main { font-size:3.4rem; font-weight:900; color:#fff; line-height:1.1; text-align:center; max-width:900px; }
+  .title-accent { color:#FF6B35; text-shadow:0 0 28px rgba(255,107,53,.5); }
+  .hw-badge { background:rgba(255,255,255,.1); border-radius:8px; padding:7px 22px; font-size:1rem; letter-spacing:.15em; color:rgba(255,255,255,.85); text-transform:uppercase; font-weight:600; margin-bottom:32px; }
+
+  /* ===== BANNERS ===== */
+  .banner { width:100%; padding:13px 28px; font-size:1.1rem; font-weight:700; letter-spacing:.03em; display:flex; align-items:center; gap:10px; flex-shrink:0; color:#fff; }
+  .banner-leadin    { background:#D35400; }
+  .banner-listening { background:#0E7A8A; }
+  .banner-speaking  { background:#B23A6B; }
+  .banner-grammar   { background:#5A2E8C; }
+  .banner-pron      { background:#A8571E; }
+  .banner-reading   { background:#2A6B42; }
+  .banner-vocab     { background:#1E7A5F; }
+  .banner-video     { background:#A83232; }
+  .banner-review    { background:#2E2A6B; }
+  .banner-hw        { background:#1C2B3A; }
+
+  .slide-main { flex:1; overflow-y:auto; width:100%; display:flex; flex-direction:column; padding-bottom:60px; }
+  .content { padding:24px 48px 20px; flex:1; }
+  h2 { font-size:1.85rem; font-weight:800; color:#1C2B3A; margin:0 0 14px; }
+  .instruction { font-size:1.08rem; font-weight:700; color:#1C2B3A; margin:0 0 18px; }
+  .inst-light { font-size:1.05rem; font-weight:400; color:#1C2B3A; margin:0 0 18px; line-height:1.7; }
+  .discuss-label { font-size:1.08rem; font-weight:700; color:#1C2B3A; margin:0 0 14px; line-height:1.7; }
+  .section-subhead { font-size:1.3rem; font-weight:800; color:#5A2E8C; margin:24px 0 10px; }
+  .discuss-list { margin:0 0 18px; padding-left:22px; line-height:1.9; font-size:1.06rem; color:#1C2B3A; }
+  .discuss-list li { margin-bottom:10px; }
+  .discuss-box { background:#F4F8FA; border-left:6px solid #0E7A8A; border-radius:12px; padding:16px 20px 4px; margin-top:20px; }
+  .discuss-box .discuss-label { margin-bottom:10px; line-height:1.7; }
+  .discuss-box .discuss-list { margin-bottom:12px; }
+
+  /* ===== CARDS / EXERCISE CONTAINERS ===== */
+  .card { background:#F4F8FA; border-radius:12px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:20px; }
+  .book-placeholder { border:2px dashed #C9A227; background:#FBF6E8; border-radius:12px; padding:32px 24px; text-align:center; color:#7A5A1E; font-weight:600; margin-bottom:20px; }
+  .book-placeholder .bp-icon { font-size:2.2rem; display:block; margin-bottom:8px; }
+  .book-placeholder .bp-note { font-weight:400; font-size:1.05rem; color:#9A7A2E; margin-top:6px; }
+  .lead-img-wrap { text-align:center; margin-bottom:20px; }
+  .lead-img { width:100%; max-height:280px; object-fit:cover; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,.15); }
+  .lead-img-caption { font-size:1.08rem; font-style:italic; font-weight:700; color:#8B3A1E; margin:12px 0 0; }
+
+  .ex-row { font-size:1.06rem; line-height:1.7; margin-bottom:10px; color:#1C2B3A; }
+  .ans-input { border:none; border-bottom:2px solid #5A2E8C; background:transparent; font-size:1.05rem; font-weight:700; width:160px; padding:2px 4px; text-align:left; font-family:inherit; color:#1C2B3A; }
+  .ans-input.small { width:120px; }
+  .ans-input.wide { width:100%; margin-top:6px; }
+  .ans-input.half { width:50%; margin-top:6px; }
+  textarea.ans-input { display:block; min-height:70px; resize:vertical; text-align:left; }
+  .ans-input:focus { outline:none; border-bottom-color:#B23A6B; }
+  .ans-input.correct { color:#1A7A4A; border-bottom-color:#1A7A4A; }
+  .ans-input.wrong { color:#C4614A; border-bottom-color:#C4614A; }
+  .ans-input.empty-warn { color:#C98A1E; border-bottom-color:#C98A1E; }
+
+  .two-col { columns:2; column-gap:40px; }
+  .two-col .ex-row { break-inside:avoid; }
+  .fixed-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0 40px; align-items:start; }
+  .fixed-three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 28px; align-items:start; }
+
+  .btn-row { display:flex; gap:12px; justify-content:center; margin-top:22px; flex-wrap:wrap; }
+  .btn-check { background:#5A2E8C; color:#fff; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+  .btn-reset { background:#e8e8ec; color:#333; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+  .btn-suggest { background:#1B6E96; color:#fff; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+
+  .suggest-box { display:none; background:#EAF4F6; border-left:4px solid #1B6E96; border-radius:8px; padding:16px 20px; margin-top:16px; font-size:1.05rem; line-height:1.7; color:#1C2B3A; }
+  .suggest-box.show { display:block; }
+  .suggest-box li { margin-bottom:6px; }
+
+  /* circle MC */
+  .circ-num { display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:6px; font-weight:800; background:#eee; color:#5A2E8C; margin-right:8px; font-size:.9rem; }
+  .circ-opt { border:1.5px solid #ccc; border-radius:14px; padding:4px 14px; margin:2px 4px; background:#fff; cursor:pointer; font-family:inherit; font-size:1.05rem; color:#1C2B3A; }
+  .circ-opt.picked { border-color:#5A2E8C; background:#EEE7F7; font-weight:700; }
+  .circ-opt.correct { border-color:#1A7A4A; background:#E3F5EA; color:#1A7A4A; font-weight:800; }
+  .circ-opt.wrong { border-color:#C4614A; background:#FBEAE6; color:#C4614A; font-weight:800; }
+  .example-badge { background:#2E7D32;color:#fff;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;font-weight:800; margin-right:8px; font-size:.9rem; }
+
+  /* classify */
+  .classify-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .classify-chip { border:1.5px solid #5A2E8C; color:#5A2E8C; border-radius:20px; padding:6px 16px; cursor:pointer; font-weight:700; font-size:1.05rem; background:#fff; font-family:inherit; }
+  .classify-chip.selected { background:#5A2E8C; color:#fff; }
+  .classify-chip.used { opacity:.35; cursor:default; border-style:dashed; }
+  .classify-cols { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .classify-col { background:#fff; border:2px solid #ddd; border-radius:10px; padding:14px; min-height:70px; cursor:pointer; }
+  .classify-col h4 { margin:0 0 8px; font-size:1.1rem; color:#5A2E8C; }
+  .classify-col .placed { display:inline-block; background:#EEE7F7; border-radius:14px; padding:3px 10px; margin:3px; font-size:1.05rem; font-weight:700; }
+  .classify-col .placed.correct { background:#E3F5EA; color:#1A7A4A; }
+  .classify-col .placed.wrong { background:#FBEAE6; color:#C4614A; }
+
+  /* match colour pair */
+  .match-wrap { display:grid; grid-template-columns:1fr 1fr; gap:40px; background:#F8FAFB; border-radius:14px; padding:1.3rem 1.4rem; }
+  .match-col-head { font-weight:800; font-size:1.05rem; letter-spacing:.02em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #E0E6EC; }
+  .match-col-head.mc-left { color:#5A2E8C; }
+  .match-col-head.mc-right { color:#A8571E; }
+  .match-item { padding:11px 14px; border-radius:8px; border:1.5px solid #ddd; margin-bottom:10px; cursor:pointer; font-size:1.05rem; color:#1C2B3A; user-select:none; position:relative; transition:border-color .15s, box-shadow .15s, transform .15s; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.06); display:flex; align-items:flex-start; }
+  .match-item:not(.example-pair):hover { box-shadow:0 3px 10px rgba(0,0,0,.14); transform:translateY(-1px); }
+  .match-item.example-pair { cursor:default; background:#EAF6EE !important; border-color:#2E7D32 !important; }
+  .match-item.c0 { border-color:#7B2D8E; border-width:3px; background:#F3E6F7; box-shadow:0 0 0 2px rgba(123,45,142,.25); }
+  .match-item.c1 { border-color:#C9822E; border-width:3px; background:#FBEFE0; box-shadow:0 0 0 2px rgba(201,130,46,.25); }
+  .match-item.c2 { border-color:#2A5A9E; border-width:3px; background:#E3EBFA; box-shadow:0 0 0 2px rgba(42,90,158,.25); }
+  .match-item.c3 { border-color:#0E7A8A; border-width:3px; background:#E3F2F4; box-shadow:0 0 0 2px rgba(14,122,138,.25); }
+  .match-item.c4 { border-color:#B23A6B; border-width:3px; background:#F8E6EE; box-shadow:0 0 0 2px rgba(178,58,107,.25); }
+  .match-item.c5 { border-color:#8C7A1E; border-width:3px; background:#F5F1DD; box-shadow:0 0 0 2px rgba(140,122,30,.25); }
+  .match-item.c6 { border-color:#4A5A8C; border-width:3px; background:#E6E9F5; box-shadow:0 0 0 2px rgba(74,90,140,.25); }
+  .match-item.c7 { border-color:#3E8C5E; border-width:3px; background:#E6F5EC; box-shadow:0 0 0 2px rgba(62,140,94,.25); }
+  .match-item.picking { border-color:#5A2E8C; border-width:3px; border-style:dashed; box-shadow:0 0 0 2px rgba(90,46,140,.2); }
+  .match-item.correctpair { outline:3px solid #1A7A4A; background:#1A7A4A !important; color:#fff; }
+  .match-item.wrongpair { outline:3px solid #C4614A; background:#C4614A !important; color:#fff; }
+
+  /* word bank tiles */
+  .wb-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .wb-bank.book-style { border-top:3px double #333; border-bottom:1px solid #ccc; padding:12px 4px; }
+  .wb-tile { border:1.5px solid #A8571E; color:#A8571E; background:#fff; border-radius:18px; padding:6px 16px; cursor:pointer; font-weight:700; font-family:inherit; font-size:1.05rem; }
+  .wb-tile.used { opacity:.35; border-style:dashed; cursor:default; }
+  .wb-tile.selected { background:#A8571E; color:#fff; }
+  .wb-tile.example-used { opacity:.5; border-style:dashed; cursor:default; text-decoration:line-through; }
+  .wb-blank { display:inline-block; min-width:90px; border-bottom:2px solid #A8571E; padding:2px 8px; margin:0 3px; cursor:pointer; font-weight:700; color:#A8571E; text-align:center; }
+  .wb-blank.filled { border-style:solid; }
+  .wb-blank.correct { color:#1A7A4A; border-color:#1A7A4A; }
+  .wb-blank.wrong { color:#C4614A; border-color:#C4614A; }
+
+  /* audio / video placeholders */
+  .audio-box { background:#f0f4f8; border-radius:999px; padding:10px 18px; display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+  .audio-box audio { width:100%; }
+  .speaker-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:22px; }
+  .speaker-card { background:#F4F8FA; border-radius:14px; padding:12px; }
+  .speaker-card img { width:100%; height:120px; object-fit:cover; border-radius:10px; display:block; }
+  .speaker-card .sp-name { font-size:1.05rem; font-weight:800; color:#1C2B3A; margin:10px 0 8px; text-align:center; }
+  .speaker-card .audio-box { margin-bottom:0; padding:6px 10px; }
+  .who-table { border:1px solid #E2E8E2; border-radius:12px; overflow:hidden; }
+  .who-row { display:grid; grid-template-columns:1fr repeat(4,86px); align-items:center; gap:8px; padding:9px 14px; border-bottom:1px solid #E2E8E2; font-size:1.06rem; line-height:1.5; color:#1C2B3A; }
+  .who-row:last-child { border-bottom:none; }
+  .who-row.who-head { background:#F4F8FA; font-weight:800; }
+  .who-row.who-head span { text-align:center; }
+  .who-row.who-head span:first-child { text-align:left; }
+  .who-row .circ-opt { width:100%; margin:0; text-align:center; padding:4px 0; }
+  .video-box { background:#1C2B3A; border-radius:14px; padding:16px 20px; margin-bottom:18px; }
+  .video-box video { width:100%; border-radius:8px; display:block; }
+  .video-box p { color:#fff; font-size:1.05rem; margin:0 0 10px; font-weight:700; letter-spacing:.02em; }
+  .glossary-note { font-size:1.05rem; color:#666; font-style:italic; margin-top:10px; }
+  .glossary-box { background:#F4F8FA; border-radius:10px; padding:14px 18px; margin-bottom:16px; }
+  .glossary-box h4 { margin:0 0 8px; font-size:1rem; color:#5A2E8C; }
+  .glossary-box p { margin:0 0 6px; font-size:1.05rem; line-height:1.7; color:#1C2B3A; }
+  .glossary-box b { color:#1C2B3A; }
+
+  /* answer key toggle */
+  .akey-box { display:none; background:#F3EEF7; border-left:4px solid #5A2E8C; border-radius:8px; padding:16px 20px; margin-top:16px; font-size:1.05rem; line-height:1.7; color:#1C2B3A; }
+  .akey-box.show { display:block; }
+  .akey-box li { margin-bottom:8px; }
+  .btn-akey { background:#5A2E8C; color:#fff; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+
+  /* grammar theory / form reference */
+  .gram-box { background:#F4F8FA; border-radius:12px; padding:18px 22px; margin-bottom:16px; border-left:6px solid #5A2E8C; }
+  .gram-box h3 { margin:0 0 8px; font-size:1.1rem; color:#5A2E8C; }
+  .gram-box p { font-size:1.06rem; line-height:1.7; color:#1C2B3A; margin:0 0 8px; }
+  .gram-box .hl { font-weight:800; color:#5A2E8C; }
+  .gram-box ul { margin:6px 0 0; padding-left:20px; font-size:1.05rem; line-height:1.8; color:#1C2B3A; }
+  .gram-note { background:#FDF3D6; border-left:4px solid #C9A227; border-radius:8px; padding:14px 18px; font-size:1.05rem; color:#7A5A1E; margin-top:6px; line-height:1.7; }
+  .gram-mistake { background:#FDEBEA; border-left:4px solid #C4614A; border-radius:8px; padding:14px 18px; font-size:1.05rem; color:#7A2A1E; margin-top:10px; line-height:1.7; }
+  .gram-mistake s { color:#922B21; }
+  .ex-example-centered { text-align:center; font-size:1.06rem; font-style:italic; color:#1A5030; background:#EAF6EE; border-radius:10px; padding:14px 24px; margin:0 0 22px; font-weight:600; line-height:1.7; }
+  .ex-example-centered .ex-tag { display:block; font-style:normal; font-weight:800; letter-spacing:.06em; font-size:.78rem; text-transform:uppercase; color:#2F7A52; margin-bottom:6px; }
+
+  /* CCQ box */
+  .gx-two { display:grid; grid-template-columns:3fr 2fr; gap:20px; align-items:start; }
+  .gx-board { background:#F4F8FA; border-radius:10px; padding:14px 18px; }
+  .gx-board h4, .gx-h { margin:0 0 10px; color:#5A2E8C; font-size:1.1rem; }
+  .gx-board .ex-row { margin-bottom:8px; line-height:1.6; }
+  mark.gx-if { background:#E7EAF7; color:#3B4C99; font-weight:800; padding:1px 6px; border-radius:5px; }
+  mark.gx-main { background:#FFF0D9; color:#9A5B00; font-weight:800; padding:1px 6px; border-radius:5px; }
+  .ccq-box { background:#F4F8FA; border-radius:10px; padding:14px 18px; margin:14px 0; }
+  .ccq-label { font-weight:700; color:#5A2E8C; margin-bottom:8px; font-size:1.05rem; }
+  .ccq-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .ccq-list li { font-size:1.05rem; color:#1C2B3A; line-height:1.7; }
+  .ccq-list em { color:#5A2E8C; font-weight:700; font-style:normal; }
+  .ccq-reveal-btn { background:#5A2E8C; color:#fff; border:none; border-radius:20px; padding:4px 14px; font-size:1.05rem; font-weight:700; cursor:pointer; margin-right:10px; }
+  .ccq-reveal-btn:hover { background:#7A45B5; }
+  .ccq-answer { display:none; color:#1A5030; font-weight:600; }
+  .ccq-answer.show { display:inline; }
+
+  /* speaking interview cards */
+  /* ---- Risk Bingo ---- */
+  .bingo-layout { display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start; }
+  .bingo-card { display:grid; grid-template-columns:repeat(4,72px); gap:8px; }
+  .bingo-cell { height:72px; border-radius:12px; border:2px solid #B23A6B; background:#fff; color:#B23A6B; font-family:inherit; font-size:1.6rem; font-weight:800; cursor:default; display:flex; align-items:center; justify-content:center; transition:background .25s, color .25s, transform .25s; }
+  .bingo-cell.marked { background:#B23A6B; color:#fff; transform:scale(.94); }
+  .bingo-cell.inline { box-shadow:0 0 0 4px #F2C14E; }
+  .bingo-ball { width:120px; height:120px; border-radius:50%; background:#B23A6B; color:#fff; font-size:3rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; box-shadow:0 6px 18px rgba(178,58,107,.35); }
+  .bingo-ball.empty { background:#F0E4EA; color:#B23A6B; }
+  .bingo-prompt { background:#F8F0F4; border-left:6px solid #B23A6B; border-radius:12px; padding:18px 22px; min-height:150px; }
+  .bingo-area { font-size:1.05rem; font-weight:800; color:#B23A6B; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; }
+  .bingo-q { font-size:1.15rem; line-height:1.6; color:#1C2B3A; margin:0; }
+  .bingo-status { text-align:center; font-size:1.05rem; font-weight:700; color:#1C2B3A; margin-top:14px; min-height:1.6em; }
+  .bingo-status.win { color:#B23A6B; font-size:1.25rem; }
+
+  /* image placeholder */
+  .img-placeholder { background:linear-gradient(135deg,#FBEFE0,#F5DCC0); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#8B5A1E; font-size:.95rem; font-weight:600; border:2px dashed #D9B36C; margin:8px 0; padding:24px; text-align:center; min-height:120px; }
+  .img-placeholder .ip-icon { font-size:1.8rem; margin-bottom:6px; }
+  .photo-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:16px; }
+  .photo-item { position:relative; }
+  .photo-item .img-placeholder { min-height:140px; margin:0; }
+  .photo-num { position:absolute; top:8px; left:8px; background:#1C2B3A; color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; }
+  .photo-label { margin-top:6px; }
+  .photo-label .wb-blank { display:block; width:100%; text-align:center; }
+
+  /* article */
+  .article-box { background:#FAFAF8; border-radius:12px; padding:20px 24px; margin-bottom:16px; border:1px solid #eee; }
+  .article-box h3 { font-size:1.3rem; font-weight:900; color:#1C2B3A; margin:0 0 4px; line-height:1.3; }
+  .article-box h3 .hl { background:#A83232; color:#fff; padding:2px 8px; border-radius:4px; }
+  .article-box p { font-size:1.05rem; line-height:1.75; color:#1C2B3A; margin:0 0 14px; }
+  .article-box p:last-child { margin-bottom:0; }
+
+  /* checkbox tick list */
+  .tick-list { display:flex; flex-direction:column; gap:8px; margin:10px 0 18px; }
+  .tick-item { display:flex; align-items:center; gap:12px; padding:9px 14px; border:1.5px solid #ddd; border-radius:8px; cursor:pointer; font-size:1.05rem; color:#1C2B3A; background:#fff; transition:all .15s; }
+  .tick-item:hover { border-color:#2A6B42; }
+  .tick-box { width:22px; height:22px; border:2px solid #999; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff; font-weight:800; }
+  .tick-item.picked { border-color:#2A6B42; background:#EAF6EE; }
+  .tick-item.picked .tick-box { background:#2A6B42; border-color:#2A6B42; }
+  .tick-item.correct { border-color:#1A7A4A; background:#E3F5EA; }
+  .tick-item.correct .tick-box { background:#1A7A4A; border-color:#1A7A4A; }
+  .tick-item.wrong { border-color:#C4614A; background:#FBEAE6; }
+  .tick-item.wrong .tick-box { background:#C4614A; border-color:#C4614A; }
+  .tick-item.missed { border-color:#C98A1E; background:#FDF3D6; }
+
+  /* dice */
+  .dice-box { text-align:center; background:#F4F8FA; border-radius:14px; padding:30px; }
+  .die-face { font-size:3.5rem; margin-bottom:16px; }
+  .dice-prompt { font-size:1.15rem; font-weight:700; color:#1C2B3A; margin-top:16px; min-height:30px; }
+  .book-hl { background:#D9D9D9; padding:1px 5px; border-radius:3px; }
+
+  /* review */
+  .review-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:10px 0; }
+
+  /* score scale (Listening 1a) */
+  .score-card { background:#F4F8FA; border-radius:12px; padding:18px 22px; margin-bottom:16px; }
+  .env-row { display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; padding:9px 0; border-bottom:1px solid #e2e8e2; font-size:1.05rem; color:#1C2B3A; }
+  .env-row:last-child { border-bottom:none; }
+  .env-row .env-label { min-width:0; }
+  .env-scale { display:flex; gap:6px; }
+  .scale-head { display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; padding-bottom:8px; }
+  .scale-head .scale-anchors { display:flex; gap:6px; }
+  .scale-head .scale-anchors span { width:32px; text-align:center; font-size:.7rem; line-height:1.2; color:#5A6B7A; font-style:italic; }
+  .env-pill { width:32px; height:32px; border-radius:50%; border:1.5px solid #0E7A8A; color:#0E7A8A; background:#fff; cursor:pointer; font-weight:700; font-size:.95rem; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+  .env-pill.picked { background:#0E7A8A; color:#fff; }
+
+  /* ===== NAV / NOTES / HOME ===== */
+  #notesBtn { position:fixed; top:14px; right:22px; z-index:1000; background:rgba(10,40,54,.88); color:#fff; border:none; padding:9px 20px; border-radius:22px; cursor:pointer; font-size:.92rem; font-weight:600; letter-spacing:.02em; transition:background .2s; backdrop-filter:blur(4px); }
+  #notesBtn:hover { background:rgba(10,40,54,1); }
+  #notesDragHandle { cursor: move; user-select: none; padding: 2px 8px; margin-right: 4px; opacity: .55; font-size: .95rem; border-radius: 4px; display: inline-block; }
+  #notesDragHandle:hover { opacity: 1; background: rgba(255,255,255,.15); }
+  #notesPanel.dragging { transition: none !important; }
+  #homeBtn { position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:1000; display:none; background:rgba(10,40,54,.88); color:#fff; border:none; width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:1.1rem; align-items:center; justify-content:center; transition:background .2s; backdrop-filter:blur(4px); }
+  #homeBtn:hover { background:rgba(20,96,122,.95); }
+  #notesPanel { position:fixed; top:54px; right:22px; z-index:999; width:360px; max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .25s ease; opacity:0; border-radius:14px; }
+  #notesPanel.open { max-height:320px; opacity:1; }
+  #notesPanel.cover { left:50%; right:auto; top:56px; transform:translateX(-50%); width:min(760px,94vw); max-height:calc(100vh - 110px) !important; display:flex; flex-direction:column; }
+  #notesPanel.cover #notesTA { min-height:calc(100vh - 210px) !important; max-height:calc(100vh - 210px) !important; overflow-y:auto; }
+  #notesToolbar { display:flex; gap:5px; padding:6px 10px; background:rgba(10,40,54,.7); border-radius:10px 10px 0 0; align-items:center; flex-wrap:wrap; }
+  #notesToolbar button { background:rgba(255,255,255,.12); border:none; border-radius:5px; color:#fff; font-size:.85rem; padding:3px 9px; cursor:pointer; font-family:inherit; transition:background .15s; }
+  #notesToolbar button:hover { background:rgba(255,255,255,.25); }
+  #notesTA { width:100%; min-height:220px; max-height:260px; padding:14px; border:none; border-radius:0 0 14px 14px; outline:none; font-size:1rem; line-height:1.55; background:rgba(10,40,54,.92); color:#fff; font-family:inherit; backdrop-filter:blur(6px); box-sizing:border-box; overflow-y:auto; }
+  #notesTA:empty::before { content:attr(data-placeholder); color:rgba(255,255,255,.4); pointer-events:none; }
+  #notesTA [style*="background-color"] { color:#1a1a1a !important; }
+  #nav { position:fixed; bottom:0; left:0; right:0; height:52px; background:rgba(10,40,54,.96); z-index:500; display:flex; align-items:center; justify-content:center; gap:14px; }
+  #nav button { background:rgba(255,255,255,.12); color:#fff; border:none; border-radius:7px; padding:7px 16px; font-size:.95rem; cursor:pointer; font-family:inherit; }
+  #nav button:disabled { opacity:.35; cursor:default; }
+  #dots { display:flex; gap:5px; flex-wrap:wrap; max-width:360px; justify-content:center; }
+  .dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.3); cursor:pointer; }
+  .dot.active { background:#FF6B35; }
+  #counter { color:#fff; font-size:.9rem; min-width:54px; text-align:center; }
+
+  /* print */
+  .slide-notes-print { display:none; }
+  .lesson-link-print { display:none; }
+  @media print {
+    @page { margin:1.2cm; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    html, body { height:auto !important; overflow:visible !important; background:#fff !important; display:block !important; }
+    #deck { overflow:visible !important; height:auto !important; display:block !important; position:static !important; }
+    #notesBtn, #notesPanel, #nav, #homeBtn { display:none !important; }
+    body.print-all .slide { display:flex !important; flex-direction:column !important; position:relative !important; inset:auto !important; opacity:1 !important; padding:16px 24px !important; page-break-after:always; break-after:page; min-height:0 !important; height:auto !important; }
+    .slide * { flex:none !important; height:auto !important; min-height:0 !important; max-height:none !important; }
+    .slide-main, .content { overflow:visible !important; }
+    img, video { max-height:240px !important; width:auto !important; max-width:100% !important; object-fit:contain !important; }
+    body.print-all .slide::before { content:"Business English · Unit 2 · Getting to know colleagues"; display:block !important; font-size:10px; color:#999; font-family:'Segoe UI', Arial, sans-serif; padding-bottom:5px; border-bottom:1px solid #ddd; margin-bottom:8px; }
+    body.print-all #s1::before { display:none !important; }
+    .lesson-link-print { display:block !important; padding:28px 32px; margin-bottom:20px; background:linear-gradient(135deg, #180B08 0%, #3D1810 30%, #6B2318 55%, #8B3A1E 75%, #C44D1E 100%); border-radius:12px; text-align:center; font-family:'Segoe UI', Arial, sans-serif; }
+    .lesson-link-print .lp-title { display:block; font-size:30px; font-weight:900; color:#fff; margin-bottom:10px; letter-spacing:.01em; line-height:1.2; }
+    .lesson-link-print .lp-sub { display:block; font-size:20px; color:rgba(255,255,255,.88); font-weight:500; }
+    .lesson-link-print a { color:#FF6B35; font-weight:800; text-decoration:underline; font-size:20px; }
+    .slide-notes-print { display:block !important; margin-top:12px; padding:10px 14px; border-top:2px solid #0E5A8A; background:#E3F2FD; border-radius:6px; font-size:12px; line-height:1.6; color:#1A1A2E; }
+    .slide-notes-print-label { font-size:10px; font-weight:800; color:#0E5A8A; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; display:block; }
+    .card-body, .card-body * { color:#1a1a1a !important; }
+  }
+
+
+
+  /* =====================================================================
+     BUSINESS-EFE2 · UNIT 1 "Introductions" — design layer
+     Theme: the conference lobby (delegate badges, session tags, lanyards).
+     Adult / professional: ink navy, deep teal, brass, warm paper. Serif headlines.
+     ===================================================================== */
+  :root {
+    --ink:#0F2438; --ink2:#1B3A57; --teal:#0F766E; --teal-l:#E2F0EE; --brass:#B8892B; --brass-l:#F6EBD0;
+    --paper:#FBF9F4; --line:#D8D2C4; --text:#1B2733; --muted:#586573;
+    --ok:#1E7A4D; --ok-l:#E3F4EA; --bad:#B4432F; --bad-l:#FBE9E5; --warn:#A8700F; --warn-l:#FFF1D6;
+    --plum:#5B3A7A; --olive:#4C6B2F; --blue:#1F5F8B; --clay:#A4472F;
+  }
+  body { font-family:'DM Sans','Segoe UI',system-ui,sans-serif; background:var(--ink); color:var(--text); }
+  .slide { background:var(--paper); }
+  .slide-main { padding-bottom:72px; }
+  .content { zoom:1.25; }
+
+  /* ---------- progress ---------- */
+  #progBar { position:fixed; top:0; left:0; height:4px; width:0; z-index:1200; transition:width .45s ease; pointer-events:none;
+    background:linear-gradient(90deg,var(--brass),#E3C477); }
+
+  /* ---------- covers ---------- */
+  #s1, #hw-cover { background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(15,118,110,.55), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(184,137,43,.28), transparent 60%),
+      linear-gradient(160deg,#0B1B2B 0%, #11304B 100%); }
+  .title-inner { z-index:3; }
+  .title-label { font-weight:500; letter-spacing:.34em; color:#E3C477; font-size:1.05rem; }
+  .title-sub { font-weight:400; color:rgba(255,255,255,.85); font-size:1.2rem; }
+  .title-main { font-family:'DM Serif Display',Georgia,serif; font-weight:400; color:#fff; font-size:clamp(3.2rem,7vw,6rem); line-height:1.05; letter-spacing:.005em; max-width:1100px; }
+  .title-accent { color:#E3C477; text-shadow:none; }
+  #s1 .title-inner::before { content:""; display:block; width:84px; height:3px; background:var(--brass); margin:0 auto 22px; border-radius:3px; }
+  .hw-badge { background:transparent; color:#E3C477; border:1px solid #E3C477; border-radius:999px; letter-spacing:.3em; font-weight:500; padding:8px 26px; }
+  #s1 button[onclick^="goToId"] { background:transparent !important; color:#fff !important; border:1px solid #E3C477 !important; font-weight:500 !important; border-radius:999px !important; letter-spacing:.06em; padding:11px 26px !important; transition:background .2s; }
+  #s1 button[onclick^="goToId"]:hover { background:rgba(227,196,119,.18) !important; }
+  #s1::after, #hw-cover::after { display:none; }
+
+  /* floating speech cards + lanyard badge on the cover */
+  .cv-card { position:absolute; z-index:1; padding:14px 22px; border-radius:6px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.22); color:rgba(255,255,255,.88); font-family:'DM Serif Display',Georgia,serif; font-style:italic; font-size:clamp(1.05rem,1.9vw,1.55rem); animation:cvFloat 7s ease-in-out infinite; pointer-events:none; backdrop-filter:blur(2px); }
+  .cv-card.a { top:11%; left:6%; } .cv-card.b { top:16%; right:7%; animation-delay:-2s; } .cv-card.c { bottom:24%; left:8%; animation-delay:-4s; } .cv-card.d { bottom:28%; right:9%; animation-delay:-1s; }
+  @keyframes cvFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+
+  /* ---------- banners (session tags) ---------- */
+  .banner { position:relative; display:flex; align-items:center; gap:14px; padding:13px 48px; font-size:.82rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    background:#fff; color:var(--tag,var(--ink)); border-bottom:1px solid var(--line); margin-bottom:20px; }
+  .banner::before { content:""; position:absolute; left:0; top:0; bottom:0; width:12px; background:var(--tag,var(--ink)); }
+  .banner-bridge { --tag:var(--brass); } .banner-leadin { --tag:var(--brass); } .banner-vocab { --tag:var(--teal); }
+  .banner-speaking { --tag:var(--clay); } .banner-grammar { --tag:var(--plum); } .banner-pron { --tag:#8A5A12; }
+  .banner-listening { --tag:var(--blue); } .banner-reading { --tag:var(--olive); } .banner-review { --tag:var(--ink); } .banner-hw { --tag:var(--ink); }
+
+  /* ---------- typography ---------- */
+  h2 { font-family:'DM Serif Display',Georgia,serif; font-weight:400; color:var(--ink); font-size:2.35rem; line-height:1.15; margin:0 0 14px; }
+  h2::after { content:""; display:block; width:64px; height:3px; margin-top:10px; background:var(--brass); border-radius:3px; }
+  .instruction { color:var(--ink); border-left:4px solid var(--brass); padding-left:16px; font-weight:600; }
+  .inst-light { color:var(--text); }
+  .discuss-label, .ex-row, .discuss-list { color:var(--text); }
+  .section-subhead { color:var(--teal); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.45rem; }
+
+  /* ---------- cards & boxes ---------- */
+  .card, .gram-box, .glossary-box, .ccq-box, .discuss-box, .match-wrap, .article-box, .dice-box, .qa-table-wrap {
+    background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 2px 10px rgba(15,36,56,.06); }
+  .gram-box { border-left:6px solid var(--plum); padding:18px 24px; margin-bottom:18px; }
+  .gram-box h3, .glossary-box h4 { color:var(--plum); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.35rem; margin:0 0 8px; }
+  .gram-box .hl { color:var(--ink); background:var(--brass-l); padding:0 6px; border-radius:4px; font-weight:700; }
+  .gram-note { background:var(--brass-l); border:1px solid #E5CF98; border-left:6px solid var(--brass); color:#3D2F0A; border-radius:10px; padding:14px 20px; margin:14px 0; }
+  .gram-mistake { background:var(--bad-l); border:1px solid #EBC0B6; border-left:6px solid var(--bad); color:#5A1D12; border-radius:10px; padding:14px 20px; margin:14px 0; }
+  .ex-example-centered { background:var(--ok-l); color:#14573A; border:1px dashed var(--ok); border-radius:12px; }
+  .discuss-box { border-left:6px solid var(--teal); padding:16px 22px 6px; margin-top:18px; }
+  .suggest-box { background:var(--teal-l); border:1px solid #BCD9D5; border-left:6px solid var(--teal); border-radius:10px; }
+  .akey-box { background:var(--brass-l); border:1px solid #E5CF98; border-left:6px solid var(--brass); border-radius:10px; }
+  .book-placeholder, .img-placeholder { background:repeating-linear-gradient(135deg,#F4F1E8 0 16px,#EEEADD 16px 32px); border:2px dashed #BDB59D; color:var(--muted); border-radius:12px; font-size:1.02rem; font-weight:500; }
+  .img-placeholder .ip-icon { font-size:2rem; }
+  .ccq-box { background:var(--teal-l); border-color:#BCD9D5; box-shadow:none; padding:14px 22px; margin:16px 0; }
+  .ccq-label { color:var(--teal); font-weight:700; letter-spacing:.02em; margin:0 0 6px; }
+  .ccq-list { margin:0; padding-left:22px; } .ccq-list li { color:var(--text); margin-bottom:8px; line-height:1.6; }
+  .ccq-reveal-btn { background:var(--ink); color:#fff; font-weight:500; font-size:.95rem; border-radius:999px; padding:3px 14px; border:0; cursor:pointer; font-family:inherit; margin-left:6px; }
+  .ccq-reveal-btn:hover { background:var(--teal); }
+  .ccq-answer { display:none; color:#14573A; font-weight:500; background:var(--ok-l); border-radius:8px; padding:2px 10px; margin-left:8px; }
+  .ccq-answer.show { display:inline-block; }
+  .ccq-list em { color:var(--plum); }
+
+  /* ---------- answer fields ---------- */
+  .ans-input { border:0; border-bottom:2px solid var(--ink2); background:rgba(184,137,43,.12); border-radius:4px 4px 0 0; color:var(--ink); text-align:left; font-weight:600; }
+  .ans-input:focus { outline:none; border-bottom-color:var(--teal); background:rgba(15,118,110,.10); }
+  .ans-input.correct { color:var(--ok); border-bottom-color:var(--ok); background:var(--ok-l); }
+  .ans-input.wrong { color:var(--bad); border-bottom-color:var(--bad); background:var(--bad-l); }
+  .ans-input.empty-warn { color:var(--warn); border-bottom-color:#D9A441; background:var(--warn-l); }
+
+  /* ---------- buttons ---------- */
+  .btn-check, .btn-reset, .btn-suggest, .btn-akey, .btn-deal { border-radius:999px; font-size:1rem; font-weight:700; cursor:pointer; font-family:inherit; padding:11px 30px; transition:transform .12s, box-shadow .12s, background .15s; border:1px solid var(--ink); }
+  .btn-check { background:var(--ink); color:#fff; font-weight:500; letter-spacing:.03em; }
+  .btn-check:hover { background:var(--teal); border-color:var(--teal); }
+  .btn-reset { background:#fff; color:var(--ink); }
+  .btn-reset:hover { background:var(--brass-l); }
+  .btn-suggest { background:var(--teal-l); color:var(--teal); border-color:var(--teal); }
+  .btn-akey { background:var(--brass-l); color:#5C4210; border-color:var(--brass); }
+  .btn-deal { background:var(--teal); color:#fff; border-color:var(--teal); font-weight:500; letter-spacing:.04em; padding:13px 34px; font-size:1.1rem; }
+  .btn-deal:hover { background:var(--ink); border-color:var(--ink); transform:translateY(-1px); }
+  .btn-row { gap:14px; margin-top:26px; }
+
+  /* ---------- choices, tiles, ticks ---------- */
+  .circ-num { background:var(--ink); color:#fff; font-weight:600; border-radius:50%; width:26px; height:26px; }
+  .example-badge { background:var(--ok); color:#fff; font-weight:600; border-radius:50%; width:26px; height:26px; }
+  .circ-opt { border:1.5px solid var(--line); border-radius:999px; background:#fff; color:var(--ink); padding:3px 14px; transition:background .12s, transform .12s, border-color .12s; white-space:nowrap; }
+  .circ-opt:hover { background:var(--brass-l); border-color:var(--brass); }
+  .circ-opt.picked { background:var(--ink); border-color:var(--ink); color:#fff; font-weight:500; }
+  .circ-opt.correct { border-color:var(--ok); background:var(--ok-l); color:var(--ok); font-weight:700; }
+  .circ-opt.wrong { border-color:var(--bad); background:var(--bad-l); color:var(--bad); font-weight:700; }
+  .circ-opt.is-example { border-color:var(--ok); background:var(--ok-l); color:var(--ok); font-weight:700; cursor:default; }
+  .circ-opt.struck { text-decoration:line-through; color:var(--muted); border-style:dashed; }
+  .circ-sep { color:var(--muted); font-weight:500; margin:0 2px; }
+  .classify-chip, .wb-tile { border:1.5px solid var(--ink2); color:var(--ink); background:#fff; font-weight:600; border-radius:999px; transition:background .12s, transform .12s; }
+  .classify-chip:hover, .wb-tile:hover { background:var(--brass-l); transform:translateY(-1px); }
+  .classify-chip.selected, .wb-tile.selected { background:var(--ink); color:#fff; font-weight:500; }
+  .classify-col { border:1.5px solid var(--line); border-radius:14px; background:#fff; padding:16px 18px; }
+  .classify-col h4 { color:var(--ink); font-family:'DM Sans',sans-serif; font-weight:600; font-size:1.05rem; line-height:1.5; }
+  .classify-col .placed { background:var(--brass-l); border:1px solid var(--brass); color:var(--ink); font-weight:600; }
+  .classify-col .placed.correct { background:var(--ok-l); color:var(--ok); border-color:var(--ok); }
+  .classify-col .placed.wrong { background:var(--bad-l); color:var(--bad); border-color:var(--bad); }
+  .wb-bank { gap:10px; }
+  .wb-bank.book-style { border-top:3px double var(--ink2); border-bottom:1px solid var(--line); padding:14px 6px; background:#fff; border-radius:6px; }
+  .wb-tile.example-used { opacity:.55; border-style:dashed; text-decoration:line-through; cursor:default; }
+  .wb-tile.used { opacity:.35; border-style:dashed; }
+  .wb-blank { border-bottom:2px solid var(--ink2); color:var(--ink); font-weight:600; min-width:120px; background:rgba(184,137,43,.12); border-radius:4px 4px 0 0; }
+  .wb-blank.correct { color:var(--ok); border-color:var(--ok); background:var(--ok-l); }
+  .wb-blank.wrong { color:var(--bad); border-color:var(--bad); background:var(--bad-l); }
+  .wb-blank.is-example { color:var(--ok); border-color:var(--ok); background:var(--ok-l); cursor:default; font-weight:700; }
+  .match-wrap { background:#fff; padding:20px 22px; gap:36px; }
+  .match-col-head.mc-left, .match-col-head.mc-right { color:var(--ink); border-bottom:2px solid var(--brass); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.2rem; }
+  .match-item { background:var(--paper); border:1.5px solid var(--line); border-radius:10px; color:var(--text); }
+  .match-item.example-pair { background:var(--ok-l) !important; border-color:var(--ok) !important; }
+  .match-item.c0 { border-color:#0F766E; background:#E2F0EE; box-shadow:none; } .match-item.c1 { border-color:#B8892B; background:#F6EBD0; box-shadow:none; }
+  .match-item.c2 { border-color:#1F5F8B; background:#E1EDF6; box-shadow:none; } .match-item.c3 { border-color:#5B3A7A; background:#EDE5F4; box-shadow:none; }
+  .match-item.c4 { border-color:#A4472F; background:#F8E7E1; box-shadow:none; } .match-item.c5 { border-color:#4C6B2F; background:#E8F0DE; box-shadow:none; }
+  .match-item.c6 { border-color:#6B6B6B; background:#EEEEEE; box-shadow:none; } .match-item.c7 { border-color:#0F2438; background:#E3E9EF; box-shadow:none; }
+  .match-item.picking { border-color:var(--ink); border-style:dashed; }
+  .match-item.correctpair { outline:3px solid var(--ok); background:var(--ok-l) !important; color:var(--ok); }
+  .match-item.wrongpair { outline:3px solid var(--bad); background:var(--bad-l) !important; color:var(--bad); }
+  .tick-item { border:1.5px solid var(--line); border-radius:12px; } .tick-item.picked { border-color:var(--teal); background:var(--teal-l); }
+  .tick-item.picked .tick-box { background:var(--teal); border-color:var(--teal); }
+  .audio-box { background:#fff; border:1px solid var(--line); border-radius:999px; box-shadow:0 2px 8px rgba(15,36,56,.06); margin-top:24px; }
+  .audio-box.pending { background:repeating-linear-gradient(135deg,#F4F1E8 0 14px,#EEEADD 14px 28px); border:2px dashed #BDB59D; box-shadow:none; }
+  .audio-box.top { margin-top:0; }
+  .article-box { background:#fff; padding:22px 28px; }
+  .article-box h3 { font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.9rem; color:var(--ink); margin:2px 0 4px; }
+  .article-box .kicker { display:inline-block; font-size:.72rem; letter-spacing:.2em; font-weight:700; color:#fff; background:var(--olive); padding:4px 12px; margin-bottom:10px; text-transform:uppercase; }
+  .article-box .deck { font-weight:700; color:var(--ink); margin:0 0 12px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+  .article-box p { color:var(--text); }
+
+  /* ---------- delegate badge (lead-in builder + review) ---------- */
+  .lead-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,380px); gap:34px; align-items:start; }
+  .bd-form label { display:block; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:14px 0 4px; }
+  .bd-form input { width:100%; font-family:inherit; font-size:1.1rem; color:var(--ink); border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; }
+  .bd-form input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(15,118,110,.15); }
+  .badge { position:relative; width:100%; max-width:360px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 14px 30px rgba(15,36,56,.18); overflow:hidden; text-align:center; transform:rotate(-1.5deg); }
+  .badge::before { content:""; display:block; width:74px; height:12px; background:var(--ink); border-radius:8px; margin:14px auto 12px; box-shadow:inset 0 2px 4px rgba(0,0,0,.5); }
+  .bd-event { background:var(--ink); color:#E3C477; letter-spacing:.24em; font-size:.74rem; padding:9px 12px; font-weight:500; }
+  .bd-hello { font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:var(--teal); margin-top:16px; font-style:italic; }
+  .bd-name { font-family:'DM Serif Display',Georgia,serif; font-size:2.6rem; color:var(--ink); line-height:1.1; padding:4px 14px; min-height:3rem; word-break:break-word; }
+  .bd-role { font-size:1.15rem; color:var(--ink); font-weight:600; padding:0 14px; min-height:1.6rem; }
+  .bd-company { font-size:1rem; color:var(--muted); padding:0 14px 6px; min-height:1.4rem; }
+  .bd-ask { margin:12px 16px 0; padding:10px 12px; border-top:1px dashed var(--line); font-size:.95rem; color:var(--text); min-height:3.2rem; }
+  .bd-ask b { color:var(--brass); letter-spacing:.12em; font-size:.72rem; text-transform:uppercase; display:block; }
+  .bd-foot { margin-top:12px; background:var(--teal); color:#fff; font-size:.78rem; letter-spacing:.3em; padding:7px; font-weight:500; }
+
+  /* ---------- scene cards (introducing people) ---------- */
+  .scene { background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .scene .sc-figs { text-align:center; }
+  .scene .sc-figs svg { width:150px; height:90px; }
+  .scene .say { background:var(--paper); border:1px solid var(--line); border-left:5px solid var(--teal); border-radius:8px; padding:9px 12px; font-size:1.02rem; line-height:1.5; color:var(--ink); }
+  .scene .say.b { border-left-color:var(--brass); margin-left:22px; }
+  .scene .say .who { display:block; font-size:.7rem; letter-spacing:.14em; font-weight:700; color:var(--muted); text-transform:uppercase; }
+  .scene .sc-drop { min-height:46px; border:2px dashed var(--line); border-radius:10px; padding:6px; cursor:pointer; text-align:center; color:var(--muted); font-size:.95rem; }
+  .scene .sc-drop:hover { border-color:var(--teal); background:var(--teal-l); }
+  .scene .sc-drop .placed { display:inline-block; border-radius:999px; padding:4px 12px; font-weight:600; background:var(--brass-l); border:1px solid var(--brass); color:var(--ink); }
+  .scene .sc-drop .placed.correct { background:var(--ok-l); color:var(--ok); border-color:var(--ok); }
+  .scene .sc-drop .placed.wrong { background:var(--bad-l); color:var(--bad); border-color:var(--bad); }
+  .three-up { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+  .two-up { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  .reveal-card { display:block; width:100%; text-align:left; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:16px 20px; cursor:pointer; font-family:inherit; font-size:1.05rem; color:var(--text); transition:border-color .15s, box-shadow .15s; }
+  .reveal-card:hover { border-color:var(--brass); box-shadow:0 4px 14px rgba(15,36,56,.1); }
+  .reveal-card .rc-q { display:block; font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:var(--ink); line-height:1.4; }
+  .reveal-card .rc-hint { display:block; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); font-weight:700; margin-top:6px; }
+  .reveal-card .rc-a { display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-size:1.02rem; line-height:1.6; }
+  .reveal-card.open { border-color:var(--teal); background:var(--teal-l); }
+  .reveal-card.open .rc-a { display:block; } .reveal-card.open .rc-hint { display:none; }
+
+  /* ---------- grammar visuals ---------- */
+  .tl-wrap { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:14px 0; }
+  .tl { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 20px; }
+  .tl h4 { margin:0 0 4px; font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.3rem; color:var(--ink); }
+  .tl .tl-sub { color:var(--muted); font-size:.95rem; margin-bottom:10px; }
+  .tl svg { width:100%; height:100px; display:block; }
+  .tl .tl-ex { margin-top:8px; font-size:1.08rem; color:var(--ink); }
+  .tl .tl-ex .hl { background:var(--brass-l); padding:0 6px; border-radius:4px; font-weight:700; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .form-card { background:#fff; border:1px solid var(--line); border-top:5px solid var(--plum); border-radius:12px; padding:16px 20px; }
+  .form-card.cont { border-top-color:var(--teal); }
+  .form-card h4 { font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.3rem; margin:0 0 8px; color:var(--ink); }
+  .form-row { display:grid; grid-template-columns:110px 1fr; gap:10px; padding:7px 0; border-top:1px solid #EEE9DC; font-size:1.02rem; line-height:1.5; }
+  .form-row:first-of-type { border-top:0; }
+  .form-row .fr-k { color:var(--muted); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; padding-top:4px; }
+  .form-row .fr-v b { color:var(--plum); } .form-card.cont .fr-v b { color:var(--teal); }
+  .state-box { margin-top:18px; background:#fff; border:1px solid var(--line); border-left:6px solid var(--brass); border-radius:12px; padding:16px 22px; }
+  .state-box h4 { margin:0 0 8px; font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.3rem; color:var(--ink); }
+  .chip-row { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+  .chip { display:inline-block; padding:4px 14px; border-radius:999px; background:var(--brass-l); border:1px solid var(--brass); color:var(--ink); font-weight:600; font-size:1rem; }
+  .stress-line { display:flex; align-items:center; justify-content:space-between; gap:14px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 18px; margin-bottom:10px; font-size:1.25rem; color:var(--ink); }
+  .stress-line .st { font-weight:800; color:var(--teal); background:var(--teal-l); padding:0 5px; border-radius:4px; }
+  .say-btn { font-family:inherit; font-size:.95rem; border:1.5px solid var(--ink2); background:#fff; color:var(--ink); border-radius:999px; padding:5px 16px; cursor:pointer; white-space:nowrap; }
+  .say-btn.done { background:var(--ok-l); border-color:var(--ok); color:var(--ok); font-weight:700; }
+  .say-btn.done::before { content:"✓ "; }
+
+  /* ---------- exercise row bits ---------- */
+  .ex-row.ex-given { background:none; border:0; padding:0; }
+  .hl-ok { color:var(--ok); font-weight:700; background:var(--ok-l); padding:1px 8px; border-radius:6px; }
+  .hl-no { color:var(--muted); text-decoration:line-through; }
+  .ex-row .ans-line { display:block; margin:4px 0 0 34px; color:var(--ok); font-weight:700; background:var(--ok-l); border-radius:6px; padding:2px 10px; }
+  .ex-row .cue { font-size:1.5rem; margin-right:6px; vertical-align:middle; }
+  .fixed-two-col .ex-row { margin-bottom:14px; }
+
+  /* ---------- freer practice: delegate cards ---------- */
+  .deal-wrap { display:grid; grid-template-columns:minmax(0,1fr); gap:20px; justify-items:center; }
+  .deal-card { width:min(760px,100%); min-height:250px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 34px rgba(15,36,56,.14); overflow:hidden; text-align:left; }
+  .deal-card .dc-head { background:var(--ink); color:#E3C477; font-size:.78rem; letter-spacing:.24em; padding:10px 22px; text-transform:uppercase; }
+  .deal-card .dc-body { padding:20px 28px 24px; }
+  .deal-card .dc-setting { font-family:'DM Serif Display',Georgia,serif; font-size:1.7rem; color:var(--ink); margin:0 0 8px; }
+  .deal-card .dc-line { font-size:1.15rem; line-height:1.6; margin:6px 0; color:var(--text); }
+  .deal-card .dc-goal { margin-top:14px; padding:10px 16px; background:var(--teal-l); border-left:5px solid var(--teal); border-radius:8px; font-size:1.1rem; color:var(--ink); }
+  .deal-card .dc-goal b { color:var(--teal); letter-spacing:.14em; font-size:.74rem; text-transform:uppercase; display:block; }
+  .deal-card.flip { animation:dealIn .45s ease; }
+  @keyframes dealIn { from { opacity:0; transform:translateY(18px) rotate(-1deg); } to { opacity:1; transform:none; } }
+  .deal-count { color:var(--muted); font-size:.95rem; letter-spacing:.06em; }
+
+  /* ---------- review checklist ---------- */
+  .check-list { display:grid; grid-template-columns:1fr; gap:12px; margin:16px 0; }
+  .check-item { display:flex; align-items:center; gap:16px; padding:16px 22px; background:#fff; border:1.5px solid var(--line); border-radius:14px; cursor:pointer; font-size:1.2rem; color:var(--ink); transition:border-color .15s, background .15s; text-align:left; font-family:inherit; }
+  .check-item:hover { border-color:var(--brass); }
+  .check-item .ck { width:30px; height:30px; border:2px solid var(--ink2); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; color:#fff; flex:none; }
+  .check-item.on { border-color:var(--teal); background:var(--teal-l); }
+  .check-item.on .ck { background:var(--teal); border-color:var(--teal); }
+  .check-item.on .ck::after { content:"✓"; }
+  .check-item .ck-ic { margin-left:auto; font-size:1.5rem; }
+  .win-banner { display:none; margin-top:14px; padding:14px 22px; border-radius:12px; background:var(--ok-l); border:1px solid var(--ok); color:var(--ok); font-weight:700; font-size:1.1rem; text-align:center; }
+  .win-banner.show { display:block; }
+
+
+  /* ---------- grammar sentence board ---------- */
+  .big-sent { font-family:'DM Serif Display',Georgia,serif; font-size:1.9rem; line-height:1.4; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 24px; margin:14px 0 8px; text-align:center; }
+  .big-sent .ps { color:var(--plum); border-bottom:3px solid var(--plum); }
+  .big-sent .pc { color:var(--teal); border-bottom:3px solid var(--teal); }
+  .anno-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:6px; }
+  .anno { font-size:.98rem; padding:8px 14px; border-radius:10px; line-height:1.5; }
+  .anno.ps { background:#EDE5F4; color:#3A2350; } .anno.pc { background:var(--teal-l); color:#0B4F4A; }
+  .st.sy { padding:0 1px; border-radius:3px; }
+  .match-wrap.compact { padding:14px 18px; gap:30px; }
+  .match-wrap.compact .match-item { padding:7px 12px; margin-bottom:7px; font-size:1rem; }
+  .match-wrap.compact .match-col-head { margin-bottom:8px; padding-bottom:4px; font-size:1.1rem; }
+  .match-wrap.compact .circ-num, .match-wrap.compact .example-badge { width:22px; height:22px; font-size:.8rem; }
+  .three-up { align-items:stretch; }
+  .scene { gap:8px; padding:12px 16px; }
+  .scene .sc-figs svg { width:100px; height:60px; }
+  .scene .say { padding:7px 12px; }
+  .scene .sc-drop { margin-top:auto; min-height:40px; }
+  .ph-small .img-placeholder { padding:10px; margin:0 0 14px; }
+  .ph-small .img-placeholder .ip-icon { font-size:1.6rem; }
+
+  /* ---------- print ---------- */
+  @media print {
+    .content { zoom:1; }
+  }
+
+  .bd-tip { grid-column:1 / -1; margin-top:6px; padding:10px 14px; background:#F6EBD0; border-left:4px solid var(--brass); border-radius:8px; font-size:.88rem; line-height:1.5; color:var(--text); }
+  .bd-tip b { color:#7A5A12; }
+  .bd-form input::placeholder { color:#9AA3AD; font-style:italic; }
+  .audio-box.pending { display:none; }
+  /* ---- audio clip players ---- */
+  .clips-box { flex-wrap:wrap; gap:8px; border-radius:18px; }
+  .clips-label { font-weight:700; color:var(--ink2); margin-right:4px; }
+  .clip { font-family:inherit; font-size:.95rem; font-weight:700; border:1.5px solid var(--teal); background:#fff; color:var(--teal); border-radius:999px; padding:6px 16px; cursor:pointer; }
+  .clip:hover { background:rgba(15,118,110,.08); }
+  .clip.playing { background:var(--teal); color:#fff; }
+  .clip.word { padding:2px 10px; font-size:.9rem; border-width:1.2px; }
+  /* ---- block options (mark the correct sentence) ---- */
+  .circ-opt.block { display:block; white-space:normal; text-align:left; border-radius:12px; margin:5px 0; padding:6px 14px; }
+  .pick-wrap { display:inline-block; vertical-align:top; width:calc(100% - 40px); }
+  .cue-verb { color:var(--brass); font-weight:700; }
+  /* ---- form puzzle ---- */
+  .pz-row { display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 14px; }
+  .pz { flex:1 1 150px; border:2px solid var(--line); border-radius:14px; background:#fff; padding:10px 14px; text-align:center; }
+  .pz-k { display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:4px; }
+  .pz-v { font-family:'DM Serif Display',Georgia,serif; font-size:1.5rem; color:var(--ink); }
+  .pz.a { border-color:var(--teal); background:var(--teal-l); } .pz.a .pz-v { color:var(--teal); }
+  .pz.b { border-color:#5B3A7A; background:#F1EAF6; } .pz.b .pz-v { color:#5B3A7A; }
+  .pz.c { border-color:var(--brass); background:var(--brass-l); } .pz.c .pz-v { color:#8A6513; }
+  .profile-card { background:#fff; border:1px solid var(--line); border-top:6px solid var(--teal); border-radius:14px; padding:18px 22px; box-shadow:0 8px 24px rgba(15,36,56,.10); }
+  .profile-card .pc-h { letter-spacing:.2em; font-size:.72rem; text-transform:uppercase; color:var(--brass); font-weight:700; margin-bottom:8px; }
+  .profile-card .pc-row { display:flex; gap:12px; padding:8px 0; border-top:1px dashed var(--line); }
+  .profile-card .pc-k { flex:0 0 150px; color:var(--muted); font-size:.85rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding-top:3px; }
+  .profile-card .pc-v { font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:var(--ink); min-height:1.6rem; }
+  /* ---- vocabulary cards ---- */
+  .vgrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:6px 0 10px; }
+  .vgrid.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .vcard { background:#fff; border:1px solid var(--line); border-top:5px solid var(--teal); border-radius:14px; padding:12px 16px 12px; display:flex; flex-direction:column; gap:4px; box-shadow:0 2px 8px rgba(15,36,56,.05); }
+  .vcard:nth-child(3n+2) { border-top-color:var(--brass); } .vcard:nth-child(3n) { border-top-color:#5B3A7A; }
+  .vcard .vc-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .vcard .vc-ic { font-size:1.6rem; line-height:1; }
+  .vcard .vc-name { font-family:'DM Serif Display',Georgia,serif; font-size:1.3rem; color:var(--ink); line-height:1.15; }
+  .vcard .vc-def { color:var(--muted); font-size:.95rem; line-height:1.4; }
+  .vcard .vc-ex { font-size:1rem; color:var(--text); }
+  .vcard .vc-ex b { color:var(--teal); }
+  .pic-ph { border:2px dashed #BDB59D; border-radius:10px; background:repeating-linear-gradient(135deg,#F4F1E8 0 12px,#EEEADD 12px 24px); color:#6B6350; font-size:.88rem; padding:8px 10px; display:flex; gap:8px; align-items:center; }
+  .scr { display:inline-flex; flex-wrap:wrap; gap:6px; vertical-align:middle; }
+  .scr-w { border:1.5px solid var(--ink2); background:#fff; border-radius:8px; padding:0 8px; font-size:.9rem; color:var(--ink); font-weight:600; }
+  .ex-row .scr { width:calc(100% - 44px); }
+  .ex-row .ans-input.ord { display:block; width:calc(100% - 44px); margin:6px 0 0 40px; box-sizing:border-box; }
+  .vgrid.two.tight { gap:10px; } .vgrid.two.tight .vcard { padding:8px 14px; gap:2px; } .vgrid.two.tight .vc-name { font-size:1.15rem; } .vgrid.two.tight .vc-def { font-size:.88rem; } .vgrid.two.tight .vc-ex { font-size:.92rem; }
+  .vgrid.two.tight .vc-top { justify-content:space-between; } .vgrid.two.tight .vc-ic { font-size:1.3rem; }
+
+
+</style>
+</head>
+<body>
+<div id="progBar"></div>
+<button id="homeBtn" onclick="goTo(0)">🏠</button>
+<button id="notesBtn" onclick="toggleNotes()">📝 Notes</button>
+<div id="notesPanel">
+  <div id="notesToolbar"><span id="notesDragHandle" title="Drag to move">⠷⠷</span>
+    <button onclick="notesFormat('bold')" title="Bold"><b>B</b></button>
+    <button onclick="notesFormat('underline')" title="Underline"><u>U</u></button>
+    <span style="display:flex;gap:3px;align-items:center;margin-left:6px;padding-left:6px;border-left:1px solid rgba(255,255,255,.2)">
+      <button onclick="notesHilite('#FFE600')" title="Yellow" style="background:#FFE600;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('#90EE90')" title="Green"  style="background:#90EE90;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('#FFB3C6')" title="Pink"   style="background:#FFB3C6;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('#ADD8E6')" title="Blue"   style="background:#ADD8E6;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('remove')" title="Remove highlight" style="font-size:.78rem;padding:2px 7px;color:#ff9999;margin-left:2px;background:rgba(255,255,255,.1);border:none;border-radius:4px;cursor:pointer;">✕</button>
+    </span>
+  </div>
+  <div id="notesTA" contenteditable="true" data-placeholder="Your notes for this slide…" spellcheck="false" oninput="saveNotes()"></div>
+</div>
+
+<div id="deck">
+
+<div class="slide active" id="s1">
+  <div class="cv-card a" aria-hidden="true">What did you do before you came here?</div><div class="cv-card b" aria-hidden="true">I was working 60 hours a week.</div><div class="cv-card c" aria-hidden="true">Have you worked in a team before?</div><div class="cv-card d" aria-hidden="true">Did you want a tour of the office?</div>
+  <div class="title-inner">
+    <div class="title-label">Conversational English</div>
+    <div class="title-sub">with teacher Nanda</div>
+    <div class="title-main">Getting to know colleagues</div>
+    <a href="../index.html" title="All units" style="position:absolute;bottom:70px;left:32px;font-size:1.7rem;line-height:1;text-decoration:none;z-index:5;">🏠</a>
+    <div style="position:absolute;bottom:70px;right:32px;z-index:5;">
+      <button onclick="goToId('hw-cover')" style="cursor:pointer;font-family:inherit;font-size:.95rem;">📝 Homework</button>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s-lead">
+  <div class="banner banner-leadin">🎯 Warm-Up</div>
+  <div class="slide-main"><div class="content">
+    <h2>Your career snapshot</h2>
+    <p class="instruction">A new colleague asks about your work history. Fill in your career snapshot, then tell me the story.</p>
+    
+    <div class="lead-grid">
+      <div class="bd-form">
+        <label for="cs-1">Your first job</label><input id="cs-1" data-live="first" maxlength="44" autocomplete="off">
+        <label for="cs-2">The job before this one</label><input id="cs-2" data-live="last" maxlength="44" autocomplete="off">
+        <label for="cs-3">What you do now</label><input id="cs-3" data-live="now" maxlength="44" autocomplete="off">
+        <label for="cs-4">Something you are proud of</label><input id="cs-4" data-live="proud" maxlength="52" autocomplete="off">
+      </div>
+      <div class="profile-card">
+        <div class="pc-h">Career snapshot</div>
+        <div class="pc-row"><span class="pc-k">First job</span><span class="pc-v" data-bd="first">&nbsp;</span></div>
+        <div class="pc-row"><span class="pc-k">Before this</span><span class="pc-v" data-bd="last">&nbsp;</span></div>
+        <div class="pc-row"><span class="pc-k">Now</span><span class="pc-v" data-bd="now">&nbsp;</span></div>
+        <div class="pc-row"><span class="pc-k">Proud of</span><span class="pc-v" data-bd="proud">&nbsp;</span></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-lead2">
+  <div class="banner banner-leadin">🎯 Warm-Up</div>
+  <div class="slide-main"><div class="content">
+    <h2>Would you rather&hellip;?</h2>
+    <p class="instruction">Choose one. Then tell me why.</p>
+    <div class="ex-row" style="margin-bottom:18px;"><span class="circ-num">1</span><button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr1" onclick="circPick(this)">work for a huge company</button> <b style="margin:0 6px;">or</b> <button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr1" onclick="circPick(this)">work for a small team</button></div><div class="ex-row" style="margin-bottom:18px;"><span class="circ-num">2</span><button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr2" onclick="circPick(this)">have one job for 20 years</button> <b style="margin:0 6px;">or</b> <button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr2" onclick="circPick(this)">change jobs every three years</button></div><div class="ex-row" style="margin-bottom:18px;"><span class="circ-num">3</span><button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr3" onclick="circPick(this)">tell a new colleague about your past jobs</button> <b style="margin:0 6px;">or</b> <button class="circ-opt" style="font-size:1.1rem;padding:8px 20px;white-space:normal;text-align:left;" data-group="wyr3" onclick="circPick(this)">hear about their past jobs</button></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-m1">
+  <div class="banner banner-grammar">📐 Grammar</div>
+  <div class="slide-main"><div class="content">
+    <h2>Finished, or in progress?</h2>
+    
+    <p class="instruction" style="margin-bottom:12px;">Talking about your past work experience is a good way to get to know your colleagues. Click a sentence, then click the box where it belongs.</p>
+    <div id="s-m1-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="simple" onclick="classifyPick(this)">I fixed computers.</button><button class="classify-chip" data-ans="continuous" onclick="classifyPick(this)">I was working 60 hours a week before I came here.</button><button class="classify-chip" data-ans="simple" onclick="classifyPick(this)">I ran my own construction company.</button><button class="classify-chip" data-ans="continuous" onclick="classifyPick(this)">At 9am yesterday I was writing a report.</button><button class="classify-chip" data-ans="simple" onclick="classifyPick(this)">I was a legal assistant.</button><button class="classify-chip" data-ans="continuous" onclick="classifyPick(this)">While I was waiting, the manager arrived.</button></div>
+    <div id="s-m1-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="simple" onclick="classifyTarget(this)"><h4><b>Past simple</b><br>a single, completed action, a past habit, or a state that was true for a time</h4></div><div class="classify-col" data-target="continuous" onclick="classifyTarget(this)"><h4><b>Past continuous</b><br>an ongoing action that was in progress at a certain time in the past</h4></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkClassifySlide('s-m1')">Check Answers</button>
+      <button class="btn-reset" onclick="resetClassifySlide('s-m1')">Reset</button>
+    </div>
+    <div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>&ldquo;I ran my own construction company.&rdquo; Is the company still mine now? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. It is finished. We use the past simple for completed actions and states.</span></li><li>&ldquo;I was working 60 hours a week before I came here.&rdquo; What happened next? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">The speaker came here. The long action (working) was in progress when the short action (came) happened.</span></li></ul></div>
+    <div class="audio-box"><audio controls preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_1.mp3"></audio></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-g1">
+  <div class="banner banner-grammar">📐 Grammar</div>
+  <div class="slide-main"><div class="content">
+    <h2>How we build them</h2>
+    
+    
+    <p style="margin:0 0 4px;">The past simple is usually formed by adding &ldquo;-ed&rdquo; to the base form of the verb. The past continuous is formed by adding &ldquo;was&rdquo; or &ldquo;were&rdquo; in front of the verb, and &ldquo;-ing&rdquo; to the end of the verb.</p>
+    <div class="pz-row"><div class="pz "><span class="pz-k">Subject</span><span class="pz-v">I</span></div><div class="pz a"><span class="pz-k">Past continuous</span><span class="pz-v">was working</span></div><div class="pz "><span class="pz-k">Rest of clause</span><span class="pz-v">60 hours a week</span></div><div class="pz b"><span class="pz-k">Past simple</span><span class="pz-v">before I came here.</span></div></div>
+    <div class="form-grid">
+      <div class="form-card"><h4>Past simple</h4>
+        <div class="form-row"><span class="fr-k">Positive</span><span class="fr-v">I <b>worked</b> for TCE.<br>I <b>ran</b> my own company. <i>(irregular)</i></span></div>
+        <div class="form-row"><span class="fr-k">Negative</span><span class="fr-v">I <b>didn't work</b> there.</span></div>
+        <div class="form-row"><span class="fr-k">Question</span><span class="fr-v"><b>Did</b> you <b>work</b> in a hotel?</span></div></div>
+      <div class="form-card cont"><h4>Past continuous</h4>
+        <div class="form-row"><span class="fr-k">Positive</span><span class="fr-v">I <b>was working</b>.<br>They <b>were working</b>.</span></div>
+        <div class="form-row"><span class="fr-k">Negative</span><span class="fr-v">I <b>wasn't working</b>.<br>They <b>weren't working</b>.</span></div>
+        <div class="form-row"><span class="fr-k">Question</span><span class="fr-v"><b>Were</b> you <b>working</b> as a waiter?</span></div></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-cb23">
+<div class="banner banner-grammar">📐 Grammar</div>
+<div class="slide-main"><div class="content">
+<h2>Which tense?</h2>
+<p class="instruction">Cross out the incorrect words in each sentence.</p>
+
+<div class="fixed-two-col" id="cb23"><div><div class="ex-row ex-given"><span class="example-badge">✓</span><span class="circ-opt is-example">I started</span> <span class="circ-sep">/</span> <span class="circ-opt struck">was starting</span> my own printing company more than 10 years ago.</div><div class="ex-row"><span class="circ-num">1</span>They <button class="circ-opt" data-correct="were beginning" data-group="cb23-1" onclick="circPick(this)">began</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="were beginning" data-group="cb23-1" onclick="circPick(this)">were beginning</button> to sell more when the shop suddenly closed last year.</div><div class="ex-row"><span class="circ-num">2</span>I <button class="circ-opt" data-correct="lost" data-group="cb23-2" onclick="circPick(this)">lost</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="lost" data-group="cb23-2" onclick="circPick(this)">was losing</button> my job when the factory closed last December.</div><div class="ex-row"><span class="circ-num">3</span>I was delighted when I <button class="circ-opt" data-correct="got" data-group="cb23-3" onclick="circPick(this)">got</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="got" data-group="cb23-3" onclick="circPick(this)">was getting</button> promoted to senior manager in 2015.</div></div><div><div class="ex-row"><span class="circ-num">4</span>We moved here when my wife <button class="circ-opt" data-correct="found" data-group="cb23-4" onclick="circPick(this)">was finding</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="found" data-group="cb23-4" onclick="circPick(this)">found</button> a new job two years ago.</div><div class="ex-row"><span class="circ-num">5</span><button class="circ-opt" data-correct="I was training" data-group="cb23-5" onclick="circPick(this)">I was training</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="I was training" data-group="cb23-5" onclick="circPick(this)">trained</button> to be a chef when I was given this award.</div><div class="ex-row"><span class="circ-num">6</span>When I worked 90 hours a week, I <button class="circ-opt" data-correct="felt" data-group="cb23-6" onclick="circPick(this)">felt</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="felt" data-group="cb23-6" onclick="circPick(this)">was feeling</button> exhausted all the time.</div><div class="ex-row"><span class="circ-num">7</span>When I was a photographer, I <button class="circ-opt" data-correct="met" data-group="cb23-7" onclick="circPick(this)">was meeting</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="met" data-group="cb23-7" onclick="circPick(this)">met</button> a lot of famous people through my work.</div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('cb23')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('cb23')">Reset</button>
+</div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_3_7.mp3" onclick="playClip(this)">7</button></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-sp1">
+<div class="banner banner-speaking">💬 Speaking</div>
+<div class="slide-main"><div class="content">
+<h2>Speaking break: your work story</h2>
+<p class="instruction">Talk to your teacher. Use the past simple for finished jobs and the past continuous for what was in progress. Click the button when you have said it.</p>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Tell me about a job you had in the past. What did you do there?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>What were you doing a year ago? Where were you working or studying?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Think about the day you got your current job. What were you doing when you heard the news?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Now ask me three questions about my past. Use “Did you…?” and “Were you…ing…?”<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-m2">
+  <div class="banner banner-grammar">📐 Grammar</div>
+  <div class="slide-main"><div class="content">
+    <h2>A polite way to ask</h2>
+    
+    
+    <p class="instruction" style="margin-bottom:10px;">You may hear people ask questions about a present situation in the past tense. This makes the question more polite. The past tense is also sometimes used to make a polite request.</p>
+    <div class="two-up">
+      <div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#0F766E"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#0F766E"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#0F766E"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div><div class="say">Did you want a tour of the office?</div>
+        <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">&ldquo;Do&rdquo; becomes &ldquo;Did&rdquo; to make the question in past tense.</p></div>
+      <div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#B8892B"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#B8892B"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#B8892B"/><circle cx="105" cy="22" r="11" fill="#1B3A57"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#1B3A57"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#1B3A57"/></svg></div><div class="say b">I wanted to ask about the company's history.</div>
+        <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">A polite request about something you want now.</p></div>
+    </div>
+    <div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>Is the person asking about a tour in the past? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. The tour is for now. The past tense is just more polite.</span></li><li>Which sounds more polite: &ldquo;Do you want a tour?&rdquo; or &ldquo;Did you want a tour?&rdquo; <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">&ldquo;Did you want a tour?&rdquo;</span></li></ul></div>
+    <div class="audio-box"><audio controls preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_4.mp3"></audio></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-cb25">
+<div class="banner banner-grammar">📐 Grammar</div>
+<div class="slide-main"><div class="content">
+<h2>Which sentence is correct?</h2>
+<p class="instruction">Mark the sentences that are correct.</p>
+
+<div class="fixed-two-col" id="cb25"><div><div class="ex-row ex-given"><span class="example-badge">✓</span><span class="pick-wrap"><span class="circ-opt block is-example">Did you want some more coffee?</span><span class="circ-opt block struck">Do you wanting some more coffee?</span></span></div><div class="ex-row"><span class="circ-num">1</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I was looking for another job." data-group="cb25-1" onclick="circPick(this)">I was to look for another job.</button><button class="circ-opt block" data-correct="I was looking for another job." data-group="cb25-1" onclick="circPick(this)">I was looking for another job.</button></span></div><div class="ex-row"><span class="circ-num">2</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I was wondering if you could help." data-group="cb25-2" onclick="circPick(this)">I was wondering if you could help.</button><button class="circ-opt block" data-correct="I was wondering if you could help." data-group="cb25-2" onclick="circPick(this)">I was wondered if you could help.</button></span></div><div class="ex-row"><span class="circ-num">3</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Were you working as a waiter?" data-group="cb25-3" onclick="circPick(this)">Were you working as a waiter?</button><button class="circ-opt block" data-correct="Were you working as a waiter?" data-group="cb25-3" onclick="circPick(this)">Were you work as a waiter?</button></span></div></div><div><div class="ex-row"><span class="circ-num">4</span><span class="pick-wrap"><button class="circ-opt block" data-correct="They weren't employing young people." data-group="cb25-4" onclick="circPick(this)">They weren't employing young people.</button><button class="circ-opt block" data-correct="They weren't employing young people." data-group="cb25-4" onclick="circPick(this)">They not employing young people.</button></span></div><div class="ex-row"><span class="circ-num">5</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I didn't enjoy my last job." data-group="cb25-5" onclick="circPick(this)">I didn't enjoy my last job.</button><button class="circ-opt block" data-correct="I didn't enjoy my last job." data-group="cb25-5" onclick="circPick(this)">I didn't enjoying my last job.</button></span></div><div class="ex-row"><span class="circ-num">6</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Did you work in a hotel?" data-group="cb25-6" onclick="circPick(this)">Did you work in a hotel?</button><button class="circ-opt block" data-correct="Did you work in a hotel?" data-group="cb25-6" onclick="circPick(this)">Did you working in a hotel?</button></span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('cb25')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('cb25')">Reset</button>
+</div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_5_6.mp3" onclick="playClip(this)">6</button></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-sp2">
+<div class="banner banner-speaking">💬 Speaking</div>
+<div class="slide-main"><div class="content">
+<h2>Speaking break: sound polite</h2>
+<p class="instruction">Say these to your teacher, a new colleague. Use the past tense to sound polite.</p>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Offer your colleague some more coffee. (“Did you want…?”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Ask for help with a report. (“I was wondering if you could…”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Ask whether your colleague wanted a tour of the office.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Say you want to ask about the history of the company. (“I wanted to ask…”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-m3">
+  <div class="banner banner-grammar">📐 Grammar</div>
+  <div class="slide-main"><div class="content">
+    <h2>Is there a date?</h2>
+    
+    <p class="instruction" style="margin-bottom:12px;">The present perfect simple is used to talk about events in the recent past that still have an effect on the present moment. Click a sentence, then click the box where it belongs.</p>
+    <div id="s-m3-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="present perfect" onclick="classifyPick(this)">I have worked in a few different teams.</button><button class="classify-chip" data-ans="past simple" onclick="classifyPick(this)">I worked in a small team in 2005.</button><button class="classify-chip" data-ans="present perfect" onclick="classifyPick(this)">I haven't worked in a team before.</button><button class="classify-chip" data-ans="past simple" onclick="classifyPick(this)">We moved offices last March.</button><button class="classify-chip" data-ans="present perfect" onclick="classifyPick(this)">He has just finished the report.</button><button class="classify-chip" data-ans="past simple" onclick="classifyPick(this)">She left the company in 2019.</button></div>
+    <div id="s-m3-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="present perfect" onclick="classifyTarget(this)"><h4><b>Present perfect</b><br>no date is specified</h4></div><div class="classify-col" data-target="past simple" onclick="classifyTarget(this)"><h4><b>Past simple</b><br>a specific date is given</h4></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkClassifySlide('s-m3')">Check Answers</button>
+      <button class="btn-reset" onclick="resetClassifySlide('s-m3')">Reset</button>
+    </div>
+    <div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>&ldquo;I have worked in a few different teams.&rdquo; Do we know when? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. No date is specified, so the present perfect is used.</span></li><li>&ldquo;I worked in a small team in 2005.&rdquo; Why the past simple? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">A specific date is given, so the past simple is used.</span></li></ul></div>
+    <div class="audio-box"><audio controls preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_6.mp3"></audio></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-g2">
+  <div class="banner banner-grammar">📐 Grammar</div>
+  <div class="slide-main"><div class="content">
+    <h2>Have or has, plus a past participle</h2>
+    
+    
+    <p style="margin:0 0 4px;">The present perfect simple is formed with &ldquo;have&rdquo; and a past participle.</p>
+    <div class="pz-row"><div class="pz "><span class="pz-k">Subject</span><span class="pz-v">I</span></div><div class="pz a"><span class="pz-k">&ldquo;Have / has&rdquo; + past participle</span><span class="pz-v">have worked</span></div><div class="pz "><span class="pz-k">Rest of sentence</span><span class="pz-v">in a few teams.</span></div></div>
+    <div class="form-grid">
+      <div class="form-card"><h4>Positive</h4>
+        <div class="form-row"><span class="fr-k">I / you / we / they</span><span class="fr-v"><b>have</b> worked</span></div>
+        <div class="form-row"><span class="fr-k">he / she / it</span><span class="fr-v"><b>has</b> worked</span></div></div>
+      <div class="form-card cont"><h4>Negative and question</h4>
+        <div class="form-row"><span class="fr-k">Negative</span><span class="fr-v">I <b>haven't worked</b> in a team before.</span></div>
+        <div class="form-row"><span class="fr-k">Question</span><span class="fr-v"><b>Have</b> you <b>worked</b> in a team before?</span></div></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-cb28">
+<div class="banner banner-grammar">📐 Grammar</div>
+<div class="slide-main"><div class="content">
+<h2>Present perfect simple</h2>
+<p class="instruction">Fill in the gaps by putting the verbs in the present perfect simple.</p>
+
+<div class="fixed-two-col" id="cb28"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>Susan <span class="ans-line" style="display:inline">has worked</span> <span class="cue-verb">(work)</span> here since she graduated from college five years ago.</div><div class="ex-row"><span class="circ-num">1</span>He <input aria-label="answer 1" class="ans-input" data-alt="" data-ans="has taken" style="width:9.5em;"/> <span class="cue-verb">(take)</span> 15 days off sick this year and it is only May!</div><div class="ex-row"><span class="circ-num">2</span>Julia has a lot of experience. She <input aria-label="answer 2" class="ans-input" data-alt="" data-ans="has managed" style="width:9.5em;"/> <span class="cue-verb">(manage)</span> this department for years.</div><div class="ex-row"><span class="circ-num">3</span>They <input aria-label="answer 3" class="ans-input" data-alt="" data-ans="have employed" style="width:9.5em;"/> <span class="cue-verb">(employ)</span> more than 300 people over the years.</div></div><div><div class="ex-row"><span class="circ-num">4</span>John <input aria-label="answer 4" class="ans-input" data-alt="" data-ans="has trained" style="width:9.5em;"/> <span class="cue-verb">(train)</span> lots of young employees across a few different teams.</div><div class="ex-row"><span class="circ-num">5</span>I'm so happy! I <input aria-label="answer 5" class="ans-input" data-alt="" data-ans="have finished" style="width:9.5em;"/> <span class="cue-verb">(finish)</span> my apprenticeship at last.</div><div class="ex-row"><span class="circ-num">6</span>My manager <input aria-label="answer 6" class="ans-input" data-alt="" data-ans="has approved" style="width:9.5em;"/> <span class="cue-verb">(approve)</span> my vacation days. I'm going to Italy in July.</div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkSlide('cb28')">Check Answers</button>
+<button class="btn-reset" onclick="resetSlide('cb28')">Reset</button>
+</div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_8_6.mp3" onclick="playClip(this)">6</button></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-sp3">
+<div class="banner banner-speaking">💬 Speaking</div>
+<div class="slide-main"><div class="content">
+<h2>Speaking break: interview your colleague</h2>
+<p class="instruction">Ask your teacher these questions with the present perfect, then listen to the answer. Then answer them yourself.</p>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Ask: “Have you ever worked in a team?” Then ask a follow-up question.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Ask how long your colleague has worked here. (“How long have you…?”)<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Ask about something your colleague has just finished.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Now your turn. Tell me one thing you have done at work this year, and one thing you have not done yet.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-pron">
+  <div class="banner banner-pron">🔊 Pronunciation</div>
+  <div class="slide-main"><div class="content">
+    <h2>Three sounds for -ed</h2>
+    
+    <p class="instruction" style="margin-bottom:12px;">Say each verb out loud, then click the verb and the sound you hear at the end.</p>
+    <div id="s-pron-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="/t/" onclick="classifyPick(this)">worked</button><button class="classify-chip" data-ans="/t/" onclick="classifyPick(this)">fixed</button><button class="classify-chip" data-ans="/t/" onclick="classifyPick(this)">finished</button><button class="classify-chip" data-ans="/d/" onclick="classifyPick(this)">employed</button><button class="classify-chip" data-ans="/d/" onclick="classifyPick(this)">trained</button><button class="classify-chip" data-ans="/d/" onclick="classifyPick(this)">approved</button><button class="classify-chip" data-ans="/d/" onclick="classifyPick(this)">managed</button><button class="classify-chip" data-ans="/ɪd/" onclick="classifyPick(this)">invested</button><button class="classify-chip" data-ans="/ɪd/" onclick="classifyPick(this)">started</button></div>
+    <div id="s-pron-cols" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="/t/" onclick="classifyTarget(this)"><h4><b>/t/</b><br>after voiceless sounds</h4></div><div class="classify-col" data-target="/d/" onclick="classifyTarget(this)"><h4><b>/d/</b><br>after voiced sounds</h4></div><div class="classify-col" data-target="/ɪd/" onclick="classifyTarget(this)"><h4><b>/ɪd/</b><br>after /t/ or /d/ (an extra syllable)</h4></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkClassifySlide('s-pron')">Check Answers</button>
+      <button class="btn-reset" onclick="resetClassifySlide('s-pron')">Reset</button>
+    </div>
+    <div class="gram-note">🔊 Only the /ɪd/ verbs get an extra syllable: <b>start-ed</b>, <b>invest-ed</b>.</div>
+    
+  </div></div>
+</div>
+
+<div class="slide" id="s-cb29">
+<div class="banner banner-listening">🎧 Listening</div>
+<div class="slide-main"><div class="content">
+<h2>Two colleagues talk about their past</h2>
+<p class="instruction">Listen to the audio and answer the questions. Two colleagues are discussing their past experience.</p>
+<div class="audio-box top"><audio controls="" preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_9.mp3"></audio></div><div class="img-placeholder ph-small"><span class="ip-icon">🎧</span>Photo: two colleagues talking in an office</div>
+
+<div class="fixed-two-col" id="cb29"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>This is Suzi's first day at the company.<br/><span style="margin-left:34px;display:inline-block;"><span class="circ-opt struck">True</span><span class="circ-opt is-example">False</span><span class="circ-opt struck">Not given</span></span></div><div class="ex-row"><span class="circ-num">1</span>Suzi's previous company was smaller.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="cb29-1" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="cb29-1" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="cb29-1" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">2</span>Suzi has always worked in HR.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="False" data-group="cb29-2" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="False" data-group="cb29-2" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="False" data-group="cb29-2" onclick="circPick(this)">Not given</button></span></div></div><div><div class="ex-row"><span class="circ-num">3</span>Jack has worked for CIE for six years.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="Not given" data-group="cb29-3" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="Not given" data-group="cb29-3" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="Not given" data-group="cb29-3" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">4</span>Jack has never worked for another company.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="cb29-4" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="cb29-4" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="cb29-4" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">5</span>Jack and Suzi always work the same days.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="Not given" data-group="cb29-5" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="Not given" data-group="cb29-5" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="Not given" data-group="cb29-5" onclick="circPick(this)">Not given</button></span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('cb29')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('cb29')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="s-rd0">
+  <div class="banner banner-reading">📖 Reading</div>
+  <div class="slide-main"><div class="content">
+    <h2>Before you read</h2>
+    <p class="instruction">Talk to your teacher first. Then go to the next slide to read.</p>
+    
+    <div class="two-up">
+      <div class="scene"><p style="margin:0 0 6px;"><b>Talk about it</b></p>
+        <p style="margin:0;">1. Where do people talk at your workplace: the coffee machine, the lift, the kitchen?<br>2. Have you ever learned something important from a short chat with a colleague?<br>3. Is it easy or difficult for you to start a conversation with a new colleague?</p></div>
+      <div class="scene"><p style="margin:0 0 6px;"><b>Predict</b></p>
+        <p style="margin:0;">The article is called &ldquo;The best meeting happens at the coffee machine&rdquo;. What do you think it says? Write down two ideas, then read to check.</p></div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-rd1">
+  <div class="banner banner-reading">📖 Reading</div>
+  <div class="slide-main"><div class="content">
+    <h2>The best meeting happens at the coffee machine</h2>
+    <p class="instruction">Read the article. Is it close to your ideas? (This article was written for this course.)</p>
+    <div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee&mdash;and her whole team</p><p>When Marta Silva joined a logistics company in Porto last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Marta was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Brazil. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.</p><p>Marta has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;</p></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-rd2">
+<div class="banner banner-reading">📖 Reading</div>
+<div class="slide-main"><div class="content">
+<h2>What does the article say?</h2>
+<p class="instruction">Read the article again and answer the questions.</p>
+<div style="margin-bottom:14px;"><div class="btn-row" style="justify-content:flex-start;margin-top:0;"><button class="btn-akey" onclick="toggleSuggested('rd-art')">📖 Show / hide the article</button></div><div class="akey-box" id="rd-art" style="background:#fff;padding:0;border:0;"><div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee—and her whole team</p><p>When Marta Silva joined a logistics company in Porto last spring, she did not know a single person on her floor. “I was eating lunch alone at my desk and I felt invisible,” she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Marta was waiting for her coffee, a colleague from the finance department asked a simple question: “What were you doing before you came here?” She had worked in three countries and had managed a small warehouse team in Brazil. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created “conversation corners” instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other’s skills in ten minutes of small talk than in a month of emails.</p><p>Marta has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. “I wasn’t looking for a project,” she says. “I was just asking a colleague about his weekend.”</p></div></div></div>
+
+<div class="fixed-two-col" id="rd"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>Marta felt invisible at the beginning.<br/><span style="margin-left:34px;display:inline-block;"><span class="circ-opt is-example">True</span><span class="circ-opt struck">False</span><span class="circ-opt struck">Not given</span></span></div><div class="ex-row"><span class="circ-num">1</span>Marta knew many people on her floor when she started.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="False" data-group="rd-1" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="False" data-group="rd-1" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="False" data-group="rd-1" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">2</span>A colleague from the finance department asked Marta about her past.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="rd-2" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="rd-2" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="rd-2" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">3</span>Marta has worked in three countries.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="rd-3" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="rd-3" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="rd-3" onclick="circPick(this)">Not given</button></span></div></div><div><div class="ex-row"><span class="circ-num">4</span>The company is in Lisbon.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="False" data-group="rd-4" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="False" data-group="rd-4" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="False" data-group="rd-4" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">5</span>Some companies have changed their office layout to help people meet.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="rd-5" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="rd-5" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="rd-5" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">6</span>Marta was promoted because of her projects.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="Not given" data-group="rd-6" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="Not given" data-group="rd-6" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="Not given" data-group="rd-6" onclick="circPick(this)">Not given</button></span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('rd')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('rd')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="s-rd3">
+  <div class="banner banner-reading">📖 Reading</div>
+  <div class="slide-main"><div class="content">
+    <h2>Choose the best answer</h2>
+    <p class="instruction">Choose the correct answer for each question.</p>
+    <div style="margin-bottom:14px;"><div class="btn-row" style="justify-content:flex-start;margin-top:0;"><button class="btn-akey" onclick="toggleSuggested('rd-art2')">📖 Show / hide the article</button></div><div class="akey-box" id="rd-art2" style="background:#fff;padding:0;border:0;"><div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee&mdash;and her whole team</p><p>When Marta Silva joined a logistics company in Porto last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Marta was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Brazil. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.</p><p>Marta has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;</p></div></div></div>
+    
+    <div class="fixed-two-col" id="rdm"><div><div class="ex-row"><span class="circ-num">1</span>What is the main idea of the article?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">Short, informal chats can help colleagues connect.</button><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">Formal meetings are the best way to make friends.</button><button class="circ-opt" data-group="rdm-1" data-correct="Short, informal chats can help colleagues connect." onclick="circPick(this)">New employees should eat lunch alone.</button></span></div><div class="ex-row"><span class="circ-num">2</span>Why was Marta&rsquo;s colleague interested in her?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She had a lot of international experience.</button><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She worked in the finance department.</button><button class="circ-opt" data-group="rdm-2" data-correct="She had a lot of international experience." onclick="circPick(this)">She was the new manager.</button></span></div></div><div><div class="ex-row"><span class="circ-num">3</span>What does &ldquo;I wasn&rsquo;t looking for a project&rdquo; mean?<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She did not plan to find a project.</button><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She could not find her project.</button><button class="circ-opt" data-group="rdm-3" data-correct="She did not plan to find a project." onclick="circPick(this)">She did not like projects.</button></span></div></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkCircSlide('rdm')">Check Answers</button>
+      <button class="btn-reset" onclick="resetCircSlide('rdm')">Reset</button>
+    </div>
+    
+  </div></div>
+</div>
+
+<div class="slide" id="s-rd4">
+  <div class="banner banner-reading">📖 Reading</div>
+  <div class="slide-main"><div class="content">
+    <h2>Words from the article</h2>
+    <p class="instruction">Find the word in the article and type it in the gap. (Hint: look at paragraphs 1, 3 and 4.)</p>
+    <div style="margin-bottom:14px;"><div class="btn-row" style="justify-content:flex-start;margin-top:0;"><button class="btn-akey" onclick="toggleSuggested('rd-art3')">📖 Show / hide the article</button></div><div class="akey-box" id="rd-art3" style="background:#fff;padding:0;border:0;"><div class="article-box"><span class="kicker">Workplace culture</span><h3>The best meeting happens at the coffee machine</h3><p class="deck">How a five-minute chat helped a new employee&mdash;and her whole team</p><p>When Marta Silva joined a logistics company in Porto last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.</p><p>One morning, while Marta was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Brazil. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.</p><p>Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.</p><p>Marta has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;</p></div></div></div>
+    
+    <div class="fixed-two-col" id="rdv"><div><div class="ex-row"><span class="circ-num">1</span>If nobody notices you, you feel ______: <input class="ans-input wide" data-ans="invisible" data-alt="" aria-label="answer 1"></div><div class="ex-row"><span class="circ-num">2</span>The way furniture and rooms are arranged in an office is its ______: <input class="ans-input wide" data-ans="layout" data-alt="" aria-label="answer 2"></div></div><div><div class="ex-row"><span class="circ-num">3</span>A project with people from several departments is a ______: <input class="ans-input wide" data-ans="cross-department" data-alt="" aria-label="answer 3"></div><div class="ex-row"><span class="circ-num">4</span>An activity to help people who do not know each other start talking is an ______: <input class="ans-input wide" data-ans="ice-breaker" data-alt="" aria-label="answer 4"></div></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkSlide('rdv')">Check Answers</button>
+      <button class="btn-reset" onclick="resetSlide('rdv')">Reset</button>
+    </div>
+    
+  </div></div>
+</div>
+
+<div class="slide" id="s-rd5">
+<div class="banner banner-speaking">💬 Speaking</div>
+<div class="slide-main"><div class="content">
+<h2>Speaking break: what do you think?</h2>
+<p class="instruction">Discuss with your teacher. Use the past and the present perfect from this unit.</p>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Have you ever had a conversation at work that changed something for you? What happened?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>What were you doing the last time you met a new colleague?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Would conversation corners work in your company? Why, or why not?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Marta has led two projects since she joined. What has your company done recently to help people meet?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-cb210">
+<div class="banner banner-speaking">💬 Speaking</div>
+<div class="slide-main"><div class="content">
+<h2>Choose, then say it</h2>
+<p class="instruction">Cross out the incorrect words in each sentence, then say the sentences out loud.</p>
+
+<div class="fixed-two-col" id="cb210"><div><div class="ex-row ex-given"><span class="example-badge">✓</span><span class="circ-opt struck">I worked</span> <span class="circ-sep">/</span> <span class="circ-opt struck">was working</span> <span class="circ-sep">/</span> <span class="circ-opt is-example">have worked</span> in marketing since 1995.</div><div class="ex-row"><span class="circ-num">1</span><button class="circ-opt" data-correct="was driving" data-group="cb210-1" onclick="circPick(this)">drove</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was driving" data-group="cb210-1" onclick="circPick(this)">was driving</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was driving" data-group="cb210-1" onclick="circPick(this)">have driven</button> taxis when I saw this job advertised.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span><button class="circ-opt" data-correct="have managed" data-group="cb210-2" onclick="circPick(this)">managed</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have managed" data-group="cb210-2" onclick="circPick(this)">was managing</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have managed" data-group="cb210-2" onclick="circPick(this)">have managed</button> accounts for this company for seven years.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">3</span><button class="circ-opt" data-correct="bought" data-group="cb210-3" onclick="circPick(this)">bought</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="bought" data-group="cb210-3" onclick="circPick(this)">was buying</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="bought" data-group="cb210-3" onclick="circPick(this)">have bought</button> my first business in 2009.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">4</span>I was studying in college when I <button class="circ-opt" data-correct="saw" data-group="cb210-4" onclick="circPick(this)">saw</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="saw" data-group="cb210-4" onclick="circPick(this)">was seeing</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="saw" data-group="cb210-4" onclick="circPick(this)">have seen</button> this job.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">5</span>They <button class="circ-opt" data-correct="have invested" data-group="cb210-5" onclick="circPick(this)">invested</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have invested" data-group="cb210-5" onclick="circPick(this)">were investing</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have invested" data-group="cb210-5" onclick="circPick(this)">have invested</button> in this company since 2010.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">6</span>In 2014, I <button class="circ-opt" data-correct="sold" data-group="cb210-6" onclick="circPick(this)">sold</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="sold" data-group="cb210-6" onclick="circPick(this)">was selling</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="sold" data-group="cb210-6" onclick="circPick(this)">has sold</button> the company to an investor.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('cb210')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('cb210')">Reset</button>
+</div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/2/2_10_6.mp3" onclick="playClip(this)">6</button></div>
+</div></div>
+</div>
+
+<div class="slide" id="s-free">
+  <div class="banner banner-speaking">💬 Speaking</div>
+  <div class="slide-main"><div class="content">
+    <h2>Coffee-machine catch-up</h2>
+    <p class="instruction">Your teacher is a new colleague. Take a card, then start the conversation and find out about their work history.</p>
+    <div class="deal-wrap">
+      <div class="deal-card" id="deal-card"><div class="dc-head">Coffee machine card</div>
+        <div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div></div>
+      <div class="btn-row" style="margin-top:0;align-items:center;">
+        <button class="btn-deal" onclick="dealNext()">Deal a card</button>
+        <button class="btn-reset" onclick="dealReset()">Shuffle</button>
+        <span class="deal-count" id="deal-count">Cards played: 0</span>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-review">
+  <div class="banner banner-review">⭐ Lesson Review</div>
+  <div class="slide-main"><div class="content">
+    <h2>Before you leave the coffee machine</h2>
+    <p class="instruction">Click each one when you feel ready to use it.</p>
+    <div class="check-list" id="ck-list"><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Past simple and past continuous</span><span class="ck-ic">⚙️</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Sharing past experiences</span><span class="ck-ic">🗂️</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Talking about past experiences</span><span class="ck-ic">🧩</span></button></div>
+    <div class="win-banner" id="ck-win">You are ready for the next unit.</div>
+    
+    <p class="instruction" style="margin-top:22px;">Tell me about your career one more time. What can you say now that you could not say before?</p>
+  </div></div>
+</div>
+
+<div class="slide" id="hw-cover">
+  <div class="title-inner">
+    <div class="hw-badge">📝 Homework</div>
+    <div class="title-main" style="margin-top:22px;">Getting to know colleagues</div>
+  </div>
+</div>
+
+<div class="slide" id="hw-1">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW1 — Which sentence is correct?</h2>
+<p class="instruction">Mark the sentences that are correct.</p>
+
+<div class="fixed-two-col" id="hw1"><div><div class="ex-row ex-given"><span class="example-badge">✓</span><span class="pick-wrap"><span class="circ-opt block struck">Jan was to look for another job.</span><span class="circ-opt block is-example">Jan was looking for another job.</span></span></div><div class="ex-row"><span class="circ-num">1</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I was preparing for the presentation." data-group="hw1-1" onclick="circPick(this)">I was preparing for the presentation.</button><button class="circ-opt block" data-correct="I was preparing for the presentation." data-group="hw1-1" onclick="circPick(this)">I was prepare for the presentation.</button></span></div><div class="ex-row"><span class="circ-num">2</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Did Greg work in the New York branch?" data-group="hw1-2" onclick="circPick(this)">Did Greg work in the New York branch?</button><button class="circ-opt block" data-correct="Did Greg work in the New York branch?" data-group="hw1-2" onclick="circPick(this)">Did Greg working in the New York branch?</button></span></div><div class="ex-row"><span class="circ-num">3</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Akira was living in Kyoto in 1998." data-group="hw1-3" onclick="circPick(this)">Akira was living in Kyoto in 1998.</button><button class="circ-opt block" data-correct="Akira was living in Kyoto in 1998." data-group="hw1-3" onclick="circPick(this)">Akira was live in Kyoto in 1998.</button></span></div><div class="ex-row"><span class="circ-num">4</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I didn't understand the presentation." data-group="hw1-4" onclick="circPick(this)">I didn't understanding the presentation.</button><button class="circ-opt block" data-correct="I didn't understand the presentation." data-group="hw1-4" onclick="circPick(this)">I didn't understand the presentation.</button></span></div><div class="ex-row"><span class="circ-num">5</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Pete was reading a book at 9pm yesterday." data-group="hw1-5" onclick="circPick(this)">Pete was reading a book at 9pm yesterday.</button><button class="circ-opt block" data-correct="Pete was reading a book at 9pm yesterday." data-group="hw1-5" onclick="circPick(this)">Pete read a book at 9pm yesterday.</button></span></div></div><div><div class="ex-row"><span class="circ-num">6</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I was feeling exhausted at work, so I left." data-group="hw1-6" onclick="circPick(this)">I was feeling exhausted at work, so I left.</button><button class="circ-opt block" data-correct="I was feeling exhausted at work, so I left." data-group="hw1-6" onclick="circPick(this)">I was feel exhausted at work, so I left.</button></span></div><div class="ex-row"><span class="circ-num">7</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Did you enjoy the presentation?" data-group="hw1-7" onclick="circPick(this)">Did you enjoy the presentation?</button><button class="circ-opt block" data-correct="Did you enjoy the presentation?" data-group="hw1-7" onclick="circPick(this)">Did you enjoyed the presentation?</button></span></div><div class="ex-row"><span class="circ-num">8</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Were you working in IT then?" data-group="hw1-8" onclick="circPick(this)">Were you worked in IT then?</button><button class="circ-opt block" data-correct="Were you working in IT then?" data-group="hw1-8" onclick="circPick(this)">Were you working in IT then?</button></span></div><div class="ex-row"><span class="circ-num">9</span><span class="pick-wrap"><button class="circ-opt block" data-correct="Kai wasn't feeling well, so he went home." data-group="hw1-9" onclick="circPick(this)">Kai wasn't feeling well, so he went home.</button><button class="circ-opt block" data-correct="Kai wasn't feeling well, so he went home." data-group="hw1-9" onclick="circPick(this)">Kai didn't feeling well, so he went home.</button></span></div><div class="ex-row"><span class="circ-num">10</span><span class="pick-wrap"><button class="circ-opt block" data-correct="I found a new job in France." data-group="hw1-10" onclick="circPick(this)">I was finding a new job in France.</button><button class="circ-opt block" data-correct="I found a new job in France." data-group="hw1-10" onclick="circPick(this)">I found a new job in France.</button></span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('hw1')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('hw1')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="hw-2">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW2 — Present perfect simple</h2>
+<p class="instruction">Fill in the gaps by putting the verbs in the present perfect simple.</p>
+
+<div class="fixed-two-col" id="hw2"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>Chloe <span class="ans-line" style="display:inline">has bought</span> <span class="cue-verb">(buy)</span> a new apartment in Paris.</div><div class="ex-row"><span class="circ-num">1</span>Daniel <input aria-label="answer 1" class="ans-input" data-alt="" data-ans="has worked" style="width:9.5em;"/> <span class="cue-verb">(work)</span> for more than five different law firms.</div><div class="ex-row"><span class="circ-num">2</span>I <input aria-label="answer 2" class="ans-input" data-alt="" data-ans="have taken" style="width:9.5em;"/> <span class="cue-verb">(take)</span> the bus to work all my working life.</div><div class="ex-row"><span class="circ-num">3</span>The company <input aria-label="answer 3" class="ans-input" data-alt="" data-ans="has employed" style="width:9.5em;"/> <span class="cue-verb">(employ)</span> five new people since September.</div><div class="ex-row"><span class="circ-num">4</span>Peter is a terrible waiter. He <input aria-label="answer 4" class="ans-input" data-alt="" data-ans="has started" style="width:9.5em;"/> <span class="cue-verb">(start)</span> looking for a different job.</div><div class="ex-row"><span class="circ-num">5</span>Andrea <input aria-label="answer 5" class="ans-input" data-alt="" data-ans="has worked" style="width:9.5em;"/> <span class="cue-verb">(work)</span> here since she graduated in 1999.</div><div class="ex-row"><span class="circ-num">6</span>The factory <input aria-label="answer 6" class="ans-input" data-alt="" data-ans="has produced" style="width:9.5em;"/> <span class="cue-verb">(produce)</span> 15,000 machines this year.</div></div><div><div class="ex-row"><span class="circ-num">7</span>Tim's really happy. He <input aria-label="answer 7" class="ans-input" data-alt="" data-ans="has finished" style="width:9.5em;"/> <span class="cue-verb">(finish)</span> his presentation for tomorrow.</div><div class="ex-row"><span class="circ-num">8</span>We <input aria-label="answer 8" class="ans-input" data-alt="" data-ans="have sold" style="width:9.5em;"/> <span class="cue-verb">(sell)</span> our products in more than 25 countries.</div><div class="ex-row"><span class="circ-num">9</span>I <input aria-label="answer 9" class="ans-input" data-alt="" data-ans="have walked" style="width:9.5em;"/> <span class="cue-verb">(walk)</span> to work since my car broke down.</div><div class="ex-row"><span class="circ-num">10</span>I <input aria-label="answer 10" class="ans-input" data-alt="" data-ans="have decided" style="width:9.5em;"/> <span class="cue-verb">(decide)</span> that I'm going to retire next year.</div><div class="ex-row"><span class="circ-num">11</span>Dave <input aria-label="answer 11" class="ans-input" data-alt="" data-ans="has taken" style="width:9.5em;"/> <span class="cue-verb">(take)</span> more time than we expected.</div><div class="ex-row"><span class="circ-num">12</span>I <input aria-label="answer 12" class="ans-input" data-alt="" data-ans="have worked" style="width:9.5em;"/> <span class="cue-verb">(work)</span> at this office for more than 25 years now.</div><div class="ex-row"><span class="circ-num">13</span>Chris <input aria-label="answer 13" class="ans-input" data-alt="" data-ans="has visited" style="width:9.5em;"/> <span class="cue-verb">(visit)</span> more than 50 countries so far.</div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkSlide('hw2')">Check Answers</button>
+<button class="btn-reset" onclick="resetSlide('hw2')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="hw-3">
+  <div class="banner banner-hw">📝 Homework</div>
+  <div class="slide-main"><div class="content">
+    <h2>HW3 — Beginnings and endings</h2>
+    <p class="instruction">Match the beginnings of the sentences to the correct endings. Click one on the left, then one on the right.</p>
+    <div class="match-wrap compact" id="hw-3-match">
+      <div><div class="match-item example-pair"><span class="example-badge">✓</span>Claire was working at a bank</div><div class="match-item" data-side="left" data-pair="1" onclick="matchPick(this)"><span class="circ-num">1</span>Jim was preparing a presentation</div><div class="match-item" data-side="left" data-pair="2" onclick="matchPick(this)"><span class="circ-num">2</span>I've worked at this company</div><div class="match-item" data-side="left" data-pair="3" onclick="matchPick(this)"><span class="circ-num">3</span>Chris had to wait for a taxi for</div><div class="match-item" data-side="left" data-pair="4" onclick="matchPick(this)"><span class="circ-num">4</span>Tim moved to New York</div><div class="match-item" data-side="left" data-pair="5" onclick="matchPick(this)"><span class="circ-num">5</span>I ran my own software company</div><div class="match-item" data-side="left" data-pair="6" onclick="matchPick(this)"><span class="circ-num">6</span>In 2013, our company</div></div>
+      <div><div class="match-item" data-side="right" data-pair="2" onclick="matchPick(this)">for more than ten years.</div><div class="match-item" data-side="right" data-pair="3" onclick="matchPick(this)">more than an hour.</div><div class="match-item example-pair">when she received a new job offer.</div><div class="match-item" data-side="right" data-pair="1" onclick="matchPick(this)">when his boss entered the room.</div><div class="match-item" data-side="right" data-pair="5" onclick="matchPick(this)">before I started working here.</div><div class="match-item" data-side="right" data-pair="6" onclick="matchPick(this)">bought a smaller Canadian software firm.</div><div class="match-item" data-side="right" data-pair="4" onclick="matchPick(this)">when he was transferred to the US office.</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkMatchSlide('hw-3-match')">Check Answers</button>
+      <button class="btn-reset" onclick="resetMatchSlide('hw-3-match')">Reset</button>
+    </div>
+    
+  </div></div>
+</div>
+
+<div class="slide" id="hw-4">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW4 — Silvia's blog</h2>
+<p class="instruction">Read the article and answer the questions.</p>
+<div class="article-box"><span class="kicker">Silvia's Blog</span><h3>On the up!</h3><p class="deck">Posted Friday, 7:30am</p><p>I've just started my new job at Moda Fashions in Edinburgh. I've worked for three different employers so far, and I'm hoping that this job will be the best I've had.</p><p>My first job was in a local supermarket. I hated it. I was bored, I had no responsibilities, and the customers were often rude to me. I left after only three months.</p><p>After that, I worked in a bar. It was more interesting and I met some interesting people. I was studying for my business diploma while I worked there, so I had something to dream about.</p><p>Then I started to become interested in fashion. I was working as an intern for a small fashion agency when I received my job offer. I'm so excited.</p></div>
+
+<div class="fixed-two-col" id="hw4"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>Silvia has just started work for a bank.<br/><span style="margin-left:34px;display:inline-block;"><span class="circ-opt struck">True</span><span class="circ-opt is-example">False</span><span class="circ-opt struck">Not given</span></span></div><div class="ex-row"><span class="circ-num">1</span>Silvia has worked for three different employers so far.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="hw4-1" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="hw4-1" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="hw4-1" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">2</span>Her first job was boring.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="hw4-2" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="hw4-2" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="hw4-2" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">3</span>She worked there for six months.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="False" data-group="hw4-3" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="False" data-group="hw4-3" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="False" data-group="hw4-3" onclick="circPick(this)">Not given</button></span></div></div><div><div class="ex-row"><span class="circ-num">4</span>Silvia worked in a bar while she was studying.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="hw4-4" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="hw4-4" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="hw4-4" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">5</span>She only worked in the evenings.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="Not given" data-group="hw4-5" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="Not given" data-group="hw4-5" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="Not given" data-group="hw4-5" onclick="circPick(this)">Not given</button></span></div><div class="ex-row"><span class="circ-num">6</span>She was working as an intern until recently.<br/><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-correct="True" data-group="hw4-6" onclick="circPick(this)">True</button><button class="circ-opt" data-correct="True" data-group="hw4-6" onclick="circPick(this)">False</button><button class="circ-opt" data-correct="True" data-group="hw4-6" onclick="circPick(this)">Not given</button></span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('hw4')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('hw4')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="hw-5">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW5 — Choose, then say it</h2>
+<p class="instruction">Cross out the incorrect words in each sentence, then say the sentences out loud.</p>
+
+<div class="fixed-two-col" id="hw5"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>My doctor <span class="circ-opt is-example">told</span> <span class="circ-sep">/</span> <span class="circ-opt struck">was telling</span> me that I should take a vacation.</div><div class="ex-row"><span class="circ-num">1</span>At 3pm yesterday, I <button class="circ-opt" data-correct="was discussing" data-group="hw5-1" onclick="circPick(this)">discussed</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was discussing" data-group="hw5-1" onclick="circPick(this)">was discussing</button> the new software with our IT team.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>While Susan <button class="circ-opt" data-correct="was eating" data-group="hw5-2" onclick="circPick(this)">has eaten</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was eating" data-group="hw5-2" onclick="circPick(this)">was eating</button> lunch, her team was working hard.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">3</span>Karl moved to Berlin when he <button class="circ-opt" data-correct="lost" data-group="hw5-3" onclick="circPick(this)">lost</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="lost" data-group="hw5-3" onclick="circPick(this)">has lost</button> his job in Paris.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Alan <button class="circ-opt" data-correct="was traveling" data-group="hw5-4" onclick="circPick(this)">traveled</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was traveling" data-group="hw5-4" onclick="circPick(this)">was traveling</button> to work when he received a call from his wife.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">5</span>In 2007 I <button class="circ-opt" data-correct="was working" data-group="hw5-5" onclick="circPick(this)">was working</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was working" data-group="hw5-5" onclick="circPick(this)">have worked</button> in the company headquarters in Geneva.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">6</span>I <button class="circ-opt" data-correct="have lived" data-group="hw5-6" onclick="circPick(this)">have lived</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have lived" data-group="hw5-6" onclick="circPick(this)">was living</button> in San Francisco since 2003.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">7</span>Peter <button class="circ-opt" data-correct="was sleeping" data-group="hw5-7" onclick="circPick(this)">is sleeping</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was sleeping" data-group="hw5-7" onclick="circPick(this)">was sleeping</button> at his desk when his phone rang.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">8</span>They <button class="circ-opt" data-correct="have been" data-group="hw5-8" onclick="circPick(this)">was</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have been" data-group="hw5-8" onclick="circPick(this)">have been</button> based in Frankfurt since 1994.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">9</span>While I <button class="circ-opt" data-correct="was living" data-group="hw5-9" onclick="circPick(this)">was living</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was living" data-group="hw5-9" onclick="circPick(this)">have living</button> in France, I worked as a waiter.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">10</span>Derek <button class="circ-opt" data-correct="bought" data-group="hw5-10" onclick="circPick(this)">was buying</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="bought" data-group="hw5-10" onclick="circPick(this)">bought</button> his first house in 2009.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">11</span>What <button class="circ-opt" data-correct="were you doing" data-group="hw5-11" onclick="circPick(this)">were you doing</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="were you doing" data-group="hw5-11" onclick="circPick(this)">have you done</button> at 4pm this afternoon?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">12</span>I <button class="circ-opt" data-correct="was studying" data-group="hw5-12" onclick="circPick(this)">was studying</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="was studying" data-group="hw5-12" onclick="circPick(this)">studied</button> in college when I decided to work as a lawyer.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">13</span>Who was in the meeting room when you <button class="circ-opt" data-correct="entered" data-group="hw5-13" onclick="circPick(this)">entered</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="entered" data-group="hw5-13" onclick="circPick(this)">have entered</button>?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">14</span>We <button class="circ-opt" data-correct="sold" data-group="hw5-14" onclick="circPick(this)">were selling</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="sold" data-group="hw5-14" onclick="circPick(this)">sold</button> our first machine in China in 2003.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkCircSlide('hw5')">Check Answers</button>
+<button class="btn-reset" onclick="resetCircSlide('hw5')">Reset</button>
+</div>
+</div></div>
+</div>
+
+</div><!-- END #deck -->
+
+<div id="nav">
+  <button id="prevBtn" onclick="goTo(current-1)">◀ Prev</button>
+  <div id="dots"></div>
+  <div id="counter">1/1</div>
+  <button id="nextBtn" onclick="goTo(current+1)">Next ▶</button>
+  <button id="dlNotesBtn" onclick="savePDF()" style="margin-left:10px;padding:5px 12px;background:#2E2A6B;color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:inherit;">💾 Save Notes</button>
+  <button onclick="this.blur();printAll()" style="margin-left:6px;padding:5px 12px;background:#0E5A8A;color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:inherit;">🖨️ Print Lesson</button>
+  <button onclick="this.blur();clearAllNotes()" title="Delete all notes and start a new lesson" style="margin-left:6px;padding:5px 12px;background:#8B2E2E;color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:inherit;">🗑️ Clear Notes</button>
+</div>
+
+<script>
+/* ===================== SLIDE NAV DATA ===================== */
+var slideIds = ["s1", "s-lead", "s-lead2", "s-m1", "s-g1", "s-cb23", "s-sp1", "s-m2", "s-cb25", "s-sp2", "s-m3", "s-g2", "s-cb28", "s-sp3", "s-pron", "s-cb29", "s-rd0", "s-rd1", "s-rd2", "s-rd3", "s-rd4", "s-rd5", "s-cb210", "s-free", "s-review", "hw-cover", "hw-1", "hw-2", "hw-3", "hw-4", "hw-5"];
+var slideLabels = ["Cover", "Warm-Up – Career Snapshot", "Warm-Up – Would You Rather?", "Meaning – Past Simple or Past Continuous?", "Grammar – Form", "Grammar – Cross Out the Incorrect Words", "Speaking Break 1 – Your Work Story", "Meaning – The Past Tense for Politeness", "Grammar – Mark the Correct Sentences", "Speaking Break 2 – Be Polite", "Meaning – Present Perfect or Past Simple?", "Grammar – Form: Present Perfect Simple", "Grammar – Fill in the Gaps", "Speaking Break 3 – Interview a Colleague", "Pronunciation – -ed Endings", "Listening – Two Colleagues", "Reading – Before You Read", "Reading – The Coffee Machine", "Reading – True, False, Not Given", "Reading – Understanding the Article", "Reading – Words in Context", "Speaking – About the Article", "Speaking – Choose, Then Say It", "Speaking – Coffee Machine Catch-up", "Lesson Review", "Homework Cover", "HW1 – Mark the Correct Sentences", "HW2 – Fill in the Gaps", "HW3 – Match the Endings", "HW4 – Read and Answer", "HW5 – Choose, Then Say It"];
+var slides = Array.from(document.querySelectorAll('.slide'));
+var current = 0;
+var notesStoreKey = 'befeNotes::U02-Getting-to-know-colleagues::' + document.title;
+var notesData = {};
+try { var _savedNotes = JSON.parse(localStorage.getItem(notesStoreKey)); if (_savedNotes) Object.assign(notesData, _savedNotes); } catch(e) {}
+var notesOpen = false;
+
+if (slides.length !== slideIds.length || slides.length !== slideLabels.length) {
+  console.warn('Slide count mismatch:', slides.length, 'slides,', slideIds.length, 'IDs,', slideLabels.length, 'labels');
+}
+
+var dotsWrap = document.getElementById('dots');
+slides.forEach(function(s, i){
+  var d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = function(){ goTo(i); };
+  dotsWrap.appendChild(d);
+});
+
+function goTo(n){
+  if (n < 0 || n >= slides.length) return;
+  saveNotes();
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('active', i===current); });
+  document.getElementById('counter').textContent = (current+1)+'/'+slides.length;
+  document.getElementById('prevBtn').disabled = current===0;
+  document.getElementById('nextBtn').disabled = current===slides.length-1;
+  document.getElementById('homeBtn').style.display = current===0 ? 'none' : 'flex';
+  var panel = document.getElementById('notesPanel');
+  if (current === 0) { if (notesOpen) panel.classList.add('cover'); }
+  else { panel.classList.remove('cover'); }
+  loadNotes(current);
+}
+function goToId(id){ var i = slideIds.indexOf(id); if (i>-1) goTo(i); }
+
+document.addEventListener('keydown', function(e){
+  var tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.contentEditable === 'true') return;
+  if (e.key === 'ArrowRight') goTo(current+1);
+  if (e.key === 'ArrowLeft') goTo(current-1);
+});
+
+
+/* ===================== NOTES ===================== */
+
+/* -- DRAGGABLE NOTES PANEL -------------------- */
+(function(){
+  var panel = document.getElementById('notesPanel');
+  if (!panel) return;
+  var handle = document.getElementById('notesDragHandle') || panel.querySelector('.notes-header') || document.getElementById('notesToolbar');
+  if (!handle) return;
+  handle.style.touchAction = 'none';
+  var dragging = false, startX, startY, startLeft, startTop;
+  function onDown(e){
+    if (e.target.closest('button')) return;
+    dragging = true;
+    panel.classList.add('dragging');
+    panel.classList.remove('cover');
+    var rect = panel.getBoundingClientRect();
+    panel.style.left = rect.left + 'px';
+    panel.style.top = rect.top + 'px';
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+    panel.style.transform = 'none';
+    startX = e.clientX; startY = e.clientY;
+    startLeft = rect.left; startTop = rect.top;
+    e.preventDefault();
+    document.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerup', onUp);
+  }
+  function onMove(e){
+    if (!dragging) return;
+    var dx = e.clientX - startX, dy = e.clientY - startY;
+    var newLeft = startLeft + dx, newTop = startTop + dy;
+    var maxLeft = window.innerWidth - panel.offsetWidth - 4;
+    var maxTop = window.innerHeight - 40;
+    newLeft = Math.max(4, Math.min(newLeft, maxLeft));
+    newTop = Math.max(4, Math.min(newTop, maxTop));
+    panel.style.left = newLeft + 'px';
+    panel.style.top = newTop + 'px';
+  }
+  function onUp(){
+    dragging = false;
+    panel.classList.remove('dragging');
+    document.removeEventListener('pointermove', onMove);
+    document.removeEventListener('pointerup', onUp);
+  }
+  handle.addEventListener('pointerdown', onDown);
+})();
+
+function toggleNotes(){
+  notesOpen = !notesOpen;
+  var panel = document.getElementById('notesPanel');
+  panel.classList.toggle('open', notesOpen);
+  if (current === 0) panel.classList.toggle('cover', notesOpen);
+  document.getElementById('notesBtn').textContent = notesOpen ? '✕ Close' : '📝 Notes';
+  /* reset position on close */
+  if (!notesOpen) { panel.style.left=''; panel.style.top=''; panel.style.right=''; panel.style.bottom=''; panel.style.transform=''; }
+}
+function notesFormat(cmd){
+  document.getElementById('notesTA').focus();
+  document.execCommand(cmd, false, null);
+  saveNotes();
+}
+function notesHilite(color){
+  var ta = document.getElementById('notesTA');
+  ta.focus();
+  var sel = window.getSelection();
+  if (!sel || !sel.rangeCount || sel.getRangeAt(0).collapsed) return;
+  document.execCommand('styleWithCSS', false, true);
+  if (color !== 'remove'){
+    var cur = document.queryCommandValue('backColor');
+    var hex = color.replace('#','');
+    var r = parseInt(hex.substr(0,2),16), g = parseInt(hex.substr(2,2),16), b = parseInt(hex.substr(4,2),16);
+    if (cur === 'rgb('+r+', '+g+', '+b+')' || cur === 'rgb('+r+','+g+','+b+')') { color = 'remove'; }
+  }
+  if (color === 'remove'){
+    document.execCommand('hiliteColor', false, 'transparent');
+    Array.from(ta.querySelectorAll('[style*="background"]')).forEach(function(el){
+      var c = el.style.backgroundColor;
+      if (c === 'transparent' || c === 'rgba(0, 0, 0, 0)' || c === ''){
+        var p = el.parentNode;
+        if (!p) return;
+        while (el.firstChild) p.insertBefore(el.firstChild, el);
+        p.removeChild(el);
+      }
+    });
+  } else {
+    document.execCommand('hiliteColor', false, color);
+  }
+  saveNotes();
+}
+function saveNotes(){ notesData[current] = document.getElementById('notesTA').innerHTML; try{ localStorage.setItem(notesStoreKey, JSON.stringify(notesData)); }catch(e){} }
+function loadNotes(idx){ document.getElementById('notesTA').innerHTML = notesData[idx] || ''; }
+function clearAllNotes(){
+  if(!confirm('Delete all notes for this lesson? This cannot be undone.')) return;
+  Object.keys(notesData).forEach(function(k){ delete notesData[k]; });
+  var ta = document.getElementById('notesTA');
+  if (ta) ta.innerHTML = '';
+  try{ if (typeof notesStoreKey !== 'undefined') localStorage.removeItem(notesStoreKey); }catch(e){}
+}
+function savePDF(){
+  saveNotes();
+  var hasNotes = Object.keys(notesData).some(function(k){ return notesData[k] && notesData[k].replace(/<[^>]*>/g,'').trim(); });
+  if (!hasNotes){ alert('No notes to save yet!'); return; }
+  var win = window.open('', '_blank');
+  var cards = '';
+  slideIds.forEach(function(sid, idx){
+    var note = notesData[idx] || '';
+    if (!note.replace(/<[^>]*>/g,'').trim()) return;
+    cards += '<div class="card"><div class="card-header">Slide '+(idx+1)+' &mdash; '+slideLabels[idx]+'</div><div class="card-body">'+note+'</div></div>';
+  });
+  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Notes – Business English · Unit 2 · Getting to know colleagues</title><style>'+
+    'body{font-family:"Segoe UI",system-ui,sans-serif;max-width:800px;margin:0 auto;padding:32px 24px;color:#1C2B3A}'+
+    '.header{border-bottom:2px solid #0B1929;padding-bottom:8px;margin-bottom:4px}'+
+    '.header h1{font-size:1.4rem;margin:0 0 6px;color:#0B1929}.header .lesson-link{font-size:1.05rem;color:#1C2B3A}.header a{color:#1B6E96}'+
+    '.date{font-size:.85rem;color:#666;margin:10px 0 24px}'+
+    '.card{border:1px solid #DDD;border-radius:8px;margin-bottom:16px;overflow:hidden;}'+
+    '.card-header{background:#0B1929;color:#fff;padding:8px 14px;font-weight:700;font-size:.88rem;break-after:avoid-page;page-break-after:avoid;}'+
+    '.card-body{orphans:3;widows:3;}'+
+    '.card-body{padding:12px 16px;font-size:.95rem;line-height:1.7}'+
+    'mark{background:#FFE066;color:#1a1a1a;padding:0 2px}'+
+    '[style*="background-color"]{color:#1a1a1a!important}'+
+    '.card-body,.card-body *{color:#1a1a1a!important}'+
+    '*{print-color-adjust:exact;-webkit-print-color-adjust:exact}'+
+    '@media print{@page{margin:1.5cm}body{padding:0}button{display:none}}'+
+  '</style></head><body>'+
+  '<div class="header"><h1>Business English · Unit 2 · Getting to know colleagues</h1><div class="lesson-link">📝 Here you can see our Notes from Class.</div><div class="lesson-link" style="margin-top:4px;">You can also access <a href="https://teacher-nanda.github.io/AEF-Courses/AEF4-4B/index.html" target="_blank">this link</a> to review the lesson material and do your optional Homework activities.</div></div>'+
+  '<p class="date">'+new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</p>'+
+  cards+'</body></html>');
+  win.document.close();
+  setTimeout(function(){ win.print(); }, 400);
+}
+
+/* ===================== GENERIC: TYPED GAP-FILL ===================== */
+function norm(s){ return (s||'').toString().trim().toLowerCase().replace(/[.,!?;:'’]+$/,'').replace(/\s+/g,' '); }
+function checkSlide(sid){
+  var box = document.getElementById(sid);
+  var inputs = box.querySelectorAll('.ans-input');
+  inputs.forEach(function(inp){
+    var val = norm(inp.value);
+    if (!val) { inp.classList.remove('correct','wrong'); inp.classList.add('empty-warn'); return; }
+    inp.classList.remove('empty-warn');
+    var ans = norm(inp.dataset.ans);
+    var alts = (inp.dataset.alt || '').split('|').map(norm).filter(Boolean);
+    if (val === ans || alts.indexOf(val) > -1) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); }
+  });
+}
+function resetSlide(sid){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.ans-input').forEach(function(inp){ inp.value=''; inp.classList.remove('correct','wrong','empty-warn'); });
+}
+
+/* ===================== GENERIC: CIRCLE MC ===================== */
+function circPick(btn){
+  var group = btn.dataset.group;
+  var box = btn.closest('.slide');
+  var wasPicked = btn.classList.contains('picked');
+  box.querySelectorAll('.circ-opt[data-group="'+group+'"]').forEach(function(b){ b.classList.remove('picked'); });
+  if (!wasPicked) btn.classList.add('picked');
+}
+function circScope(sid){
+  var el = document.getElementById(sid);
+  if (!el) return null;
+  if (el.querySelector('.circ-opt[data-group]')) return el;   /* scope to this exercise */
+  return el.closest('.slide') || el;                           /* legacy fallback */
+}
+function checkCircSlide(sid){
+  var box = circScope(sid);
+  var groups = {};
+  box.querySelectorAll('.circ-opt[data-group][data-correct]').forEach(function(b){ groups[b.dataset.group] = groups[b.dataset.group] || []; groups[b.dataset.group].push(b); });
+  Object.keys(groups).forEach(function(g){
+    var picked = groups[g].find(function(b){ return b.classList.contains('picked'); });
+    groups[g].forEach(function(b){ b.classList.remove('correct','wrong'); });
+    if (!picked) return;
+    if (picked.dataset.correct === picked.textContent.trim()) picked.classList.add('correct');
+    else picked.classList.add('wrong');
+  });
+}
+function resetCircSlide(sid){
+  var box = circScope(sid);
+  box.querySelectorAll('.circ-opt[data-group]').forEach(function(b){ b.classList.remove('picked','correct','wrong'); });
+}
+
+/* ===================== GENERIC: COLOUR-PAIR MATCH ===================== */
+var matchColours = ['c0','c1','c2','c3','c4','c5','c6','c7'];
+var matchPending = {};
+function matchPick(el){
+  var wrap = el.closest('.match-wrap');
+  var wid = wrap.id;
+  if (el._linked){
+    var partner = el._linked;
+    matchColours.forEach(function(c){ el.classList.remove(c); partner.classList.remove(c); });
+    el.classList.remove('correctpair','wrongpair','picking');
+    partner.classList.remove('correctpair','wrongpair','picking');
+    el._linked = null; partner._linked = null;
+    delete el.dataset.colour; delete partner.dataset.colour;
+    if (matchPending[wid] === el) matchPending[wid] = null;
+    return;
+  }
+  var pending = matchPending[wid];
+  if (pending && pending !== el && pending.dataset.side !== el.dataset.side){
+    var used = Array.from(wrap.querySelectorAll('.match-item')).map(function(x){ return x.dataset.colour; }).filter(Boolean);
+    var next = matchColours.find(function(c){ return used.indexOf(c) === -1; }) || matchColours[Math.floor(used.length/2) % matchColours.length];
+    pending.classList.remove('picking');
+    pending.classList.add(next); el.classList.add(next);
+    pending.dataset.colour = next; el.dataset.colour = next;
+    pending._linked = el; el._linked = pending;
+    matchPending[wid] = null;
+    return;
+  }
+  if (pending === el){
+    pending.classList.remove('picking');
+    matchPending[wid] = null;
+    return;
+  }
+  if (pending) pending.classList.remove('picking');
+  el.classList.add('picking');
+  matchPending[wid] = el;
+}
+function checkMatchSlide(id){
+  var wrap = document.getElementById(id);
+  wrap.querySelectorAll('.match-item[data-side="left"]').forEach(function(l){
+    l.classList.remove('correctpair','wrongpair');
+    if (l._linked) l._linked.classList.remove('correctpair','wrongpair');
+    if (!l._linked) return;
+    var r = l._linked;
+    if (r.dataset.pair === l.dataset.pair){ l.classList.add('correctpair'); r.classList.add('correctpair'); }
+    else { l.classList.add('wrongpair'); r.classList.add('wrongpair'); }
+  });
+}
+function resetMatchSlide(id){
+  var wrap = document.getElementById(id);
+  wrap.querySelectorAll('.match-item').forEach(function(el){
+    matchColours.forEach(function(c){ el.classList.remove(c); });
+    el.classList.remove('correctpair','wrongpair','picking');
+    el._linked = null;
+    delete el.dataset.colour;
+  });
+  matchPending[id] = null;
+}
+
+/* ===================== GENERIC: CLASSIFY / SORT ===================== */
+var classifySelected = {};
+function classifyPick(chip){
+  if (chip.classList.contains('used')) return;
+  var bank = chip.closest('[id$="-bank"]') || chip.parentElement;
+  bank.querySelectorAll('.classify-chip').forEach(function(c){ c.classList.remove('selected'); });
+  chip.classList.add('selected');
+  classifySelected[bank.id] = chip;
+}
+function classifyTarget(col){
+  var colsEl = col.closest('[id$="-cols"]');
+  var bankId = colsEl ? colsEl.id.replace(/-cols$/, '-bank') : null;
+  var chip = bankId ? classifySelected[bankId] : null;
+  if (!chip) return;
+  var tag = document.createElement('span');
+  tag.className = 'placed';
+  tag.textContent = chip.textContent;
+  tag.dataset.ans = chip.dataset.ans;
+  tag.dataset.chipRef = '1';
+  tag.onclick = function(e){ e.stopPropagation(); tag.remove(); chip.classList.remove('used'); };
+  col.appendChild(tag);
+  chip.classList.add('used'); chip.classList.remove('selected');
+  delete classifySelected[bankId];
+}
+function checkClassifySlide(prefix){
+  var cols = document.getElementById(prefix+'-cols');
+  cols.querySelectorAll('.classify-col').forEach(function(col){
+    col.querySelectorAll('.placed').forEach(function(tag){
+      tag.classList.remove('correct','wrong');
+      if (tag.dataset.ans === col.dataset.target) tag.classList.add('correct');
+      else tag.classList.add('wrong');
+    });
+  });
+}
+function resetClassifySlide(prefix){
+  var bank = document.getElementById(prefix+'-bank');
+  var cols = document.getElementById(prefix+'-cols');
+  cols.querySelectorAll('.placed').forEach(function(tag){ tag.remove(); });
+  bank.querySelectorAll('.classify-chip').forEach(function(c){ c.classList.remove('used','selected'); });
+  classifySelected = {};
+}
+
+/* ===================== GENERIC: WORD BANK FILL ===================== */
+var wbSelected = {};
+function wbPick(tile){
+  if (tile.classList.contains('used')) return;
+  var bank = tile.parentElement;
+  bank.querySelectorAll('.wb-tile').forEach(function(t){ t.classList.remove('selected'); });
+  tile.classList.add('selected');
+  wbSelected[closestSlideId(tile)] = tile;
+}
+function closestSlideId(el){ return el.closest('.slide').id; }
+function wbPlace(blank){
+  var sid = closestSlideId(blank);
+  if (blank.classList.contains('filled')) {
+    var tile = blank._tileRef;
+    if (tile) tile.classList.remove('used');
+    blank.textContent = '______';
+    blank.classList.remove('filled','correct','wrong');
+    blank._tileRef = null;
+    return;
+  }
+  var tile = wbSelected[sid];
+  if (!tile) return;
+  blank.textContent = tile.dataset.val;
+  blank.classList.add('filled');
+  blank._tileRef = tile;
+  tile.classList.add('used'); tile.classList.remove('selected');
+  delete wbSelected[sid];
+}
+function checkWbSlide(sid){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.wb-blank').forEach(function(b){
+    b.classList.remove('correct','wrong');
+    if (!b.classList.contains('filled')) return;
+    if (norm(b.textContent) === norm(b.dataset.ans)) b.classList.add('correct');
+    else b.classList.add('wrong');
+  });
+}
+function resetWbSlide(sid){
+  var box = document.getElementById(sid);
+  var slideEl = box.closest('.slide') || box;
+  box.querySelectorAll('.wb-blank').forEach(function(b){ b.textContent='______'; b.classList.remove('filled','correct','wrong'); b._tileRef=null; });
+  slideEl.querySelectorAll('.wb-tile').forEach(function(t){ t.classList.remove('used','selected'); });
+  wbSelected = {};
+}
+
+/* ===================== GENERIC: TICK / CHECKBOX ===================== */
+function toggleTick(el){
+  el.classList.toggle('picked');
+}
+function checkTickSlide(sid, correctVals){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.tick-item').forEach(function(item){
+    var val = item.dataset.val;
+    var isCorrect = correctVals.indexOf(val) > -1;
+    item.classList.remove('correct','wrong','missed');
+    if (item.classList.contains('picked') && isCorrect) item.classList.add('correct');
+    else if (item.classList.contains('picked') && !isCorrect) item.classList.add('wrong');
+    else if (!item.classList.contains('picked') && isCorrect) item.classList.add('missed');
+  });
+}
+function resetTickSlide(sid){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.tick-item').forEach(function(item){ item.classList.remove('picked','correct','wrong','missed'); });
+}
+
+/* ===================== SUGGESTED ANSWER / ANSWER KEY TOGGLE ===================== */
+function toggleSuggested(id){
+  var box = document.getElementById(id);
+  box.classList.toggle('show');
+}
+
+/* ===================== SHARED NO-REPEAT SHUFFLE BAG ===================== */
+var shuffleBags = {}, shuffleLast = {};
+function shuffleArray(arr){
+  var a = arr.slice();
+  for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+function nextNoRepeat(key, size){
+  if (!shuffleBags[key] || shuffleBags[key].length === 0){
+    var idxs = []; for (var k=0;k<size;k++) idxs.push(k);
+    var bag = shuffleArray(idxs);
+    if (size > 1 && shuffleLast[key] !== undefined && bag[bag.length-1] === shuffleLast[key]){
+      var swapWith = Math.floor(Math.random()*(bag.length-1));
+      var tmp = bag[bag.length-1]; bag[bag.length-1] = bag[swapWith]; bag[swapWith] = tmp;
+    }
+    shuffleBags[key] = bag;
+  }
+  var n = shuffleBags[key].pop();
+  shuffleLast[key] = n;
+  return n;
+}
+
+/* ===================== PRINT LESSON ===================== */
+function printAll(){
+  saveNotes();
+  var injected = [];
+  slides.forEach(function(slide, i){
+    if (i === 0){
+      var linkEl = document.createElement('div');
+      linkEl.className = 'lesson-link-print';
+      linkEl.innerHTML = '<span class="lp-title">Business English · Unit 2 · Getting to know colleagues</span>' +
+        '<span class="lp-sub">📝 Here you can see our Notes from Class.</span>' +
+        '<span class="lp-sub" style="margin-top:6px;">You can also access <a href="https://teacher-nanda.github.io/Business-EFE2/U02-Getting-to-know-colleagues/index.html" target="_blank">this link</a> to review the lesson material and do your optional Homework activities.</span>';
+      slide.insertBefore(linkEl, slide.firstChild);
+      injected.push(linkEl);
+    }
+    var n = notesData[i] || '';
+    if (n.replace(/<[^>]*>/g,'').trim()){
+      var notesEl = document.createElement('div');
+      notesEl.className = 'slide-notes-print';
+      notesEl.innerHTML = '<div class="slide-notes-print-label">📝 Teacher Notes</div>' + n;
+      slide.appendChild(notesEl);
+      injected.push(notesEl);
+    }
+  });
+  document.body.classList.add('print-all');
+  window.print();
+  setTimeout(function(){
+    document.body.classList.remove('print-all');
+    injected.forEach(function(el){ el.parentNode && el.parentNode.removeChild(el); });
+  }, 1500);
+}
+
+/* ===================== UNSAVED-NOTES WARNING + PROGRESS BAR ===================== */
+(function(){
+  var notesUnsaved = false;
+  document.addEventListener('input', function(e){ if (e.target && e.target.id === 'notesTA') notesUnsaved = true; });
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('#dlNotesBtn') : null;
+    if (t) setTimeout(function(){ notesUnsaved = false; }, 300);
+  });
+  window.addEventListener('beforeunload', function(e){
+    if (notesUnsaved) { e.preventDefault(); e.returnValue = ''; return ''; }
+  });
+  var bar = document.getElementById('progBar'); var all = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  function upd(){ var i = all.findIndex(function(x){ return x.classList.contains('active'); }); if (i < 0) return; bar.style.width = ((i+1)/all.length*100) + '%'; }
+  new MutationObserver(upd).observe(document.getElementById('deck'), {attributes:true, subtree:true, attributeFilter:['class']});
+  upd();
+})();
+
+/* init */
+document.getElementById('counter').textContent = '1/' + slides.length;
+document.getElementById('prevBtn').disabled = true;
+loadNotes(0);
+
+
+/* ===================== SAVE NOTES AS PDF (student-friendly cover) ===================== */
+function savePDF(){
+  saveNotes();
+  var hasNotes = Object.keys(notesData).some(function(k){ return notesData[k] && notesData[k].replace(/<[^>]*>/g,'').trim(); });
+  if (!hasNotes){ alert('No notes to save yet!'); return; }
+  var LESSON = 'https://teacher-nanda.github.io/Business-EFE2/U02-Getting-to-know-colleagues/index.html', HW = LESSON + '#homework';
+  var win = window.open('', '_blank');
+  var cards = '';
+  slideIds.forEach(function(sid, idx){
+    var note = notesData[idx] || '';
+    if (!note.replace(/<[^>]*>/g,'').trim()) return;
+    cards += '<div class="card"><div class="card-header">Slide '+(idx+1)+' &mdash; '+slideLabels[idx]+'</div><div class="card-body">'+note+'</div></div>';
+  });
+  var css =
+    'body{font-family:"DM Sans","Segoe UI",system-ui,sans-serif;max-width:820px;margin:0 auto;padding:0 0 32px;color:#1C2B3A;background:#fff}'+
+    '.hero{background:linear-gradient(135deg,#2B1B5E 0%,#5A2E8C 55%,#FF6B5E 130%);color:#fff;border-radius:0 0 28px 28px;padding:34px 36px 30px;position:relative;overflow:hidden}'+
+    '.hero:after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08)}'+
+    '.hero .kicker{font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:#FFD84D;font-weight:800;margin:0 0 6px}'+
+    '.hero h1{font-family:"DM Serif Display",Georgia,serif;font-size:2.3rem;line-height:1.1;margin:0 0 6px;font-weight:600}'+
+    '.hero .sub{font-size:1.1rem;opacity:.92;margin:0}'+
+    '.hero .date{display:inline-block;margin-top:14px;background:rgba(255,255,255,.16);border-radius:999px;padding:4px 14px;font-size:.9rem}'+
+    '.how{margin:26px 28px 8px;background:#FFF8E1;border:3px solid #FFD84D;border-radius:22px;padding:20px 24px}'+
+    '.how h2{font-family:"DM Serif Display",Georgia,serif;font-size:1.45rem;margin:0 0 14px;color:#2B1B5E}'+
+    '.step{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px}'+
+    '.step .n{flex:none;width:34px;height:34px;border-radius:50%;background:#2B1B5E;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.1rem}'+
+    '.step p{margin:0;font-size:1.08rem;line-height:1.55}'+
+    '.btns{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 6px 48px}'+
+    '.bigbtn{display:inline-block;text-decoration:none;color:#fff!important;font-weight:800;font-size:1.2rem;padding:13px 26px;border-radius:999px;border:3px solid #2B1B5E;box-shadow:0 5px 0 #2B1B5E}'+
+    '.bigbtn.lesson{background:#1F9D6B}.bigbtn.hw{background:#FF6B5E}'+
+    '.link-note{margin:6px 0 0 48px;font-size:.88rem;color:#5b5b6b;word-break:break-all}'+
+    '.tip{margin-top:12px;font-size:.95rem;color:#5b5b6b}'+
+    '.notes-title{font-family:"DM Serif Display",Georgia,serif;font-size:1.5rem;color:#2B1B5E;margin:26px 28px 12px}'+
+    '.card{border:1px solid #DDD;border-radius:12px;margin:0 28px 16px;overflow:hidden}'+
+    '.card-header{background:#2B1B5E;color:#fff;padding:8px 14px;font-weight:700;font-size:.92rem;break-after:avoid-page;page-break-after:avoid}'+
+    '.card-body{padding:12px 16px;font-size:1rem;line-height:1.7;orphans:3;widows:3}'+
+    'mark{background:#FFE066;color:#1a1a1a;padding:0 2px}'+
+    '[style*="background-color"]{color:#1a1a1a!important}'+
+    '.card-body,.card-body *{color:#1a1a1a!important}'+
+    '*{print-color-adjust:exact;-webkit-print-color-adjust:exact}'+
+    '@media print{@page{margin:1.2cm}body{padding:0}.hero,.how{break-inside:avoid}}';
+  var today = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Notes – '+document.title+'</title>'+
+    '<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;700;800&display=swap" rel="stylesheet">'+
+    '<style>'+css+'</style></head><body>'+
+    '<div class="hero"><p class="kicker">Conversational English with teacher Nanda</p>'+
+      '<h1>'+document.title.replace(' — ',' · ')+'</h1>'+
+      '<p class="sub">📝 Your notes from class</p><span class="date">'+today+'</span></div>'+
+    '<div class="how"><h2>👋 How to use this PDF</h2>'+
+      '<div class="step"><div class="n">1</div><p><b>Read your notes</b> below. These are the notes we made together in class.</p></div>'+
+      '<div class="step"><div class="n">2</div><p><b>Click the green button</b> to open the lesson on your computer, tablet or phone. You can practice our lesson content again or go to the Homework to review.</p></div>'+
+      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the lesson</a></div>'+
+      '<p class="link-note">If the button does not open, copy this link: '+LESSON+'</p></div>'+
+    '<h2 class="notes-title">📝 Notes from class</h2>'+cards+'</body></html>';
+  win.document.write(html);
+  win.document.close();
+  setTimeout(function(){ win.print(); }, 700);
+}
+/* open the Homework directly from the PDF button */
+if (location.hash === '#homework' && document.getElementById('hw-cover')) { goToId('hw-cover'); }
+
+/* ===================== AUDIO CLIPS ===================== */
+var _clipAudio = null, _clipBtn = null;
+function playClip(btn){
+  try{
+    if (_clipAudio){ _clipAudio.pause(); if (_clipBtn) _clipBtn.classList.remove('playing'); }
+    if (_clipBtn === btn && _clipAudio && !_clipAudio.ended && _clipAudio.currentTime > 0){ _clipAudio = null; _clipBtn = null; return; }
+    _clipAudio = new Audio(btn.dataset.src); _clipBtn = btn;
+    btn.classList.add('playing');
+    _clipAudio.onended = function(){ btn.classList.remove('playing'); };
+    _clipAudio.onerror = function(){ btn.classList.remove('playing'); };
+    _clipAudio.play();
+  }catch(e){}
+}
+
+/* ===================== TYPED ANSWERS: forgiving comparison ===================== */
+/* ignores capitals, punctuation, curly apostrophes and extra spaces (overrides the generic version) */
+function norm(s){
+  return (s||'').toString().toLowerCase()
+    .replace(/[‘’ʼ`]/g, "'")
+    .replace(/[.,!?;:"“”]/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
+
+
+var dealCount = 0;
+function dealNext(){
+  var i = nextNoRepeat('deal', DEAL.length);
+  var d = DEAL[i];
+  var card = document.getElementById('deal-card');
+  card.innerHTML = '<div class="dc-head">' + DEAL_LABEL + ' · ' + d.head + '</div><div class="dc-body"><p class="dc-setting">' + d.title + '</p>' +
+    d.lines.map(function(l){ return '<p class="dc-line">' + l + '</p>'; }).join('') +
+    '<div class="dc-goal"><b>Your goal</b>' + d.goal + '</div></div>';
+  card.classList.remove('flip'); void card.offsetWidth; card.classList.add('flip');
+  dealCount++;
+  document.getElementById('deal-count').textContent = 'Cards played: ' + dealCount;
+}
+function dealReset(){
+  shuffleBags['deal'] = []; shuffleLast['deal'] = undefined; dealCount = 0;
+  document.getElementById('deal-count').textContent = 'Cards played: 0';
+  document.getElementById('deal-card').innerHTML = '<div class="dc-head">' + DEAL_LABEL + '</div><div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div>';
+}
+
+
+/* ===================== REVIEW: CHECKLIST ===================== */
+function ckToggle(btn){
+  btn.classList.toggle('on');
+  var list = btn.closest('.check-list');
+  var all = list.querySelectorAll('.check-item'), on = list.querySelectorAll('.check-item.on');
+  var win = list.parentElement.querySelector('.win-banner');
+  if (win) win.classList.toggle('show', all.length === on.length);
+}
+
+
+/* ===================== LIVE-BOUND WARM-UP FIELDS ===================== */
+function liveUpdate(){
+  document.querySelectorAll('[data-live]').forEach(function(inp){
+    var k = inp.dataset.live;
+    document.querySelectorAll('[data-bd="' + k + '"]').forEach(function(n){ n.textContent = inp.value.trim() || ' '; });
+  });
+}
+document.addEventListener('input', function(e){ if (e.target && e.target.dataset && e.target.dataset.live) liveUpdate(); });
+
+var DEAL_LABEL = 'Coffee machine card';
+var DEAL = [
+  {head:'Monday morning', title:'The new team member',
+   lines:['Your teacher joined the team last week.', 'You want to be friendly.'],
+   goal:'Ask what your colleague did before they came here. Ask a follow-up question about it.'},
+  {head:'Office kitchen', title:'A long career',
+   lines:['Your teacher has worked at the company for many years.'],
+   goal:'Find out how long they have worked here and what other jobs they have had.'},
+  {head:'Team lunch', title:'Before the company',
+   lines:['You are having lunch with your teacher, a new manager.'],
+   goal:'Ask what their last job was like. Ask what they were doing when they got this job.'},
+  {head:'Induction day', title:'Your first week',
+   lines:['You are the new employee. Your teacher is the HR manager.'],
+   goal:'Answer questions about your past work, then ask politely about the company\'s history.'},
+  {head:'Conference break', title:'Same industry',
+   lines:['You and your teacher work in the same industry but in different companies.'],
+   goal:'Find out where they worked before and which countries they have visited for work.'},
+  {head:'Office tour', title:'A polite offer',
+   lines:['You are showing your teacher around the office.'],
+   goal:'Offer a tour or a coffee politely, using the past tense to sound polite.'},
+  {head:'Video call', title:'Meeting a remote teammate',
+   lines:['Your teacher is a teammate in another country. You have never met.'],
+   goal:'Ask about their career so far and tell them about yours.'},
+  {head:'Promotion party', title:'How did you get here?',
+   lines:['Your teacher has just been promoted.'],
+   goal:'Ask about their career. What were they doing when they got the opportunity?'},
+  {head:'Lift', title:'A short chat',
+   lines:['You are alone in the lift with your teacher, a colleague from another floor.'],
+   goal:'Ask what they did before joining. Keep the conversation going.'},
+  {head:'Mentoring session', title:'Your mentor',
+   lines:['Your teacher is your new mentor.'],
+   goal:'Tell your mentor about your first job and what you have learned so far.'},
+  {head:'Interview chat', title:'Casual talk before the meeting',
+   lines:['You arrive early for a meeting. Your teacher is already there.'],
+   goal:'Introduce yourself and ask about their experience. Say something about yours.'},
+  {head:'Farewell lunch', title:'Looking back',
+   lines:['Your teacher is leaving the company after many years.'],
+   goal:'Ask what they have done here and what they were doing before they joined.'}
+];
+
+</script>
+</body>
+</html>

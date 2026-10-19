@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 — Departments and roles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Segoe UI', system-ui, sans-serif; background:#0A0A0A; }
+  #deck { position:relative; width:100%; height:100vh; overflow:hidden; }
+  .slide {
+    position:absolute; inset:0; opacity:0; pointer-events:none;
+    transition:opacity .35s ease; overflow-y:auto; min-height:100vh;
+    display:flex; flex-direction:column; background:#fff;
+  }
+  .slide.active { opacity:1; pointer-events:auto; }
+
+  /* ===== COVER / HW COVER ===== */
+  #s1, #hw-cover {
+    background: linear-gradient(135deg, #180B08 0%, #3D1810 30%, #6B2318 55%, #8B3A1E 75%, #C44D1E 100%);
+    align-items:center; justify-content:center;
+  }
+  .title-inner { position:relative; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px; }
+  .title-label { text-transform:uppercase; letter-spacing:.18em; font-size:1.1rem; font-weight:500; color:rgba(255,255,255,.65); margin-bottom:10px; }
+  .title-sub { font-size:1.15rem; font-weight:400; color:rgba(255,255,255,.75); margin-bottom:26px; }
+  .title-main { font-size:3.4rem; font-weight:900; color:#fff; line-height:1.1; text-align:center; max-width:900px; }
+  .title-accent { color:#FF6B35; text-shadow:0 0 28px rgba(255,107,53,.5); }
+  .hw-badge { background:rgba(255,255,255,.1); border-radius:8px; padding:7px 22px; font-size:1rem; letter-spacing:.15em; color:rgba(255,255,255,.85); text-transform:uppercase; font-weight:600; margin-bottom:32px; }
+
+  /* ===== BANNERS ===== */
+  .banner { width:100%; padding:13px 28px; font-size:1.1rem; font-weight:700; letter-spacing:.03em; display:flex; align-items:center; gap:10px; flex-shrink:0; color:#fff; }
+  .banner-leadin    { background:#D35400; }
+  .banner-listening { background:#0E7A8A; }
+  .banner-speaking  { background:#B23A6B; }
+  .banner-grammar   { background:#5A2E8C; }
+  .banner-pron      { background:#A8571E; }
+  .banner-reading   { background:#2A6B42; }
+  .banner-vocab     { background:#1E7A5F; }
+  .banner-video     { background:#A83232; }
+  .banner-review    { background:#2E2A6B; }
+  .banner-hw        { background:#1C2B3A; }
+
+  .slide-main { flex:1; overflow-y:auto; width:100%; display:flex; flex-direction:column; padding-bottom:60px; }
+  .content { padding:24px 48px 20px; flex:1; }
+  h2 { font-size:1.85rem; font-weight:800; color:#1C2B3A; margin:0 0 14px; }
+  .instruction { font-size:1.08rem; font-weight:700; color:#1C2B3A; margin:0 0 18px; }
+  .inst-light { font-size:1.05rem; font-weight:400; color:#1C2B3A; margin:0 0 18px; line-height:1.7; }
+  .discuss-label { font-size:1.08rem; font-weight:700; color:#1C2B3A; margin:0 0 14px; line-height:1.7; }
+  .section-subhead { font-size:1.3rem; font-weight:800; color:#5A2E8C; margin:24px 0 10px; }
+  .discuss-list { margin:0 0 18px; padding-left:22px; line-height:1.9; font-size:1.06rem; color:#1C2B3A; }
+  .discuss-list li { margin-bottom:10px; }
+  .discuss-box { background:#F4F8FA; border-left:6px solid #0E7A8A; border-radius:12px; padding:16px 20px 4px; margin-top:20px; }
+  .discuss-box .discuss-label { margin-bottom:10px; line-height:1.7; }
+  .discuss-box .discuss-list { margin-bottom:12px; }
+
+  /* ===== CARDS / EXERCISE CONTAINERS ===== */
+  .card { background:#F4F8FA; border-radius:12px; padding:1.5rem; box-shadow:0 2px 8px rgba(0,0,0,.06); margin-bottom:20px; }
+  .book-placeholder { border:2px dashed #C9A227; background:#FBF6E8; border-radius:12px; padding:32px 24px; text-align:center; color:#7A5A1E; font-weight:600; margin-bottom:20px; }
+  .book-placeholder .bp-icon { font-size:2.2rem; display:block; margin-bottom:8px; }
+  .book-placeholder .bp-note { font-weight:400; font-size:1.05rem; color:#9A7A2E; margin-top:6px; }
+  .lead-img-wrap { text-align:center; margin-bottom:20px; }
+  .lead-img { width:100%; max-height:280px; object-fit:cover; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,.15); }
+  .lead-img-caption { font-size:1.08rem; font-style:italic; font-weight:700; color:#8B3A1E; margin:12px 0 0; }
+
+  .ex-row { font-size:1.06rem; line-height:1.7; margin-bottom:10px; color:#1C2B3A; }
+  .ans-input { border:none; border-bottom:2px solid #5A2E8C; background:transparent; font-size:1.05rem; font-weight:700; width:160px; padding:2px 4px; text-align:left; font-family:inherit; color:#1C2B3A; }
+  .ans-input.small { width:120px; }
+  .ans-input.wide { width:100%; margin-top:6px; }
+  .ans-input.half { width:50%; margin-top:6px; }
+  textarea.ans-input { display:block; min-height:70px; resize:vertical; text-align:left; }
+  .ans-input:focus { outline:none; border-bottom-color:#B23A6B; }
+  .ans-input.correct { color:#1A7A4A; border-bottom-color:#1A7A4A; }
+  .ans-input.wrong { color:#C4614A; border-bottom-color:#C4614A; }
+  .ans-input.empty-warn { color:#C98A1E; border-bottom-color:#C98A1E; }
+
+  .two-col { columns:2; column-gap:40px; }
+  .two-col .ex-row { break-inside:avoid; }
+  .fixed-two-col { display:grid; grid-template-columns:1fr 1fr; gap:0 40px; align-items:start; }
+  .fixed-three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0 28px; align-items:start; }
+
+  .btn-row { display:flex; gap:12px; justify-content:center; margin-top:22px; flex-wrap:wrap; }
+  .btn-check { background:#5A2E8C; color:#fff; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+  .btn-reset { background:#e8e8ec; color:#333; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+  .btn-suggest { background:#1B6E96; color:#fff; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+
+  .suggest-box { display:none; background:#EAF4F6; border-left:4px solid #1B6E96; border-radius:8px; padding:16px 20px; margin-top:16px; font-size:1.05rem; line-height:1.7; color:#1C2B3A; }
+  .suggest-box.show { display:block; }
+  .suggest-box li { margin-bottom:6px; }
+
+  /* circle MC */
+  .circ-num { display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border-radius:6px; font-weight:800; background:#eee; color:#5A2E8C; margin-right:8px; font-size:.9rem; }
+  .circ-opt { border:1.5px solid #ccc; border-radius:14px; padding:4px 14px; margin:2px 4px; background:#fff; cursor:pointer; font-family:inherit; font-size:1.05rem; color:#1C2B3A; }
+  .circ-opt.picked { border-color:#5A2E8C; background:#EEE7F7; font-weight:700; }
+  .circ-opt.correct { border-color:#1A7A4A; background:#E3F5EA; color:#1A7A4A; font-weight:800; }
+  .circ-opt.wrong { border-color:#C4614A; background:#FBEAE6; color:#C4614A; font-weight:800; }
+  .example-badge { background:#2E7D32;color:#fff;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:6px;font-weight:800; margin-right:8px; font-size:.9rem; }
+
+  /* classify */
+  .classify-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+  .classify-chip { border:1.5px solid #5A2E8C; color:#5A2E8C; border-radius:20px; padding:6px 16px; cursor:pointer; font-weight:700; font-size:1.05rem; background:#fff; font-family:inherit; }
+  .classify-chip.selected { background:#5A2E8C; color:#fff; }
+  .classify-chip.used { opacity:.35; cursor:default; border-style:dashed; }
+  .classify-cols { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .classify-col { background:#fff; border:2px solid #ddd; border-radius:10px; padding:14px; min-height:70px; cursor:pointer; }
+  .classify-col h4 { margin:0 0 8px; font-size:1.1rem; color:#5A2E8C; }
+  .classify-col .placed { display:inline-block; background:#EEE7F7; border-radius:14px; padding:3px 10px; margin:3px; font-size:1.05rem; font-weight:700; }
+  .classify-col .placed.correct { background:#E3F5EA; color:#1A7A4A; }
+  .classify-col .placed.wrong { background:#FBEAE6; color:#C4614A; }
+
+  /* match colour pair */
+  .match-wrap { display:grid; grid-template-columns:1fr 1fr; gap:40px; background:#F8FAFB; border-radius:14px; padding:1.3rem 1.4rem; }
+  .match-col-head { font-weight:800; font-size:1.05rem; letter-spacing:.02em; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #E0E6EC; }
+  .match-col-head.mc-left { color:#5A2E8C; }
+  .match-col-head.mc-right { color:#A8571E; }
+  .match-item { padding:11px 14px; border-radius:8px; border:1.5px solid #ddd; margin-bottom:10px; cursor:pointer; font-size:1.05rem; color:#1C2B3A; user-select:none; position:relative; transition:border-color .15s, box-shadow .15s, transform .15s; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.06); display:flex; align-items:flex-start; }
+  .match-item:not(.example-pair):hover { box-shadow:0 3px 10px rgba(0,0,0,.14); transform:translateY(-1px); }
+  .match-item.example-pair { cursor:default; background:#EAF6EE !important; border-color:#2E7D32 !important; }
+  .match-item.c0 { border-color:#7B2D8E; border-width:3px; background:#F3E6F7; box-shadow:0 0 0 2px rgba(123,45,142,.25); }
+  .match-item.c1 { border-color:#C9822E; border-width:3px; background:#FBEFE0; box-shadow:0 0 0 2px rgba(201,130,46,.25); }
+  .match-item.c2 { border-color:#2A5A9E; border-width:3px; background:#E3EBFA; box-shadow:0 0 0 2px rgba(42,90,158,.25); }
+  .match-item.c3 { border-color:#0E7A8A; border-width:3px; background:#E3F2F4; box-shadow:0 0 0 2px rgba(14,122,138,.25); }
+  .match-item.c4 { border-color:#B23A6B; border-width:3px; background:#F8E6EE; box-shadow:0 0 0 2px rgba(178,58,107,.25); }
+  .match-item.c5 { border-color:#8C7A1E; border-width:3px; background:#F5F1DD; box-shadow:0 0 0 2px rgba(140,122,30,.25); }
+  .match-item.c6 { border-color:#4A5A8C; border-width:3px; background:#E6E9F5; box-shadow:0 0 0 2px rgba(74,90,140,.25); }
+  .match-item.c7 { border-color:#3E8C5E; border-width:3px; background:#E6F5EC; box-shadow:0 0 0 2px rgba(62,140,94,.25); }
+  .match-item.picking { border-color:#5A2E8C; border-width:3px; border-style:dashed; box-shadow:0 0 0 2px rgba(90,46,140,.2); }
+  .match-item.correctpair { outline:3px solid #1A7A4A; background:#1A7A4A !important; color:#fff; }
+  .match-item.wrongpair { outline:3px solid #C4614A; background:#C4614A !important; color:#fff; }
+
+  /* word bank tiles */
+  .wb-bank { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; }
+  .wb-bank.book-style { border-top:3px double #333; border-bottom:1px solid #ccc; padding:12px 4px; }
+  .wb-tile { border:1.5px solid #A8571E; color:#A8571E; background:#fff; border-radius:18px; padding:6px 16px; cursor:pointer; font-weight:700; font-family:inherit; font-size:1.05rem; }
+  .wb-tile.used { opacity:.35; border-style:dashed; cursor:default; }
+  .wb-tile.selected { background:#A8571E; color:#fff; }
+  .wb-tile.example-used { opacity:.5; border-style:dashed; cursor:default; text-decoration:line-through; }
+  .wb-blank { display:inline-block; min-width:90px; border-bottom:2px solid #A8571E; padding:2px 8px; margin:0 3px; cursor:pointer; font-weight:700; color:#A8571E; text-align:center; }
+  .wb-blank.filled { border-style:solid; }
+  .wb-blank.correct { color:#1A7A4A; border-color:#1A7A4A; }
+  .wb-blank.wrong { color:#C4614A; border-color:#C4614A; }
+
+  /* audio / video placeholders */
+  .audio-box { background:#f0f4f8; border-radius:999px; padding:10px 18px; display:flex; align-items:center; gap:14px; margin-bottom:18px; }
+  .audio-box audio { width:100%; }
+  .speaker-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:22px; }
+  .speaker-card { background:#F4F8FA; border-radius:14px; padding:12px; }
+  .speaker-card img { width:100%; height:120px; object-fit:cover; border-radius:10px; display:block; }
+  .speaker-card .sp-name { font-size:1.05rem; font-weight:800; color:#1C2B3A; margin:10px 0 8px; text-align:center; }
+  .speaker-card .audio-box { margin-bottom:0; padding:6px 10px; }
+  .who-table { border:1px solid #E2E8E2; border-radius:12px; overflow:hidden; }
+  .who-row { display:grid; grid-template-columns:1fr repeat(4,86px); align-items:center; gap:8px; padding:9px 14px; border-bottom:1px solid #E2E8E2; font-size:1.06rem; line-height:1.5; color:#1C2B3A; }
+  .who-row:last-child { border-bottom:none; }
+  .who-row.who-head { background:#F4F8FA; font-weight:800; }
+  .who-row.who-head span { text-align:center; }
+  .who-row.who-head span:first-child { text-align:left; }
+  .who-row .circ-opt { width:100%; margin:0; text-align:center; padding:4px 0; }
+  .video-box { background:#1C2B3A; border-radius:14px; padding:16px 20px; margin-bottom:18px; }
+  .video-box video { width:100%; border-radius:8px; display:block; }
+  .video-box p { color:#fff; font-size:1.05rem; margin:0 0 10px; font-weight:700; letter-spacing:.02em; }
+  .glossary-note { font-size:1.05rem; color:#666; font-style:italic; margin-top:10px; }
+  .glossary-box { background:#F4F8FA; border-radius:10px; padding:14px 18px; margin-bottom:16px; }
+  .glossary-box h4 { margin:0 0 8px; font-size:1rem; color:#5A2E8C; }
+  .glossary-box p { margin:0 0 6px; font-size:1.05rem; line-height:1.7; color:#1C2B3A; }
+  .glossary-box b { color:#1C2B3A; }
+
+  /* answer key toggle */
+  .akey-box { display:none; background:#F3EEF7; border-left:4px solid #5A2E8C; border-radius:8px; padding:16px 20px; margin-top:16px; font-size:1.05rem; line-height:1.7; color:#1C2B3A; }
+  .akey-box.show { display:block; }
+  .akey-box li { margin-bottom:8px; }
+  .btn-akey { background:#5A2E8C; color:#fff; border:none; border-radius:8px; padding:11px 26px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; }
+
+  /* grammar theory / form reference */
+  .gram-box { background:#F4F8FA; border-radius:12px; padding:18px 22px; margin-bottom:16px; border-left:6px solid #5A2E8C; }
+  .gram-box h3 { margin:0 0 8px; font-size:1.1rem; color:#5A2E8C; }
+  .gram-box p { font-size:1.06rem; line-height:1.7; color:#1C2B3A; margin:0 0 8px; }
+  .gram-box .hl { font-weight:800; color:#5A2E8C; }
+  .gram-box ul { margin:6px 0 0; padding-left:20px; font-size:1.05rem; line-height:1.8; color:#1C2B3A; }
+  .gram-note { background:#FDF3D6; border-left:4px solid #C9A227; border-radius:8px; padding:14px 18px; font-size:1.05rem; color:#7A5A1E; margin-top:6px; line-height:1.7; }
+  .gram-mistake { background:#FDEBEA; border-left:4px solid #C4614A; border-radius:8px; padding:14px 18px; font-size:1.05rem; color:#7A2A1E; margin-top:10px; line-height:1.7; }
+  .gram-mistake s { color:#922B21; }
+  .ex-example-centered { text-align:center; font-size:1.06rem; font-style:italic; color:#1A5030; background:#EAF6EE; border-radius:10px; padding:14px 24px; margin:0 0 22px; font-weight:600; line-height:1.7; }
+  .ex-example-centered .ex-tag { display:block; font-style:normal; font-weight:800; letter-spacing:.06em; font-size:.78rem; text-transform:uppercase; color:#2F7A52; margin-bottom:6px; }
+
+  /* CCQ box */
+  .gx-two { display:grid; grid-template-columns:3fr 2fr; gap:20px; align-items:start; }
+  .gx-board { background:#F4F8FA; border-radius:10px; padding:14px 18px; }
+  .gx-board h4, .gx-h { margin:0 0 10px; color:#5A2E8C; font-size:1.1rem; }
+  .gx-board .ex-row { margin-bottom:8px; line-height:1.6; }
+  mark.gx-if { background:#E7EAF7; color:#3B4C99; font-weight:800; padding:1px 6px; border-radius:5px; }
+  mark.gx-main { background:#FFF0D9; color:#9A5B00; font-weight:800; padding:1px 6px; border-radius:5px; }
+  .ccq-box { background:#F4F8FA; border-radius:10px; padding:14px 18px; margin:14px 0; }
+  .ccq-label { font-weight:700; color:#5A2E8C; margin-bottom:8px; font-size:1.05rem; }
+  .ccq-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+  .ccq-list li { font-size:1.05rem; color:#1C2B3A; line-height:1.7; }
+  .ccq-list em { color:#5A2E8C; font-weight:700; font-style:normal; }
+  .ccq-reveal-btn { background:#5A2E8C; color:#fff; border:none; border-radius:20px; padding:4px 14px; font-size:1.05rem; font-weight:700; cursor:pointer; margin-right:10px; }
+  .ccq-reveal-btn:hover { background:#7A45B5; }
+  .ccq-answer { display:none; color:#1A5030; font-weight:600; }
+  .ccq-answer.show { display:inline; }
+
+  /* speaking interview cards */
+  /* ---- Risk Bingo ---- */
+  .bingo-layout { display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:start; }
+  .bingo-card { display:grid; grid-template-columns:repeat(4,72px); gap:8px; }
+  .bingo-cell { height:72px; border-radius:12px; border:2px solid #B23A6B; background:#fff; color:#B23A6B; font-family:inherit; font-size:1.6rem; font-weight:800; cursor:default; display:flex; align-items:center; justify-content:center; transition:background .25s, color .25s, transform .25s; }
+  .bingo-cell.marked { background:#B23A6B; color:#fff; transform:scale(.94); }
+  .bingo-cell.inline { box-shadow:0 0 0 4px #F2C14E; }
+  .bingo-ball { width:120px; height:120px; border-radius:50%; background:#B23A6B; color:#fff; font-size:3rem; font-weight:800; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; box-shadow:0 6px 18px rgba(178,58,107,.35); }
+  .bingo-ball.empty { background:#F0E4EA; color:#B23A6B; }
+  .bingo-prompt { background:#F8F0F4; border-left:6px solid #B23A6B; border-radius:12px; padding:18px 22px; min-height:150px; }
+  .bingo-area { font-size:1.05rem; font-weight:800; color:#B23A6B; margin:0 0 8px; text-transform:uppercase; letter-spacing:.04em; }
+  .bingo-q { font-size:1.15rem; line-height:1.6; color:#1C2B3A; margin:0; }
+  .bingo-status { text-align:center; font-size:1.05rem; font-weight:700; color:#1C2B3A; margin-top:14px; min-height:1.6em; }
+  .bingo-status.win { color:#B23A6B; font-size:1.25rem; }
+
+  /* image placeholder */
+  .img-placeholder { background:linear-gradient(135deg,#FBEFE0,#F5DCC0); border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#8B5A1E; font-size:.95rem; font-weight:600; border:2px dashed #D9B36C; margin:8px 0; padding:24px; text-align:center; min-height:120px; }
+  .img-placeholder .ip-icon { font-size:1.8rem; margin-bottom:6px; }
+  .photo-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:16px; }
+  .photo-item { position:relative; }
+  .photo-item .img-placeholder { min-height:140px; margin:0; }
+  .photo-num { position:absolute; top:8px; left:8px; background:#1C2B3A; color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem; }
+  .photo-label { margin-top:6px; }
+  .photo-label .wb-blank { display:block; width:100%; text-align:center; }
+
+  /* article */
+  .article-box { background:#FAFAF8; border-radius:12px; padding:20px 24px; margin-bottom:16px; border:1px solid #eee; }
+  .article-box h3 { font-size:1.3rem; font-weight:900; color:#1C2B3A; margin:0 0 4px; line-height:1.3; }
+  .article-box h3 .hl { background:#A83232; color:#fff; padding:2px 8px; border-radius:4px; }
+  .article-box p { font-size:1.05rem; line-height:1.75; color:#1C2B3A; margin:0 0 14px; }
+  .article-box p:last-child { margin-bottom:0; }
+
+  /* checkbox tick list */
+  .tick-list { display:flex; flex-direction:column; gap:8px; margin:10px 0 18px; }
+  .tick-item { display:flex; align-items:center; gap:12px; padding:9px 14px; border:1.5px solid #ddd; border-radius:8px; cursor:pointer; font-size:1.05rem; color:#1C2B3A; background:#fff; transition:all .15s; }
+  .tick-item:hover { border-color:#2A6B42; }
+  .tick-box { width:22px; height:22px; border:2px solid #999; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff; font-weight:800; }
+  .tick-item.picked { border-color:#2A6B42; background:#EAF6EE; }
+  .tick-item.picked .tick-box { background:#2A6B42; border-color:#2A6B42; }
+  .tick-item.correct { border-color:#1A7A4A; background:#E3F5EA; }
+  .tick-item.correct .tick-box { background:#1A7A4A; border-color:#1A7A4A; }
+  .tick-item.wrong { border-color:#C4614A; background:#FBEAE6; }
+  .tick-item.wrong .tick-box { background:#C4614A; border-color:#C4614A; }
+  .tick-item.missed { border-color:#C98A1E; background:#FDF3D6; }
+
+  /* dice */
+  .dice-box { text-align:center; background:#F4F8FA; border-radius:14px; padding:30px; }
+  .die-face { font-size:3.5rem; margin-bottom:16px; }
+  .dice-prompt { font-size:1.15rem; font-weight:700; color:#1C2B3A; margin-top:16px; min-height:30px; }
+  .book-hl { background:#D9D9D9; padding:1px 5px; border-radius:3px; }
+
+  /* review */
+  .review-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:10px 0; }
+
+  /* score scale (Listening 1a) */
+  .score-card { background:#F4F8FA; border-radius:12px; padding:18px 22px; margin-bottom:16px; }
+  .env-row { display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; padding:9px 0; border-bottom:1px solid #e2e8e2; font-size:1.05rem; color:#1C2B3A; }
+  .env-row:last-child { border-bottom:none; }
+  .env-row .env-label { min-width:0; }
+  .env-scale { display:flex; gap:6px; }
+  .scale-head { display:grid; grid-template-columns:1fr auto; gap:16px; align-items:end; padding-bottom:8px; }
+  .scale-head .scale-anchors { display:flex; gap:6px; }
+  .scale-head .scale-anchors span { width:32px; text-align:center; font-size:.7rem; line-height:1.2; color:#5A6B7A; font-style:italic; }
+  .env-pill { width:32px; height:32px; border-radius:50%; border:1.5px solid #0E7A8A; color:#0E7A8A; background:#fff; cursor:pointer; font-weight:700; font-size:.95rem; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+  .env-pill.picked { background:#0E7A8A; color:#fff; }
+
+  /* ===== NAV / NOTES / HOME ===== */
+  #notesBtn { position:fixed; top:14px; right:22px; z-index:1000; background:rgba(10,40,54,.88); color:#fff; border:none; padding:9px 20px; border-radius:22px; cursor:pointer; font-size:.92rem; font-weight:600; letter-spacing:.02em; transition:background .2s; backdrop-filter:blur(4px); }
+  #notesBtn:hover { background:rgba(10,40,54,1); }
+  #notesDragHandle { cursor: move; user-select: none; padding: 2px 8px; margin-right: 4px; opacity: .55; font-size: .95rem; border-radius: 4px; display: inline-block; }
+  #notesDragHandle:hover { opacity: 1; background: rgba(255,255,255,.15); }
+  #notesPanel.dragging { transition: none !important; }
+  #homeBtn { position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:1000; display:none; background:rgba(10,40,54,.88); color:#fff; border:none; width:38px; height:38px; border-radius:50%; cursor:pointer; font-size:1.1rem; align-items:center; justify-content:center; transition:background .2s; backdrop-filter:blur(4px); }
+  #homeBtn:hover { background:rgba(20,96,122,.95); }
+  #notesPanel { position:fixed; top:54px; right:22px; z-index:999; width:360px; max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .25s ease; opacity:0; border-radius:14px; }
+  #notesPanel.open { max-height:320px; opacity:1; }
+  #notesPanel.cover { left:50%; right:auto; top:56px; transform:translateX(-50%); width:min(760px,94vw); max-height:calc(100vh - 110px) !important; display:flex; flex-direction:column; }
+  #notesPanel.cover #notesTA { min-height:calc(100vh - 210px) !important; max-height:calc(100vh - 210px) !important; overflow-y:auto; }
+  #notesToolbar { display:flex; gap:5px; padding:6px 10px; background:rgba(10,40,54,.7); border-radius:10px 10px 0 0; align-items:center; flex-wrap:wrap; }
+  #notesToolbar button { background:rgba(255,255,255,.12); border:none; border-radius:5px; color:#fff; font-size:.85rem; padding:3px 9px; cursor:pointer; font-family:inherit; transition:background .15s; }
+  #notesToolbar button:hover { background:rgba(255,255,255,.25); }
+  #notesTA { width:100%; min-height:220px; max-height:260px; padding:14px; border:none; border-radius:0 0 14px 14px; outline:none; font-size:1rem; line-height:1.55; background:rgba(10,40,54,.92); color:#fff; font-family:inherit; backdrop-filter:blur(6px); box-sizing:border-box; overflow-y:auto; }
+  #notesTA:empty::before { content:attr(data-placeholder); color:rgba(255,255,255,.4); pointer-events:none; }
+  #notesTA [style*="background-color"] { color:#1a1a1a !important; }
+  #nav { position:fixed; bottom:0; left:0; right:0; height:52px; background:rgba(10,40,54,.96); z-index:500; display:flex; align-items:center; justify-content:center; gap:14px; }
+  #nav button { background:rgba(255,255,255,.12); color:#fff; border:none; border-radius:7px; padding:7px 16px; font-size:.95rem; cursor:pointer; font-family:inherit; }
+  #nav button:disabled { opacity:.35; cursor:default; }
+  #dots { display:flex; gap:5px; flex-wrap:wrap; max-width:360px; justify-content:center; }
+  .dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.3); cursor:pointer; }
+  .dot.active { background:#FF6B35; }
+  #counter { color:#fff; font-size:.9rem; min-width:54px; text-align:center; }
+
+  /* print */
+  .slide-notes-print { display:none; }
+  .lesson-link-print { display:none; }
+  @media print {
+    @page { margin:1.2cm; }
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    html, body { height:auto !important; overflow:visible !important; background:#fff !important; display:block !important; }
+    #deck { overflow:visible !important; height:auto !important; display:block !important; position:static !important; }
+    #notesBtn, #notesPanel, #nav, #homeBtn { display:none !important; }
+    body.print-all .slide { display:flex !important; flex-direction:column !important; position:relative !important; inset:auto !important; opacity:1 !important; padding:16px 24px !important; page-break-after:always; break-after:page; min-height:0 !important; height:auto !important; }
+    .slide * { flex:none !important; height:auto !important; min-height:0 !important; max-height:none !important; }
+    .slide-main, .content { overflow:visible !important; }
+    img, video { max-height:240px !important; width:auto !important; max-width:100% !important; object-fit:contain !important; }
+    body.print-all .slide::before { content:"Business English · Unit 3 · Departments and roles"; display:block !important; font-size:10px; color:#999; font-family:'Segoe UI', Arial, sans-serif; padding-bottom:5px; border-bottom:1px solid #ddd; margin-bottom:8px; }
+    body.print-all #s1::before { display:none !important; }
+    .lesson-link-print { display:block !important; padding:28px 32px; margin-bottom:20px; background:linear-gradient(135deg, #180B08 0%, #3D1810 30%, #6B2318 55%, #8B3A1E 75%, #C44D1E 100%); border-radius:12px; text-align:center; font-family:'Segoe UI', Arial, sans-serif; }
+    .lesson-link-print .lp-title { display:block; font-size:30px; font-weight:900; color:#fff; margin-bottom:10px; letter-spacing:.01em; line-height:1.2; }
+    .lesson-link-print .lp-sub { display:block; font-size:20px; color:rgba(255,255,255,.88); font-weight:500; }
+    .lesson-link-print a { color:#FF6B35; font-weight:800; text-decoration:underline; font-size:20px; }
+    .slide-notes-print { display:block !important; margin-top:12px; padding:10px 14px; border-top:2px solid #0E5A8A; background:#E3F2FD; border-radius:6px; font-size:12px; line-height:1.6; color:#1A1A2E; }
+    .slide-notes-print-label { font-size:10px; font-weight:800; color:#0E5A8A; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; display:block; }
+    .card-body, .card-body * { color:#1a1a1a !important; }
+  }
+
+
+
+  /* =====================================================================
+     BUSINESS-EFE2 · UNIT 1 "Introductions" — design layer
+     Theme: the conference lobby (delegate badges, session tags, lanyards).
+     Adult / professional: ink navy, deep teal, brass, warm paper. Serif headlines.
+     ===================================================================== */
+  :root {
+    --ink:#0F2438; --ink2:#1B3A57; --teal:#0F766E; --teal-l:#E2F0EE; --brass:#B8892B; --brass-l:#F6EBD0;
+    --paper:#FBF9F4; --line:#D8D2C4; --text:#1B2733; --muted:#586573;
+    --ok:#1E7A4D; --ok-l:#E3F4EA; --bad:#B4432F; --bad-l:#FBE9E5; --warn:#A8700F; --warn-l:#FFF1D6;
+    --plum:#5B3A7A; --olive:#4C6B2F; --blue:#1F5F8B; --clay:#A4472F;
+  }
+  body { font-family:'DM Sans','Segoe UI',system-ui,sans-serif; background:var(--ink); color:var(--text); }
+  .slide { background:var(--paper); }
+  .slide-main { padding-bottom:72px; }
+  .content { zoom:1.25; }
+
+  /* ---------- progress ---------- */
+  #progBar { position:fixed; top:0; left:0; height:4px; width:0; z-index:1200; transition:width .45s ease; pointer-events:none;
+    background:linear-gradient(90deg,var(--brass),#E3C477); }
+
+  /* ---------- covers ---------- */
+  #s1, #hw-cover { background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(15,118,110,.55), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(184,137,43,.28), transparent 60%),
+      linear-gradient(160deg,#0B1B2B 0%, #11304B 100%); }
+  .title-inner { z-index:3; }
+  .title-label { font-weight:500; letter-spacing:.34em; color:#E3C477; font-size:1.05rem; }
+  .title-sub { font-weight:400; color:rgba(255,255,255,.85); font-size:1.2rem; }
+  .title-main { font-family:'DM Serif Display',Georgia,serif; font-weight:400; color:#fff; font-size:clamp(3.2rem,7vw,6rem); line-height:1.05; letter-spacing:.005em; max-width:1100px; }
+  .title-accent { color:#E3C477; text-shadow:none; }
+  #s1 .title-inner::before { content:""; display:block; width:84px; height:3px; background:var(--brass); margin:0 auto 22px; border-radius:3px; }
+  .hw-badge { background:transparent; color:#E3C477; border:1px solid #E3C477; border-radius:999px; letter-spacing:.3em; font-weight:500; padding:8px 26px; }
+  #s1 button[onclick^="goToId"] { background:transparent !important; color:#fff !important; border:1px solid #E3C477 !important; font-weight:500 !important; border-radius:999px !important; letter-spacing:.06em; padding:11px 26px !important; transition:background .2s; }
+  #s1 button[onclick^="goToId"]:hover { background:rgba(227,196,119,.18) !important; }
+  #s1::after, #hw-cover::after { display:none; }
+
+  /* floating speech cards + lanyard badge on the cover */
+  .cv-card { position:absolute; z-index:1; padding:14px 22px; border-radius:6px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.22); color:rgba(255,255,255,.88); font-family:'DM Serif Display',Georgia,serif; font-style:italic; font-size:clamp(1.05rem,1.9vw,1.55rem); animation:cvFloat 7s ease-in-out infinite; pointer-events:none; backdrop-filter:blur(2px); }
+  .cv-card.a { top:11%; left:6%; } .cv-card.b { top:16%; right:7%; animation-delay:-2s; } .cv-card.c { bottom:24%; left:8%; animation-delay:-4s; } .cv-card.d { bottom:28%; right:9%; animation-delay:-1s; }
+  @keyframes cvFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+
+  /* ---------- banners (session tags) ---------- */
+  .banner { position:relative; display:flex; align-items:center; gap:14px; padding:13px 48px; font-size:.82rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+    background:#fff; color:var(--tag,var(--ink)); border-bottom:1px solid var(--line); margin-bottom:20px; }
+  .banner::before { content:""; position:absolute; left:0; top:0; bottom:0; width:12px; background:var(--tag,var(--ink)); }
+  .banner-bridge { --tag:var(--brass); } .banner-leadin { --tag:var(--brass); } .banner-vocab { --tag:var(--teal); }
+  .banner-speaking { --tag:var(--clay); } .banner-grammar { --tag:var(--plum); } .banner-pron { --tag:#8A5A12; }
+  .banner-listening { --tag:var(--blue); } .banner-reading { --tag:var(--olive); } .banner-review { --tag:var(--ink); } .banner-hw { --tag:var(--ink); }
+
+  /* ---------- typography ---------- */
+  h2 { font-family:'DM Serif Display',Georgia,serif; font-weight:400; color:var(--ink); font-size:2.35rem; line-height:1.15; margin:0 0 14px; }
+  h2::after { content:""; display:block; width:64px; height:3px; margin-top:10px; background:var(--brass); border-radius:3px; }
+  .instruction { color:var(--ink); border-left:4px solid var(--brass); padding-left:16px; font-weight:600; }
+  .inst-light { color:var(--text); }
+  .discuss-label, .ex-row, .discuss-list { color:var(--text); }
+  .section-subhead { color:var(--teal); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.45rem; }
+
+  /* ---------- cards & boxes ---------- */
+  .card, .gram-box, .glossary-box, .ccq-box, .discuss-box, .match-wrap, .article-box, .dice-box, .qa-table-wrap {
+    background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 2px 10px rgba(15,36,56,.06); }
+  .gram-box { border-left:6px solid var(--plum); padding:18px 24px; margin-bottom:18px; }
+  .gram-box h3, .glossary-box h4 { color:var(--plum); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.35rem; margin:0 0 8px; }
+  .gram-box .hl { color:var(--ink); background:var(--brass-l); padding:0 6px; border-radius:4px; font-weight:700; }
+  .gram-note { background:var(--brass-l); border:1px solid #E5CF98; border-left:6px solid var(--brass); color:#3D2F0A; border-radius:10px; padding:14px 20px; margin:14px 0; }
+  .gram-mistake { background:var(--bad-l); border:1px solid #EBC0B6; border-left:6px solid var(--bad); color:#5A1D12; border-radius:10px; padding:14px 20px; margin:14px 0; }
+  .ex-example-centered { background:var(--ok-l); color:#14573A; border:1px dashed var(--ok); border-radius:12px; }
+  .discuss-box { border-left:6px solid var(--teal); padding:16px 22px 6px; margin-top:18px; }
+  .suggest-box { background:var(--teal-l); border:1px solid #BCD9D5; border-left:6px solid var(--teal); border-radius:10px; }
+  .akey-box { background:var(--brass-l); border:1px solid #E5CF98; border-left:6px solid var(--brass); border-radius:10px; }
+  .book-placeholder, .img-placeholder { background:repeating-linear-gradient(135deg,#F4F1E8 0 16px,#EEEADD 16px 32px); border:2px dashed #BDB59D; color:var(--muted); border-radius:12px; font-size:1.02rem; font-weight:500; }
+  .img-placeholder .ip-icon { font-size:2rem; }
+  .ccq-box { background:var(--teal-l); border-color:#BCD9D5; box-shadow:none; padding:14px 22px; margin:16px 0; }
+  .ccq-label { color:var(--teal); font-weight:700; letter-spacing:.02em; margin:0 0 6px; }
+  .ccq-list { margin:0; padding-left:22px; } .ccq-list li { color:var(--text); margin-bottom:8px; line-height:1.6; }
+  .ccq-reveal-btn { background:var(--ink); color:#fff; font-weight:500; font-size:.95rem; border-radius:999px; padding:3px 14px; border:0; cursor:pointer; font-family:inherit; margin-left:6px; }
+  .ccq-reveal-btn:hover { background:var(--teal); }
+  .ccq-answer { display:none; color:#14573A; font-weight:500; background:var(--ok-l); border-radius:8px; padding:2px 10px; margin-left:8px; }
+  .ccq-answer.show { display:inline-block; }
+  .ccq-list em { color:var(--plum); }
+
+  /* ---------- answer fields ---------- */
+  .ans-input { border:0; border-bottom:2px solid var(--ink2); background:rgba(184,137,43,.12); border-radius:4px 4px 0 0; color:var(--ink); text-align:left; font-weight:600; }
+  .ans-input:focus { outline:none; border-bottom-color:var(--teal); background:rgba(15,118,110,.10); }
+  .ans-input.correct { color:var(--ok); border-bottom-color:var(--ok); background:var(--ok-l); }
+  .ans-input.wrong { color:var(--bad); border-bottom-color:var(--bad); background:var(--bad-l); }
+  .ans-input.empty-warn { color:var(--warn); border-bottom-color:#D9A441; background:var(--warn-l); }
+
+  /* ---------- buttons ---------- */
+  .btn-check, .btn-reset, .btn-suggest, .btn-akey, .btn-deal { border-radius:999px; font-size:1rem; font-weight:700; cursor:pointer; font-family:inherit; padding:11px 30px; transition:transform .12s, box-shadow .12s, background .15s; border:1px solid var(--ink); }
+  .btn-check { background:var(--ink); color:#fff; font-weight:500; letter-spacing:.03em; }
+  .btn-check:hover { background:var(--teal); border-color:var(--teal); }
+  .btn-reset { background:#fff; color:var(--ink); }
+  .btn-reset:hover { background:var(--brass-l); }
+  .btn-suggest { background:var(--teal-l); color:var(--teal); border-color:var(--teal); }
+  .btn-akey { background:var(--brass-l); color:#5C4210; border-color:var(--brass); }
+  .btn-deal { background:var(--teal); color:#fff; border-color:var(--teal); font-weight:500; letter-spacing:.04em; padding:13px 34px; font-size:1.1rem; }
+  .btn-deal:hover { background:var(--ink); border-color:var(--ink); transform:translateY(-1px); }
+  .btn-row { gap:14px; margin-top:26px; }
+
+  /* ---------- choices, tiles, ticks ---------- */
+  .circ-num { background:var(--ink); color:#fff; font-weight:600; border-radius:50%; width:26px; height:26px; }
+  .example-badge { background:var(--ok); color:#fff; font-weight:600; border-radius:50%; width:26px; height:26px; }
+  .circ-opt { border:1.5px solid var(--line); border-radius:999px; background:#fff; color:var(--ink); padding:3px 14px; transition:background .12s, transform .12s, border-color .12s; white-space:nowrap; }
+  .circ-opt:hover { background:var(--brass-l); border-color:var(--brass); }
+  .circ-opt.picked { background:var(--ink); border-color:var(--ink); color:#fff; font-weight:500; }
+  .circ-opt.correct { border-color:var(--ok); background:var(--ok-l); color:var(--ok); font-weight:700; }
+  .circ-opt.wrong { border-color:var(--bad); background:var(--bad-l); color:var(--bad); font-weight:700; }
+  .circ-opt.is-example { border-color:var(--ok); background:var(--ok-l); color:var(--ok); font-weight:700; cursor:default; }
+  .circ-opt.struck { text-decoration:line-through; color:var(--muted); border-style:dashed; }
+  .circ-sep { color:var(--muted); font-weight:500; margin:0 2px; }
+  .classify-chip, .wb-tile { border:1.5px solid var(--ink2); color:var(--ink); background:#fff; font-weight:600; border-radius:999px; transition:background .12s, transform .12s; }
+  .classify-chip:hover, .wb-tile:hover { background:var(--brass-l); transform:translateY(-1px); }
+  .classify-chip.selected, .wb-tile.selected { background:var(--ink); color:#fff; font-weight:500; }
+  .classify-col { border:1.5px solid var(--line); border-radius:14px; background:#fff; padding:16px 18px; }
+  .classify-col h4 { color:var(--ink); font-family:'DM Sans',sans-serif; font-weight:600; font-size:1.05rem; line-height:1.5; }
+  .classify-col .placed { background:var(--brass-l); border:1px solid var(--brass); color:var(--ink); font-weight:600; }
+  .classify-col .placed.correct { background:var(--ok-l); color:var(--ok); border-color:var(--ok); }
+  .classify-col .placed.wrong { background:var(--bad-l); color:var(--bad); border-color:var(--bad); }
+  .wb-bank { gap:10px; }
+  .wb-bank.book-style { border-top:3px double var(--ink2); border-bottom:1px solid var(--line); padding:14px 6px; background:#fff; border-radius:6px; }
+  .wb-tile.example-used { opacity:.55; border-style:dashed; text-decoration:line-through; cursor:default; }
+  .wb-tile.used { opacity:.35; border-style:dashed; }
+  .wb-blank { border-bottom:2px solid var(--ink2); color:var(--ink); font-weight:600; min-width:120px; background:rgba(184,137,43,.12); border-radius:4px 4px 0 0; }
+  .wb-blank.correct { color:var(--ok); border-color:var(--ok); background:var(--ok-l); }
+  .wb-blank.wrong { color:var(--bad); border-color:var(--bad); background:var(--bad-l); }
+  .wb-blank.is-example { color:var(--ok); border-color:var(--ok); background:var(--ok-l); cursor:default; font-weight:700; }
+  .match-wrap { background:#fff; padding:20px 22px; gap:36px; }
+  .match-col-head.mc-left, .match-col-head.mc-right { color:var(--ink); border-bottom:2px solid var(--brass); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.2rem; }
+  .match-item { background:var(--paper); border:1.5px solid var(--line); border-radius:10px; color:var(--text); }
+  .match-item.example-pair { background:var(--ok-l) !important; border-color:var(--ok) !important; }
+  .match-item.c0 { border-color:#0F766E; background:#E2F0EE; box-shadow:none; } .match-item.c1 { border-color:#B8892B; background:#F6EBD0; box-shadow:none; }
+  .match-item.c2 { border-color:#1F5F8B; background:#E1EDF6; box-shadow:none; } .match-item.c3 { border-color:#5B3A7A; background:#EDE5F4; box-shadow:none; }
+  .match-item.c4 { border-color:#A4472F; background:#F8E7E1; box-shadow:none; } .match-item.c5 { border-color:#4C6B2F; background:#E8F0DE; box-shadow:none; }
+  .match-item.c6 { border-color:#6B6B6B; background:#EEEEEE; box-shadow:none; } .match-item.c7 { border-color:#0F2438; background:#E3E9EF; box-shadow:none; }
+  .match-item.picking { border-color:var(--ink); border-style:dashed; }
+  .match-item.correctpair { outline:3px solid var(--ok); background:var(--ok-l) !important; color:var(--ok); }
+  .match-item.wrongpair { outline:3px solid var(--bad); background:var(--bad-l) !important; color:var(--bad); }
+  .tick-item { border:1.5px solid var(--line); border-radius:12px; } .tick-item.picked { border-color:var(--teal); background:var(--teal-l); }
+  .tick-item.picked .tick-box { background:var(--teal); border-color:var(--teal); }
+  .audio-box { background:#fff; border:1px solid var(--line); border-radius:999px; box-shadow:0 2px 8px rgba(15,36,56,.06); margin-top:24px; }
+  .audio-box.pending { background:repeating-linear-gradient(135deg,#F4F1E8 0 14px,#EEEADD 14px 28px); border:2px dashed #BDB59D; box-shadow:none; }
+  .audio-box.top { margin-top:0; }
+  .article-box { background:#fff; padding:22px 28px; }
+  .article-box h3 { font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.9rem; color:var(--ink); margin:2px 0 4px; }
+  .article-box .kicker { display:inline-block; font-size:.72rem; letter-spacing:.2em; font-weight:700; color:#fff; background:var(--olive); padding:4px 12px; margin-bottom:10px; text-transform:uppercase; }
+  .article-box .deck { font-weight:700; color:var(--ink); margin:0 0 12px; padding-bottom:10px; border-bottom:1px solid var(--line); }
+  .article-box p { color:var(--text); }
+
+  /* ---------- delegate badge (lead-in builder + review) ---------- */
+  .lead-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,380px); gap:34px; align-items:start; }
+  .bd-form label { display:block; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:14px 0 4px; }
+  .bd-form input { width:100%; font-family:inherit; font-size:1.1rem; color:var(--ink); border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; }
+  .bd-form input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(15,118,110,.15); }
+  .badge { position:relative; width:100%; max-width:360px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 14px 30px rgba(15,36,56,.18); overflow:hidden; text-align:center; transform:rotate(-1.5deg); }
+  .badge::before { content:""; display:block; width:74px; height:12px; background:var(--ink); border-radius:8px; margin:14px auto 12px; box-shadow:inset 0 2px 4px rgba(0,0,0,.5); }
+  .bd-event { background:var(--ink); color:#E3C477; letter-spacing:.24em; font-size:.74rem; padding:9px 12px; font-weight:500; }
+  .bd-hello { font-family:'DM Serif Display',Georgia,serif; font-size:1.2rem; color:var(--teal); margin-top:16px; font-style:italic; }
+  .bd-name { font-family:'DM Serif Display',Georgia,serif; font-size:2.6rem; color:var(--ink); line-height:1.1; padding:4px 14px; min-height:3rem; word-break:break-word; }
+  .bd-role { font-size:1.15rem; color:var(--ink); font-weight:600; padding:0 14px; min-height:1.6rem; }
+  .bd-company { font-size:1rem; color:var(--muted); padding:0 14px 6px; min-height:1.4rem; }
+  .bd-ask { margin:12px 16px 0; padding:10px 12px; border-top:1px dashed var(--line); font-size:.95rem; color:var(--text); min-height:3.2rem; }
+  .bd-ask b { color:var(--brass); letter-spacing:.12em; font-size:.72rem; text-transform:uppercase; display:block; }
+  .bd-foot { margin-top:12px; background:var(--teal); color:#fff; font-size:.78rem; letter-spacing:.3em; padding:7px; font-weight:500; }
+
+  /* ---------- scene cards (introducing people) ---------- */
+  .scene { background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+  .scene .sc-figs { text-align:center; }
+  .scene .sc-figs svg { width:150px; height:90px; }
+  .scene .say { background:var(--paper); border:1px solid var(--line); border-left:5px solid var(--teal); border-radius:8px; padding:9px 12px; font-size:1.02rem; line-height:1.5; color:var(--ink); }
+  .scene .say.b { border-left-color:var(--brass); margin-left:22px; }
+  .scene .say .who { display:block; font-size:.7rem; letter-spacing:.14em; font-weight:700; color:var(--muted); text-transform:uppercase; }
+  .scene .sc-drop { min-height:46px; border:2px dashed var(--line); border-radius:10px; padding:6px; cursor:pointer; text-align:center; color:var(--muted); font-size:.95rem; }
+  .scene .sc-drop:hover { border-color:var(--teal); background:var(--teal-l); }
+  .scene .sc-drop .placed { display:inline-block; border-radius:999px; padding:4px 12px; font-weight:600; background:var(--brass-l); border:1px solid var(--brass); color:var(--ink); }
+  .scene .sc-drop .placed.correct { background:var(--ok-l); color:var(--ok); border-color:var(--ok); }
+  .scene .sc-drop .placed.wrong { background:var(--bad-l); color:var(--bad); border-color:var(--bad); }
+  .three-up { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+  .two-up { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  .reveal-card { display:block; width:100%; text-align:left; background:#fff; border:1.5px solid var(--line); border-radius:14px; padding:16px 20px; cursor:pointer; font-family:inherit; font-size:1.05rem; color:var(--text); transition:border-color .15s, box-shadow .15s; }
+  .reveal-card:hover { border-color:var(--brass); box-shadow:0 4px 14px rgba(15,36,56,.1); }
+  .reveal-card .rc-q { display:block; font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:var(--ink); line-height:1.4; }
+  .reveal-card .rc-hint { display:block; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brass); font-weight:700; margin-top:6px; }
+  .reveal-card .rc-a { display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-size:1.02rem; line-height:1.6; }
+  .reveal-card.open { border-color:var(--teal); background:var(--teal-l); }
+  .reveal-card.open .rc-a { display:block; } .reveal-card.open .rc-hint { display:none; }
+
+  /* ---------- grammar visuals ---------- */
+  .tl-wrap { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:14px 0; }
+  .tl { background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 20px; }
+  .tl h4 { margin:0 0 4px; font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.3rem; color:var(--ink); }
+  .tl .tl-sub { color:var(--muted); font-size:.95rem; margin-bottom:10px; }
+  .tl svg { width:100%; height:100px; display:block; }
+  .tl .tl-ex { margin-top:8px; font-size:1.08rem; color:var(--ink); }
+  .tl .tl-ex .hl { background:var(--brass-l); padding:0 6px; border-radius:4px; font-weight:700; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .form-card { background:#fff; border:1px solid var(--line); border-top:5px solid var(--plum); border-radius:12px; padding:16px 20px; }
+  .form-card.cont { border-top-color:var(--teal); }
+  .form-card h4 { font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.3rem; margin:0 0 8px; color:var(--ink); }
+  .form-row { display:grid; grid-template-columns:110px 1fr; gap:10px; padding:7px 0; border-top:1px solid #EEE9DC; font-size:1.02rem; line-height:1.5; }
+  .form-row:first-of-type { border-top:0; }
+  .form-row .fr-k { color:var(--muted); font-size:.74rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; padding-top:4px; }
+  .form-row .fr-v b { color:var(--plum); } .form-card.cont .fr-v b { color:var(--teal); }
+  .state-box { margin-top:18px; background:#fff; border:1px solid var(--line); border-left:6px solid var(--brass); border-radius:12px; padding:16px 22px; }
+  .state-box h4 { margin:0 0 8px; font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.3rem; color:var(--ink); }
+  .chip-row { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+  .chip { display:inline-block; padding:4px 14px; border-radius:999px; background:var(--brass-l); border:1px solid var(--brass); color:var(--ink); font-weight:600; font-size:1rem; }
+  .stress-line { display:flex; align-items:center; justify-content:space-between; gap:14px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 18px; margin-bottom:10px; font-size:1.25rem; color:var(--ink); }
+  .stress-line .st { font-weight:800; color:var(--teal); background:var(--teal-l); padding:0 5px; border-radius:4px; }
+  .say-btn { font-family:inherit; font-size:.95rem; border:1.5px solid var(--ink2); background:#fff; color:var(--ink); border-radius:999px; padding:5px 16px; cursor:pointer; white-space:nowrap; }
+  .say-btn.done { background:var(--ok-l); border-color:var(--ok); color:var(--ok); font-weight:700; }
+  .say-btn.done::before { content:"✓ "; }
+
+  /* ---------- exercise row bits ---------- */
+  .ex-row.ex-given { background:none; border:0; padding:0; }
+  .hl-ok { color:var(--ok); font-weight:700; background:var(--ok-l); padding:1px 8px; border-radius:6px; }
+  .hl-no { color:var(--muted); text-decoration:line-through; }
+  .ex-row .ans-line { display:block; margin:4px 0 0 34px; color:var(--ok); font-weight:700; background:var(--ok-l); border-radius:6px; padding:2px 10px; }
+  .ex-row .cue { font-size:1.5rem; margin-right:6px; vertical-align:middle; }
+  .fixed-two-col .ex-row { margin-bottom:14px; }
+
+  /* ---------- freer practice: delegate cards ---------- */
+  .deal-wrap { display:grid; grid-template-columns:minmax(0,1fr); gap:20px; justify-items:center; }
+  .deal-card { width:min(760px,100%); min-height:250px; background:#fff; border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 34px rgba(15,36,56,.14); overflow:hidden; text-align:left; }
+  .deal-card .dc-head { background:var(--ink); color:#E3C477; font-size:.78rem; letter-spacing:.24em; padding:10px 22px; text-transform:uppercase; }
+  .deal-card .dc-body { padding:20px 28px 24px; }
+  .deal-card .dc-setting { font-family:'DM Serif Display',Georgia,serif; font-size:1.7rem; color:var(--ink); margin:0 0 8px; }
+  .deal-card .dc-line { font-size:1.15rem; line-height:1.6; margin:6px 0; color:var(--text); }
+  .deal-card .dc-goal { margin-top:14px; padding:10px 16px; background:var(--teal-l); border-left:5px solid var(--teal); border-radius:8px; font-size:1.1rem; color:var(--ink); }
+  .deal-card .dc-goal b { color:var(--teal); letter-spacing:.14em; font-size:.74rem; text-transform:uppercase; display:block; }
+  .deal-card.flip { animation:dealIn .45s ease; }
+  @keyframes dealIn { from { opacity:0; transform:translateY(18px) rotate(-1deg); } to { opacity:1; transform:none; } }
+  .deal-count { color:var(--muted); font-size:.95rem; letter-spacing:.06em; }
+
+  /* ---------- review checklist ---------- */
+  .check-list { display:grid; grid-template-columns:1fr; gap:12px; margin:16px 0; }
+  .check-item { display:flex; align-items:center; gap:16px; padding:16px 22px; background:#fff; border:1.5px solid var(--line); border-radius:14px; cursor:pointer; font-size:1.2rem; color:var(--ink); transition:border-color .15s, background .15s; text-align:left; font-family:inherit; }
+  .check-item:hover { border-color:var(--brass); }
+  .check-item .ck { width:30px; height:30px; border:2px solid var(--ink2); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; color:#fff; flex:none; }
+  .check-item.on { border-color:var(--teal); background:var(--teal-l); }
+  .check-item.on .ck { background:var(--teal); border-color:var(--teal); }
+  .check-item.on .ck::after { content:"✓"; }
+  .check-item .ck-ic { margin-left:auto; font-size:1.5rem; }
+  .win-banner { display:none; margin-top:14px; padding:14px 22px; border-radius:12px; background:var(--ok-l); border:1px solid var(--ok); color:var(--ok); font-weight:700; font-size:1.1rem; text-align:center; }
+  .win-banner.show { display:block; }
+
+
+  /* ---------- grammar sentence board ---------- */
+  .big-sent { font-family:'DM Serif Display',Georgia,serif; font-size:1.9rem; line-height:1.4; color:var(--ink); background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 24px; margin:14px 0 8px; text-align:center; }
+  .big-sent .ps { color:var(--plum); border-bottom:3px solid var(--plum); }
+  .big-sent .pc { color:var(--teal); border-bottom:3px solid var(--teal); }
+  .anno-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:6px; }
+  .anno { font-size:.98rem; padding:8px 14px; border-radius:10px; line-height:1.5; }
+  .anno.ps { background:#EDE5F4; color:#3A2350; } .anno.pc { background:var(--teal-l); color:#0B4F4A; }
+  .st.sy { padding:0 1px; border-radius:3px; }
+  .match-wrap.compact { padding:14px 18px; gap:30px; }
+  .match-wrap.compact .match-item { padding:7px 12px; margin-bottom:7px; font-size:1rem; }
+  .match-wrap.compact .match-col-head { margin-bottom:8px; padding-bottom:4px; font-size:1.1rem; }
+  .match-wrap.compact .circ-num, .match-wrap.compact .example-badge { width:22px; height:22px; font-size:.8rem; }
+  .three-up { align-items:stretch; }
+  .scene { gap:8px; padding:12px 16px; }
+  .scene .sc-figs svg { width:100px; height:60px; }
+  .scene .say { padding:7px 12px; }
+  .scene .sc-drop { margin-top:auto; min-height:40px; }
+  .ph-small .img-placeholder { padding:10px; margin:0 0 14px; }
+  .ph-small .img-placeholder .ip-icon { font-size:1.6rem; }
+
+  /* ---------- print ---------- */
+  @media print {
+    .content { zoom:1; }
+  }
+
+  .bd-tip { grid-column:1 / -1; margin-top:6px; padding:10px 14px; background:#F6EBD0; border-left:4px solid var(--brass); border-radius:8px; font-size:.88rem; line-height:1.5; color:var(--text); }
+  .bd-tip b { color:#7A5A12; }
+  .bd-form input::placeholder { color:#9AA3AD; font-style:italic; }
+  .audio-box.pending { display:none; }
+  /* ---- audio clip players ---- */
+  .clips-box { flex-wrap:wrap; gap:8px; border-radius:18px; }
+  .clips-label { font-weight:700; color:var(--ink2); margin-right:4px; }
+  .clip { font-family:inherit; font-size:.95rem; font-weight:700; border:1.5px solid var(--teal); background:#fff; color:var(--teal); border-radius:999px; padding:6px 16px; cursor:pointer; }
+  .clip:hover { background:rgba(15,118,110,.08); }
+  .clip.playing { background:var(--teal); color:#fff; }
+  .clip.word { padding:2px 10px; font-size:.9rem; border-width:1.2px; }
+  /* ---- block options (mark the correct sentence) ---- */
+  .circ-opt.block { display:block; white-space:normal; text-align:left; border-radius:12px; margin:5px 0; padding:6px 14px; }
+  .pick-wrap { display:inline-block; vertical-align:top; width:calc(100% - 40px); }
+  .cue-verb { color:var(--brass); font-weight:700; }
+  /* ---- form puzzle ---- */
+  .pz-row { display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 14px; }
+  .pz { flex:1 1 150px; border:2px solid var(--line); border-radius:14px; background:#fff; padding:10px 14px; text-align:center; }
+  .pz-k { display:block; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:4px; }
+  .pz-v { font-family:'DM Serif Display',Georgia,serif; font-size:1.5rem; color:var(--ink); }
+  .pz.a { border-color:var(--teal); background:var(--teal-l); } .pz.a .pz-v { color:var(--teal); }
+  .pz.b { border-color:#5B3A7A; background:#F1EAF6; } .pz.b .pz-v { color:#5B3A7A; }
+  .pz.c { border-color:var(--brass); background:var(--brass-l); } .pz.c .pz-v { color:#8A6513; }
+  .profile-card { background:#fff; border:1px solid var(--line); border-top:6px solid var(--teal); border-radius:14px; padding:18px 22px; box-shadow:0 8px 24px rgba(15,36,56,.10); }
+  .profile-card .pc-h { letter-spacing:.2em; font-size:.72rem; text-transform:uppercase; color:var(--brass); font-weight:700; margin-bottom:8px; }
+  .profile-card .pc-row { display:flex; gap:12px; padding:8px 0; border-top:1px dashed var(--line); }
+  .profile-card .pc-k { flex:0 0 150px; color:var(--muted); font-size:.85rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding-top:3px; }
+  .profile-card .pc-v { font-family:'DM Serif Display',Georgia,serif; font-size:1.25rem; color:var(--ink); min-height:1.6rem; }
+  /* ---- vocabulary cards ---- */
+  .vgrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:6px 0 10px; }
+  .vgrid.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .vcard { background:#fff; border:1px solid var(--line); border-top:5px solid var(--teal); border-radius:14px; padding:12px 16px 12px; display:flex; flex-direction:column; gap:4px; box-shadow:0 2px 8px rgba(15,36,56,.05); }
+  .vcard:nth-child(3n+2) { border-top-color:var(--brass); } .vcard:nth-child(3n) { border-top-color:#5B3A7A; }
+  .vcard .vc-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .vcard .vc-ic { font-size:1.6rem; line-height:1; }
+  .vcard .vc-name { font-family:'DM Serif Display',Georgia,serif; font-size:1.3rem; color:var(--ink); line-height:1.15; }
+  .vcard .vc-def { color:var(--muted); font-size:.95rem; line-height:1.4; }
+  .vcard .vc-ex { font-size:1rem; color:var(--text); }
+  .vcard .vc-ex b { color:var(--teal); }
+  .pic-ph { border:2px dashed #BDB59D; border-radius:10px; background:repeating-linear-gradient(135deg,#F4F1E8 0 12px,#EEEADD 12px 24px); color:#6B6350; font-size:.88rem; padding:8px 10px; display:flex; gap:8px; align-items:center; }
+  .scr { display:inline-flex; flex-wrap:wrap; gap:6px; vertical-align:middle; }
+  .scr-w { border:1.5px solid var(--ink2); background:#fff; border-radius:8px; padding:0 8px; font-size:.9rem; color:var(--ink); font-weight:600; }
+  .ex-row .scr { width:calc(100% - 44px); }
+  .ex-row .ans-input.ord { display:block; width:calc(100% - 44px); margin:6px 0 0 40px; box-sizing:border-box; }
+  .vgrid.two.tight { gap:10px; } .vgrid.two.tight .vcard { padding:8px 14px; gap:2px; } .vgrid.two.tight .vc-name { font-size:1.15rem; } .vgrid.two.tight .vc-def { font-size:.88rem; } .vgrid.two.tight .vc-ex { font-size:.92rem; }
+  .vgrid.two.tight .vc-top { justify-content:space-between; } .vgrid.two.tight .vc-ic { font-size:1.3rem; }
+
+
+</style>
+</head>
+<body>
+<div id="progBar"></div>
+<button id="homeBtn" onclick="goTo(0)">🏠</button>
+<button id="notesBtn" onclick="toggleNotes()">📝 Notes</button>
+<div id="notesPanel">
+  <div id="notesToolbar"><span id="notesDragHandle" title="Drag to move">⠷⠷</span>
+    <button onclick="notesFormat('bold')" title="Bold"><b>B</b></button>
+    <button onclick="notesFormat('underline')" title="Underline"><u>U</u></button>
+    <span style="display:flex;gap:3px;align-items:center;margin-left:6px;padding-left:6px;border-left:1px solid rgba(255,255,255,.2)">
+      <button onclick="notesHilite('#FFE600')" title="Yellow" style="background:#FFE600;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('#90EE90')" title="Green"  style="background:#90EE90;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('#FFB3C6')" title="Pink"   style="background:#FFB3C6;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('#ADD8E6')" title="Blue"   style="background:#ADD8E6;width:20px;height:20px;padding:0;border-radius:4px;border:none;cursor:pointer;"></button>
+      <button onclick="notesHilite('remove')" title="Remove highlight" style="font-size:.78rem;padding:2px 7px;color:#ff9999;margin-left:2px;background:rgba(255,255,255,.1);border:none;border-radius:4px;cursor:pointer;">✕</button>
+    </span>
+  </div>
+  <div id="notesTA" contenteditable="true" data-placeholder="Your notes for this slide…" spellcheck="false" oninput="saveNotes()"></div>
+</div>
+
+<div id="deck">
+
+<div class="slide active" id="s1">
+  <div class="cv-card a" aria-hidden="true">Who looks after the salaries?</div><div class="cv-card b" aria-hidden="true">I work in event management.</div><div class="cv-card c" aria-hidden="true">She works as a fashion designer.</div><div class="cv-card d" aria-hidden="true">I'm in charge of administration.</div>
+  <div class="title-inner">
+    <div class="title-label">Conversational English</div>
+    <div class="title-sub">with teacher Nanda</div>
+    <div class="title-main">Departments and roles</div>
+    <a href="../index.html" title="All units" style="position:absolute;bottom:70px;left:32px;font-size:1.7rem;line-height:1;text-decoration:none;z-index:5;">🏠</a>
+    <div style="position:absolute;bottom:70px;right:32px;z-index:5;">
+      <button onclick="goToId('hw-cover')" style="cursor:pointer;font-family:inherit;font-size:.95rem;">📝 Homework</button>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="s-lead">
+  <div class="banner banner-leadin">🎯 Warm-Up</div>
+  <div class="slide-main"><div class="content">
+    <h2>Your place in the company</h2>
+    <p class="instruction">Fill in your entry in the company directory. Then explain it to me in your own words, even if you do not know all the words yet.</p>
+    
+    <div class="lead-grid">
+      <div class="bd-form">
+        <label for="oc-1">Your company</label><input id="oc-1" data-live="co" maxlength="40" autocomplete="off">
+        <label for="oc-2">Your department</label><input id="oc-2" data-live="dept" maxlength="40" autocomplete="off">
+        <label for="oc-3">Your role</label><input id="oc-3" data-live="role" maxlength="40" autocomplete="off">
+        <label for="oc-4">Who you report to</label><input id="oc-4" data-live="boss" maxlength="40" autocomplete="off">
+      </div>
+      <div class="profile-card">
+        <div class="pc-h">Company directory</div>
+        <div class="pc-row"><span class="pc-k">Company</span><span class="pc-v" data-bd="co">&nbsp;</span></div>
+        <div class="pc-row"><span class="pc-k">Department</span><span class="pc-v" data-bd="dept">&nbsp;</span></div>
+        <div class="pc-row"><span class="pc-k">Role</span><span class="pc-v" data-bd="role">&nbsp;</span></div>
+        <div class="pc-row"><span class="pc-k">Reports to</span><span class="pc-v" data-bd="boss">&nbsp;</span></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-v1">
+  <div class="banner banner-vocab">📚 Vocabulary</div>
+  <div class="slide-main"><div class="content">
+    <h2>Departments (1 of 2)</h2>
+    <p class="instruction">Click the speaker to hear each department. Which ones exist in your company?</p>
+    <div class="vgrid"><div class="vcard"><div class="vc-top"><span class="vc-ic">🗂️</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_administration.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Administration</div><div class="vc-def">deals with organization and internal and external communication</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🔬</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_researchanddevelopment.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Research and Development (R&amp;D)</div><div class="vc-def">deals with researching and developing future products for a company</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🤝</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_humanresources.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Human Resources (HR)</div><div class="vc-def">deals with employee relations and matters such as hiring staff</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">💰</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_accountsfinance.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Accounts / Finance</div><div class="vc-def">deals with money matters, from paying bills to projecting sales</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">📣</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_marketing.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Marketing</div><div class="vc-def">deals with promoting products</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🎤</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_publicrelations.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Public Relations (PR)</div><div class="vc-def">deals with maintaining a positive public image for a company</div></div></div><div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>Which department deals with hiring staff? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Human Resources (HR).</span></li><li>Which department deals with promoting products? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Marketing.</span></li></ul></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-v2">
+  <div class="banner banner-vocab">📚 Vocabulary</div>
+  <div class="slide-main"><div class="content">
+    <h2>Departments (2 of 2)</h2>
+    <p class="instruction">Click the speaker to hear each department. Which ones exist in your company?</p>
+    <div class="vgrid"><div class="vcard"><div class="vc-top"><span class="vc-ic">🏭</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_production.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Production</div><div class="vc-def">ensures all manufacturing stages run smoothly</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🛒</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_purchasing.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Purchasing</div><div class="vc-def">deals with buying goods and raw materials</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🏷️</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_sales.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Sales</div><div class="vc-def">deals with selling a finished product to outside markets</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🧹</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_facilitiesofficeservices.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Facilities / Office Services</div><div class="vc-def">ensures the smooth day-to-day running of the practical aspects of a company</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">⚖️</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_legal.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Legal</div><div class="vc-def">ensures that all contracts and company activities are legal</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">💻</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_informationtechnology.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Information Technology (IT)</div><div class="vc-def">ensures that all technological systems are working and maintained</div></div></div><div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>Which department deals with buying raw materials? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Purchasing.</span></li><li>Which department keeps all the technological systems working? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Information Technology (IT).</span></li></ul></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-v3">
+  <div class="banner banner-vocab">📚 Vocabulary</div>
+  <div class="slide-main"><div class="content">
+    <h2>Roles</h2>
+    <p class="instruction">Click the speaker to hear each role.</p>
+    <div class="vgrid"><div class="vcard"><div class="vc-top"><span class="vc-ic">🧑‍💼</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_2_employer.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">employer</div><div class="vc-def">a person or company that employs people</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🧑‍💻</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_2_employee.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">employee</div><div class="vc-def">a person who works for an employer</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">👔</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_2_chiefexecutiveofficer.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Chief Executive Officer (CEO)</div><div class="vc-def">the person with the highest position in the company</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">📊</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_2_chieffinancialofficer.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">Chief Financial Officer (CFO)</div><div class="vc-def">the person in charge of the company's finances</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">📋</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_2_manager.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">manager</div><div class="vc-def">a person who is in charge of a team or department</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🗒️</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_2_assistant.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">assistant</div><div class="vc-def">a person who helps someone with their work</div></div></div><div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>Who pays an employee? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">The employer.</span></li><li>Who is the most senior person in a company? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">The CEO.</span></li></ul></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-v4">
+  <div class="banner banner-vocab">📚 Vocabulary</div>
+  <div class="slide-main"><div class="content">
+    <h2>Describing roles</h2>
+    <p class="instruction">Click the speaker to hear each phrase.</p>
+    <div class="vgrid"><div class="vcard"><div class="vc-top"><span class="vc-ic">🏬</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_3_toworkfor.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">to work for</div><div class="vc-def">[to be employed by a company]</div><div class="vc-ex">We all <b>work for</b> a large department store.</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🎈</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_3_toworkin.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">to work in</div><div class="vc-def">[to be employed in a department or area of an industry]</div><div class="vc-ex">I <b>work in</b> event management.</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">👗</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_3_toworkas.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">to work as</div><div class="vc-def">[to have a particular job or role]</div><div class="vc-ex">She <b>works as</b> a fashion designer.</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">💵</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_3_tolookafter.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">to look after</div><div class="vc-def">[to ensure something runs smoothly]</div><div class="vc-ex">He <b>looks after</b> our salaries and wages.</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🧰</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_3_toberesponsiblefor.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">to be responsible for</div><div class="vc-def">[to have the duty of ensuring something is done effectively]</div><div class="vc-ex">They are <b>responsible for</b> office maintenance.</div></div><div class="vcard"><div class="vc-top"><span class="vc-ic">🗄️</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_3_tobeinchargeof.mp3" onclick="playClip(this)" aria-label="listen">🔊</button></div><div class="vc-name">to be in charge of</div><div class="vc-def">[to have control and authority over something]</div><div class="vc-ex">I'm <b>in charge of</b> administration.</div></div></div><div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list"><li>&ldquo;I work in event management.&rdquo; Is event management the company or the area? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">The area of an industry. For the company we say &ldquo;work for.&rdquo;</span></li><li>&ldquo;She works as a fashion designer.&rdquo; What does &ldquo;works as&rdquo; tell us? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Her job or role.</span></li></ul></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-pron">
+  <div class="banner banner-pron">🔊 Pronunciation</div>
+  <div class="slide-main"><div class="content">
+    <h2>Where is the stress?</h2>
+    
+    <p class="instruction" style="margin-bottom:12px;">Click the speaker to hear the word, say it, then click the word and the syllable that is stressed.</p>
+    <div id="s-pron-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="1st" onclick="classifyPick(this)">Marketing</button><button class="classify-chip" data-ans="1st" onclick="classifyPick(this)">Purchasing</button><button class="classify-chip" data-ans="1st" onclick="classifyPick(this)">Legal</button><button class="classify-chip" data-ans="2nd" onclick="classifyPick(this)">Production</button><button class="classify-chip" data-ans="2nd" onclick="classifyPick(this)">Facilities</button><button class="classify-chip" data-ans="2nd" onclick="classifyPick(this)">Technology</button><button class="classify-chip" data-ans="3rd" onclick="classifyPick(this)">Information</button><button class="classify-chip" data-ans="4th" onclick="classifyPick(this)">Administration</button></div>
+    <div id="s-pron-cols" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="1st" onclick="classifyTarget(this)"><h4><b>1st syllable</b><br>MAR-ke-ting</h4></div><div class="classify-col" data-target="2nd" onclick="classifyTarget(this)"><h4><b>2nd syllable</b><br>pro-DUC-tion</h4></div><div class="classify-col" data-target="3rd" onclick="classifyTarget(this)"><h4><b>3rd syllable</b><br>in-for-MA-tion</h4></div><div class="classify-col" data-target="4th" onclick="classifyTarget(this)"><h4><b>4th syllable</b><br>ad-min-is-TRA-tion</h4></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkClassifySlide('s-pron')">Check Answers</button>
+      <button class="btn-reset" onclick="resetClassifySlide('s-pron')">Reset</button>
+    </div>
+    
+    <div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_marketing.mp3" onclick="playClip(this)" aria-label="listen">🔊 marketing</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_purchasing.mp3" onclick="playClip(this)" aria-label="listen">🔊 purchasing</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_legal.mp3" onclick="playClip(this)" aria-label="listen">🔊 legal</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_production.mp3" onclick="playClip(this)" aria-label="listen">🔊 production</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_administration.mp3" onclick="playClip(this)" aria-label="listen">🔊 administration</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/3/3_1_informationtechnology.mp3" onclick="playClip(this)" aria-label="listen">🔊 information technology</button></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-call">
+  <div class="banner banner-vocab">📚 Vocabulary</div>
+  <div class="slide-main"><div class="content">
+    <h2>Who would you call?</h2>
+    <p class="instruction">Read each situation. Which department would you call?</p>
+    
+    
+    <div class="fixed-two-col" id="call"><div><div class="ex-row"><span class="circ-num">1</span>Your laptop will not start.<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="call-1" data-correct="Information Technology (IT)" onclick="circPick(this)">Legal</button><button class="circ-opt" data-group="call-1" data-correct="Information Technology (IT)" onclick="circPick(this)">Information Technology (IT)</button><button class="circ-opt" data-group="call-1" data-correct="Information Technology (IT)" onclick="circPick(this)">Sales</button></span></div><div class="ex-row"><span class="circ-num">2</span>You want to hire a new assistant.<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="call-2" data-correct="Human Resources (HR)" onclick="circPick(this)">Human Resources (HR)</button><button class="circ-opt" data-group="call-2" data-correct="Human Resources (HR)" onclick="circPick(this)">Purchasing</button><button class="circ-opt" data-group="call-2" data-correct="Human Resources (HR)" onclick="circPick(this)">Production</button></span></div><div class="ex-row"><span class="circ-num">3</span>You need to check a supplier's contract.<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="call-3" data-correct="Legal" onclick="circPick(this)">Marketing</button><button class="circ-opt" data-group="call-3" data-correct="Legal" onclick="circPick(this)">Legal</button><button class="circ-opt" data-group="call-3" data-correct="Legal" onclick="circPick(this)">Public Relations (PR)</button></span></div></div><div><div class="ex-row"><span class="circ-num">4</span>The office is very dirty.<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="call-4" data-correct="Facilities / Office Services" onclick="circPick(this)">Facilities / Office Services</button><button class="circ-opt" data-group="call-4" data-correct="Facilities / Office Services" onclick="circPick(this)">Accounts / Finance</button><button class="circ-opt" data-group="call-4" data-correct="Facilities / Office Services" onclick="circPick(this)">Sales</button></span></div><div class="ex-row"><span class="circ-num">5</span>You are launching a new advert.<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="call-5" data-correct="Marketing" onclick="circPick(this)">Production</button><button class="circ-opt" data-group="call-5" data-correct="Marketing" onclick="circPick(this)">Marketing</button><button class="circ-opt" data-group="call-5" data-correct="Marketing" onclick="circPick(this)">Administration</button></span></div><div class="ex-row"><span class="circ-num">6</span>You need to order raw materials.<br><span style="margin-left:34px;display:inline-block;"><button class="circ-opt" data-group="call-6" data-correct="Purchasing" onclick="circPick(this)">Purchasing</button><button class="circ-opt" data-group="call-6" data-correct="Purchasing" onclick="circPick(this)">Research and Development (R&amp;D)</button><button class="circ-opt" data-group="call-6" data-correct="Purchasing" onclick="circPick(this)">Public Relations (PR)</button></span></div></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkCircSlide('call')">Check Answers</button>
+      <button class="btn-reset" onclick="resetCircSlide('call')">Reset</button>
+    </div>
+    
+  </div></div>
+</div>
+
+<div class="slide" id="s-rs">
+  <div class="banner banner-vocab">📚 Vocabulary</div>
+  <div class="slide-main"><div class="content">
+    <h2>Describe the roles</h2>
+    <p class="instruction">Fill in the gaps using the phrases in the panel. Click a phrase, then click a gap.</p>
+    <div class="wb-bank book-style"><button class="wb-tile" data-val="works as" onclick="wbPick(this)">works as</button><button class="wb-tile" data-val="works for" onclick="wbPick(this)">works for</button><button class="wb-tile" data-val="is in charge of" onclick="wbPick(this)">is in charge of</button><button class="wb-tile" data-val="looks after" onclick="wbPick(this)">looks after</button><button class="wb-tile" data-val="work in" onclick="wbPick(this)">work in</button><button class="wb-tile" data-val="is responsible for" onclick="wbPick(this)">is responsible for</button></div>
+    
+    <div class="fixed-two-col" id="rs"><div><div class="ex-row"><span class="circ-num">1</span>My cousin <span class="wb-blank" data-ans="works as" onclick="wbPlace(this)">______</span> an accountant.</div><div class="ex-row"><span class="circ-num">2</span>Pablo <span class="wb-blank" data-ans="works for" onclick="wbPlace(this)">______</span> a large department store.</div><div class="ex-row"><span class="circ-num">3</span>Anna <span class="wb-blank" data-ans="is in charge of" onclick="wbPlace(this)">______</span> the whole marketing department.</div></div><div><div class="ex-row"><span class="circ-num">4</span>Sam <span class="wb-blank" data-ans="looks after" onclick="wbPlace(this)">______</span> the office equipment.</div><div class="ex-row"><span class="circ-num">5</span>They <span class="wb-blank" data-ans="work in" onclick="wbPlace(this)">______</span> event management.</div><div class="ex-row"><span class="circ-num">6</span>Who <span class="wb-blank" data-ans="is responsible for" onclick="wbPlace(this)">______</span> the office maintenance?</div></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkWbSlide('rs')">Check Answers</button>
+      <button class="btn-reset" onclick="resetWbSlide('rs')">Reset</button>
+    </div>
+    
+  </div></div>
+</div>
+
+<div class="slide" id="s-free">
+  <div class="banner banner-speaking">💬 Speaking</div>
+  <div class="slide-main"><div class="content">
+    <h2>Org chart chat</h2>
+    <p class="instruction">Your teacher is a new employee. Take a card, then explain who does what in the company.</p>
+    <div class="deal-wrap">
+      <div class="deal-card" id="deal-card"><div class="dc-head">Org chart card</div>
+        <div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div></div>
+      <div class="btn-row" style="margin-top:0;align-items:center;">
+        <button class="btn-deal" onclick="dealNext()">Deal a card</button>
+        <button class="btn-reset" onclick="dealReset()">Shuffle</button>
+        <span class="deal-count" id="deal-count">Cards played: 0</span>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-review">
+  <div class="banner banner-review">⭐ Lesson Review</div>
+  <div class="slide-main"><div class="content">
+    <h2>Before you leave the office</h2>
+    <p class="instruction">Click each one when you feel ready to use it.</p>
+    <div class="check-list" id="ck-list"><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Departments</span><span class="ck-ic">🏢</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Roles</span><span class="ck-ic">🧑‍💼</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Describing roles</span><span class="ck-ic">🧩</span></button></div>
+    <div class="win-banner" id="ck-win">You are ready for the next unit.</div>
+    
+    <p class="instruction" style="margin-top:22px;">Describe your own department and role to me again. Which new phrases can you use?</p>
+  </div></div>
+</div>
+
+<div class="slide" id="hw-cover">
+  <div class="title-inner">
+    <div class="hw-badge">📝 Homework</div>
+    <div class="title-main" style="margin-top:22px;">Departments and roles</div>
+  </div>
+</div>
+
+<div class="slide" id="hw-1">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW1 — Departments</h2>
+<p class="instruction">Write the departments from the panel under the correct definitions. Click a department, then click a gap.</p>
+<div class="wb-bank book-style"><button class="wb-tile" data-val="Public Relations (PR)" onclick="wbPick(this)">Public Relations (PR)</button><button class="wb-tile" data-val="Administration" onclick="wbPick(this)">Administration</button><button class="wb-tile" data-val="Research and Development (R&amp;D)" onclick="wbPick(this)">Research and Development (R&amp;D)</button><button class="wb-tile" data-val="Production" onclick="wbPick(this)">Production</button><button class="wb-tile" data-val="Facilities / Office Services" onclick="wbPick(this)">Facilities / Office Services</button><button class="wb-tile" data-val="Accounts / Finance" onclick="wbPick(this)">Accounts / Finance</button><button class="wb-tile" data-val="Information Technology (IT)" onclick="wbPick(this)">Information Technology (IT)</button><button class="wb-tile" data-val="Human Resources (HR)" onclick="wbPick(this)">Human Resources (HR)</button><button class="wb-tile" data-val="Sales" onclick="wbPick(this)">Sales</button><button class="wb-tile example-used" data-val="Purchasing" disabled="">Purchasing</button><button class="wb-tile" data-val="Legal" onclick="wbPick(this)">Legal</button><button class="wb-tile" data-val="Marketing" onclick="wbPick(this)">Marketing</button></div>
+
+<div class="fixed-two-col" id="hw1"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>Deals with buying goods and raw materials.<br/><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="Purchasing">Purchasing</span></span></div><div class="ex-row"><span class="circ-num">1</span>Deals with employee relations and matters such as hiring staff. <span class="wb-blank" data-ans="Human Resources (HR)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">2</span>Ensures that all technological systems are working and maintained. <span class="wb-blank" data-ans="Information Technology (IT)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">3</span>Deals with selling a finished product to outside markets. <span class="wb-blank" data-ans="Sales" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">4</span>Deals with maintaining a positive public image for a company. <span class="wb-blank" data-ans="Public Relations (PR)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">5</span>Ensures that all contracts and company activities are legal. <span class="wb-blank" data-ans="Legal" onclick="wbPlace(this)">______</span></div></div><div><div class="ex-row"><span class="circ-num">6</span>Ensures the smooth day-to-day running of the practical aspects of a company. <span class="wb-blank" data-ans="Facilities / Office Services" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">7</span>Deals with organization and internal and external communication. <span class="wb-blank" data-ans="Administration" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">8</span>Deals with researching and developing future products for a company. <span class="wb-blank" data-ans="Research and Development (R&amp;D)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">9</span>Deals with money matters, from paying bills to projecting sales. <span class="wb-blank" data-ans="Accounts / Finance" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">10</span>Deals with promoting products. <span class="wb-blank" data-ans="Marketing" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">11</span>Ensures all manufacturing stages run smoothly. <span class="wb-blank" data-ans="Production" onclick="wbPlace(this)">______</span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkWbSlide('hw1')">Check Answers</button>
+<button class="btn-reset" onclick="resetWbSlide('hw1')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="hw-2">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW2 — Roles</h2>
+<p class="instruction">Write the words from the panel under the correct pictures. Click a word, then click a gap.</p>
+<div class="wb-bank book-style"><button class="wb-tile" data-val="manager" onclick="wbPick(this)">manager</button><button class="wb-tile" data-val="Chief Executive Officer (CEO)" onclick="wbPick(this)">Chief Executive Officer (CEO)</button><button class="wb-tile example-used" data-val="employer" disabled="">employer</button><button class="wb-tile" data-val="Chief Financial Officer (CFO)" onclick="wbPick(this)">Chief Financial Officer (CFO)</button><button class="wb-tile" data-val="employee" onclick="wbPick(this)">employee</button><button class="wb-tile" data-val="assistant" onclick="wbPick(this)">assistant</button></div>
+
+<div class="fixed-two-col" id="hw2"><div><div class="ex-row ex-given"><span class="example-badge">✓</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: two people talking at a table</span></div> <span class="wb-blank filled is-example" data-ans="employer">employer</span></span></div><div class="ex-row"><span class="circ-num">1</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a man in a suit and a woman holding a folder, standing together</span></div> <span class="wb-blank" data-ans="assistant" onclick="wbPlace(this)">______</span></span></div><div class="ex-row"><span class="circ-num">2</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a man in a suit sitting behind a large desk</span></div> <span class="wb-blank" data-ans="Chief Executive Officer (CEO)" onclick="wbPlace(this)">______</span></span></div></div><div><div class="ex-row"><span class="circ-num">3</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a woman at a desk with an abacus</span></div> <span class="wb-blank" data-ans="Chief Financial Officer (CFO)" onclick="wbPlace(this)">______</span></span></div><div class="ex-row"><span class="circ-num">4</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a man and a woman shaking hands at a table</span></div> <span class="wb-blank" data-ans="employee" onclick="wbPlace(this)">______</span></span></div><div class="ex-row"><span class="circ-num">5</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a woman at the head of a meeting table, with colleagues around it</span></div> <span class="wb-blank" data-ans="manager" onclick="wbPlace(this)">______</span></span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkWbSlide('hw2')">Check Answers</button>
+<button class="btn-reset" onclick="resetWbSlide('hw2')">Reset</button>
+</div>
+</div></div>
+</div>
+
+<div class="slide" id="hw-3">
+<div class="banner banner-hw">📝 Homework</div>
+<div class="slide-main"><div class="content">
+<h2>HW3 — Describing roles</h2>
+<p class="instruction">Write the phrases from the panel under the correct definitions. Click a phrase, then click a gap.</p>
+<div class="wb-bank book-style"><button class="wb-tile" data-val="to work as" onclick="wbPick(this)">to work as</button><button class="wb-tile example-used" data-val="to look after" disabled="">to look after</button><button class="wb-tile" data-val="to be in charge of" onclick="wbPick(this)">to be in charge of</button><button class="wb-tile" data-val="to be responsible for" onclick="wbPick(this)">to be responsible for</button><button class="wb-tile" data-val="to work in" onclick="wbPick(this)">to work in</button><button class="wb-tile" data-val="to work for" onclick="wbPick(this)">to work for</button></div>
+
+<div class="fixed-two-col" id="hw3"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>To ensure something runs smoothly<br/><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="to look after">to look after</span></span></div><div class="ex-row"><span class="circ-num">1</span>To be employed by a company <span class="wb-blank" data-ans="to work for" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">2</span>To have a particular job or role <span class="wb-blank" data-ans="to work as" onclick="wbPlace(this)">______</span></div></div><div><div class="ex-row"><span class="circ-num">3</span>To have the duty of ensuring something is done effectively <span class="wb-blank" data-ans="to be responsible for" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">4</span>To have control and authority over something <span class="wb-blank" data-ans="to be in charge of" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">5</span>To be employed in a department or area of an industry <span class="wb-blank" data-ans="to work in" onclick="wbPlace(this)">______</span></div></div></div>
+<div class="btn-row">
+<button class="btn-check" onclick="checkWbSlide('hw3')">Check Answers</button>
+<button class="btn-reset" onclick="resetWbSlide('hw3')">Reset</button>
+</div>
+</div></div>
+</div>
+
+</div><!-- END #deck -->
+
+<div id="nav">
+  <button id="prevBtn" onclick="goTo(current-1)">◀ Prev</button>
+  <div id="dots"></div>
+  <div id="counter">1/1</div>
+  <button id="nextBtn" onclick="goTo(current+1)">Next ▶</button>
+  <button id="dlNotesBtn" onclick="savePDF()" style="margin-left:10px;padding:5px 12px;background:#2E2A6B;color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:inherit;">💾 Save Notes</button>
+  <button onclick="this.blur();printAll()" style="margin-left:6px;padding:5px 12px;background:#0E5A8A;color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:inherit;">🖨️ Print Lesson</button>
+  <button onclick="this.blur();clearAllNotes()" title="Delete all notes and start a new lesson" style="margin-left:6px;padding:5px 12px;background:#8B2E2E;color:#fff;border:none;border-radius:7px;font-size:.82rem;cursor:pointer;font-family:inherit;">🗑️ Clear Notes</button>
+</div>
+
+<script>
+/* ===================== SLIDE NAV DATA ===================== */
+var slideIds = ["s1", "s-lead", "s-v1", "s-v2", "s-v3", "s-v4", "s-pron", "s-call", "s-rs", "s-free", "s-review", "hw-cover", "hw-1", "hw-2", "hw-3"];
+var slideLabels = ["Cover", "Warm-Up – Your Place in the Company", "Vocabulary – Departments (1)", "Vocabulary – Departments (2)", "Vocabulary – Roles", "Vocabulary – Describing Roles", "Pronunciation – Word Stress", "Practice – Who Would You Call?", "Practice – Describe the Roles", "Speaking – Org Chart Chat", "Lesson Review", "Homework Cover", "HW1 – Departments", "HW2 – Roles", "HW3 – Describing Roles"];
+var slides = Array.from(document.querySelectorAll('.slide'));
+var current = 0;
+var notesStoreKey = 'befeNotes::U03-Departments-and-roles::' + document.title;
+var notesData = {};
+try { var _savedNotes = JSON.parse(localStorage.getItem(notesStoreKey)); if (_savedNotes) Object.assign(notesData, _savedNotes); } catch(e) {}
+var notesOpen = false;
+
+if (slides.length !== slideIds.length || slides.length !== slideLabels.length) {
+  console.warn('Slide count mismatch:', slides.length, 'slides,', slideIds.length, 'IDs,', slideLabels.length, 'labels');
+}
+
+var dotsWrap = document.getElementById('dots');
+slides.forEach(function(s, i){
+  var d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.onclick = function(){ goTo(i); };
+  dotsWrap.appendChild(d);
+});
+
+function goTo(n){
+  if (n < 0 || n >= slides.length) return;
+  saveNotes();
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.querySelectorAll('.dot').forEach(function(d,i){ d.classList.toggle('active', i===current); });
+  document.getElementById('counter').textContent = (current+1)+'/'+slides.length;
+  document.getElementById('prevBtn').disabled = current===0;
+  document.getElementById('nextBtn').disabled = current===slides.length-1;
+  document.getElementById('homeBtn').style.display = current===0 ? 'none' : 'flex';
+  var panel = document.getElementById('notesPanel');
+  if (current === 0) { if (notesOpen) panel.classList.add('cover'); }
+  else { panel.classList.remove('cover'); }
+  loadNotes(current);
+}
+function goToId(id){ var i = slideIds.indexOf(id); if (i>-1) goTo(i); }
+
+document.addEventListener('keydown', function(e){
+  var tag = document.activeElement.tagName;
+  if (tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.contentEditable === 'true') return;
+  if (e.key === 'ArrowRight') goTo(current+1);
+  if (e.key === 'ArrowLeft') goTo(current-1);
+});
+
+
+/* ===================== NOTES ===================== */
+
+/* -- DRAGGABLE NOTES PANEL -------------------- */
+(function(){
+  var panel = document.getElementById('notesPanel');
+  if (!panel) return;
+  var handle = document.getElementById('notesDragHandle') || panel.querySelector('.notes-header') || document.getElementById('notesToolbar');
+  if (!handle) return;
+  handle.style.touchAction = 'none';
+  var dragging = false, startX, startY, startLeft, startTop;
+  function onDown(e){
+    if (e.target.closest('button')) return;
+    dragging = true;
+    panel.classList.add('dragging');
+    panel.classList.remove('cover');
+    var rect = panel.getBoundingClientRect();
+    panel.style.left = rect.left + 'px';
+    panel.style.top = rect.top + 'px';
+    panel.style.right = 'auto';
+    panel.style.bottom = 'auto';
+    panel.style.transform = 'none';
+    startX = e.clientX; startY = e.clientY;
+    startLeft = rect.left; startTop = rect.top;
+    e.preventDefault();
+    document.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerup', onUp);
+  }
+  function onMove(e){
+    if (!dragging) return;
+    var dx = e.clientX - startX, dy = e.clientY - startY;
+    var newLeft = startLeft + dx, newTop = startTop + dy;
+    var maxLeft = window.innerWidth - panel.offsetWidth - 4;
+    var maxTop = window.innerHeight - 40;
+    newLeft = Math.max(4, Math.min(newLeft, maxLeft));
+    newTop = Math.max(4, Math.min(newTop, maxTop));
+    panel.style.left = newLeft + 'px';
+    panel.style.top = newTop + 'px';
+  }
+  function onUp(){
+    dragging = false;
+    panel.classList.remove('dragging');
+    document.removeEventListener('pointermove', onMove);
+    document.removeEventListener('pointerup', onUp);
+  }
+  handle.addEventListener('pointerdown', onDown);
+})();
+
+function toggleNotes(){
+  notesOpen = !notesOpen;
+  var panel = document.getElementById('notesPanel');
+  panel.classList.toggle('open', notesOpen);
+  if (current === 0) panel.classList.toggle('cover', notesOpen);
+  document.getElementById('notesBtn').textContent = notesOpen ? '✕ Close' : '📝 Notes';
+  /* reset position on close */
+  if (!notesOpen) { panel.style.left=''; panel.style.top=''; panel.style.right=''; panel.style.bottom=''; panel.style.transform=''; }
+}
+function notesFormat(cmd){
+  document.getElementById('notesTA').focus();
+  document.execCommand(cmd, false, null);
+  saveNotes();
+}
+function notesHilite(color){
+  var ta = document.getElementById('notesTA');
+  ta.focus();
+  var sel = window.getSelection();
+  if (!sel || !sel.rangeCount || sel.getRangeAt(0).collapsed) return;
+  document.execCommand('styleWithCSS', false, true);
+  if (color !== 'remove'){
+    var cur = document.queryCommandValue('backColor');
+    var hex = color.replace('#','');
+    var r = parseInt(hex.substr(0,2),16), g = parseInt(hex.substr(2,2),16), b = parseInt(hex.substr(4,2),16);
+    if (cur === 'rgb('+r+', '+g+', '+b+')' || cur === 'rgb('+r+','+g+','+b+')') { color = 'remove'; }
+  }
+  if (color === 'remove'){
+    document.execCommand('hiliteColor', false, 'transparent');
+    Array.from(ta.querySelectorAll('[style*="background"]')).forEach(function(el){
+      var c = el.style.backgroundColor;
+      if (c === 'transparent' || c === 'rgba(0, 0, 0, 0)' || c === ''){
+        var p = el.parentNode;
+        if (!p) return;
+        while (el.firstChild) p.insertBefore(el.firstChild, el);
+        p.removeChild(el);
+      }
+    });
+  } else {
+    document.execCommand('hiliteColor', false, color);
+  }
+  saveNotes();
+}
+function saveNotes(){ notesData[current] = document.getElementById('notesTA').innerHTML; try{ localStorage.setItem(notesStoreKey, JSON.stringify(notesData)); }catch(e){} }
+function loadNotes(idx){ document.getElementById('notesTA').innerHTML = notesData[idx] || ''; }
+function clearAllNotes(){
+  if(!confirm('Delete all notes for this lesson? This cannot be undone.')) return;
+  Object.keys(notesData).forEach(function(k){ delete notesData[k]; });
+  var ta = document.getElementById('notesTA');
+  if (ta) ta.innerHTML = '';
+  try{ if (typeof notesStoreKey !== 'undefined') localStorage.removeItem(notesStoreKey); }catch(e){}
+}
+function savePDF(){
+  saveNotes();
+  var hasNotes = Object.keys(notesData).some(function(k){ return notesData[k] && notesData[k].replace(/<[^>]*>/g,'').trim(); });
+  if (!hasNotes){ alert('No notes to save yet!'); return; }
+  var win = window.open('', '_blank');
+  var cards = '';
+  slideIds.forEach(function(sid, idx){
+    var note = notesData[idx] || '';
+    if (!note.replace(/<[^>]*>/g,'').trim()) return;
+    cards += '<div class="card"><div class="card-header">Slide '+(idx+1)+' &mdash; '+slideLabels[idx]+'</div><div class="card-body">'+note+'</div></div>';
+  });
+  win.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Notes – Business English · Unit 3 · Departments and roles</title><style>'+
+    'body{font-family:"Segoe UI",system-ui,sans-serif;max-width:800px;margin:0 auto;padding:32px 24px;color:#1C2B3A}'+
+    '.header{border-bottom:2px solid #0B1929;padding-bottom:8px;margin-bottom:4px}'+
+    '.header h1{font-size:1.4rem;margin:0 0 6px;color:#0B1929}.header .lesson-link{font-size:1.05rem;color:#1C2B3A}.header a{color:#1B6E96}'+
+    '.date{font-size:.85rem;color:#666;margin:10px 0 24px}'+
+    '.card{border:1px solid #DDD;border-radius:8px;margin-bottom:16px;overflow:hidden;}'+
+    '.card-header{background:#0B1929;color:#fff;padding:8px 14px;font-weight:700;font-size:.88rem;break-after:avoid-page;page-break-after:avoid;}'+
+    '.card-body{orphans:3;widows:3;}'+
+    '.card-body{padding:12px 16px;font-size:.95rem;line-height:1.7}'+
+    'mark{background:#FFE066;color:#1a1a1a;padding:0 2px}'+
+    '[style*="background-color"]{color:#1a1a1a!important}'+
+    '.card-body,.card-body *{color:#1a1a1a!important}'+
+    '*{print-color-adjust:exact;-webkit-print-color-adjust:exact}'+
+    '@media print{@page{margin:1.5cm}body{padding:0}button{display:none}}'+
+  '</style></head><body>'+
+  '<div class="header"><h1>Business English · Unit 3 · Departments and roles</h1><div class="lesson-link">📝 Here you can see our Notes from Class.</div><div class="lesson-link" style="margin-top:4px;">You can also access <a href="https://teacher-nanda.github.io/AEF-Courses/AEF4-4B/index.html" target="_blank">this link</a> to review the lesson material and do your optional Homework activities.</div></div>'+
+  '<p class="date">'+new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</p>'+
+  cards+'</body></html>');
+  win.document.close();
+  setTimeout(function(){ win.print(); }, 400);
+}
+
+/* ===================== GENERIC: TYPED GAP-FILL ===================== */
+function norm(s){ return (s||'').toString().trim().toLowerCase().replace(/[.,!?;:'’]+$/,'').replace(/\s+/g,' '); }
+function checkSlide(sid){
+  var box = document.getElementById(sid);
+  var inputs = box.querySelectorAll('.ans-input');
+  inputs.forEach(function(inp){
+    var val = norm(inp.value);
+    if (!val) { inp.classList.remove('correct','wrong'); inp.classList.add('empty-warn'); return; }
+    inp.classList.remove('empty-warn');
+    var ans = norm(inp.dataset.ans);
+    var alts = (inp.dataset.alt || '').split('|').map(norm).filter(Boolean);
+    if (val === ans || alts.indexOf(val) > -1) { inp.classList.add('correct'); inp.classList.remove('wrong'); }
+    else { inp.classList.add('wrong'); inp.classList.remove('correct'); }
+  });
+}
+function resetSlide(sid){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.ans-input').forEach(function(inp){ inp.value=''; inp.classList.remove('correct','wrong','empty-warn'); });
+}
+
+/* ===================== GENERIC: CIRCLE MC ===================== */
+function circPick(btn){
+  var group = btn.dataset.group;
+  var box = btn.closest('.slide');
+  var wasPicked = btn.classList.contains('picked');
+  box.querySelectorAll('.circ-opt[data-group="'+group+'"]').forEach(function(b){ b.classList.remove('picked'); });
+  if (!wasPicked) btn.classList.add('picked');
+}
+function circScope(sid){
+  var el = document.getElementById(sid);
+  if (!el) return null;
+  if (el.querySelector('.circ-opt[data-group]')) return el;   /* scope to this exercise */
+  return el.closest('.slide') || el;                           /* legacy fallback */
+}
+function checkCircSlide(sid){
+  var box = circScope(sid);
+  var groups = {};
+  box.querySelectorAll('.circ-opt[data-group][data-correct]').forEach(function(b){ groups[b.dataset.group] = groups[b.dataset.group] || []; groups[b.dataset.group].push(b); });
+  Object.keys(groups).forEach(function(g){
+    var picked = groups[g].find(function(b){ return b.classList.contains('picked'); });
+    groups[g].forEach(function(b){ b.classList.remove('correct','wrong'); });
+    if (!picked) return;
+    if (picked.dataset.correct === picked.textContent.trim()) picked.classList.add('correct');
+    else picked.classList.add('wrong');
+  });
+}
+function resetCircSlide(sid){
+  var box = circScope(sid);
+  box.querySelectorAll('.circ-opt[data-group]').forEach(function(b){ b.classList.remove('picked','correct','wrong'); });
+}
+
+/* ===================== GENERIC: COLOUR-PAIR MATCH ===================== */
+var matchColours = ['c0','c1','c2','c3','c4','c5','c6','c7'];
+var matchPending = {};
+function matchPick(el){
+  var wrap = el.closest('.match-wrap');
+  var wid = wrap.id;
+  if (el._linked){
+    var partner = el._linked;
+    matchColours.forEach(function(c){ el.classList.remove(c); partner.classList.remove(c); });
+    el.classList.remove('correctpair','wrongpair','picking');
+    partner.classList.remove('correctpair','wrongpair','picking');
+    el._linked = null; partner._linked = null;
+    delete el.dataset.colour; delete partner.dataset.colour;
+    if (matchPending[wid] === el) matchPending[wid] = null;
+    return;
+  }
+  var pending = matchPending[wid];
+  if (pending && pending !== el && pending.dataset.side !== el.dataset.side){
+    var used = Array.from(wrap.querySelectorAll('.match-item')).map(function(x){ return x.dataset.colour; }).filter(Boolean);
+    var next = matchColours.find(function(c){ return used.indexOf(c) === -1; }) || matchColours[Math.floor(used.length/2) % matchColours.length];
+    pending.classList.remove('picking');
+    pending.classList.add(next); el.classList.add(next);
+    pending.dataset.colour = next; el.dataset.colour = next;
+    pending._linked = el; el._linked = pending;
+    matchPending[wid] = null;
+    return;
+  }
+  if (pending === el){
+    pending.classList.remove('picking');
+    matchPending[wid] = null;
+    return;
+  }
+  if (pending) pending.classList.remove('picking');
+  el.classList.add('picking');
+  matchPending[wid] = el;
+}
+function checkMatchSlide(id){
+  var wrap = document.getElementById(id);
+  wrap.querySelectorAll('.match-item[data-side="left"]').forEach(function(l){
+    l.classList.remove('correctpair','wrongpair');
+    if (l._linked) l._linked.classList.remove('correctpair','wrongpair');
+    if (!l._linked) return;
+    var r = l._linked;
+    if (r.dataset.pair === l.dataset.pair){ l.classList.add('correctpair'); r.classList.add('correctpair'); }
+    else { l.classList.add('wrongpair'); r.classList.add('wrongpair'); }
+  });
+}
+function resetMatchSlide(id){
+  var wrap = document.getElementById(id);
+  wrap.querySelectorAll('.match-item').forEach(function(el){
+    matchColours.forEach(function(c){ el.classList.remove(c); });
+    el.classList.remove('correctpair','wrongpair','picking');
+    el._linked = null;
+    delete el.dataset.colour;
+  });
+  matchPending[id] = null;
+}
+
+/* ===================== GENERIC: CLASSIFY / SORT ===================== */
+var classifySelected = {};
+function classifyPick(chip){
+  if (chip.classList.contains('used')) return;
+  var bank = chip.closest('[id$="-bank"]') || chip.parentElement;
+  bank.querySelectorAll('.classify-chip').forEach(function(c){ c.classList.remove('selected'); });
+  chip.classList.add('selected');
+  classifySelected[bank.id] = chip;
+}
+function classifyTarget(col){
+  var colsEl = col.closest('[id$="-cols"]');
+  var bankId = colsEl ? colsEl.id.replace(/-cols$/, '-bank') : null;
+  var chip = bankId ? classifySelected[bankId] : null;
+  if (!chip) return;
+  var tag = document.createElement('span');
+  tag.className = 'placed';
+  tag.textContent = chip.textContent;
+  tag.dataset.ans = chip.dataset.ans;
+  tag.dataset.chipRef = '1';
+  tag.onclick = function(e){ e.stopPropagation(); tag.remove(); chip.classList.remove('used'); };
+  col.appendChild(tag);
+  chip.classList.add('used'); chip.classList.remove('selected');
+  delete classifySelected[bankId];
+}
+function checkClassifySlide(prefix){
+  var cols = document.getElementById(prefix+'-cols');
+  cols.querySelectorAll('.classify-col').forEach(function(col){
+    col.querySelectorAll('.placed').forEach(function(tag){
+      tag.classList.remove('correct','wrong');
+      if (tag.dataset.ans === col.dataset.target) tag.classList.add('correct');
+      else tag.classList.add('wrong');
+    });
+  });
+}
+function resetClassifySlide(prefix){
+  var bank = document.getElementById(prefix+'-bank');
+  var cols = document.getElementById(prefix+'-cols');
+  cols.querySelectorAll('.placed').forEach(function(tag){ tag.remove(); });
+  bank.querySelectorAll('.classify-chip').forEach(function(c){ c.classList.remove('used','selected'); });
+  classifySelected = {};
+}
+
+/* ===================== GENERIC: WORD BANK FILL ===================== */
+var wbSelected = {};
+function wbPick(tile){
+  if (tile.classList.contains('used')) return;
+  var bank = tile.parentElement;
+  bank.querySelectorAll('.wb-tile').forEach(function(t){ t.classList.remove('selected'); });
+  tile.classList.add('selected');
+  wbSelected[closestSlideId(tile)] = tile;
+}
+function closestSlideId(el){ return el.closest('.slide').id; }
+function wbPlace(blank){
+  var sid = closestSlideId(blank);
+  if (blank.classList.contains('filled')) {
+    var tile = blank._tileRef;
+    if (tile) tile.classList.remove('used');
+    blank.textContent = '______';
+    blank.classList.remove('filled','correct','wrong');
+    blank._tileRef = null;
+    return;
+  }
+  var tile = wbSelected[sid];
+  if (!tile) return;
+  blank.textContent = tile.dataset.val;
+  blank.classList.add('filled');
+  blank._tileRef = tile;
+  tile.classList.add('used'); tile.classList.remove('selected');
+  delete wbSelected[sid];
+}
+function checkWbSlide(sid){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.wb-blank').forEach(function(b){
+    b.classList.remove('correct','wrong');
+    if (!b.classList.contains('filled')) return;
+    if (norm(b.textContent) === norm(b.dataset.ans)) b.classList.add('correct');
+    else b.classList.add('wrong');
+  });
+}
+function resetWbSlide(sid){
+  var box = document.getElementById(sid);
+  var slideEl = box.closest('.slide') || box;
+  box.querySelectorAll('.wb-blank').forEach(function(b){ b.textContent='______'; b.classList.remove('filled','correct','wrong'); b._tileRef=null; });
+  slideEl.querySelectorAll('.wb-tile').forEach(function(t){ t.classList.remove('used','selected'); });
+  wbSelected = {};
+}
+
+/* ===================== GENERIC: TICK / CHECKBOX ===================== */
+function toggleTick(el){
+  el.classList.toggle('picked');
+}
+function checkTickSlide(sid, correctVals){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.tick-item').forEach(function(item){
+    var val = item.dataset.val;
+    var isCorrect = correctVals.indexOf(val) > -1;
+    item.classList.remove('correct','wrong','missed');
+    if (item.classList.contains('picked') && isCorrect) item.classList.add('correct');
+    else if (item.classList.contains('picked') && !isCorrect) item.classList.add('wrong');
+    else if (!item.classList.contains('picked') && isCorrect) item.classList.add('missed');
+  });
+}
+function resetTickSlide(sid){
+  var box = document.getElementById(sid);
+  box.querySelectorAll('.tick-item').forEach(function(item){ item.classList.remove('picked','correct','wrong','missed'); });
+}
+
+/* ===================== SUGGESTED ANSWER / ANSWER KEY TOGGLE ===================== */
+function toggleSuggested(id){
+  var box = document.getElementById(id);
+  box.classList.toggle('show');
+}
+
+/* ===================== SHARED NO-REPEAT SHUFFLE BAG ===================== */
+var shuffleBags = {}, shuffleLast = {};
+function shuffleArray(arr){
+  var a = arr.slice();
+  for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a;
+}
+function nextNoRepeat(key, size){
+  if (!shuffleBags[key] || shuffleBags[key].length === 0){
+    var idxs = []; for (var k=0;k<size;k++) idxs.push(k);
+    var bag = shuffleArray(idxs);
+    if (size > 1 && shuffleLast[key] !== undefined && bag[bag.length-1] === shuffleLast[key]){
+      var swapWith = Math.floor(Math.random()*(bag.length-1));
+      var tmp = bag[bag.length-1]; bag[bag.length-1] = bag[swapWith]; bag[swapWith] = tmp;
+    }
+    shuffleBags[key] = bag;
+  }
+  var n = shuffleBags[key].pop();
+  shuffleLast[key] = n;
+  return n;
+}
+
+/* ===================== PRINT LESSON ===================== */
+function printAll(){
+  saveNotes();
+  var injected = [];
+  slides.forEach(function(slide, i){
+    if (i === 0){
+      var linkEl = document.createElement('div');
+      linkEl.className = 'lesson-link-print';
+      linkEl.innerHTML = '<span class="lp-title">Business English · Unit 3 · Departments and roles</span>' +
+        '<span class="lp-sub">📝 Here you can see our Notes from Class.</span>' +
+        '<span class="lp-sub" style="margin-top:6px;">You can also access <a href="https://teacher-nanda.github.io/Business-EFE2/U03-Departments-and-roles/index.html" target="_blank">this link</a> to review the lesson material and do your optional Homework activities.</span>';
+      slide.insertBefore(linkEl, slide.firstChild);
+      injected.push(linkEl);
+    }
+    var n = notesData[i] || '';
+    if (n.replace(/<[^>]*>/g,'').trim()){
+      var notesEl = document.createElement('div');
+      notesEl.className = 'slide-notes-print';
+      notesEl.innerHTML = '<div class="slide-notes-print-label">📝 Teacher Notes</div>' + n;
+      slide.appendChild(notesEl);
+      injected.push(notesEl);
+    }
+  });
+  document.body.classList.add('print-all');
+  window.print();
+  setTimeout(function(){
+    document.body.classList.remove('print-all');
+    injected.forEach(function(el){ el.parentNode && el.parentNode.removeChild(el); });
+  }, 1500);
+}
+
+/* ===================== UNSAVED-NOTES WARNING + PROGRESS BAR ===================== */
+(function(){
+  var notesUnsaved = false;
+  document.addEventListener('input', function(e){ if (e.target && e.target.id === 'notesTA') notesUnsaved = true; });
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('#dlNotesBtn') : null;
+    if (t) setTimeout(function(){ notesUnsaved = false; }, 300);
+  });
+  window.addEventListener('beforeunload', function(e){
+    if (notesUnsaved) { e.preventDefault(); e.returnValue = ''; return ''; }
+  });
+  var bar = document.getElementById('progBar'); var all = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  function upd(){ var i = all.findIndex(function(x){ return x.classList.contains('active'); }); if (i < 0) return; bar.style.width = ((i+1)/all.length*100) + '%'; }
+  new MutationObserver(upd).observe(document.getElementById('deck'), {attributes:true, subtree:true, attributeFilter:['class']});
+  upd();
+})();
+
+/* init */
+document.getElementById('counter').textContent = '1/' + slides.length;
+document.getElementById('prevBtn').disabled = true;
+loadNotes(0);
+
+
+/* ===================== SAVE NOTES AS PDF (student-friendly cover) ===================== */
+function savePDF(){
+  saveNotes();
+  var hasNotes = Object.keys(notesData).some(function(k){ return notesData[k] && notesData[k].replace(/<[^>]*>/g,'').trim(); });
+  if (!hasNotes){ alert('No notes to save yet!'); return; }
+  var LESSON = 'https://teacher-nanda.github.io/Business-EFE2/U03-Departments-and-roles/index.html', HW = LESSON + '#homework';
+  var win = window.open('', '_blank');
+  var cards = '';
+  slideIds.forEach(function(sid, idx){
+    var note = notesData[idx] || '';
+    if (!note.replace(/<[^>]*>/g,'').trim()) return;
+    cards += '<div class="card"><div class="card-header">Slide '+(idx+1)+' &mdash; '+slideLabels[idx]+'</div><div class="card-body">'+note+'</div></div>';
+  });
+  var css =
+    'body{font-family:"DM Sans","Segoe UI",system-ui,sans-serif;max-width:820px;margin:0 auto;padding:0 0 32px;color:#1C2B3A;background:#fff}'+
+    '.hero{background:linear-gradient(135deg,#2B1B5E 0%,#5A2E8C 55%,#FF6B5E 130%);color:#fff;border-radius:0 0 28px 28px;padding:34px 36px 30px;position:relative;overflow:hidden}'+
+    '.hero:after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.08)}'+
+    '.hero .kicker{font-size:.85rem;letter-spacing:.22em;text-transform:uppercase;color:#FFD84D;font-weight:800;margin:0 0 6px}'+
+    '.hero h1{font-family:"DM Serif Display",Georgia,serif;font-size:2.3rem;line-height:1.1;margin:0 0 6px;font-weight:600}'+
+    '.hero .sub{font-size:1.1rem;opacity:.92;margin:0}'+
+    '.hero .date{display:inline-block;margin-top:14px;background:rgba(255,255,255,.16);border-radius:999px;padding:4px 14px;font-size:.9rem}'+
+    '.how{margin:26px 28px 8px;background:#FFF8E1;border:3px solid #FFD84D;border-radius:22px;padding:20px 24px}'+
+    '.how h2{font-family:"DM Serif Display",Georgia,serif;font-size:1.45rem;margin:0 0 14px;color:#2B1B5E}'+
+    '.step{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px}'+
+    '.step .n{flex:none;width:34px;height:34px;border-radius:50%;background:#2B1B5E;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.1rem}'+
+    '.step p{margin:0;font-size:1.08rem;line-height:1.55}'+
+    '.btns{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 6px 48px}'+
+    '.bigbtn{display:inline-block;text-decoration:none;color:#fff!important;font-weight:800;font-size:1.2rem;padding:13px 26px;border-radius:999px;border:3px solid #2B1B5E;box-shadow:0 5px 0 #2B1B5E}'+
+    '.bigbtn.lesson{background:#1F9D6B}.bigbtn.hw{background:#FF6B5E}'+
+    '.link-note{margin:6px 0 0 48px;font-size:.88rem;color:#5b5b6b;word-break:break-all}'+
+    '.tip{margin-top:12px;font-size:.95rem;color:#5b5b6b}'+
+    '.notes-title{font-family:"DM Serif Display",Georgia,serif;font-size:1.5rem;color:#2B1B5E;margin:26px 28px 12px}'+
+    '.card{border:1px solid #DDD;border-radius:12px;margin:0 28px 16px;overflow:hidden}'+
+    '.card-header{background:#2B1B5E;color:#fff;padding:8px 14px;font-weight:700;font-size:.92rem;break-after:avoid-page;page-break-after:avoid}'+
+    '.card-body{padding:12px 16px;font-size:1rem;line-height:1.7;orphans:3;widows:3}'+
+    'mark{background:#FFE066;color:#1a1a1a;padding:0 2px}'+
+    '[style*="background-color"]{color:#1a1a1a!important}'+
+    '.card-body,.card-body *{color:#1a1a1a!important}'+
+    '*{print-color-adjust:exact;-webkit-print-color-adjust:exact}'+
+    '@media print{@page{margin:1.2cm}body{padding:0}.hero,.how{break-inside:avoid}}';
+  var today = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Notes – '+document.title+'</title>'+
+    '<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;700;800&display=swap" rel="stylesheet">'+
+    '<style>'+css+'</style></head><body>'+
+    '<div class="hero"><p class="kicker">Conversational English with teacher Nanda</p>'+
+      '<h1>'+document.title.replace(' — ',' · ')+'</h1>'+
+      '<p class="sub">📝 Your notes from class</p><span class="date">'+today+'</span></div>'+
+    '<div class="how"><h2>👋 How to use this PDF</h2>'+
+      '<div class="step"><div class="n">1</div><p><b>Read your notes</b> below. These are the notes we made together in class.</p></div>'+
+      '<div class="step"><div class="n">2</div><p><b>Click the green button</b> to open the lesson on your computer, tablet or phone. You can practice our lesson content again or go to the Homework to review.</p></div>'+
+      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the lesson</a></div>'+
+      '<p class="link-note">If the button does not open, copy this link: '+LESSON+'</p></div>'+
+    '<h2 class="notes-title">📝 Notes from class</h2>'+cards+'</body></html>';
+  win.document.write(html);
+  win.document.close();
+  setTimeout(function(){ win.print(); }, 700);
+}
+/* open the Homework directly from the PDF button */
+if (location.hash === '#homework' && document.getElementById('hw-cover')) { goToId('hw-cover'); }
+
+/* ===================== AUDIO CLIPS ===================== */
+var _clipAudio = null, _clipBtn = null;
+function playClip(btn){
+  try{
+    if (_clipAudio){ _clipAudio.pause(); if (_clipBtn) _clipBtn.classList.remove('playing'); }
+    if (_clipBtn === btn && _clipAudio && !_clipAudio.ended && _clipAudio.currentTime > 0){ _clipAudio = null; _clipBtn = null; return; }
+    _clipAudio = new Audio(btn.dataset.src); _clipBtn = btn;
+    btn.classList.add('playing');
+    _clipAudio.onended = function(){ btn.classList.remove('playing'); };
+    _clipAudio.onerror = function(){ btn.classList.remove('playing'); };
+    _clipAudio.play();
+  }catch(e){}
+}
+
+/* ===================== TYPED ANSWERS: forgiving comparison ===================== */
+/* ignores capitals, punctuation, curly apostrophes and extra spaces (overrides the generic version) */
+function norm(s){
+  return (s||'').toString().toLowerCase()
+    .replace(/[‘’ʼ`]/g, "'")
+    .replace(/[.,!?;:"“”]/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
+
+
+var dealCount = 0;
+function dealNext(){
+  var i = nextNoRepeat('deal', DEAL.length);
+  var d = DEAL[i];
+  var card = document.getElementById('deal-card');
+  card.innerHTML = '<div class="dc-head">' + DEAL_LABEL + ' · ' + d.head + '</div><div class="dc-body"><p class="dc-setting">' + d.title + '</p>' +
+    d.lines.map(function(l){ return '<p class="dc-line">' + l + '</p>'; }).join('') +
+    '<div class="dc-goal"><b>Your goal</b>' + d.goal + '</div></div>';
+  card.classList.remove('flip'); void card.offsetWidth; card.classList.add('flip');
+  dealCount++;
+  document.getElementById('deal-count').textContent = 'Cards played: ' + dealCount;
+}
+function dealReset(){
+  shuffleBags['deal'] = []; shuffleLast['deal'] = undefined; dealCount = 0;
+  document.getElementById('deal-count').textContent = 'Cards played: 0';
+  document.getElementById('deal-card').innerHTML = '<div class="dc-head">' + DEAL_LABEL + '</div><div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div>';
+}
+
+
+/* ===================== REVIEW: CHECKLIST ===================== */
+function ckToggle(btn){
+  btn.classList.toggle('on');
+  var list = btn.closest('.check-list');
+  var all = list.querySelectorAll('.check-item'), on = list.querySelectorAll('.check-item.on');
+  var win = list.parentElement.querySelector('.win-banner');
+  if (win) win.classList.toggle('show', all.length === on.length);
+}
+
+
+/* ===================== LIVE-BOUND WARM-UP FIELDS ===================== */
+function liveUpdate(){
+  document.querySelectorAll('[data-live]').forEach(function(inp){
+    var k = inp.dataset.live;
+    document.querySelectorAll('[data-bd="' + k + '"]').forEach(function(n){ n.textContent = inp.value.trim() || ' '; });
+  });
+}
+document.addEventListener('input', function(e){ if (e.target && e.target.dataset && e.target.dataset.live) liveUpdate(); });
+
+var DEAL_LABEL = 'Org chart card';
+var DEAL = [
+  {head:'Induction day', title:'Your first morning', lines:['Your teacher is a new employee.', 'You are the office manager.'], goal:'Explain which departments there are and who is responsible for what.'},
+  {head:'Office tour', title:'Where do I go?', lines:['Your teacher has problems with a laptop, a contract and the coffee machine.'], goal:'Tell your teacher which department to contact for each problem.'},
+  {head:'Team lunch', title:'Tell me about your job', lines:['Your teacher is a colleague from another company.'], goal:'Say who you work for, what area you work in and what your role is.'},
+  {head:'Networking event', title:'What do you do?', lines:['You meet your teacher, who works as an employee in a company you do not know.'], goal:'Ask what department they work in and what they are in charge of.'},
+  {head:'Company visit', title:'A visitor asks', lines:['A visitor wants to speak to the person responsible for office maintenance.'], goal:'Explain who looks after it and which department they work in.'},
+  {head:'Reorganization', title:'New chart', lines:['The company is changing its structure. Your teacher is the new CEO.'], goal:'Describe which department you are in charge of and what it deals with.'},
+  {head:'Job interview', title:'Describe your role', lines:['Your teacher is an interviewer from HR.'], goal:'Describe your current role using three of the phrases from this unit.'},
+  {head:'Video call', title:'Who is who?', lines:['Your teacher is a new colleague abroad.'], goal:'Explain who the manager, the CFO and the assistant are in your company.'},
+  {head:'Coffee break', title:'Different departments', lines:['You work in Marketing. Your teacher works in Finance.'], goal:'Explain what your departments deal with and how you work together.'},
+  {head:'Onboarding', title:'The new assistant', lines:['Your teacher is your new assistant.'], goal:'Explain who looks after what in the office and who they should ask.'},
+  {head:'Client meeting', title:'Who should I speak to?', lines:['A client has a question about a contract and an invoice.'], goal:'Tell the client which departments are responsible and who to contact.'},
+  {head:'Company party', title:'A small world', lines:['Your teacher works for the same company, in a different department.'], goal:'Ask what they do and what their department is responsible for.'}
+];
+
+</script>
+</body>
+</html>
