@@ -5,9 +5,19 @@ S = []
 def slide(sid, label, html):
     S.append((sid, label, html))
 
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
+import audiolib as AL
+_TRACKS = {'cb1.1': ('single', '1', '1_1'), 'cb1.2': ('clips', '1', '1_2', 5), 'cb1.3': ('clips', '1', '1_3', 5),
+           'cb1.4': ('single', '1', '1_4'), 'cb1.5': ('single', '1', '1_5'), 'cb1.7': ('clips', '1', '1_7', 4), 'cb1.8': ('clips', '1', '1_8', 4),
+           'pb1.1': ('pb', '1', '1', 9), 'pb1.2': ('pb', '1', '2', 6), 'pb1.4': ('pb', '1', '4', 12), 'pb1.5': ('pb', '1', '5', 10)}
 def audio(track, top=False):
-    # Audio files are placeholders until the teacher supplies them (wired through the AUDIO map in js_new.js).
-    return '<div class="audio-box pending%s"><audio controls data-track="%s"></audio></div>' % (' top' if top else '', track)
+    t = _TRACKS.get(track)
+    if t and t[0] == 'pb':
+        return AL.pb_clips(t[1], t[2], t[3])
+    if t:
+        return AL.single(t[1], t[2], top) if t[0] == 'single' else AL.clips(t[1], t[2], t[3], True, top)
+    return ''   # no audio file available -> no player at all
 
 def green(txt):
     return '<span class="hl-ok">%s</span>' % txt

@@ -101,8 +101,8 @@ function savePDF(){
       '<p class="sub">📝 Your notes from class</p><span class="date">'+today+'</span></div>'+
     '<div class="how"><h2>👋 How to use this PDF</h2>'+
       '<div class="step"><div class="n">1</div><p><b>Read your notes</b> below. These are the notes we made together in class.</p></div>'+
-      '<div class="step"><div class="n">2</div><p><b>Click the green button</b> to open the lesson on your computer, tablet or phone. You can practice our lesson content again or go to the Homework to review.</p></div>'+
-      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the lesson</a></div>'+
+      '<div class="step"><div class="n">2</div><p><b>Click &ldquo;Open the Lesson&rdquo;</b> to see the lesson content from class and do homework activities.</p></div>'+
+      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the Lesson</a></div>'+
       '<p class="link-note">If the button does not open, copy this link: '+LESSON+'</p></div>'+
     '<h2 class="notes-title">📝 Notes from class</h2>'+cards+'</body></html>';
   win.document.write(html);
@@ -111,3 +111,24 @@ function savePDF(){
 }
 /* open the Homework directly from the PDF button */
 if (location.hash === '#homework' && document.getElementById('hw-cover')) { goToId('hw-cover'); }
+
+/* guided conversation (chat bubbles) */
+function chatNext(sid){
+  var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
+  var bs=c.querySelectorAll('.b');
+  for(var i=0;i<bs.length;i++){
+    if(!bs[i].classList.contains('show')){
+      bs[i].classList.add('show');
+      btn.textContent = (i===bs.length-1) ? 'End of conversation' : (bs[i].classList.contains('them') ? 'Your turn ▸' : 'Continue ▸');
+      if(i===bs.length-1) btn.disabled=true;
+      try{ bs[i].scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+      return;
+    }
+  }
+}
+function chatReset(sid){
+  var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
+  c.querySelectorAll('.b').forEach(function(b){b.classList.remove('show');});
+  c.querySelectorAll('.ccq-answer').forEach(function(a){a.classList.remove('show');});
+  btn.disabled=false; btn.textContent='Start the conversation';
+}

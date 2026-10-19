@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Unit 1 "Introductions" — lesson slides (cover -> review). Theme: the conference lobby.
-import itertools
+import itertools, os
 from lib import (slide, audio, green, ccq, reveal_card, ph, banner, ex_given, example_badge, tf_row, tf_example,
                  figs, TEAL, BRASS, INK, PLUM, CB_ARTICLE, article_toggle)
 
@@ -82,32 +82,44 @@ slide('s-lead2', 'Warm-Up – Would You Rather?', '''<div class="slide" id="s-le
 slide('s-l1', 'Listening – Key Language', '''<div class="slide" id="s-l1">
   %s
   <div class="slide-main"><div class="content">
-    <h2>Listen: people meet and introduce each other</h2>
-    <p class="instruction">Listen to the audio. Then try to summarize it in your own words.</p>
-    %s
-    <div class="two-up" style="margin-top:6px;">
-      <div class="scene"><p style="margin:0 0 6px;"><b>1. Tell me what you understood</b></p>
-        <p style="margin:0;">Who is talking? Who knows whom? Where do people say they met? It is OK if you do not understand everything.</p></div>
-      <div class="scene"><p style="margin:0 0 6px;"><b>2. Check your understanding</b></p>
-        <ul class="ccq-list" style="margin:0;">%s</ul></div>
+    <h2>Listen: five short conversations</h2>
+    <p class="instruction">Listen to each conversation, one at a time.
+Then summarize it in your own words.</p>
+    <div class="conv-box">
+      <div class="conv-row">
+        <button class="clip" data-src="audio/1_1_c1.mp3" onclick="playClip(this)">▶ Conversation 1</button>
+        <span class="conv-q">Has the speaker met Eric before? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. Carl has told the speaker about him.</span></span>
+      </div>
+      <div class="conv-row">
+        <button class="clip" data-src="audio/1_1_c2.mp3" onclick="playClip(this)">▶ Conversation 2</button>
+        <span class="conv-q">Where do they think they met? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">In Mumbai.</span></span>
+      </div>
+      <div class="conv-row">
+        <button class="clip" data-src="audio/1_1_c3.mp3" onclick="playClip(this)">▶ Conversation 3</button>
+        <span class="conv-q">Do Osric and Laura know each other? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. They meet for the first time.</span></span>
+      </div>
+      <div class="conv-row">
+        <button class="clip" data-src="audio/1_1_c4.mp3" onclick="playClip(this)">▶ Conversation 4</button>
+        <span class="conv-q">What is Tony&rsquo;s job? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">He is the new director of marketing.</span></span>
+      </div>
+      <div class="conv-row">
+        <button class="clip" data-src="audio/1_1_c5.mp3" onclick="playClip(this)">▶ Conversation 5</button>
+        <span class="conv-q">Who is introduced to Faisal? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Victoria.</span></span>
+      </div>
     </div>
     <div class="btn-row" style="justify-content:flex-start;margin-top:14px;">
       <button class="btn-akey" onclick="toggleSuggested('l1-script')">📄 Show / hide the transcript</button>
     </div>
     <div class="akey-box" id="l1-script" style="background:#fff;">
-      <p style="margin:0 0 8px;"><b>Transcript</b> &mdash; listen again and read at the same time.</p>
-      <p style="margin:0 0 8px;"><b>1.</b> You must be Eric from the UK. Carl has told me a lot about you.</p>
-      <p style="margin:0 0 8px;"><b>2.</b> I think we met in Mumbai, didn&rsquo;t we? I&rsquo;m Max from HTB Engineering. &ndash; Great to see you again!</p>
-      <p style="margin:0 0 8px;"><b>3.</b> Hello, I don&rsquo;t think we&rsquo;ve met. I&rsquo;m Osric. &ndash; Hi Osric. Laura.</p>
-      <p style="margin:0 0 8px;"><b>4.</b> Tony, this is Hayao from our Japanese office.<br>Hayao, meet Tony, our new director of marketing.</p>
-      <p style="margin:0;"><b>5.</b> Victoria, I&rsquo;d like to introduce you to Faisal. I&rsquo;m not sure you two have met each other.<br>Nice to meet you. &ndash; How do you do?</p>
+      <p style="margin:0 0 8px;"><b>Transcript</b></p>
+      <p style="margin:0 0 10px;"><b>Conversation 1</b><br>You must be Eric from the UK. Carl has told me a lot about you.</p>
+      <p style="margin:0 0 10px;"><b>Conversation 2</b><br>I think we met in Mumbai, didn&rsquo;t we? I&rsquo;m Max from HTB Engineering.<br>Great to see you again!</p>
+      <p style="margin:0 0 10px;"><b>Conversation 3</b><br>Hello, I don&rsquo;t think we&rsquo;ve met. I&rsquo;m Osric.<br>Hi Osric. Laura.</p>
+      <p style="margin:0 0 10px;"><b>Conversation 4</b><br>Tony, this is Hayao from our Japanese office.<br>Hayao, meet Tony, our new director of marketing.</p>
+      <p style="margin:0 0 10px;"><b>Conversation 5</b><br>Victoria, I&rsquo;d like to introduce you to Faisal. I&rsquo;m not sure you two have met each other.<br>Nice to meet you.<br>How do you do?</p>
     </div>
   </div></div>
-</div>''' % (banner('listening'), audio('cb1.1', top=True),
-             ccq('How many short conversations do you hear?', 'Five.') +
-             ccq('Has the speaker in the first conversation met Eric before?', 'No. Carl has told the speaker about him.') +
-             ccq('In the second conversation, where do they think they met?', 'In Mumbai.') +
-             ccq('Who is introduced to Faisal?', 'Victoria.')))
+</div>''' % banner('listening'))
 
 # ------------------------------------------------------------------ 4 MEANING: THREE FIRST MOMENTS (book 1.1, top)
 def scene(target, cols, say_a, say_b=None, shake=False):
@@ -331,8 +343,22 @@ slide('s-g2', 'Grammar – Form', '''<div class="slide" id="s-g2">
 def _xrow(n, pre, a, b, correct, post, group):
     bs = ' <span class="circ-sep">/</span> '.join('<button class="circ-opt" data-group="%s" data-correct="%s" onclick="circPick(this)">%s</button>' % (group, correct, c) for c in (a, b))
     return '<div class="ex-row"><span class="circ-num">%d</span>%s %s %s</div>' % (n, pre, bs, post)
+SPEAK_EX = {
+ "s-x2": [
+  "On Monday mornings I usually check my emails and plan the week.",
+  "I am working on a new training program for our sales team.",
+  "I know about twenty people. I know my team best.",
+  "I think networking events are useful. I am enjoying this course a lot."
+ ],
+ "s-x3": [
+  "It's a pleasure to meet you.",
+  "I'd like to introduce myself. I'm Ana from the finance department.",
+  "You must be Daniel from the Berlin office.",
+  "We met in Lisbon last year, didn't we?"
+ ]
+}
 def _xspeak(sid, label, h2, instr, items):
-    rows = ''.join('<div class="ex-row"><span class="circ-num">%d</span>%s<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle(\'done\')">🗣 I said it</button></div>' % (i + 1, t) for i, t in enumerate(items))
+    rows = ''.join('<div class="ex-row"><span class="circ-num">%d</span>%s<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.nextElementSibling.classList.toggle(\'show\')">💬 Example sentence</button><div class="ccq-answer ex-sent">%s</div></div>' % (i + 1, t, SPEAK_EX[sid][i]) for i, t in enumerate(items))
     slide(sid, label, '''<div class="slide" id="%s">
   %s
   <div class="slide-main"><div class="content">
@@ -341,7 +367,7 @@ def _xspeak(sid, label, h2, instr, items):
     %s
   </div></div>
 </div>''' % (sid, banner('speaking'), h2, instr, rows))
-XR = [("Our sales team", 'travels', 'is traveling', 'travels', "to Madrid every month."), ("Please be quiet. The director", 'gives', 'is giving', 'is giving', "a presentation."),
+XR = [("Our sales team", 'is traveling', 'travels', 'travels', "to Madrid every month."), ("Please be quiet. The director", 'is giving', 'gives', 'is giving', "a presentation."),
       ("I", 'know', 'am knowing', 'know', "your manager."), ("Right now we", 'test', 'are testing', 'are testing', "the new software."),
       ("He usually", 'starts', 'is starting', 'starts', "work at 8:00."), ("She", 'thinks', 'is thinking', 'is thinking', "about moving to another department at the moment.")]
 slide('s-x1', 'Extra – Simple or Continuous?', '''<div class="slide" id="s-x1">
@@ -356,7 +382,7 @@ slide('s-x1', 'Extra – Simple or Continuous?', '''<div class="slide" id="s-x1"
     </div>
   </div></div>
 </div>''' % (banner('grammar'), ''.join(_xrow(i + 1, p, a, b, c, post, 'x1-%d' % (i + 1)) for i, (p, a, b, c, post) in enumerate(XR))))
-_xspeak('s-x2', 'Speaking Break – Habits and Right Now', 'Speaking break: habits and right now', 'Talk to your teacher. Use the present simple for habits and the present continuous for what is happening now. Click the button when you have said it.',
+_xspeak('s-x2', 'Speaking Break – Habits and Right Now', 'Speaking break: habits and right now', 'Answer the questions about you. Use the present simple for habits and the present continuous for what is happening now.',
         ['What do you usually do on Monday mornings at work?', 'What are you working on at the moment? Tell me about one project.', 'Do you know many people at your company? Who do you know best?', 'What do you think about networking events? Are you enjoying this course?'])
 
 # ------------------------------------------------------------------ 11 SMALL WORDS THAT MATTER
@@ -379,8 +405,8 @@ slide('s-g3', 'Grammar – Small Words That Matter', '''<div class="slide" id="s
              chunk('Checking with a question tag', 'The tag repeats the auxiliary: did&rarr;didn\'t we? &nbsp; are&rarr;aren\'t you?', ['I think we met in Mumbai, %s' % H('didn\'t we?'), 'You\'re from Lima, %s' % H('aren\'t you?')])
              ))
 
-_xspeak('s-x3', 'Speaking Break – Make the Introductions', 'Speaking break: make the introductions', 'Imagine you are at a conference. Say these to your teacher. Click the button when you have said it.',
-        ['Say you are happy to meet your teacher. (&ldquo;It&rsquo;s a pleasure to&hellip;&rdquo;)', 'Introduce yourself politely. (&ldquo;I&rsquo;d like to introduce myself&hellip;&rdquo;)', 'You think you know who your teacher is. Check. (&ldquo;You must be&hellip;&rdquo;)', 'You think you met before. Check with a question tag. (&ldquo;We met in&hellip;, didn&rsquo;t we?&rdquo;)'])
+_xspeak('s-x3', 'Speaking Break – Make the Introductions', 'Speaking break: make the introductions', 'Read each situation. What could you say?',
+        ['You meet a new contact at a conference. What could you say to show you are happy to meet them?', 'You want to start a conversation with someone you do not know. How could you introduce yourself politely?', 'You think the person in front of you is Daniel from the Berlin office, but you are not sure. What could you say?', 'You think you met this person at an event last year. How could you check with a question tag?'])
 
 # ------------------------------------------------------------------ 12 PRONUNCIATION
 def stress_line(html):
@@ -391,7 +417,7 @@ slide('s-pron', 'Pronunciation – Sound Like a Professional', '''<div class="sl
   %s
   <div class="slide-main"><div class="content">
     <h2>Stress the important words</h2>
-    <p class="instruction">Listen to your teacher. Then say each sentence. The highlighted words are stronger and clearer.</p>
+    <p class="instruction">Listen, then say each sentence. The highlighted words are stronger and clearer.</p>
     %s%s%s%s%s
     <div class="gram-note">🔊 The small words are quick and weak. In fast speech, &ldquo;to&rdquo; sounds like /tə/ and &ldquo;you&rdquo; sounds like /jə/.</div>
   </div></div>
@@ -403,15 +429,29 @@ slide('s-pron', 'Pronunciation – Sound Like a Professional', '''<div class="sl
              stress_line('I don\'t %s we\'ve %s.' % (St('think'), St('met')))))
 
 # ------------------------------------------------------------------ 13 CB 1.6 READING
+def article(kicker, title, deck, paras):
+    ps = ''.join('<p>%s</p>' % x for x in paras)
+    return '<div class="article-box"><span class="kicker">%s</span><h3>%s</h3>%s%s</div>' % (kicker, title, ('<p class="deck">%s</p>' % deck) if deck else '', ps)
+LOBBY_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lobby_b64.txt')).read()
+NET = article('Networking today', 'Making connections that last', 'Business cards are fading. Conversation skills are not.', [
+    "A crowded conference lobby can feel like a test. Everyone seems to know someone, and it is easy to hide behind your phone. But the first minute matters more than a perfect business card.",
+    "Many professionals prepare a short introduction of 30 to 60 seconds: who they are, what they do, and what interests them. They finish with a question, such as &ldquo;What brought you to this event?&rdquo; Open questions like this are better than small talk about the weather, because they invite a real answer.",
+    "Body language helps, too. A smile, about two seconds of eye contact, and a firm handshake show that you are friendly and confident. Then listen carefully and ask a follow-up question.",
+    "The real networking starts after the event. Instead of a paper card, many people simply scan a QR code and connect on LinkedIn. The key is to send a personal message within 24 to 48 hours. Mention what you talked about, and suggest a next step."])
+SRC = ('<p class="src-note">Based on advice from <a href="https://roberthalf.com/blog/salaries-and-skills/icebreaker-ideas-how-to-introduce-yourself-at-business-networking-events" target="_blank" rel="noopener">Robert Half</a> '
+       'and <a href="https://www.ift.org/brain-food-blog/9-ways-to-strike-up-a-conversation-at-a-networking-event" target="_blank" rel="noopener">IFT</a>. Photo: Josh, Unsplash.</p>')
 slide('s-cb16a', 'Reading – Making Connections', '''<div class="slide" id="s-cb16a">
   %s
   <div class="slide-main"><div class="content">
     <h2>Making connections</h2>
-    <p class="instruction">Look at the title and the picture first. What do you think the article says? Then read it.</p>
-    <div class="ph-small">%s</div>
-    %s
+    <p class="instruction">Look at the title and the picture first.
+What do you think the article says? Then read it.</p>
+    <div class="read-grid">
+      <img class="read-img" alt="People networking in a crowded conference lobby" src="data:image/jpeg;base64,%s">
+      <div>%s%s</div>
+    </div>
   </div></div>
-</div>''' % (banner('reading'), ph('🤝', 'Photo: two hands exchanging a business card'), CB_ARTICLE))
+</div>''' % (banner('reading'), LOBBY_B64, NET, SRC))
 
 def mc_row(n, q, choices, ans, group):
     b = ''.join('<button class="circ-opt" data-group="%s" data-correct="%s" onclick="circPick(this)">%s</button>' % (group, ans, c) for c in choices)
@@ -419,21 +459,21 @@ def mc_row(n, q, choices, ans, group):
 def mc_example(q, choices, ans):
     b = ''.join('<span class="circ-opt %s">%s</span>' % ('is-example' if c == ans else 'struck', c) for c in choices)
     return ex_given('%s%s<br><span style="margin-left:34px;display:inline-block;">%s</span>' % (example_badge(), q, b))
-cb16 = [
- ('What kind of people is the article aimed at?', ['Shy', 'Confident', 'Intelligent'], 'Shy'),
- ('What types of connections are useful?', ['New ones', 'Good ones', 'Lots of them'], 'Good ones'),
- ('Who might be useful people to talk to?', ['Ex-colleagues', 'Recruiters', 'Family'], 'Ex-colleagues'),
- ('What do shy people do a lot?', ['Lie', 'Say sorry', 'Say thank you'], 'Say sorry'),
- ('What does apologizing a lot make you seem?', ['Confident', 'Worried', 'Unprofessional'], 'Unprofessional'),
- ('Where should you look when talking to people?', ['Their eyes', 'Their feet', 'Their mouths'], 'Their eyes'),
- ('What should you give contacts?', ['Money', 'Gifts', 'Your business card'], 'Your business card'),
-]
-rows = [mc_row(i + 1, q, c, a, 'cb16-%d' % (i + 1)) for i, (q, c, a) in enumerate(cb16)]
+T16 = [("A short introduction should last 30 to 60 seconds.", 'True'), ("Business cards are the most important part of networking.", 'False'),
+       ("The article recommends starting with small talk about the weather.", 'False'), ("Most professionals prefer to connect on Facebook.", 'Not given'),
+       ("You should make eye contact for about two seconds.", 'True'), ("You should follow up within a week.", 'False')]
+M16 = [("What should a short introduction end with?", ['Your phone number', 'A question', 'A compliment'], 'A question'),
+       ("Why are open questions useful?", ['They invite a real answer.', 'They are very short.', 'They avoid eye contact.'], 'They invite a real answer.'),
+       ("What do many people do instead of giving a paper card?", ['Send an email', 'Make a phone call', 'Scan a QR code'], 'Scan a QR code'),
+       ("What should a follow-up message include?", ['A long biography', 'What you talked about', 'A price list'], 'What you talked about')]
+rows = [tf_row(i + 1, t, a, 'cb16-%d' % (i + 1)) for i, (t, a) in enumerate(T16)] + [mc_row(i + 7, q, c, a, 'cb16-%d' % (i + 7)) for i, (q, c, a) in enumerate(M16)]
 slide('s-cb16b', 'Reading – Answer the Questions', '''<div class="slide" id="s-cb16b">
   %s
   <div class="slide-main"><div class="content">
     <h2>What does the article say?</h2>
-    <p class="instruction">Read the article and answer the questions.</p>
+    <p class="instruction">Read the article again.
+Questions 1&ndash;6: choose True, False, or Not given.
+Questions 7&ndash;10: choose the best answer.</p>
     <div style="margin-bottom:14px;">%s</div>
     %s
     <div class="fixed-two-col" id="cb16"><div>%s</div><div>%s</div></div>
@@ -442,9 +482,9 @@ slide('s-cb16b', 'Reading – Answer the Questions', '''<div class="slide" id="s
       <button class="btn-reset" onclick="resetCircSlide('cb16')">Reset</button>
     </div>
   </div></div>
-</div>''' % (banner('reading'), article_toggle('cb16-art', CB_ARTICLE),
-             mc_example('What word is used for making connections?', ['Networking', 'Sharing', 'Dividing'], 'Networking'),
-             ''.join(rows[:3]), ''.join(rows[3:])))
+</div>''' % (banner('reading'), article_toggle('cb16-art', NET),
+             tf_example('The article says the first minute matters.', 'True'),
+             ''.join(rows[:5]), ''.join(rows[5:])))
 
 # ------------------------------------------------------------------ 14 CB 1.7 REWRITE
 CONTR = [("I'm", 'I am'), ("don't", 'do not'), ("we've", 'we have'), ("I'd", 'I would')]
@@ -503,22 +543,35 @@ slide('s-cb18', 'Speaking – Choose, Then Say It', '''<div class="slide" id="s-
              audio('cb1.8')))
 
 # ------------------------------------------------------------------ 16 FREER PRACTICE: WORK THE ROOM
-slide('s-free', 'Speaking – Work the Room', '''<div class="slide" id="s-free">
+def chat_speak(sid, label, h2, instr, name, turns, kind='speaking'):
+    """Guided conversation in chat bubbles. turns = [(their_line, your_task, your_example), ...].
+    The conversation reveals one bubble at a time; the student says a reply, the conversation keeps going."""
+    bub = ''
+    for their, task, ex in turns:
+        bub += '<div class="b them"><span class="who">%s</span>%s</div>' % (name, their)
+        bub += ('<div class="b you"><span class="who">You</span><span class="you-task">%s</span><br>'
+                '<button class="say-btn" onclick="this.nextElementSibling.classList.toggle(\'show\')">💬 Example sentence</button>'
+                '<div class="ccq-answer ex-sent">%s</div></div>') % (task, ex)
+    slide(sid, label, '''<div class="slide" id="%s">
   %s
   <div class="slide-main"><div class="content">
-    <h2>Work the room</h2>
-    <p class="instruction">Your teacher is another delegate. Take a card, then start the conversation.</p>
-    <div class="deal-wrap">
-      <div class="deal-card" id="deal-card"><div class="dc-head">Delegate card</div>
-        <div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see who you are, who you meet, and what you need to do.</p></div></div>
-      <div class="btn-row" style="margin-top:0;align-items:center;">
-        <button class="btn-deal" onclick="dealNext()">Deal a card</button>
-        <button class="btn-reset" onclick="dealReset()">Shuffle</button>
-        <span class="deal-count" id="deal-count">Cards played: 0</span>
-      </div>
+    <h2>%s</h2>
+    <p class="instruction">%s</p>
+    <div class="btn-row" style="margin:6px 0 10px;">
+      <button class="btn-deal" id="%s-next" onclick="chatNext('%s')">Start the conversation</button>
+      <button class="btn-reset" onclick="chatReset('%s')">Start again</button>
     </div>
+    <div class="chat" id="%s-chat">%s</div>
   </div></div>
-</div>''' % banner('speaking'))
+</div>''' % (sid, banner(kind), h2, instr, sid, sid, sid, sid, bub))
+
+chat_speak('s-free', 'Speaking – Work the Room', 'Work the room', 'Read the conversation as it goes. When it is your turn, say what you could say.', 'Daniel', [
+ ("Hello. I don't think we've met. I'm Daniel, from the Berlin office.", 'Greet Daniel and introduce yourself.', "Nice to meet you, Daniel. I'm Lena, from the Toronto office."),
+ ("Great to meet you too.<br>Are you enjoying the conference?", 'Say whether you are enjoying it, and why.', "Yes, I'm enjoying it a lot. The presentations are really interesting."),
+ ("Me too.<br>What do you usually do at your company?", 'Tell Daniel what you usually do.', "I usually manage the budget and work with the sales team."),
+ ("And what are you working on at the moment?", 'Say what you are working on now.', "I'm working on a new pricing project. It's keeping me busy."),
+ ("Interesting!<br>Oh, here comes Mei, our CEO. Do you two know each other?", 'Introduce Daniel to your colleague Mei.', "Mei, I'd like to introduce you to Daniel from the Berlin office."),
+ ("It was great talking to you. I'd love to stay in touch.", 'Say goodbye politely and suggest staying in touch.', "It was a pleasure to meet you. Let's connect on LinkedIn.")])
 
 # ------------------------------------------------------------------ 17 LESSON REVIEW
 def ck(label, icon):

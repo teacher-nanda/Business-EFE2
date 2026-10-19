@@ -642,6 +642,23 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 .akey-box, .akey-box p, .article-box p, .form-row, .dc-line, .dc-goal, .vc-def, .rc-a, .rc-q, .bd-tip, .ccq-answer, .big-sent .say-btn,
 .classify-chip, .circ-opt, .match-item, .inst-light, .discuss-list, .check-item, .pc-v { line-height:1.5 !important; }
 .sent-br { display:block; }
+/* ---- notes box: white, larger text ---- */
+#notesPanel { box-shadow:0 8px 28px rgba(0,0,0,.18); border:1px solid #D9D4C5; background:#fff; }
+#notesToolbar { background:#EFEBDD; }
+#notesToolbar button { background:#fff; color:#1C2B3A; border:1px solid #D9D4C5; }
+#notesToolbar button:hover { background:#F6EBD0; }
+#notesDragHandle { color:#1C2B3A; }
+#notesTA { background:#fff; color:#1C2B3A; font-size:1.2rem; backdrop-filter:none; }
+#notesTA:empty::before { color:rgba(28,43,58,.45); }
+.ccq-answer.ex-sent.show { display:block; margin:8px 0 0 34px; }
+.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;}
+.chat .b{display:none;max-width:76%;padding:12px 16px;border-radius:16px;font-size:1.08rem;line-height:1.5;color:#1C2B3A;}
+.chat .b.show{display:block;}
+.chat .b.them{align-self:flex-start;background:#fff;border:1.5px solid #D9D4C5;border-bottom-left-radius:4px;}
+.chat .b.you{align-self:flex-end;background:#E3F0EC;border:1.5px solid #9CC7BB;border-bottom-right-radius:4px;}
+.chat .who{display:block;font-size:.72rem;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:2px;}
+.chat .you-task{font-weight:600;}
+.chat .ccq-answer.ex-sent.show{margin:8px 0 0 0;}
 
 </style>
 </head>
@@ -742,7 +759,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <div class="slide-main"><div class="content">
 <h2>Speaking break: departments</h2>
 <p class="instruction">Answer the questions about the departments you just learned.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Which departments does your company have? Name three and say what each one does.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Which department do you work with most? Why?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Which department would you like to visit for a day? Why?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Ask: “Which department do you think is the busiest?” Then give your own opinion.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Which departments does your company have? Name three and say what each one does.<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">We have Marketing, Sales, and IT. Marketing promotes our products.</div></div><div class="ex-row"><span class="circ-num">2</span>Which department do you work with most? Why?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I work with Human Resources most, because they handle hiring.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>Which department would you like to visit for a day? Why?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I'd like to visit Research and Development. I want to see new products.</div></div><div class="ex-row"><span class="circ-num">4</span>Ask: “Which department do you think is the busiest?” Then give your own opinion.<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">Which department do you think is the busiest? I think it's Sales.</div></div></div></div>
 </div></div>
 </div>
 
@@ -776,7 +793,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
   <div class="slide-main"><div class="content">
     <h2>Speaking break: roles</h2>
     <p class="instruction">Answer the questions about you.</p>
-    <div class="ex-row"><span class="circ-num">1</span>Who is your employer? Who are your managers?<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle('done')">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Do you have an assistant, or are you an assistant to someone? What does that person do?<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle('done')">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">3</span>Who is the CEO of your company or of a company you know well? What is the CEO like?<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle('done')">🗣 I said it</button></div>
+    <div class="ex-row"><span class="circ-num">1</span>Who is your employer? Who are your managers?<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">My employer is a software company. My manager is Clara.</div></div><div class="ex-row"><span class="circ-num">2</span>Do you have an assistant, or are you an assistant to someone? What does that person do?<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I'm an assistant to the director. I organize her calendar.</div></div><div class="ex-row"><span class="circ-num">3</span>Who is the CEO of your company or of a company you know well? What is the CEO like?<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">The CEO of my company is very organized and friendly.</div></div>
   </div></div>
 </div>
 
@@ -810,7 +827,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <div class="slide-main"><div class="content">
 <h2>Speaking break: describe your job</h2>
 <p class="instruction">Use the phrases from this lesson to talk about your own job.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Use “work for” and “work in”: where do you work?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Use “work as”: what is your job?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Use “in charge of” or “responsible for”: what do you manage or look after?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Now ask about someone else's job, using the same phrases.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Use “work for” and “work in”: where do you work?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I work for a travel company. I work in the sales department.</div></div><div class="ex-row"><span class="circ-num">2</span>Use “work as”: what is your job?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I work as a project manager.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>Use “in charge of” or “responsible for”: what do you manage or look after?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I'm in charge of the budget. I'm responsible for the schedule.</div></div><div class="ex-row"><span class="circ-num">4</span>Now ask about someone else's job, using the same phrases.<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">Where do you work? Who looks after the accounts?</div></div></div></div>
 </div></div>
 </div>
 
@@ -835,16 +852,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
   <div class="banner banner-speaking">💬 Speaking</div>
   <div class="slide-main"><div class="content">
     <h2>Org chart chat</h2>
-    <p class="instruction">Your teacher is a new employee.<br>Take a card, then explain who does what in the company.</p>
-    <div class="deal-wrap">
-      <div class="deal-card" id="deal-card"><div class="dc-head">Org chart card</div>
-        <div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div></div>
-      <div class="btn-row" style="margin-top:0;align-items:center;">
-        <button class="btn-deal" onclick="dealNext()">Deal a card</button>
-        <button class="btn-reset" onclick="dealReset()">Shuffle</button>
-        <span class="deal-count" id="deal-count">Cards played: 0</span>
-      </div>
+    <p class="instruction">Read the conversation as it goes.<br>When it is your turn, say what you could say.</p>
+    <div class="btn-row" style="margin:6px 0 10px;">
+      <button class="btn-deal" id="s-free-next" onclick="chatNext('s-free')">Start the conversation</button>
+      <button class="btn-reset" onclick="chatReset('s-free')">Start again</button>
     </div>
+    <div class="chat" id="s-free-chat"><div class="b them"><span class="who">Tom</span>Hi, I'm Tom. It's my first day.<br>Which department do you work in?</div><div class="b you"><span class="who">You</span><span class="you-task">Say which department you work in and what your job is.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I work in Marketing. I work as a brand manager.</div></div><div class="b them"><span class="who">Tom</span>Great.<br>Who is in charge of Human Resources?</div><div class="b you"><span class="who">You</span><span class="you-task">Say who is in charge of HR. Invent a name if you like.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Sofia is in charge of HR. She's very helpful.</div></div><div class="b them"><span class="who">Tom</span>And who do I go to if my computer breaks?</div><div class="b you"><span class="who">You</span><span class="you-task">Tell Tom which department is responsible.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">You should contact IT. They're responsible for all our equipment.</div></div><div class="b them"><span class="who">Tom</span>What does the Facilities department do?</div><div class="b you"><span class="who">You</span><span class="you-task">Explain what Facilities does.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Facilities looks after the office: cleaning, repairs, and security.</div></div><div class="b them"><span class="who">Tom</span>Who is the CEO? What is the CEO like?</div><div class="b you"><span class="who">You</span><span class="you-task">Describe the CEO of your company, or of a company you know.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Our CEO is Marta Lindqvist. She's friendly, and she works very hard.</div></div><div class="b them"><span class="who">Tom</span>Thanks, this is really helpful.<br>Which department should I visit for a day to learn more?</div><div class="b you"><span class="who">You</span><span class="you-task">Suggest a department and say why.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I'd visit Sales. They work with every other department.</div></div></div>
   </div></div>
 </div>
 
@@ -873,12 +886,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <h2>HW1 — Departments</h2>
 <p class="instruction">Write the departments from the panel under the correct definitions.<br>Click a department, then click a gap.</p>
 <div class="wb-bank book-style"><button class="wb-tile" data-val="Public Relations (PR)" onclick="wbPick(this)">Public Relations (PR)</button><button class="wb-tile" data-val="Administration" onclick="wbPick(this)">Administration</button><button class="wb-tile" data-val="Research and Development (R&amp;D)" onclick="wbPick(this)">Research and Development (R&amp;D)</button><button class="wb-tile" data-val="Production" onclick="wbPick(this)">Production</button><button class="wb-tile" data-val="Facilities / Office Services" onclick="wbPick(this)">Facilities / Office Services</button><button class="wb-tile" data-val="Accounts / Finance" onclick="wbPick(this)">Accounts / Finance</button><button class="wb-tile" data-val="Information Technology (IT)" onclick="wbPick(this)">Information Technology (IT)</button><button class="wb-tile" data-val="Human Resources (HR)" onclick="wbPick(this)">Human Resources (HR)</button><button class="wb-tile" data-val="Sales" onclick="wbPick(this)">Sales</button><button class="wb-tile example-used" data-val="Purchasing" disabled="">Purchasing</button><button class="wb-tile" data-val="Legal" onclick="wbPick(this)">Legal</button><button class="wb-tile" data-val="Marketing" onclick="wbPick(this)">Marketing</button></div>
-
 <div class="fixed-two-col" id="hw1"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>Deals with buying goods and raw materials.<br/><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="Purchasing">Purchasing</span></span></div><div class="ex-row"><span class="circ-num">1</span>Deals with employee relations and matters such as hiring staff. <span class="wb-blank" data-ans="Human Resources (HR)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">2</span>Ensures that all technological systems are working and maintained. <span class="wb-blank" data-ans="Information Technology (IT)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">3</span>Deals with selling a finished product to outside markets. <span class="wb-blank" data-ans="Sales" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">4</span>Deals with maintaining a positive public image for a company. <span class="wb-blank" data-ans="Public Relations (PR)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">5</span>Ensures that all contracts and company activities are legal. <span class="wb-blank" data-ans="Legal" onclick="wbPlace(this)">______</span></div></div><div><div class="ex-row"><span class="circ-num">6</span>Ensures the smooth day-to-day running of the practical aspects of a company. <span class="wb-blank" data-ans="Facilities / Office Services" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">7</span>Deals with organization and internal and external communication. <span class="wb-blank" data-ans="Administration" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">8</span>Deals with researching and developing future products for a company. <span class="wb-blank" data-ans="Research and Development (R&amp;D)" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">9</span>Deals with money matters, from paying bills to projecting sales. <span class="wb-blank" data-ans="Accounts / Finance" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">10</span>Deals with promoting products. <span class="wb-blank" data-ans="Marketing" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">11</span>Ensures all manufacturing stages run smoothly. <span class="wb-blank" data-ans="Production" onclick="wbPlace(this)">______</span></div></div></div>
 <div class="btn-row">
 <button class="btn-check" onclick="checkWbSlide('hw1')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('hw1')">Reset</button>
 </div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_10.mp3" onclick="playClip(this)">10</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_1_11.mp3" onclick="playClip(this)">11</button></div>
 </div></div>
 </div>
 
@@ -888,12 +901,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <h2>HW2 — Roles</h2>
 <p class="instruction">Write the words from the panel under the correct pictures.<br>Click a word, then click a gap.</p>
 <div class="wb-bank book-style"><button class="wb-tile" data-val="manager" onclick="wbPick(this)">manager</button><button class="wb-tile" data-val="Chief Executive Officer (CEO)" onclick="wbPick(this)">Chief Executive Officer (CEO)</button><button class="wb-tile example-used" data-val="employer" disabled="">employer</button><button class="wb-tile" data-val="Chief Financial Officer (CFO)" onclick="wbPick(this)">Chief Financial Officer (CFO)</button><button class="wb-tile" data-val="employee" onclick="wbPick(this)">employee</button><button class="wb-tile" data-val="assistant" onclick="wbPick(this)">assistant</button></div>
-
 <div class="fixed-two-col" id="hw2"><div><div class="ex-row ex-given"><span class="example-badge">✓</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: two people talking at a table</span></div> <span class="wb-blank filled is-example" data-ans="employer">employer</span></span></div><div class="ex-row"><span class="circ-num">1</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a man in a suit and a woman holding a folder, standing together</span></div> <span class="wb-blank" data-ans="assistant" onclick="wbPlace(this)">______</span></span></div><div class="ex-row"><span class="circ-num">2</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a man in a suit sitting behind a large desk</span></div> <span class="wb-blank" data-ans="Chief Executive Officer (CEO)" onclick="wbPlace(this)">______</span></span></div></div><div><div class="ex-row"><span class="circ-num">3</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a woman at a desk with an abacus</span></div> <span class="wb-blank" data-ans="Chief Financial Officer (CFO)" onclick="wbPlace(this)">______</span></span></div><div class="ex-row"><span class="circ-num">4</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a man and a woman shaking hands at a table</span></div> <span class="wb-blank" data-ans="employee" onclick="wbPlace(this)">______</span></span></div><div class="ex-row"><span class="circ-num">5</span><span style="display:inline-flex;gap:12px;align-items:center;flex-wrap:wrap;"><div class="pic-ph"><span>🖼️</span><span>Picture: a woman at the head of a meeting table, with colleagues around it</span></div> <span class="wb-blank" data-ans="manager" onclick="wbPlace(this)">______</span></span></div></div></div>
 <div class="btn-row">
 <button class="btn-check" onclick="checkWbSlide('hw2')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('hw2')">Reset</button>
 </div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_2__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_2_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_2_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_2_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_2_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_2_5.mp3" onclick="playClip(this)">5</button></div>
 </div></div>
 </div>
 
@@ -903,12 +916,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <h2>HW3 — Describing roles</h2>
 <p class="instruction">Write the phrases from the panel under the correct definitions.<br>Click a phrase, then click a gap.</p>
 <div class="wb-bank book-style"><button class="wb-tile" data-val="to work as" onclick="wbPick(this)">to work as</button><button class="wb-tile example-used" data-val="to look after" disabled="">to look after</button><button class="wb-tile" data-val="to be in charge of" onclick="wbPick(this)">to be in charge of</button><button class="wb-tile" data-val="to be responsible for" onclick="wbPick(this)">to be responsible for</button><button class="wb-tile" data-val="to work in" onclick="wbPick(this)">to work in</button><button class="wb-tile" data-val="to work for" onclick="wbPick(this)">to work for</button></div>
-
 <div class="fixed-two-col" id="hw3"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>To ensure something runs smoothly<br/><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="to look after">to look after</span></span></div><div class="ex-row"><span class="circ-num">1</span>To be employed by a company <span class="wb-blank" data-ans="to work for" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">2</span>To have a particular job or role <span class="wb-blank" data-ans="to work as" onclick="wbPlace(this)">______</span></div></div><div><div class="ex-row"><span class="circ-num">3</span>To have the duty of ensuring something is done effectively <span class="wb-blank" data-ans="to be responsible for" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">4</span>To have control and authority over something <span class="wb-blank" data-ans="to be in charge of" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">5</span>To be employed in a department or area of an industry <span class="wb-blank" data-ans="to work in" onclick="wbPlace(this)">______</span></div></div></div>
 <div class="btn-row">
 <button class="btn-check" onclick="checkWbSlide('hw3')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('hw3')">Reset</button>
 </div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_3__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_3_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_3_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_3_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_3_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/3/3_3_5.mp3" onclick="playClip(this)">5</button></div>
 </div></div>
 </div>
 
@@ -1451,8 +1464,8 @@ function savePDF(){
       '<p class="sub">📝 Your notes from class</p><span class="date">'+today+'</span></div>'+
     '<div class="how"><h2>👋 How to use this PDF</h2>'+
       '<div class="step"><div class="n">1</div><p><b>Read your notes</b> below. These are the notes we made together in class.</p></div>'+
-      '<div class="step"><div class="n">2</div><p><b>Click the green button</b> to open the lesson on your computer, tablet or phone. You can practice our lesson content again or go to the Homework to review.</p></div>'+
-      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the lesson</a></div>'+
+      '<div class="step"><div class="n">2</div><p><b>Click &ldquo;Open the Lesson&rdquo;</b> to see the lesson content from class and do homework activities.</p></div>'+
+      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the Lesson</a></div>'+
       '<p class="link-note">If the button does not open, copy this link: '+LESSON+'</p></div>'+
     '<h2 class="notes-title">📝 Notes from class</h2>'+cards+'</body></html>';
   win.document.write(html);
@@ -1461,6 +1474,27 @@ function savePDF(){
 }
 /* open the Homework directly from the PDF button */
 if (location.hash === '#homework' && document.getElementById('hw-cover')) { goToId('hw-cover'); }
+
+/* guided conversation (chat bubbles) */
+function chatNext(sid){
+  var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
+  var bs=c.querySelectorAll('.b');
+  for(var i=0;i<bs.length;i++){
+    if(!bs[i].classList.contains('show')){
+      bs[i].classList.add('show');
+      btn.textContent = (i===bs.length-1) ? 'End of conversation' : (bs[i].classList.contains('them') ? 'Your turn ▸' : 'Continue ▸');
+      if(i===bs.length-1) btn.disabled=true;
+      try{ bs[i].scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+      return;
+    }
+  }
+}
+function chatReset(sid){
+  var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
+  c.querySelectorAll('.b').forEach(function(b){b.classList.remove('show');});
+  c.querySelectorAll('.ccq-answer').forEach(function(a){a.classList.remove('show');});
+  btn.disabled=false; btn.textContent='Start the conversation';
+}
 
 /* ===================== AUDIO CLIPS ===================== */
 var _clipAudio = null, _clipBtn = null;

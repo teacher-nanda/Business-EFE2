@@ -6,6 +6,20 @@ from lib import *
 from ex import *
 import audiolib as AL
 U = '6'
+SPEAK_EX.update({
+ "s-sp1": [
+  "The biggest expenditure is salaries.",
+  "Yes, we have a training budget. It's about two thousand dollars per person.",
+  "Getting into debt is dangerous because you have to pay interest.",
+  "A restaurant has high overheads. It can break even by selling more lunches."
+ ],
+ "s-sp2": [
+  "A large retailer went out of business last year. Its sales figures dropped fast.",
+  "They undercut competitors to win customers. It can hurt their profit margin.",
+  "There was an upturn in the market in 2021, and a downturn in 2008.",
+  "When the exchange rate drops, imports become more expensive."
+ ]
+})
 W = lambda n: AL.word(U, '6_1_' + n)
 
 cover(6, 'Money and finance', ["We've made a loss.", "Our sales figures have improved.", "We need to undercut our competitors.", "Thankfully, there was an upturn in the market."])
@@ -57,7 +71,7 @@ gapsA = [("The company's", 'income', "fell last year."), ("The initial", 'expend
          ("High", 'overheads', "make this business difficult to run.")]
 exercise('s-cl1', 'Practice – Complete the Sentences (1)', 'vocab', 'Complete the sentences (1 of 2)', 'Fill in the gaps using the words in the panel. Click a word, then click a gap.',
          [wb_row(i + 1, p, a, post) for i, (p, a, post) in enumerate(gapsA)], 'wb', pre=wb_bank([a for _, a, _ in gapsA]), gid='cl1')
-speak('s-sp1', 'Speaking Break – Income and Costs', 'Speaking break: income and costs', 'Talk to your teacher. Use the phrases from the first list. Click the button when you have said it.', [
+speak('s-sp1', 'Speaking Break – Income and Costs', 'Speaking break: income and costs', 'Answer the questions. Use the phrases from the first list.', [
     'What is the biggest expenditure in your company or your household? Why?',
     'Does your company have a budget for training? What do you know about it?',
     'Why is it important to avoid getting into debt? Give your opinion.',
@@ -72,7 +86,7 @@ gapsB = [("I'm selling these earrings at", 'cost', "to attract customers."), ("O
 exercise('s-cl2', 'Practice – Complete the Sentences (2)', 'vocab', 'Complete the sentences (2 of 2)', 'Fill in the gaps using the words in the panel. Click a word, then click a gap.',
          [wb_row(i + 1, p, a, post) for i, (p, a, post) in enumerate(gapsB)], 'wb', pre=wb_bank([a for _, a, _ in gapsB]), gid='cl2')
 
-speak('s-sp2', 'Speaking Break – The Market', 'Speaking break: good and bad times', 'Talk to your teacher. Use the phrases from the second list. Click the button when you have said it.', [
+speak('s-sp2', 'Speaking Break – The Market', 'Speaking break: good and bad times', 'Answer the questions. Use the phrases from the second list.', [
     'Think of a company that dropped in value or went out of business. What happened?',
     'Why do some companies undercut their competitors? Is it a good idea?',
     'When did your industry have an upturn in the market, or an economic downturn?',
@@ -92,5 +106,11 @@ sort_slide('s-pron', 'Pronunciation – Word Stress', 'pron', 'Where is the stre
            [(S1, '<b>Stress on the 1st syllable</b><br>IN-come'), (S2, '<b>Stress later in the word</b><br>ac-COUNTS')],
            aud='<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span>%s</div>' % ''.join(AL.word(U, '6_1_' + a, l) for a, l in [('income', 'income'), ('abudget', 'budget'), ('overheads', 'overheads'), ('anoverdraft', 'overdraft'), ('accounts', 'accounts'), ('expenditureoutlay', 'expenditure'), ('theexchangerate', 'exchange rate'), ('aneconomicdownturn', 'economic downturn')]))
 
-freer('s-free', 'Speaking – Financial Update', 'Finance card', 'Your teacher is a colleague who needs a financial update. Take a card, then explain the situation.', 'Finance card')
+chat_speak('s-free', 'Speaking – Financial Update', 'Financial update', 'Read the conversation as it goes. When it is your turn, say what you could say.', 'Jordan', [
+ ("Can you give me a quick financial update on the company?", 'Give a short overview of the company&rsquo;s income.', "Of course. Overall, our income is up this quarter."),
+ ("That's good.<br>What about our costs?", 'Talk about costs.', "Our biggest expenditure is salaries, but our overheads are low."),
+ ("Are we going to break even this year?", 'Answer, and say when.', "Yes. We expect to break even by December."),
+ ("What about our competitors? Are they undercutting us?", 'Talk about the competition.', "Yes, one competitor has dropped its prices to undercut us."),
+ ("How is the market doing?", 'Describe the market.', "There was an upturn this spring, but there could be a downturn next year."),
+ ("Do we have enough money in the budget for new equipment?", 'Answer, and give advice about debt.', "Not at the moment. We should avoid getting into debt, so let's wait until next quarter.")])
 review([('Money and finance phrases', '💰'), ('Describing good and bad news', '📊'), ('Talking about a business situation', '🧩')], 'Before you leave', 'Give me a short financial update about a real or imaginary company, using at least five new phrases.')

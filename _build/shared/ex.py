@@ -94,12 +94,19 @@ def mrow(side, pair, text, num=None, example=False):
     return '<div class="match-item" data-side="right" data-pair="%s" onclick="matchPick(this)">%s</div>' % (pair, text)
 
 # ---------- slide builders ----------
-def _two_col(rows, gid):
-    k = math.ceil(len(rows) / 2.0)
-    return '<div class="fixed-two-col" id="%s"><div>%s</div><div>%s</div></div>' % (gid, ''.join(rows[:k]), ''.join(rows[k:]))
+def _two_col(rows, gid, example=''):
+    """Layout rule: example + even items -> example alone on top, items split evenly in 2 columns.
+    example + odd items -> example joins column 1 (total even, split evenly)."""
+    n = len(rows)
+    if example and n % 2 == 1:
+        k = (n + 1) // 2 - 1
+        return '<div class="fixed-two-col" id="%s"><div>%s%s</div><div>%s</div></div>' % (gid, example, ''.join(rows[:k]), ''.join(rows[k:])), ''
+    k = math.ceil(n / 2.0)
+    return '<div class="fixed-two-col" id="%s"><div>%s</div><div>%s</div></div>' % (gid, ''.join(rows[:k]), ''.join(rows[k:])), example
 
 def exercise(sid, label, kind, h2, instr, rows, mode='circ', example='', pre='', aud='', gid=None, inst_class='instruction'):
     gid = gid or sid
+    grid, example = _two_col(rows, gid, example)
     chk, rst = {'circ': ('checkCircSlide', 'resetCircSlide'), 'typed': ('checkSlide', 'resetSlide'), 'wb': ('checkWbSlide', 'resetWbSlide')}[mode]
     html = '''<div class="slide" id="%s">
   %s
@@ -115,7 +122,7 @@ def exercise(sid, label, kind, h2, instr, rows, mode='circ', example='', pre='',
     </div>
     %s
   </div></div>
-</div>''' % (sid, banner(kind), h2, inst_class, instr, pre, example, _two_col(rows, gid), chk, gid, rst, gid, aud)
+</div>''' % (sid, banner(kind), h2, inst_class, instr, pre, example, grid, chk, gid, rst, gid, aud)
     slide(sid, label, html)
 
 def match_exercise(sid, label, kind, h2, instr, left, right, aud=''):
@@ -270,7 +277,47 @@ St = lambda t: '<span class="st">%s</span>' % t
 Sy = lambda t: '<span class="st sy">%s</span>' % t
 
 
+SPEAK_EX = {}
+
+def speak_rows(sid, items, ex):
+    out = ''
+    for i, t in enumerate(items):
+        eg = ('<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.nextElementSibling.classList.toggle(\'show\')">💬 Example sentence</button>'
+              '<div class="ccq-answer ex-sent">%s</div>') % ex[i] if ex and i < len(ex) else ''
+        out += '<div class="ex-row"><span class="circ-num">%d</span>%s%s</div>' % (i + 1, t, eg)
+    return out
+
 def speak(sid, label, h2, instr, items, closing=''):
-    """Speaking break slide: numbered prompts, each with an 'I said it' button."""
-    rows = ''.join('<div class="ex-row"><span class="circ-num">%d</span>%s<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle(\'done\')">🗣 I said it</button></div>' % (i + 1, t) for i, t in enumerate(items))
-    content(sid, label, 'speaking', h2, rows + closing, instr)
+    """Speaking break slide: numbered prompts, each with an 'Example sentence' button."""
+    content(sid, label, 'speaking', h2, speak_rows(sid, items, SPEAK_EX.get(sid)) + closing, instr)
+
+
+def pic_num_row(letter, text, ans):
+    """Listening: number the pictures. A text description stands in for the picture."""
+    return '<div class="ex-row"><span class="circ-num">%s</span>%s <input class="ans-input" style="width:56px;text-align:center" data-ans="%s" data-alt="" aria-label="picture %s"></div>' % (letter, text, ans, letter)
+
+def pic_num_example(letter, text, ans):
+    return ex_given('%s<span class="circ-num">%s</span>%s <span class="ans-line" style="display:inline;margin:0 0 0 6px;">%s</span>' % (example_badge(), letter, text, ans))
+
+
+def chat_speak(sid, label, h2, instr, name, turns, kind='speaking'):
+    """Guided conversation in chat bubbles. turns = [(their_line, your_task, your_example), ...].
+    The conversation reveals one bubble at a time; the student says a reply, the conversation keeps going."""
+    bub = ''
+    for their, task, ex in turns:
+        bub += '<div class="b them"><span class="who">%s</span>%s</div>' % (name, their)
+        bub += ('<div class="b you"><span class="who">You</span><span class="you-task">%s</span><br>'
+                '<button class="say-btn" onclick="this.nextElementSibling.classList.toggle(\'show\')">💬 Example sentence</button>'
+                '<div class="ccq-answer ex-sent">%s</div></div>') % (task, ex)
+    slide(sid, label, '''<div class="slide" id="%s">
+  %s
+  <div class="slide-main"><div class="content">
+    <h2>%s</h2>
+    <p class="instruction">%s</p>
+    <div class="btn-row" style="margin:6px 0 10px;">
+      <button class="btn-deal" id="%s-next" onclick="chatNext('%s')">Start the conversation</button>
+      <button class="btn-reset" onclick="chatReset('%s')">Start again</button>
+    </div>
+    <div class="chat" id="%s-chat">%s</div>
+  </div></div>
+</div>''' % (sid, banner(kind), h2, instr, sid, sid, sid, sid, bub))

@@ -642,6 +642,23 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 .akey-box, .akey-box p, .article-box p, .form-row, .dc-line, .dc-goal, .vc-def, .rc-a, .rc-q, .bd-tip, .ccq-answer, .big-sent .say-btn,
 .classify-chip, .circ-opt, .match-item, .inst-light, .discuss-list, .check-item, .pc-v { line-height:1.5 !important; }
 .sent-br { display:block; }
+/* ---- notes box: white, larger text ---- */
+#notesPanel { box-shadow:0 8px 28px rgba(0,0,0,.18); border:1px solid #D9D4C5; background:#fff; }
+#notesToolbar { background:#EFEBDD; }
+#notesToolbar button { background:#fff; color:#1C2B3A; border:1px solid #D9D4C5; }
+#notesToolbar button:hover { background:#F6EBD0; }
+#notesDragHandle { color:#1C2B3A; }
+#notesTA { background:#fff; color:#1C2B3A; font-size:1.2rem; backdrop-filter:none; }
+#notesTA:empty::before { color:rgba(28,43,58,.45); }
+.ccq-answer.ex-sent.show { display:block; margin:8px 0 0 34px; }
+.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;}
+.chat .b{display:none;max-width:76%;padding:12px 16px;border-radius:16px;font-size:1.08rem;line-height:1.5;color:#1C2B3A;}
+.chat .b.show{display:block;}
+.chat .b.them{align-self:flex-start;background:#fff;border:1.5px solid #D9D4C5;border-bottom-left-radius:4px;}
+.chat .b.you{align-self:flex-end;background:#E3F0EC;border:1.5px solid #9CC7BB;border-bottom-right-radius:4px;}
+.chat .who{display:block;font-size:.72rem;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:2px;}
+.chat .you-task{font-weight:600;}
+.chat .ccq-answer.ex-sent.show{margin:8px 0 0 0;}
 
 </style>
 </head>
@@ -733,7 +750,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <div class="slide-main"><div class="content">
 <h2>Speaking break: income and costs</h2>
 <p class="instruction">Answer the questions.<br>Use the phrases from the first list.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>What is the biggest expenditure in your company or your household? Why?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Does your company have a budget for training? What do you know about it?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Why is it important to avoid getting into debt? Give your opinion.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>Describe a business that has high overheads. How can it break even?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>What is the biggest expenditure in your company or your household? Why?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">The biggest expenditure is salaries.</div></div><div class="ex-row"><span class="circ-num">2</span>Does your company have a budget for training? What do you know about it?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, we have a training budget. It's about two thousand dollars per person.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>Why is it important to avoid getting into debt? Give your opinion.<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">Getting into debt is dangerous because you have to pay interest.</div></div><div class="ex-row"><span class="circ-num">4</span>Describe a business that has high overheads. How can it break even?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">A restaurant has high overheads. It can break even by selling more lunches.</div></div></div></div>
 </div></div>
 </div>
 
@@ -767,7 +784,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <div class="slide-main"><div class="content">
 <h2>Speaking break: good and bad times</h2>
 <p class="instruction">Answer the questions.<br>Use the phrases from the second list.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Think of a company that dropped in value or went out of business. What happened?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Why do some companies undercut their competitors? Is it a good idea?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>When did your industry have an upturn in the market, or an economic downturn?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>How do changes in the exchange rate affect companies that sell abroad?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Think of a company that dropped in value or went out of business. What happened?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">A large retailer went out of business last year. Its sales figures dropped fast.</div></div><div class="ex-row"><span class="circ-num">2</span>Why do some companies undercut their competitors? Is it a good idea?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">They undercut competitors to win customers. It can hurt their profit margin.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>When did your industry have an upturn in the market, or an economic downturn?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">There was an upturn in the market in 2021, and a downturn in 2008.</div></div><div class="ex-row"><span class="circ-num">4</span>How do changes in the exchange rate affect companies that sell abroad?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">When the exchange rate drops, imports become more expensive.</div></div></div></div>
 </div></div>
 </div>
 
@@ -808,17 +825,13 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <div class="slide" id="s-free">
   <div class="banner banner-speaking">💬 Speaking</div>
   <div class="slide-main"><div class="content">
-    <h2>Finance card</h2>
-    <p class="instruction">Your teacher is a colleague who needs a financial update.<br>Take a card, then explain the situation.</p>
-    <div class="deal-wrap">
-      <div class="deal-card" id="deal-card"><div class="dc-head">Finance card</div>
-        <div class="dc-body"><p class="dc-setting">Ready?</p><p class="dc-line">Press <b>Deal a card</b> to see the situation and what you need to do.</p></div></div>
-      <div class="btn-row" style="margin-top:0;align-items:center;">
-        <button class="btn-deal" onclick="dealNext()">Deal a card</button>
-        <button class="btn-reset" onclick="dealReset()">Shuffle</button>
-        <span class="deal-count" id="deal-count">Cards played: 0</span>
-      </div>
+    <h2>Financial update</h2>
+    <p class="instruction">Read the conversation as it goes.<br>When it is your turn, say what you could say.</p>
+    <div class="btn-row" style="margin:6px 0 10px;">
+      <button class="btn-deal" id="s-free-next" onclick="chatNext('s-free')">Start the conversation</button>
+      <button class="btn-reset" onclick="chatReset('s-free')">Start again</button>
     </div>
+    <div class="chat" id="s-free-chat"><div class="b them"><span class="who">Jordan</span>Can you give me a quick financial update on the company?</div><div class="b you"><span class="who">You</span><span class="you-task">Give a short overview of the company&rsquo;s income.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Of course. Overall, our income is up this quarter.</div></div><div class="b them"><span class="who">Jordan</span>That's good.<br>What about our costs?</div><div class="b you"><span class="who">You</span><span class="you-task">Talk about costs.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Our biggest expenditure is salaries, but our overheads are low.</div></div><div class="b them"><span class="who">Jordan</span>Are we going to break even this year?</div><div class="b you"><span class="who">You</span><span class="you-task">Answer, and say when.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes. We expect to break even by December.</div></div><div class="b them"><span class="who">Jordan</span>What about our competitors? Are they undercutting us?</div><div class="b you"><span class="who">You</span><span class="you-task">Talk about the competition.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, one competitor has dropped its prices to undercut us.</div></div><div class="b them"><span class="who">Jordan</span>How is the market doing?</div><div class="b you"><span class="who">You</span><span class="you-task">Describe the market.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">There was an upturn this spring, but there could be a downturn next year.</div></div><div class="b them"><span class="who">Jordan</span>Do we have enough money in the budget for new equipment?</div><div class="b you"><span class="who">You</span><span class="you-task">Answer, and give advice about debt.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Not at the moment. We should avoid getting into debt, so let's wait until next quarter.</div></div></div>
   </div></div>
 </div>
 
@@ -847,12 +860,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <h2>HW1 — Money and finance</h2>
 <p class="instruction">Write the phrases from the panel under the correct definitions.<br>Click a phrase, then click a gap.</p>
 <div class="wb-bank book-style"><button class="wb-tile" data-val="to make a loss" onclick="wbPick(this)">to make a loss</button><button class="wb-tile" data-val="an upturn in the market" onclick="wbPick(this)">an upturn in the market</button><button class="wb-tile" data-val="sales figures" onclick="wbPick(this)">sales figures</button><button class="wb-tile" data-val="income" onclick="wbPick(this)">income</button><button class="wb-tile" data-val="an economic downturn" onclick="wbPick(this)">an economic downturn</button><button class="wb-tile" data-val="overheads" onclick="wbPick(this)">overheads</button><button class="wb-tile" data-val="the exchange rate" onclick="wbPick(this)">the exchange rate</button><button class="wb-tile" data-val="cash flow" onclick="wbPick(this)">cash flow</button><button class="wb-tile" data-val="an overdraft" onclick="wbPick(this)">an overdraft</button><button class="wb-tile" data-val="to get into debt" onclick="wbPick(this)">to get into debt</button><button class="wb-tile" data-val="to go out of business" onclick="wbPick(this)">to go out of business</button><button class="wb-tile" data-val="to peak" onclick="wbPick(this)">to peak</button><button class="wb-tile" data-val="expenditure / outlay" onclick="wbPick(this)">expenditure / outlay</button><button class="wb-tile example-used" data-val="a budget" disabled="">a budget</button><button class="wb-tile" data-val="to undercut competitors" onclick="wbPick(this)">to undercut competitors</button><button class="wb-tile" data-val="to drop" onclick="wbPick(this)">to drop</button><button class="wb-tile" data-val="accounts" onclick="wbPick(this)">accounts</button><button class="wb-tile" data-val="to break even" onclick="wbPick(this)">to break even</button></div>
-
 <div class="fixed-two-col" id="hw1"><div><div class="ex-row ex-given"><span class="example-badge">✓</span>The amount of money that is available to spend on something<br/><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="a budget">a budget</span></span></div><div class="ex-row"><span class="circ-num">1</span>To lose money by spending more than you earn <span class="wb-blank" data-ans="to make a loss" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">2</span>To charge less than others who sell the same goods or services as you <span class="wb-blank" data-ans="to undercut competitors" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">3</span>Extra money the bank allows you to spend <span class="wb-blank" data-ans="an overdraft" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">4</span>The regular costs of running a business, such as wages <span class="wb-blank" data-ans="overheads" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">5</span>The amount or value of total sales over a particular period <span class="wb-blank" data-ans="sales figures" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">6</span>To get into a situation where you owe people money <span class="wb-blank" data-ans="to get into debt" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">7</span>To earn just enough to cover the costs of producing a product <span class="wb-blank" data-ans="to break even" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">8</span>A major decline in economic activity <span class="wb-blank" data-ans="an economic downturn" onclick="wbPlace(this)">______</span></div></div><div><div class="ex-row"><span class="circ-num">9</span>Money coming into a business <span class="wb-blank" data-ans="income" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">10</span>An amount of money spent <span class="wb-blank" data-ans="expenditure / outlay" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">11</span>A change to more positive business conditions <span class="wb-blank" data-ans="an upturn in the market" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">12</span>Records of money paid into and out of a business <span class="wb-blank" data-ans="accounts" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">13</span>To fall, especially in worth or value <span class="wb-blank" data-ans="to drop" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">14</span>The rate at which money comes into and goes out of a business <span class="wb-blank" data-ans="cash flow" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">15</span>To reach the highest point <span class="wb-blank" data-ans="to peak" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">16</span>The amount of one currency that you get when you change it for another <span class="wb-blank" data-ans="the exchange rate" onclick="wbPlace(this)">______</span></div><div class="ex-row"><span class="circ-num">17</span>To no longer be able to exist as a business <span class="wb-blank" data-ans="to go out of business" onclick="wbPlace(this)">______</span></div></div></div>
 <div class="btn-row">
 <button class="btn-check" onclick="checkWbSlide('hw1')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('hw1')">Reset</button>
 </div>
+<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_10.mp3" onclick="playClip(this)">10</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_11.mp3" onclick="playClip(this)">11</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_12.mp3" onclick="playClip(this)">12</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_13.mp3" onclick="playClip(this)">13</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_14.mp3" onclick="playClip(this)">14</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_15.mp3" onclick="playClip(this)">15</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_16.mp3" onclick="playClip(this)">16</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_17.mp3" onclick="playClip(this)">17</button></div>
 </div></div>
 </div>
 
@@ -1395,8 +1408,8 @@ function savePDF(){
       '<p class="sub">📝 Your notes from class</p><span class="date">'+today+'</span></div>'+
     '<div class="how"><h2>👋 How to use this PDF</h2>'+
       '<div class="step"><div class="n">1</div><p><b>Read your notes</b> below. These are the notes we made together in class.</p></div>'+
-      '<div class="step"><div class="n">2</div><p><b>Click the green button</b> to open the lesson on your computer, tablet or phone. You can practice our lesson content again or go to the Homework to review.</p></div>'+
-      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the lesson</a></div>'+
+      '<div class="step"><div class="n">2</div><p><b>Click &ldquo;Open the Lesson&rdquo;</b> to see the lesson content from class and do homework activities.</p></div>'+
+      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the Lesson</a></div>'+
       '<p class="link-note">If the button does not open, copy this link: '+LESSON+'</p></div>'+
     '<h2 class="notes-title">📝 Notes from class</h2>'+cards+'</body></html>';
   win.document.write(html);
@@ -1405,6 +1418,27 @@ function savePDF(){
 }
 /* open the Homework directly from the PDF button */
 if (location.hash === '#homework' && document.getElementById('hw-cover')) { goToId('hw-cover'); }
+
+/* guided conversation (chat bubbles) */
+function chatNext(sid){
+  var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
+  var bs=c.querySelectorAll('.b');
+  for(var i=0;i<bs.length;i++){
+    if(!bs[i].classList.contains('show')){
+      bs[i].classList.add('show');
+      btn.textContent = (i===bs.length-1) ? 'End of conversation' : (bs[i].classList.contains('them') ? 'Your turn ▸' : 'Continue ▸');
+      if(i===bs.length-1) btn.disabled=true;
+      try{ bs[i].scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+      return;
+    }
+  }
+}
+function chatReset(sid){
+  var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
+  c.querySelectorAll('.b').forEach(function(b){b.classList.remove('show');});
+  c.querySelectorAll('.ccq-answer').forEach(function(a){a.classList.remove('show');});
+  btn.disabled=false; btn.textContent='Start the conversation';
+}
 
 /* ===================== AUDIO CLIPS ===================== */
 var _clipAudio = null, _clipBtn = null;

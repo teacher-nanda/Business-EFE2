@@ -6,6 +6,14 @@ from lib import *
 from ex import *
 import audiolib as AL
 U = '4'
+SPEAK_EX.update({
+ "s-sp1": [
+  "I used to work night shifts. Now I work during the day.",
+  "It was difficult to get used to the long commute.",
+  "I'm used to working from home now, but at first it was strange.",
+  "What did you use to do at work that you don't do now?"
+ ]
+})
 
 cover(4, 'Talking about changes', ["Staff used to eat lunch at their desks.", "It took a while to get used to the commute.", "Nowadays I am used to waking up early.", "Did you use to work in London?"])
 
@@ -88,15 +96,15 @@ exercise('s-cb45', 'Grammar – Word Order', 'grammar', 'Put the words in order'
          example=order_example(['to', 'here?', 'get', 'Will', 'used', 'we', 'living', 'ever'], 'Will we ever get used to living here?'),
          aud=AL.clips(U, '4_5', 4), gid='cb45')
 
-speak('s-sp1', 'Speaking Break – Then and Now', 'Speaking break: then and now', 'Talk to your teacher about change at work. Use &ldquo;used to&rdquo; and &ldquo;get used to&rdquo;. Click the button when you have said it.', [
+speak('s-sp1', 'Speaking Break – Then and Now', 'Speaking break: then and now', 'Answer the questions about change at work. Use &ldquo;used to&rdquo; and &ldquo;get used to&rdquo;.', [
     'What did you use to do in your first job that you do not do now?',
     'What was difficult to get used to when you started your current job?',
     'What is something at work that you are used to now, but that was new to you before?',
-    'Ask your teacher: &ldquo;What did you use to do at work that you do not do now?&rdquo;'])
+    'Ask: &ldquo;What did you use to do at work that you do not do now?&rdquo;'])
 
 # ---- PRONUNCIATION
 content('s-pron', 'Pronunciation – Used To', 'pron', 'Say it smoothly', '''
-    <p class="instruction">Listen to your teacher. Then say each sentence. The highlighted words are stronger and clearer.</p>
+    <p class="instruction">Listen, then say each sentence. The highlighted words are stronger and clearer.</p>
     %s%s%s%s
     <div class="gram-note">🔊 The &ldquo;d&rdquo; in &ldquo;used to&rdquo; is not heard: it sounds like &ldquo;use-ta&rdquo; /juːstə/. After &ldquo;did&rdquo; and &ldquo;didn't,&rdquo; we say &ldquo;use to&rdquo; /juːs tə/.</div>''' % (
     say_line('Staff %s to %s lunch at their %s.' % (St('used'), St('eat'), St('desks')), ),
@@ -150,6 +158,12 @@ exercise('s-cb49', 'Speaking – Choose, Then Say It', 'speaking', 'Choose, then
          example=co_example('When I lived there, I', ['used to', 'was used to'], 'used to', 'have breakfast in a café every morning.'),
          aud=AL.clips(U, '4_9', 5), gid='cb49')
 
-freer('s-free', 'Speaking – Small Talk', 'Small talk card', 'Your teacher is a colleague. Take a card, then make small talk. Stick to safe topics: hobbies, books, films and the weather.', 'Small talk card')
+chat_speak('s-free', 'Speaking – Small Talk', 'Small talk', 'Read the conversation as it goes. When it is your turn, say what you could say.', 'Kate', [
+ ("Hi! Terrible weather today, isn't it?", 'Agree, and keep the conversation going.', "It really is. I'm not used to this much rain."),
+ ("Me neither.<br>Did you use to live somewhere sunnier?", 'Answer with &ldquo;used to&rdquo;.', "Yes, I used to live in Lisbon. It's much sunnier there."),
+ ("What do you like to do in your free time?", 'Talk about a hobby.', "I love reading. I'm reading a great mystery novel right now."),
+ ("Oh, I love mysteries!<br>Did you use to read a lot as a kid?", 'Answer, and add a detail.', "Yes, I used to read every night before bed."),
+ ("Have you seen any good films lately?", 'Talk about a film, or suggest a different safe topic.', "I watched a great documentary last weekend. Have you seen it?"),
+ ("Not yet.<br>How are you getting used to the new software at work?", 'Say how you are getting used to something new at work.', "I'm getting used to it. It's confusing, but it saves a lot of time.")])
 review([('&ldquo;Used to,&rdquo; &ldquo;be / get used to&rdquo;', '⚙️'), ('Small talk', '☕'), ('Talking about changes at work', '🧩')], 'Before you leave',
        'Tell me about two changes in your working life, one from the past and one you are still getting used to.')

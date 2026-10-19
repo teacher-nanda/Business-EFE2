@@ -6,6 +6,20 @@ from lib import *
 from ex import *
 import audiolib as AL
 U = '5'
+SPEAK_EX.update({
+ "s-sp1": [
+  "I have to answer emails every day. I must never forget a deadline.",
+  "I don't have to wear a suit, but some people do.",
+  "I must not share passwords. It's against company policy.",
+  "What do you have to do this week?"
+ ],
+ "s-sp2": [
+  "Could you look after my project for a week?",
+  "Would you send me the report by Friday?",
+  "You must not miss the deadline on Monday.",
+  "I have to finish the presentation before I leave."
+ ]
+})
 
 cover(5, 'Delegating tasks', ["I have to leave this with you.", "You must complete this project by Monday.", "Could you look after this for me?", "You don't have to deal with this today."])
 
@@ -65,11 +79,11 @@ exercise('s-cb55', 'Listening – Delegating Tasks', 'listening', 'A manager del
          [tf_row(i + 1, t, a, 'cb55-%d' % (i + 1)) for i, (t, a) in enumerate(T5)], 'circ',
          example=tf_example('The conference takes place once a year.', 'Not given'), pre=AL.single(U, '5_5', top=True), gid='cb55')
 
-speak('s-sp1', 'Speaking Break – Delegate and Explain', 'Speaking break: what you have to do', 'Talk to your teacher about obligations at work. Click the button when you have said it.', [
+speak('s-sp1', 'Speaking Break – Delegate and Explain', 'Speaking break: what you have to do', 'Answer the questions about obligations at work.', [
     'What do you have to do every day at work? What must you never forget?',
     'What do you not have to do at work, but some people do?',
     'What must you not do at work? Why?',
-    'Ask your teacher: &ldquo;What do you have to do this week?&rdquo;'])
+    'Ask: &ldquo;What do you have to do this week?&rdquo;'])
 
 content('s-m2', 'Meaning – Politeness', 'grammar', 'Sound polite', '''
     <div class="two-up">
@@ -91,14 +105,14 @@ exercise('s-cb57', 'Grammar – Word Order', 'grammar', 'Put the words in order'
          [order_row(i + 1, w, a) for i, (a, w) in enumerate(W7)], 'typed',
          example=order_example(['you', 'print', 'copy?', 'a', 'Could', 'me'], 'Could you print me a copy?'), aud=AL.clips(U, '5_7', 5), gid='cb57')
 
-speak('s-sp2', 'Speaking Break – Polite Requests', 'Speaking break: polite requests', 'Ask your teacher, a colleague, to do these things. Use polite modals. Click the button when you have said it.', [
-    'Ask your colleague to look after your project for a week. (&ldquo;Could you&hellip;?&rdquo;)',
-    'Ask your colleague to send a report by Friday. (&ldquo;Would you&hellip;?&rdquo;)',
-    'Tell your colleague about a deadline they must not miss. (&ldquo;You must&hellip;&rdquo;)',
-    'Say what you have to finish today before you leave. (&ldquo;I have to&hellip;&rdquo;)'])
+speak('s-sp2', 'Speaking Break – Polite Requests', 'Speaking break: polite requests', 'Read each situation. What could you say? Use polite modals.', [
+    'You are going on vacation for a week. What could you say to ask a colleague to look after your project?',
+    'You need a report by Friday. How could you ask a colleague politely?',
+    'A colleague might forget an important deadline on Monday. What could you say?',
+    'It is the end of the day and you still have work to finish. What could you say?'])
 
 content('s-pron', 'Pronunciation – Linking Modals', 'pron', 'Say it naturally', '''
-    <p class="instruction">Listen to your teacher. Then say each sentence. The highlighted words are stronger and clearer.</p>
+    <p class="instruction">Listen, then say each sentence. The highlighted words are stronger and clearer.</p>
     %s%s%s%s
     <div class="gram-note">🔊 In fast speech, &ldquo;have to&rdquo; sounds like &ldquo;hafta&rdquo; /hæftə/, &ldquo;got to&rdquo; like &ldquo;gotta&rdquo; /gɑtə/ and &ldquo;could you&rdquo; like &ldquo;could-ya&rdquo; /kʊdʒə/.</div>''' % (
     say_line('I %s to %s this with you.' % (St('have'), St('leave'))), say_line('%s you %s after this for me?' % (St('Could'), St('look'))),
@@ -120,7 +134,13 @@ exercise('s-cb59b', 'Reading – True, False, Not Given', 'reading', 'What does 
          [tf_row(i + 1, t, a, 'cb59-%d' % (i + 1)) for i, (t, a) in enumerate(T9)], 'circ',
          example=tf_example('Team leaders should do everyday tasks.', 'False'), pre='<div style="margin-bottom:14px;">%s</div>' % article_toggle('cb59-art', SHARE), gid='cb59')
 
-freer('s-free', 'Speaking – Delegate It', 'Delegation card', 'Your teacher is a colleague. Take a card, then delegate the task. Be polite, and be clear about what is obligatory.', 'Delegation card')
+chat_speak('s-free', 'Speaking – Delegate It', 'Delegate it', 'Read the conversation as it goes. When it is your turn, say what you could say.', 'Alex', [
+ ("Hi, you wanted to see me?", 'Politely ask Alex to prepare a report by Friday.', "Yes, Alex. Could you prepare the sales report by Friday?"),
+ ("Sure.<br>Do I have to include last year's numbers?", 'Say that it is obligatory.', "Yes, you must include last year's numbers. We need them for the comparison."),
+ ("Do I need to send it to the whole team?", 'Say that it is not necessary.', "No, you don't have to send it to the whole team. Just send it to me."),
+ ("Is there anything I must not forget?", 'Say what Alex must not forget.', "You must not forget to check the figures. Mistakes are a big problem."),
+ ("The deadline is tight.<br>What if I'm late?", 'Say how strict the deadline is.', "You can't be late, I'm afraid. The report has to be ready by 5pm on Friday."),
+ ("Understood.<br>Is there anything else?", 'Ask for one more small thing, politely.', "Would you also reserve the meeting room for Monday? Thanks so much!")])
 review([('Modal verbs for obligation', '⚙️'), ('Delegation and politeness', '🤝'), ('Delegating tasks to colleagues', '🧩')], 'Before you leave', 'Delegate one real task to me, politely. Then tell me one thing I must not do.')
 
 # ---- CB p.29 REVIEW of Units 1-5 (book table)

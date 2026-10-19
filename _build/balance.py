@@ -10,7 +10,11 @@ def balance_slide(html):
     soup = BeautifulSoup(html, 'html.parser')
     changed = False
     for ex in soup.select('.ex-given'):
-        grid = ex.find_next_sibling()
+        gp = ex.parent.parent if ex.parent is not None else None
+        if gp is not None and 'fixed-two-col' in (gp.get('class') or []):
+            grid = gp
+        else:
+            grid = ex.find_next_sibling()
         while grid is not None and not isinstance(grid, Tag):
             grid = grid.find_next_sibling()
         if grid is not None and 'fixed-two-col' not in (grid.get('class') or []):
@@ -22,13 +26,24 @@ def balance_slide(html):
         cols = [c for c in grid.find_all(recursive=False) if c.name == 'div']
         if len(cols) != 2:
             continue
-        items = list(ex.parent.find_all(recursive=False)) and [ex.extract()]
+        rows = []
         for c in cols:
-            items += [ch for ch in c.find_all(recursive=False)]
-        n = len(items)
-        left = math.ceil(n / 2)
+            rows += [ch for ch in c.find_all(recursive=False) if ch is not ex]
+        n = len(rows)
         for c in cols:
             c.clear()
+        # RULE: example + even rows -> example alone on top, rows split evenly in 2 columns
+        #       example + odd rows  -> example joins column 1 (total is even, split evenly)
+        if n % 2 == 0:
+            if ex.parent is not None and ex.parent is not grid.parent:
+                ex.extract(); grid.insert_before(ex)
+            ex['style'] = (ex.get('style') or '') + ';max-width:calc(50% - 20px);box-sizing:border-box;'
+            left = n // 2
+            items = rows
+        else:
+            if ex.parent is not None: ex.extract()
+            items = [ex] + rows
+            left = (n + 1) // 2
         for i, it in enumerate(items):
             cols[0 if i < left else 1].append(it.extract() if it.parent else it)
         changed = True

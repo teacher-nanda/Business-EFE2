@@ -7,10 +7,34 @@ from ex import *
 import audiolib as AL
 
 U = '2'
+SPEAK_EX.update({
+ "s-sp1": [
+  "I worked in a bank for three years. I helped customers open accounts.",
+  "A year ago I was working for a small company and studying at night.",
+  "I was driving to work when I heard the news. I was so happy!",
+  "Did you work abroad? Were you studying when you got your first job?"
+ ],
+ "s-sp2": [
+  "Did you want some more coffee?",
+  "I was wondering if you could help me with this report.",
+  "Did you want a tour of the office?",
+  "I wanted to ask about the history of the company."
+ ],
+ "s-sp3": [
+  "Have you ever worked in a team? How big was it?",
+  "How long have you worked here?",
+  "Have you finished the budget yet?",
+  "I have organized two events this year. I haven't finished my training yet."
+ ],
+ "s-rd5": [
+  "Yes. I had a short chat with a manager, and she offered me a new project.",
+  "I was waiting for a meeting when I met a new colleague.",
+  "I think they would work well. People would talk more.",
+  "My company has created a shared lunch area. It has helped us meet people from other teams."
+ ]
+})
 
-def speak(sid, label, h2, instr, items, closing=''):
-    rows = ''.join('<div class="ex-row"><span class="circ-num">%d</span>%s<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle(\'done\')">🗣 I said it</button></div>' % (i + 1, t) for i, t in enumerate(items))
-    content(sid, label, 'speaking', h2, rows + closing, instr)
+
 
 cover(2, 'Getting to know colleagues', ["What did you do before you came here?", "I was working 60 hours a week.", "Have you worked in a team before?", "Did you want a tour of the office?"])
 
@@ -84,11 +108,11 @@ exercise('s-cb23', 'Grammar – Cross Out the Incorrect Words', 'grammar', 'Whic
          example=co_example('', ['I started', 'was starting'], 'I started', 'my own printing company more than 10 years ago.'),
          aud=AL.clips(U, '2_3', 7), gid='cb23')
 
-speak('s-sp1', 'Speaking Break 1 – Your Work Story', 'Speaking break: your work story', 'Talk to your teacher. Use the past simple for finished jobs and the past continuous for what was in progress. Click the button when you have said it.', [
+speak('s-sp1', 'Speaking Break 1 – Your Work Story', 'Speaking break: your work story', 'Answer the questions about you. Use the past simple for finished jobs and the past continuous for actions in progress.', [
     'Tell me about a job you had in the past. What did you do there?',
     'What were you doing a year ago? Where were you working or studying?',
     'Think about the day you got your current job. What were you doing when you heard the news?',
-    'Now ask me three questions about my past. Use &ldquo;Did you&hellip;?&rdquo; and &ldquo;Were you&hellip;ing&hellip;?&rdquo;'])
+    'Now ask three questions about someone&rsquo;s past. Use &ldquo;Did you&hellip;?&rdquo; and &ldquo;Were you&hellip;ing&hellip;?&rdquo;'])
 
 # ------------------------------------------------------------------ 2.4 MEANING: past tense for politeness
 content('s-m2', 'Meaning – The Past Tense for Politeness', 'grammar', 'A polite way to ask', '''
@@ -117,11 +141,11 @@ exercise('s-cb25', 'Grammar – Mark the Correct Sentences', 'grammar', 'Which s
          example=pick_example(["Did you want some more coffee?", "Do you wanting some more coffee?"], "Did you want some more coffee?"),
          aud=AL.clips(U, '2_5', 6), gid='cb25')
 
-speak('s-sp2', 'Speaking Break 2 – Be Polite', 'Speaking break: sound polite', 'Say these to your teacher, a new colleague. Use the past tense to sound polite.', [
-    'Offer your colleague some more coffee. (&ldquo;Did you want&hellip;?&rdquo;)',
-    'Ask for help with a report. (&ldquo;I was wondering if you could&hellip;&rdquo;)',
-    'Ask whether your colleague wanted a tour of the office.',
-    'Say you want to ask about the history of the company. (&ldquo;I wanted to ask&hellip;&rdquo;)'])
+speak('s-sp2', 'Speaking Break 2 – Be Polite', 'Speaking break: sound polite', 'Read each situation. What could you say? Use the past tense to sound polite.', [
+    'A new colleague has an empty cup. What could you say to offer more coffee?',
+    'You need help with a report. How could you ask a colleague politely?',
+    'A visitor arrived this morning. How could you ask if they wanted a tour of the office?',
+    'You are curious about how the company started. What could you say?'])
 
 # ------------------------------------------------------------------ 2.6 MEANING: present perfect simple vs past simple (sort)
 P_PS, P_PP = 'past simple', 'present perfect'
@@ -159,10 +183,10 @@ exercise('s-cb28', 'Grammar – Fill in the Gaps', 'grammar', 'Present perfect s
          example=gap_example("Susan", "has worked", 'work', "here since she graduated from college five years ago."),
          aud=AL.clips(U, '2_8', 6), gid='cb28')
 
-speak('s-sp3', 'Speaking Break 3 – Interview a Colleague', 'Speaking break: interview your colleague', 'Ask your teacher these questions with the present perfect, then listen to the answer. Then answer them yourself.', [
-    'Ask: &ldquo;Have you ever worked in a team?&rdquo; Then ask a follow-up question.',
-    'Ask how long your colleague has worked here. (&ldquo;How long have you&hellip;?&rdquo;)',
-    'Ask about something your colleague has just finished.',
+speak('s-sp3', 'Speaking Break 3 – Interview a Colleague', 'Speaking break: interview your colleague', 'Read each situation. What could you ask or say? Use the present perfect.', [
+    'You want to know if a new colleague has any team experience. What could you ask? Then add a follow-up question.',
+    'You want to know how long a colleague has been at the company. What could you ask?',
+    'A colleague looks relieved. You think they have just finished something. What could you ask?',
     'Now your turn. Tell me one thing you have done at work this year, and one thing you have not done yet.'])
 
 # ------------------------------------------------------------------ PRONUNCIATION: -ed endings
@@ -186,26 +210,26 @@ exercise('s-cb29', 'Listening – Two Colleagues', 'listening', 'Two colleagues 
 content('s-rd0', 'Reading – Before You Read', 'reading', 'Before you read', '''
     <div class="two-up">
       <div class="scene"><p style="margin:0 0 6px;"><b>Talk about it</b></p>
-        <p style="margin:0;">1. Where do people talk at your workplace: the coffee machine, the lift, the kitchen?<br>2. Have you ever learned something important from a short chat with a colleague?<br>3. Is it easy or difficult for you to start a conversation with a new colleague?</p></div>
+        <p style="margin:0;">1. Where do people talk at your workplace: the coffee machine, the elevator, the kitchen?<br>2. Have you ever learned something important from a short chat with a colleague?<br>3. Is it easy or difficult for you to start a conversation with a new colleague?</p></div>
       <div class="scene"><p style="margin:0 0 6px;"><b>Predict</b></p>
         <p style="margin:0;">The article is called &ldquo;The best meeting happens at the coffee machine&rdquo;. What do you think it says? Write down two ideas, then read to check.</p></div>
-    </div>''', 'Talk to your teacher first. Then go to the next slide to read.')
+    </div>''', 'Discuss the questions and the prediction. Then go to the next slide to read.')
 
 COFFEE = article('Workplace culture', 'The best meeting happens at the coffee machine', 'How a five-minute chat helped a new employee&mdash;and her whole team',
-  ["When Marta Silva joined a logistics company in Porto last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.",
-   "One morning, while Marta was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Brazil. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.",
+  ["When Elena Novak joined a logistics company in Rotterdam last spring, she did not know a single person on her floor. &ldquo;I was eating lunch alone at my desk and I felt invisible,&rdquo; she remembers. Three weeks later everything had changed, and it started at the coffee machine.",
+   "One morning, while Elena was waiting for her coffee, a colleague from the finance department asked a simple question: &ldquo;What were you doing before you came here?&rdquo; She had worked in three countries and had managed a small warehouse team in Poland. Her colleague had never met anyone with that experience, and soon half the floor was asking her questions.",
    "Managers have started to notice the effect of these short chats. Many companies have created &ldquo;conversation corners&rdquo; instead of formal ice-breaker events, and some have changed the layout of their offices so that people from different departments meet by accident. Employees say they have learned more about each other&rsquo;s skills in ten minutes of small talk than in a month of emails.",
-   "Marta has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;"])
+   "Elena has now worked at the company for a year. She has led two cross-department projects, and both started with a conversation over a cup of coffee. &ldquo;I wasn&rsquo;t looking for a project,&rdquo; she says. &ldquo;I was just asking a colleague about his weekend.&rdquo;"])
 content('s-rd1', 'Reading – The Coffee Machine', 'reading', 'The best meeting happens at the coffee machine', COFFEE,
         'Read the article. Is it close to your ideas? (This article was written for this course.)')
-T2 = [("Marta knew many people on her floor when she started.", 'False'), ("A colleague from the finance department asked Marta about her past.", 'True'),
-      ("Marta has worked in three countries.", 'True'), ("The company is in Lisbon.", 'False'),
-      ("Some companies have changed their office layout to help people meet.", 'True'), ("Marta was promoted because of her projects.", 'Not given')]
+T2 = [("Elena knew many people on her floor when she started.", 'False'), ("A colleague from the finance department asked Elena about her past.", 'True'),
+      ("Elena has worked in three countries.", 'True'), ("The company is in Hamburg.", 'False'),
+      ("Some companies have changed their office layout to help people meet.", 'True'), ("Elena was promoted because of her projects.", 'Not given')]
 exercise('s-rd2', 'Reading – True, False, Not Given', 'reading', 'What does the article say?', 'Read the article again and answer the questions.',
          [tf_row(i + 1, t, a, 'rd-%d' % (i + 1)) for i, (t, a) in enumerate(T2)], 'circ',
-         example=tf_example('Marta felt invisible at the beginning.', 'True'), pre='<div style="margin-bottom:14px;">%s</div>' % article_toggle('rd-art', COFFEE), gid='rd')
-M2 = [("What is the main idea of the article?", ['Short, informal chats can help colleagues connect.', 'Formal meetings are the best way to make friends.', 'New employees should eat lunch alone.'], 'Short, informal chats can help colleagues connect.'),
-      ("Why was Marta&rsquo;s colleague interested in her?", ['She had a lot of international experience.', 'She worked in the finance department.', 'She was the new manager.'], 'She had a lot of international experience.'),
+         example=tf_example('Elena felt invisible at the beginning.', 'True'), pre='<div style="margin-bottom:14px;">%s</div>' % article_toggle('rd-art', COFFEE), gid='rd')
+M2 = [("What is the main idea of the article?", ['Formal meetings are the best way to make friends.', 'Short, informal chats can help colleagues connect.', 'New employees should eat lunch alone.'], 'Short, informal chats can help colleagues connect.'),
+      ("Why was Elena&rsquo;s colleague interested in her?", ['She worked in the finance department.', 'She was the new manager.', 'She had a lot of international experience.'], 'She had a lot of international experience.'),
       ("What does &ldquo;I wasn&rsquo;t looking for a project&rdquo; mean?", ['She did not plan to find a project.', 'She could not find her project.', 'She did not like projects.'], 'She did not plan to find a project.')]
 exercise('s-rd3', 'Reading – Understanding the Article', 'reading', 'Choose the best answer', 'Choose the correct answer for each question.',
          [mc_row(i + 1, q, c, a, 'rdm-%d' % (i + 1)) for i, (q, c, a) in enumerate(M2)], 'circ', pre='<div style="margin-bottom:14px;">%s</div>' % article_toggle('rd-art2', COFFEE), gid='rdm')
@@ -213,11 +237,11 @@ V2 = [("If nobody notices you, you feel", 'invisible', ''), ("The way furniture 
       ("A project with people from several departments is a", 'cross-department', ''), ("An activity to help people who do not know each other start talking is an", 'ice-breaker', '')]
 exercise('s-rd4', 'Reading – Words in Context', 'reading', 'Words from the article', 'Find the word in the article and type it in the gap. (Hint: look at paragraphs 1, 3 and 4.)',
          [typed_row(i + 1, p + ' ______:', a, c) for i, (p, a, c) in enumerate(V2)], 'typed', pre='<div style="margin-bottom:14px;">%s</div>' % article_toggle('rd-art3', COFFEE), gid='rdv')
-speak('s-rd5', 'Speaking – About the Article', 'Speaking break: what do you think?', 'Discuss with your teacher. Use the past and the present perfect from this unit.', [
+speak('s-rd5', 'Speaking – About the Article', 'Speaking break: what do you think?', 'Answer the questions about you. Use the past and the present perfect from this unit.', [
     'Have you ever had a conversation at work that changed something for you? What happened?',
     'What were you doing the last time you met a new colleague?',
     'Would conversation corners work in your company? Why, or why not?',
-    'Marta has led two projects since she joined. What has your company done recently to help people meet?'])
+    'Elena has led two projects since she joined. What has your company done recently to help people meet?'])
 
 # ------------------------------------------------------------------ CB 2.10
 S10 = [("", ['drove', 'was driving', 'have driven'], 'was driving', "taxis when I saw this job advertised."),
@@ -232,7 +256,13 @@ exercise('s-cb210', 'Speaking – Choose, Then Say It', 'speaking', 'Choose, the
          aud=AL.clips(U, '2_10', 6), gid='cb210')
 
 # ------------------------------------------------------------------ FREER PRACTICE
-freer('s-free', 'Speaking – Coffee Machine Catch-up', 'Coffee-machine catch-up', 'Your teacher is a new colleague. Take a card, then start the conversation and find out about their work history.', 'Coffee machine card')
+chat_speak('s-free', 'Speaking – Coffee Machine Catch-up', 'Coffee-machine catch-up', 'Read the conversation as it goes. When it is your turn, say what you could say.', 'Priya', [
+ ("Hi! I'm Priya. I just joined the finance team.<br>Have you worked here long?", 'Say how long you have worked at the company.', "Hi, Priya. I've worked here for about six years."),
+ ("Wow, that's a long time.<br>What did you do before you came here?", 'Say what job you had before.', "I worked for a small marketing agency in Madrid."),
+ ("Nice!<br>What were you doing when you got this job offer?", 'Say what you were doing when you got the offer.', "I was working on a big project when the recruiter called me."),
+ ("I was studying for my MBA when I got mine.<br>Did you enjoy your first year here?", 'Answer, and add a detail.', "Yes, I did. Everyone was friendly, and I learned a lot."),
+ ("Have you ever worked in another country?", 'Answer, and add one detail.', "Yes, I have. I lived in Dubai for two years, and I loved it."),
+ ("I was wondering if you could show me where the meeting rooms are.", 'Offer to show Priya around, politely.', "Of course! Did you want a quick tour of the whole office?")])
 
 # ------------------------------------------------------------------ REVIEW
 review([('Past simple and past continuous', '⚙️'), ('Sharing past experiences', '🗂️'), ('Talking about past experiences', '🧩')],

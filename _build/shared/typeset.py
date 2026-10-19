@@ -11,6 +11,23 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 .akey-box, .akey-box p, .article-box p, .form-row, .dc-line, .dc-goal, .vc-def, .rc-a, .rc-q, .bd-tip, .ccq-answer, .big-sent .say-btn,
 .classify-chip, .circ-opt, .match-item, .inst-light, .discuss-list, .check-item, .pc-v { line-height:1.5 !important; }
 .sent-br { display:block; }
+/* ---- notes box: white, larger text ---- */
+#notesPanel { box-shadow:0 8px 28px rgba(0,0,0,.18); border:1px solid #D9D4C5; background:#fff; }
+#notesToolbar { background:#EFEBDD; }
+#notesToolbar button { background:#fff; color:#1C2B3A; border:1px solid #D9D4C5; }
+#notesToolbar button:hover { background:#F6EBD0; }
+#notesDragHandle { color:#1C2B3A; }
+#notesTA { background:#fff; color:#1C2B3A; font-size:1.2rem; backdrop-filter:none; }
+#notesTA:empty::before { color:rgba(28,43,58,.45); }
+.ccq-answer.ex-sent.show { display:block; margin:8px 0 0 34px; }
+.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;}
+.chat .b{display:none;max-width:76%;padding:12px 16px;border-radius:16px;font-size:1.08rem;line-height:1.5;color:#1C2B3A;}
+.chat .b.show{display:block;}
+.chat .b.them{align-self:flex-start;background:#fff;border:1.5px solid #D9D4C5;border-bottom-left-radius:4px;}
+.chat .b.you{align-self:flex-end;background:#E3F0EC;border:1.5px solid #9CC7BB;border-bottom-right-radius:4px;}
+.chat .who{display:block;font-size:.72rem;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:2px;}
+.chat .you-task{font-weight:600;}
+.chat .ccq-answer.ex-sent.show{margin:8px 0 0 0;}
 '''
 
 _ABBR = r'(?<!\d)(?<!e\.g)(?<!i\.e)(?<!Mr)(?<!Mrs)(?<!Ms)(?<!Dr)(?<!vs)(?<!etc)(?<!U\.S)(?<!St)'
