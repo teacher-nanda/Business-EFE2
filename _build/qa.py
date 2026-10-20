@@ -46,8 +46,7 @@ async def main():
         n = await pg.evaluate("""(function(){var bad=[];document.querySelectorAll('input.ans-input[data-alt]').forEach(function(i){var a=(i.dataset.alt||'').split('|')[0]; if(!a) return; i.value=a; var sid=i.closest('.slide').id; i.className='ans-input'; var g=i.closest('.fixed-two-col'); if(!g) return; checkSlide(g.id); if(!i.classList.contains('correct')) bad.push(a);}); return bad;})()""")
         print('alt not accepted:', n[:5])
         await pg.evaluate("goToId('s-review')")
-        await pg.evaluate("document.querySelectorAll('#ck-list .check-item').forEach(c=>c.click())")
-        print('win shown:', await pg.evaluate("document.getElementById('ck-win').classList.contains('show')"))
+        print('summary cards:', await pg.evaluate("document.querySelectorAll('#s-review .sum-card').length"))
         if 's-free' in ids:
             await pg.evaluate("goToId('s-free')")
             tot = await pg.evaluate("document.querySelectorAll('#s-free-chat .b').length")

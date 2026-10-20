@@ -36,8 +36,8 @@
   .banner-speaking  { background:#B23A6B; }
   .banner-grammar   { background:#5A2E8C; }
   .banner-pron      { background:#A8571E; }
-  .banner-reading   { background:#2A6B42; }
-  .banner-vocab     { background:#1E7A5F; }
+  .banner-reading   { background:#1F5F8B; }
+  .banner-vocab     { background:#2563A8; }
   .banner-video     { background:#A83232; }
   .banner-review    { background:#2E2A6B; }
   .banner-hw        { background:#1C2B3A; }
@@ -124,7 +124,7 @@
   .match-item.c4 { border-color:#B23A6B; border-width:3px; background:#F8E6EE; box-shadow:0 0 0 2px rgba(178,58,107,.25); }
   .match-item.c5 { border-color:#8C7A1E; border-width:3px; background:#F5F1DD; box-shadow:0 0 0 2px rgba(140,122,30,.25); }
   .match-item.c6 { border-color:#4A5A8C; border-width:3px; background:#E6E9F5; box-shadow:0 0 0 2px rgba(74,90,140,.25); }
-  .match-item.c7 { border-color:#3E8C5E; border-width:3px; background:#E6F5EC; box-shadow:0 0 0 2px rgba(62,140,94,.25); }
+  .match-item.c7 { border-color:#0F2438; border-width:3px; background:#E3E9EF; box-shadow:0 0 0 2px rgba(15,36,56,.25); }
   .match-item.picking { border-color:#5A2E8C; border-width:3px; border-style:dashed; box-shadow:0 0 0 2px rgba(90,46,140,.2); }
   .match-item.correctpair { outline:3px solid #1A7A4A; background:#1A7A4A !important; color:#fff; }
   .match-item.wrongpair { outline:3px solid #C4614A; background:#C4614A !important; color:#fff; }
@@ -235,9 +235,9 @@
   /* checkbox tick list */
   .tick-list { display:flex; flex-direction:column; gap:8px; margin:10px 0 18px; }
   .tick-item { display:flex; align-items:center; gap:12px; padding:9px 14px; border:1.5px solid #ddd; border-radius:8px; cursor:pointer; font-size:1.05rem; color:#1C2B3A; background:#fff; transition:all .15s; }
-  .tick-item:hover { border-color:#2A6B42; }
+  .tick-item:hover { border-color:#2563A8; }
   .tick-box { width:22px; height:22px; border:2px solid #999; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff; font-weight:800; }
-  .tick-item.picked { border-color:#2A6B42; background:#EAF6EE; }
+  .tick-item.picked { border-color:#2563A8; background:#E3EDF8; }
   .tick-item.picked .tick-box { background:#2A6B42; border-color:#2A6B42; }
   .tick-item.correct { border-color:#1A7A4A; background:#E3F5EA; }
   .tick-item.correct .tick-box { background:#1A7A4A; border-color:#1A7A4A; }
@@ -324,10 +324,10 @@
      Adult / professional: ink navy, deep teal, brass, warm paper. Serif headlines.
      ===================================================================== */
   :root {
-    --ink:#0F2438; --ink2:#1B3A57; --teal:#0F766E; --teal-l:#E2F0EE; --brass:#B8892B; --brass-l:#F6EBD0;
+    --ink:#0F2438; --ink2:#1B3A57; --teal:#2563A8; --teal-l:#E3EDF8; --brass:#B8892B; --brass-l:#F6EBD0;
     --paper:#FBF9F4; --line:#D8D2C4; --text:#1B2733; --muted:#586573;
     --ok:#1E7A4D; --ok-l:#E3F4EA; --bad:#B4432F; --bad-l:#FBE9E5; --warn:#A8700F; --warn-l:#FFF1D6;
-    --plum:#5B3A7A; --olive:#4C6B2F; --blue:#1F5F8B; --clay:#A4472F;
+    --plum:#5B3A7A; --olive:#B23A6B; --blue:#1F5F8B; --clay:#A4472F;
   }
   body { font-family:'DM Sans','Segoe UI',system-ui,sans-serif; background:var(--ink); color:var(--text); }
   .slide { background:var(--paper); }
@@ -340,7 +340,7 @@
 
   /* ---------- covers ---------- */
   #s1, #hw-cover { background:
-      radial-gradient(1200px 600px at 85% -10%, rgba(15,118,110,.55), transparent 60%),
+      radial-gradient(1200px 600px at 85% -10%, rgba(37,99,168,.55), transparent 60%),
       radial-gradient(900px 500px at -10% 110%, rgba(184,137,43,.28), transparent 60%),
       linear-gradient(160deg,#0B1B2B 0%, #11304B 100%); }
   .title-inner { z-index:3; }
@@ -400,7 +400,7 @@
 
   /* ---------- answer fields ---------- */
   .ans-input { border:0; border-bottom:2px solid var(--ink2); background:rgba(184,137,43,.12); border-radius:4px 4px 0 0; color:var(--ink); text-align:left; font-weight:600; }
-  .ans-input:focus { outline:none; border-bottom-color:var(--teal); background:rgba(15,118,110,.10); }
+  .ans-input:focus { outline:none; border-bottom-color:var(--teal); background:rgba(37,99,168,.10); }
   .ans-input.correct { color:var(--ok); border-bottom-color:var(--ok); background:var(--ok-l); }
   .ans-input.wrong { color:var(--bad); border-bottom-color:var(--bad); background:var(--bad-l); }
   .ans-input.empty-warn { color:var(--warn); border-bottom-color:#D9A441; background:var(--warn-l); }
@@ -448,9 +448,9 @@
   .match-col-head.mc-left, .match-col-head.mc-right { color:var(--ink); border-bottom:2px solid var(--brass); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.2rem; }
   .match-item { background:var(--paper); border:1.5px solid var(--line); border-radius:10px; color:var(--text); }
   .match-item.example-pair { background:var(--ok-l) !important; border-color:var(--ok) !important; }
-  .match-item.c0 { border-color:#0F766E; background:#E2F0EE; box-shadow:none; } .match-item.c1 { border-color:#B8892B; background:#F6EBD0; box-shadow:none; }
-  .match-item.c2 { border-color:#1F5F8B; background:#E1EDF6; box-shadow:none; } .match-item.c3 { border-color:#5B3A7A; background:#EDE5F4; box-shadow:none; }
-  .match-item.c4 { border-color:#A4472F; background:#F8E7E1; box-shadow:none; } .match-item.c5 { border-color:#4C6B2F; background:#E8F0DE; box-shadow:none; }
+  .match-item.c0 { border-color:#2563A8; background:#E3EDF8; box-shadow:none; } .match-item.c1 { border-color:#B8892B; background:#F6EBD0; box-shadow:none; }
+  .match-item.c2 { border-color:#C2570C; background:#FFF1E3; box-shadow:none; } .match-item.c3 { border-color:#5B3A7A; background:#EDE5F4; box-shadow:none; }
+  .match-item.c4 { border-color:#A4472F; background:#F8E7E1; box-shadow:none; } .match-item.c5 { border-color:#B23A6B; background:#F8E6EE; box-shadow:none; }
   .match-item.c6 { border-color:#6B6B6B; background:#EEEEEE; box-shadow:none; } .match-item.c7 { border-color:#0F2438; background:#E3E9EF; box-shadow:none; }
   .match-item.picking { border-color:var(--ink); border-style:dashed; }
   .match-item.correctpair { outline:3px solid var(--ok); background:var(--ok-l) !important; color:var(--ok); }
@@ -470,7 +470,7 @@
   .lead-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,380px); gap:34px; align-items:start; }
   .bd-form label { display:block; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:14px 0 4px; }
   .bd-form input { width:100%; font-family:inherit; font-size:1.1rem; color:var(--ink); border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; }
-  .bd-form input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(15,118,110,.15); }
+  .bd-form input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(37,99,168,.15); }
   .badge { position:relative; width:100%; max-width:360px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 14px 30px rgba(15,36,56,.18); overflow:hidden; text-align:center; transform:rotate(-1.5deg); }
   .badge::before { content:""; display:block; width:74px; height:12px; background:var(--ink); border-radius:8px; margin:14px auto 12px; box-shadow:inset 0 2px 4px rgba(0,0,0,.5); }
   .bd-event { background:var(--ink); color:#E3C477; letter-spacing:.24em; font-size:.74rem; padding:9px 12px; font-weight:500; }
@@ -597,7 +597,7 @@
   .clips-box { flex-wrap:wrap; gap:8px; border-radius:18px; }
   .clips-label { font-weight:700; color:var(--ink2); margin-right:4px; }
   .clip { font-family:inherit; font-size:.95rem; font-weight:700; border:1.5px solid var(--teal); background:#fff; color:var(--teal); border-radius:999px; padding:6px 16px; cursor:pointer; }
-  .clip:hover { background:rgba(15,118,110,.08); }
+  .clip:hover { background:rgba(37,99,168,.08); }
   .clip.playing { background:var(--teal); color:#fff; }
   .clip.word { padding:2px 10px; font-size:.9rem; border-width:1.2px; }
   /* ---- block options (mark the correct sentence) ---- */
@@ -651,14 +651,105 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 #notesTA { background:#fff; color:#1C2B3A; font-size:1.2rem; backdrop-filter:none; }
 #notesTA:empty::before { color:rgba(28,43,58,.45); }
 .ccq-answer.ex-sent.show { display:block; margin:8px 0 0 34px; }
-.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;}
+.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;max-height:calc(100vh - 440px);min-height:240px;overflow-y:auto;padding:2px 6px 2px 0;scroll-behavior:smooth;}
 .chat .b{display:none;max-width:76%;padding:12px 16px;border-radius:16px;font-size:1.08rem;line-height:1.5;color:#1C2B3A;}
 .chat .b.show{display:block;}
 .chat .b.them{align-self:flex-start;background:#fff;border:1.5px solid #D9D4C5;border-bottom-left-radius:4px;}
-.chat .b.you{align-self:flex-end;background:#E3F0EC;border:1.5px solid #9CC7BB;border-bottom-right-radius:4px;}
+.chat .b.you{align-self:flex-end;background:#E3EDF8;border:1.5px solid #9DBCE0;border-bottom-right-radius:4px;}
 .chat .who{display:block;font-size:.72rem;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:2px;}
 .chat .you-task{font-weight:600;}
 .chat .ccq-answer.ex-sent.show{margin:8px 0 0 0;}
+.sum-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:6px 0 16px;align-items:stretch;}
+.sum-card{background:#fff;border:1.5px solid #D9D4C5;border-top:5px solid #B8892B;border-radius:14px;padding:14px 18px 8px;}
+.sum-card:nth-child(2){border-top-color:#2563A8;}
+.sum-card:nth-child(3){border-top-color:#5B3A7A;}
+.sum-ic{font-size:1.6rem;}
+.sum-card h3{margin:2px 0 8px;font-size:1.15rem;color:#1B3A57;}
+.sum-p{margin:0 0 8px;font-size:1rem;color:#1C2B3A;}
+.sum-p b{color:#1B4F8A;}
+.sum-p mark,.sum-ex mark{background:#FFF0B3;color:#1C2B3A;padding:0 4px;border-radius:4px;font-weight:700;}
+.sum-ex{margin:0 0 8px;padding:6px 10px;border-left:4px solid #B8892B;background:#FAF6EA;border-radius:0 8px 8px 0;font-style:italic;font-size:1rem;color:#1C2B3A;}
+.sum-turn{background:#1B3A57;color:#fff;border-radius:12px;padding:12px 18px;font-size:1.05rem;}
+.sum-turn-l{display:inline-block;background:#B8892B;color:#fff;font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;border-radius:6px;padding:2px 8px;margin-right:12px;}
+.ai-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:4px 0 10px;}
+.ai-step{background:#fff;border:1.5px solid #D9D4C5;border-radius:12px;padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-size:.92rem;line-height:1.4;color:#1C2B3A;position:relative;padding-left:48px;}
+.ai-step b{color:#1B3A57;font-size:1.05rem;}
+.ai-n{position:absolute;left:12px;top:10px;width:26px;height:26px;border-radius:50%;background:#2563A8;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.ai-prompt-wrap{background:#1B3A57;border-radius:14px;padding:12px 16px 14px;}
+.ai-prompt-head{display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin-bottom:8px;}
+.ai-copy{margin:0 !important;padding:8px 18px !important;font-size:.95rem !important;}
+.ai-prompt{margin:0;background:#fff;color:#1C2B3A;border-radius:10px;padding:12px 16px;font-family:inherit;font-size:.92rem;white-space:pre-wrap;line-height:1.5;max-height:calc(100vh - 590px);min-height:120px;overflow-y:auto;}
+.classify-bank.grid{display:grid;gap:10px;}
+.classify-bank.grid .classify-chip{border-radius:12px;padding:12px 16px;text-align:left;line-height:1.5;font-weight:500;font-size:1.05rem;border:1.5px solid #CFC8B4;background:#fff;color:#1C2B3A;}
+.classify-bank.grid .classify-chip.selected{background:#1B3A57;color:#fff;border-color:#1B3A57;}
+.classify-bank.grid .classify-chip.selected mark.vb{background:#FFE48A;color:#1C2B3A;}
+mark.vb{background:#FFE48A;color:#1C2B3A;padding:0 5px;border-radius:5px;font-weight:700;}
+.classify-col{padding:0 18px 14px !important;overflow:hidden;min-height:110px;}
+.classify-col h4{font-weight:500 !important;margin:0 -18px 10px !important;padding:12px 18px;color:#fff !important;font-size:1.05rem;line-height:1.5;}
+.classify-col h4 b{font-size:1.2rem;}
+.classify-col.c-a{border-color:#2563A8 !important;background:#EEF4FB !important;}
+.classify-col.c-a h4{background:#2563A8;}
+.classify-col.c-b{border-color:#C2570C !important;background:#FFF4EA !important;}
+.classify-col.c-b h4{background:#C2570C;}
+.classify-col.c-c{border-color:#5B3A7A !important;background:#F4EFF8 !important;}
+.classify-col.c-c h4{background:#5B3A7A;}
+.classify-col .placed{display:block !important;margin:6px 0 !important;padding:8px 12px !important;border-radius:10px !important;font-weight:500 !important;background:#fff !important;border:1px solid #CFC8B4 !important;color:#1C2B3A !important;}
+.classify-col .placed.correct{background:#E3F5EA !important;border-color:#1A7A4A !important;}
+.classify-col .placed.wrong{background:#FBEAE6 !important;border-color:#C4614A !important;}
+.hl-ok{color:#1B4F8A !important;background:#E3EDF8 !important;}
+
+.wheel-game{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:28px;align-items:center;margin-top:8px}
+.wheel-box{position:relative;width:100%;max-width:340px}
+.wheel-svg{width:100%;height:auto;display:block;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.wheel-pointer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:2rem;color:#1B2A38;z-index:2;line-height:1}
+.wheel-side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.wheel-card{min-height:150px;width:100%;background:#fff;border:1px solid #D9D4C7;border-left:6px solid #2563A8;border-radius:14px;padding:16px 20px;line-height:1.5}
+.wheel-card .wc-topic{font-size:1.5rem;font-weight:700;color:#1B2A38}
+.wheel-card .wc-task{font-size:1.15rem;margin:4px 0 10px}
+.wheel-card .wc-idle{color:#6B7580;font-size:1.1rem}
+.listen-img{display:block;max-height:170px;width:auto;max-width:100%;border-radius:14px;margin:6px 0 4px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.chat .you-blank{display:inline-block;min-width:min(420px,80%);border-bottom:2px solid #8A94A0;height:1.7em;vertical-align:bottom;margin-bottom:6px}
+.pic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 18px;margin:8px 0}
+.pic-card{display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:1px solid #D9D4C7;border-radius:12px;padding:8px}
+.pic-card img{width:100%;height:128px;object-fit:contain;display:block}
+.pic-in{width:64px;text-align:center;font-size:1.3rem;font-weight:700}
+.pic-ex{display:flex;align-items:center;gap:8px;min-height:40px}
+.pic-exnum{font-size:1.4rem;font-weight:700;color:#1B2A38;border-bottom:2px solid #1B2A38;padding:0 10px}
+.dice-game{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start;margin-top:8px}
+.dice-left{display:flex;flex-direction:column;align-items:center;gap:14px}
+.die{width:150px;height:150px;border-radius:26px;background:#fff;border:3px solid #1B2A38;box-shadow:0 6px 16px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;font-size:6.5rem;line-height:1;color:#1B2A38}
+.die.rolling{animation:dieshake .18s infinite}
+@keyframes dieshake{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg) translateY(-6px)}100%{transform:rotate(-8deg)}}
+.dchips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.dchip{width:34px;height:34px;border-radius:50%;border:2px solid #9AA5B1;color:#586573;display:flex;align-items:center;justify-content:center;font-weight:700}
+.dchip.done{background:#2563A8;border-color:#2563A8;color:#fff}
+.dice-card{min-height:170px;background:#fff;border:1px solid #D9D4C7;border-left:6px solid #C4570C;border-radius:14px;padding:16px 22px;line-height:1.5}
+.dice-card .wc-topic{font-size:1.45rem;font-weight:700;color:#1B2A38;margin-bottom:10px}
+.dice-card .wc-idle{color:#6B7580;font-size:1.1rem}
+.bingo-game{display:grid;grid-template-columns:minmax(340px,1.2fr) 1fr;gap:26px;align-items:start;margin-top:8px}
+.bingo-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bcell{min-height:92px;padding:10px;border-radius:12px;border:2px solid #D9D4C7;background:#fff;font:inherit;font-size:1rem;line-height:1.35;font-weight:600;color:#1B2A38;cursor:pointer;text-align:center}
+.bcell:hover{border-color:#2563A8}
+.bcell.marked{background:#E3EDF8;border-color:#2563A8;color:#1B4F8A}
+.bcell.line{background:#2563A8;border-color:#1B4F8A;color:#fff}
+.bingo-side{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.bingo-side .dice-card{width:100%}
+.bingo-msg{font-size:1.35rem;font-weight:700;color:#2563A8;min-height:1.6em}
+.fcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.fcard{position:relative;min-height:170px;border-radius:14px;cursor:pointer}
+.fc-front,.fc-back{border-radius:14px;min-height:170px;padding:14px 18px;box-sizing:border-box}
+.fc-front{background:#2563A8;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.fc-front span{font-size:1rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.fc-front b{font-size:3rem;line-height:1}
+.fcard:nth-child(3n+2) .fc-front{background:#C4570C}
+.fcard:nth-child(3n) .fc-front{background:#5B3A7A}
+.fc-back{display:none;background:#fff;border:1px solid #D9D4C7}
+.fcard.flipped .fc-front{display:none}
+.fcard.flipped .fc-back{display:block}
+.fc-p{font-size:1.15rem;font-weight:700;color:#1B2A38;margin-bottom:8px;line-height:1.4}
+.wheel-hist{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:34px}
+.wh-chip{background:#E3EDF8;color:#1B4F8A;border:1px solid #2563A8;border-radius:999px;padding:4px 14px;font-weight:600;font-size:.95rem}
+.wh-all{font-weight:700;color:#2563A8}
 
 </style>
 </head>
@@ -746,12 +837,19 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 </div>
 
 <div class="slide" id="s-sp1">
-<div class="banner banner-speaking">💬 Speaking</div>
-<div class="slide-main"><div class="content">
-<h2>Speaking break: income and costs</h2>
-<p class="instruction">Answer the questions.<br>Use the phrases from the first list.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>What is the biggest expenditure in your company or your household? Why?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">The biggest expenditure is salaries.</div></div><div class="ex-row"><span class="circ-num">2</span>Does your company have a budget for training? What do you know about it?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, we have a training budget. It's about two thousand dollars per person.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>Why is it important to avoid getting into debt? Give your opinion.<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">Getting into debt is dangerous because you have to pay interest.</div></div><div class="ex-row"><span class="circ-num">4</span>Describe a business that has high overheads. How can it break even?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">A restaurant has high overheads. It can break even by selling more lunches.</div></div></div></div>
-</div></div>
+  <div class="banner banner-speaking">💬 Speaking</div>
+  <div class="slide-main"><div class="content">
+    <h2>Money bingo</h2>
+    <p class="instruction">Choose a square and answer it.<br>Try to get three in a row.</p>
+    <div class="bingo-game" id="s-sp1-bg" data-items="[{&quot;p&quot;: &quot;What is the biggest expenditure in your company or household? Why?&quot;, &quot;e&quot;: &quot;Our biggest expenditure is salaries.&quot;}, {&quot;p&quot;: &quot;Does your company have a budget for training?&quot;, &quot;e&quot;: &quot;Yes, we have a small training budget.&quot;}, {&quot;p&quot;: &quot;Why is it important to avoid getting into debt?&quot;, &quot;e&quot;: &quot;Debt can be expensive because of the interest.&quot;}, {&quot;p&quot;: &quot;Describe a business with high overheads.&quot;, &quot;e&quot;: &quot;A restaurant has high overheads: rent, electricity and staff.&quot;}, {&quot;p&quot;: &quot;How can a business break even?&quot;, &quot;e&quot;: &quot;It can sell more or cut its costs.&quot;}, {&quot;p&quot;: &quot;Where does your company's income mainly come from?&quot;, &quot;e&quot;: &quot;Most of our income comes from subscriptions.&quot;}, {&quot;p&quot;: &quot;What would you buy with a bigger budget?&quot;, &quot;e&quot;: &quot;I would spend it on new equipment.&quot;}, {&quot;p&quot;: &quot;What do you do to keep your costs down?&quot;, &quot;e&quot;: &quot;We turn off the lights and buy in bulk.&quot;}, {&quot;p&quot;: &quot;Do you prefer saving or spending? Why?&quot;, &quot;e&quot;: &quot;I prefer saving, because I want security.&quot;}]">
+  <div class="bingo-board"><button class="bcell" data-i="0" onclick="bingoPick('s-sp1',this)">What is the biggest expenditure in your company or household? Why?</button><button class="bcell" data-i="1" onclick="bingoPick('s-sp1',this)">Does your company have a budget for training?</button><button class="bcell" data-i="2" onclick="bingoPick('s-sp1',this)">Why is it important to avoid getting into debt?</button><button class="bcell" data-i="3" onclick="bingoPick('s-sp1',this)">Describe a business with high overheads.</button><button class="bcell" data-i="4" onclick="bingoPick('s-sp1',this)">How can a business break even?</button><button class="bcell" data-i="5" onclick="bingoPick('s-sp1',this)">Where does your company's income mainly come from?</button><button class="bcell" data-i="6" onclick="bingoPick('s-sp1',this)">What would you buy with a bigger budget?</button><button class="bcell" data-i="7" onclick="bingoPick('s-sp1',this)">What do you do to keep your costs down?</button><button class="bcell" data-i="8" onclick="bingoPick('s-sp1',this)">Do you prefer saving or spending? Why?</button></div>
+  <div class="bingo-side">
+    <div class="dice-card" id="s-sp1-card"><div class="wc-idle">Choose a square.<br>Say your answer, then try for three in a row.</div></div>
+    <div class="bingo-msg" id="s-sp1-msg"></div>
+    <button class="btn-reset" onclick="bingoReset('s-sp1')">New game</button>
+  </div>
+</div>
+  </div></div>
 </div>
 
 <div class="slide" id="s-v2">
@@ -780,12 +878,17 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 </div>
 
 <div class="slide" id="s-sp2">
-<div class="banner banner-speaking">💬 Speaking</div>
-<div class="slide-main"><div class="content">
-<h2>Speaking break: good and bad times</h2>
-<p class="instruction">Answer the questions.<br>Use the phrases from the second list.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>Think of a company that dropped in value or went out of business. What happened?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">A large retailer went out of business last year. Its sales figures dropped fast.</div></div><div class="ex-row"><span class="circ-num">2</span>Why do some companies undercut their competitors? Is it a good idea?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">They undercut competitors to win customers. It can hurt their profit margin.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>When did your industry have an upturn in the market, or an economic downturn?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">There was an upturn in the market in 2021, and a downturn in 2008.</div></div><div class="ex-row"><span class="circ-num">4</span>How do changes in the exchange rate affect companies that sell abroad?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">When the exchange rate drops, imports become more expensive.</div></div></div></div>
-</div></div>
+  <div class="banner banner-speaking">💬 Speaking</div>
+  <div class="slide-main"><div class="content">
+    <h2>Roll the dice</h2>
+    <p class="instruction">Roll the dice.<br>Answer the question you get.</p>
+    <div class="dice-game" id="s-sp2-dg" data-items="[{&quot;p&quot;: &quot;Think of a company that dropped in value or went out of business. What happened?&quot;, &quot;e&quot;: &quot;A well-known video store went out of business because people started streaming films.&quot;}, {&quot;p&quot;: &quot;Why do some companies undercut their competitors? Is it a good idea?&quot;, &quot;e&quot;: &quot;They want more customers, but it can hurt their profits.&quot;}, {&quot;p&quot;: &quot;When did your industry have an upturn in the market?&quot;, &quot;e&quot;: &quot;There was an upturn after the pandemic.&quot;}, {&quot;p&quot;: &quot;When was there an economic downturn?&quot;, &quot;e&quot;: &quot;In 2008 there was a big downturn.&quot;}, {&quot;p&quot;: &quot;How do changes in the exchange rate affect companies that sell abroad?&quot;, &quot;e&quot;: &quot;A stronger currency makes their products more expensive abroad.&quot;}, {&quot;p&quot;: &quot;Which company do you think will grow next year? Why?&quot;, &quot;e&quot;: &quot;A solar-energy company, because demand is growing.&quot;}]">
+  <div class="dice-left"><div class="die" id="s-sp2-die">&#127922;</div>
+    <button class="btn-deal" onclick="diceRoll('s-sp2')">Roll the dice</button>
+    <div class="dchips"><span class="dchip" data-n="1">1</span><span class="dchip" data-n="2">2</span><span class="dchip" data-n="3">3</span><span class="dchip" data-n="4">4</span><span class="dchip" data-n="5">5</span><span class="dchip" data-n="6">6</span></div></div>
+  <div class="dice-card" id="s-sp2-card"><div class="wc-idle">Roll the dice to get your question.</div></div>
+</div>
+  </div></div>
 </div>
 
 <div class="slide" id="s-m1">
@@ -794,8 +897,8 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
     <h2>Good news or bad news?</h2>
     
     <p class="instruction" style="margin-bottom:12px;">Click a sentence, then click the box where it belongs.</p>
-    <div id="s-m1-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">Thankfully, there was an upturn in the market.</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">Everyone suffered because of the economic downturn.</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">We haven't sold enough pineapples. We've made a loss.</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">The profit margin on these T-shirts is huge!</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">High overheads make this business difficult to run.</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">Our sales figures have improved consistently each year.</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">The company's income fell last year.</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">We have a large budget for this movie.</button></div>
-    <div id="s-m1-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="good" onclick="classifyTarget(this)"><h4><b>Good news</b><br>for a business</h4></div><div class="classify-col" data-target="bad" onclick="classifyTarget(this)"><h4><b>Bad news</b><br>for a business</h4></div></div>
+    <div id="s-m1-bank" class="classify-bank grid" style="margin-bottom:16px;grid-template-columns:repeat(4,minmax(0,1fr));"><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">High overheads make this business difficult to run.</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">The profit margin on these T-shirts is huge!</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">Our sales figures have improved consistently each year.</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">The company's income fell last year.</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">Everyone suffered because of the economic downturn.</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">We have a large budget for this movie.</button><button class="classify-chip" data-ans="good" onclick="classifyPick(this)">Thankfully, there was an upturn in the market.</button><button class="classify-chip" data-ans="bad" onclick="classifyPick(this)">We haven't sold enough pineapples. We've made a loss.</button></div>
+    <div id="s-m1-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col c-a" data-target="good" onclick="classifyTarget(this)"><h4><b>Good news</b><br>for a business</h4></div><div class="classify-col c-b" data-target="bad" onclick="classifyTarget(this)"><h4><b>Bad news</b><br>for a business</h4></div></div>
     <div class="btn-row">
       <button class="btn-check" onclick="checkClassifySlide('s-m1')">Check Answers</button>
       <button class="btn-reset" onclick="resetClassifySlide('s-m1')">Reset</button>
@@ -811,14 +914,14 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
     <h2>Where is the stress?</h2>
     
     <p class="instruction" style="margin-bottom:12px;">Click the speaker to hear the word, say it, then click the word and the box with its stress pattern.</p>
-    <div id="s-pron-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">income</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">budget</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">overheads</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">overdraft</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">accounts</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">expenditure</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">exchange</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">economic</button></div>
-    <div id="s-pron-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col" data-target="first" onclick="classifyTarget(this)"><h4><b>Stress on the 1st syllable</b><br>IN-come</h4></div><div class="classify-col" data-target="later" onclick="classifyTarget(this)"><h4><b>Stress later in the word</b><br>ac-COUNTS</h4></div></div>
+    <div id="s-pron-bank" class="classify-bank grid" style="margin-bottom:16px;grid-template-columns:repeat(4,minmax(0,1fr));"><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">accounts</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">budget</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">economic</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">income</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">exchange</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">overheads</button><button class="classify-chip" data-ans="later" onclick="classifyPick(this)">expenditure</button><button class="classify-chip" data-ans="first" onclick="classifyPick(this)">overdraft</button></div>
+    <div id="s-pron-cols" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;"><div class="classify-col c-a" data-target="first" onclick="classifyTarget(this)"><h4><b>Stress on the 1st syllable</b><br>IN-come</h4></div><div class="classify-col c-b" data-target="later" onclick="classifyTarget(this)"><h4><b>Stress later in the word</b><br>ac-COUNTS</h4></div></div>
     <div class="btn-row">
       <button class="btn-check" onclick="checkClassifySlide('s-pron')">Check Answers</button>
       <button class="btn-reset" onclick="resetClassifySlide('s-pron')">Reset</button>
     </div>
     
-    <div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_income.mp3" onclick="playClip(this)" aria-label="listen">🔊 income</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_abudget.mp3" onclick="playClip(this)" aria-label="listen">🔊 budget</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_overheads.mp3" onclick="playClip(this)" aria-label="listen">🔊 overheads</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_anoverdraft.mp3" onclick="playClip(this)" aria-label="listen">🔊 overdraft</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_accounts.mp3" onclick="playClip(this)" aria-label="listen">🔊 accounts</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_expenditureoutlay.mp3" onclick="playClip(this)" aria-label="listen">🔊 expenditure</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_theexchangerate.mp3" onclick="playClip(this)" aria-label="listen">🔊 exchange rate</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_aneconomicdownturn.mp3" onclick="playClip(this)" aria-label="listen">🔊 economic downturn</button></div>
+    <div class="audio-box clips-box"><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_income.mp3" onclick="playClip(this)" aria-label="listen">🔊 income</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_abudget.mp3" onclick="playClip(this)" aria-label="listen">🔊 budget</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_overheads.mp3" onclick="playClip(this)" aria-label="listen">🔊 overheads</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_anoverdraft.mp3" onclick="playClip(this)" aria-label="listen">🔊 overdraft</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_accounts.mp3" onclick="playClip(this)" aria-label="listen">🔊 accounts</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_expenditureoutlay.mp3" onclick="playClip(this)" aria-label="listen">🔊 expenditure</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_theexchangerate.mp3" onclick="playClip(this)" aria-label="listen">🔊 exchange rate</button><button class="clip word" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/6/6_1_aneconomicdownturn.mp3" onclick="playClip(this)" aria-label="listen">🔊 economic downturn</button></div>
   </div></div>
 </div>
 
@@ -831,19 +934,16 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
       <button class="btn-deal" id="s-free-next" onclick="chatNext('s-free')">Start the conversation</button>
       <button class="btn-reset" onclick="chatReset('s-free')">Start again</button>
     </div>
-    <div class="chat" id="s-free-chat"><div class="b them"><span class="who">Jordan</span>Can you give me a quick financial update on the company?</div><div class="b you"><span class="who">You</span><span class="you-task">Give a short overview of the company&rsquo;s income.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Of course. Overall, our income is up this quarter.</div></div><div class="b them"><span class="who">Jordan</span>That's good.<br>What about our costs?</div><div class="b you"><span class="who">You</span><span class="you-task">Talk about costs.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Our biggest expenditure is salaries, but our overheads are low.</div></div><div class="b them"><span class="who">Jordan</span>Are we going to break even this year?</div><div class="b you"><span class="who">You</span><span class="you-task">Answer, and say when.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes. We expect to break even by December.</div></div><div class="b them"><span class="who">Jordan</span>What about our competitors? Are they undercutting us?</div><div class="b you"><span class="who">You</span><span class="you-task">Talk about the competition.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, one competitor has dropped its prices to undercut us.</div></div><div class="b them"><span class="who">Jordan</span>How is the market doing?</div><div class="b you"><span class="who">You</span><span class="you-task">Describe the market.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">There was an upturn this spring, but there could be a downturn next year.</div></div><div class="b them"><span class="who">Jordan</span>Do we have enough money in the budget for new equipment?</div><div class="b you"><span class="who">You</span><span class="you-task">Answer, and give advice about debt.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Not at the moment. We should avoid getting into debt, so let's wait until next quarter.</div></div></div>
+    <div class="chat" id="s-free-chat"><div class="b them"><span class="who">Jordan</span>Can you give me a quick financial update on the company?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Of course. Overall, our income is up this quarter.</div></div><div class="b them"><span class="who">Jordan</span>That's good.<br>What about our costs?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Our biggest expenditure is salaries, but our overheads are low.</div></div><div class="b them"><span class="who">Jordan</span>Are we going to break even this year?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes. We expect to break even by December.</div></div><div class="b them"><span class="who">Jordan</span>What about our competitors? Are they undercutting us?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, one competitor has dropped its prices to undercut us.</div></div><div class="b them"><span class="who">Jordan</span>How is the market doing?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">There was an upturn this spring, but there could be a downturn next year.</div></div><div class="b them"><span class="who">Jordan</span>Do we have enough money in the budget for new equipment?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Not at the moment. We should avoid getting into debt, so let's wait until next quarter.</div></div></div>
   </div></div>
 </div>
 
 <div class="slide" id="s-review">
   <div class="banner banner-review">⭐ Lesson Review</div>
   <div class="slide-main"><div class="content">
-    <h2>Before you leave</h2>
-    <p class="instruction">Click each one when you feel ready to use it.</p>
-    <div class="check-list" id="ck-list"><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Money and finance phrases</span><span class="ck-ic">💰</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Describing good and bad news</span><span class="ck-ic">📊</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Talking about a business situation</span><span class="ck-ic">🧩</span></button></div>
-    <div class="win-banner" id="ck-win">You are ready for the next unit.</div>
-    
-    <p class="instruction" style="margin-top:22px;">Give me a short financial update about a real or imaginary company, using at least five new phrases.</p>
+    <h2>Lesson summary</h2>
+    <div class="sum-grid"><div class="sum-card"><div class="sum-ic">💰</div><h3>Money and finance</h3><p class="sum-p"><mark>income</mark> = money coming in.</p><p class="sum-p"><mark>expenditure</mark> = money going out.</p><p class="sum-p"><mark>overheads</mark> = regular costs, like rent.</p><p class="sum-p"><mark>a budget</mark> = a plan for income and spending.</p><p class="sum-p">To <mark>break even</mark> = to make no profit and no loss.</p></div><div class="sum-card"><div class="sum-ic">📊</div><h3>Good news or bad news?</h3><p class="sum-p"><b>Good:</b> <mark>an upturn in the market</mark>, to <mark>break even</mark>, rising <mark>income</mark>.</p><p class="sum-p"><b>Bad:</b> <mark>an economic downturn</mark>, to <mark>make a loss</mark>, to <mark>get into debt</mark>, to <mark>go out of business</mark>.</p></div><div class="sum-card"><div class="sum-ic">🧩</div><h3>Talking about a business situation</h3><p class="sum-ex">Our biggest <mark>expenditure</mark> is salaries.</p><p class="sum-ex">We expect to <mark>break even</mark> by December.</p><p class="sum-ex">A competitor wants to <mark>undercut</mark> us.</p><p class="sum-ex">We should avoid <mark>getting into debt</mark>.</p></div></div>
+    <div class="sum-turn"><span class="sum-turn-l">Your turn</span>Give me a short financial update about a real or imaginary company, using at least five new phrases.</div>
   </div></div>
 </div>
 
@@ -865,8 +965,29 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <button class="btn-check" onclick="checkWbSlide('hw1')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('hw1')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_10.mp3" onclick="playClip(this)">10</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_11.mp3" onclick="playClip(this)">11</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_12.mp3" onclick="playClip(this)">12</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_13.mp3" onclick="playClip(this)">13</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_14.mp3" onclick="playClip(this)">14</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_15.mp3" onclick="playClip(this)">15</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_16.mp3" onclick="playClip(this)">16</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_17.mp3" onclick="playClip(this)">17</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_10.mp3" onclick="playClip(this)">10</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_11.mp3" onclick="playClip(this)">11</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_12.mp3" onclick="playClip(this)">12</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_13.mp3" onclick="playClip(this)">13</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_14.mp3" onclick="playClip(this)">14</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_15.mp3" onclick="playClip(this)">15</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_16.mp3" onclick="playClip(this)">16</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/6/6_1_17.mp3" onclick="playClip(this)">17</button></div>
 </div></div>
+</div>
+
+<div class="slide" id="hw-ai">
+  <div class="banner banner-hw">📝 Homework</div>
+  <div class="slide-main"><div class="content">
+    <h2>Practice with AI</h2>
+    <p class="instruction">Copy the prompt, paste it into an AI chat, and practice.<br>The AI will correct you and give feedback.</p>
+    <div class="ai-steps"><div class="ai-step"><span class="ai-n">1</span><b>Open an AI chat</b><span>Use any AI assistant you like, on your phone or computer.</span></div><div class="ai-step"><span class="ai-n">2</span><b>Copy the prompt</b><span>Press the button below, paste it into the chat, and send it.</span></div><div class="ai-step"><span class="ai-n">3</span><b>Answer in English</b><span>Type your answers, or use voice. Write full sentences.</span></div><div class="ai-step"><span class="ai-n">4</span><b>Collect your corrections</b><span>Save your best corrected sentences. Bring them to the next class.</span></div></div>
+    <div class="ai-prompt-wrap">
+      <div class="ai-prompt-head"><span>Prompt for your AI tutor</span><button class="btn-deal ai-copy" onclick="copyPrompt('hw-ai')">Copy prompt</button></div>
+      <pre class="ai-prompt" id="hw-ai-text">You are my friendly business English tutor. I am an upper-intermediate (B2) learner and I use American English. Challenge me with some B2+ vocabulary and structures.
+Today we are practicing: money and finance vocabulary and talking about a business situation.
+Rules:
+1. Ask me ONE question at a time about my real work life. Use this language in your questions: income, expenditure, overheads, budget, break even, make a loss, upturn, downturn and undercut.
+2. Wait for my answer. Never answer for me.
+3. After each answer, show my sentence and a corrected version, explain the mistake in one short sentence, and give me one more natural, more advanced (B2+) way to say it.
+4. Keep the conversation going with a follow-up question.
+5. After 6 questions, give me feedback: 3 things I did well, 3 things to improve, and a mini-quiz of 3 sentences to correct.
+Start now. Your first question: How is your company doing financially? Tell me about its income and costs.</pre>
+    </div>
+  </div></div>
 </div>
 
 </div><!-- END #deck -->
@@ -883,8 +1004,8 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 
 <script>
 /* ===================== SLIDE NAV DATA ===================== */
-var slideIds = ["s1", "s-lead", "s-v1", "s-cl1", "s-sp1", "s-v2", "s-cl2", "s-sp2", "s-m1", "s-pron", "s-free", "s-review", "hw-cover", "hw-1"];
-var slideLabels = ["Cover", "Warm-Up – Finance Snapshot", "Vocabulary – Money and Finance (1)", "Practice – Complete the Sentences (1)", "Speaking Break – Income and Costs", "Vocabulary – Money and Finance (2)", "Practice – Complete the Sentences (2)", "Speaking Break – The Market", "Meaning – Good News or Bad News?", "Pronunciation – Word Stress", "Speaking – Financial Update", "Lesson Review", "Homework Cover", "HW1 – Money and Finance"];
+var slideIds = ["s1", "s-lead", "s-v1", "s-cl1", "s-sp1", "s-v2", "s-cl2", "s-sp2", "s-m1", "s-pron", "s-free", "s-review", "hw-cover", "hw-1", "hw-ai"];
+var slideLabels = ["Cover", "Warm-Up – Finance Snapshot", "Vocabulary – Money and Finance (1)", "Practice – Complete the Sentences (1)", "Speaking Game – Bingo", "Vocabulary – Money and Finance (2)", "Practice – Complete the Sentences (2)", "Speaking Game – Roll the Dice", "Meaning – Good News or Bad News?", "Pronunciation – Word Stress", "Speaking – Financial Update", "Lesson Summary", "Homework Cover", "HW1 – Money and Finance", "HW – Practice with AI"];
 var slides = Array.from(document.querySelectorAll('.slide'));
 var current = 0;
 var notesStoreKey = 'befeNotes::U06-Money-and-finance::' + document.title;
@@ -1186,7 +1307,7 @@ function classifyTarget(col){
   if (!chip) return;
   var tag = document.createElement('span');
   tag.className = 'placed';
-  tag.textContent = chip.textContent;
+  tag.innerHTML = chip.innerHTML;
   tag.dataset.ans = chip.dataset.ans;
   tag.dataset.chipRef = '1';
   tag.onclick = function(e){ e.stopPropagation(); tag.remove(); chip.classList.remove('used'); };
@@ -1387,7 +1508,7 @@ function savePDF(){
     '.step p{margin:0;font-size:1.08rem;line-height:1.55}'+
     '.btns{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 6px 48px}'+
     '.bigbtn{display:inline-block;text-decoration:none;color:#fff!important;font-weight:800;font-size:1.2rem;padding:13px 26px;border-radius:999px;border:3px solid #2B1B5E;box-shadow:0 5px 0 #2B1B5E}'+
-    '.bigbtn.lesson{background:#1F9D6B}.bigbtn.hw{background:#FF6B5E}'+
+    '.bigbtn.lesson{background:#2563A8}.bigbtn.hw{background:#FF6B5E}'+
     '.link-note{margin:6px 0 0 48px;font-size:.88rem;color:#5b5b6b;word-break:break-all}'+
     '.tip{margin-top:12px;font-size:.95rem;color:#5b5b6b}'+
     '.notes-title{font-family:"DM Serif Display",Georgia,serif;font-size:1.5rem;color:#2B1B5E;margin:26px 28px 12px}'+
@@ -1428,7 +1549,7 @@ function chatNext(sid){
       bs[i].classList.add('show');
       btn.textContent = (i===bs.length-1) ? 'End of conversation' : (bs[i].classList.contains('them') ? 'Your turn ▸' : 'Continue ▸');
       if(i===bs.length-1) btn.disabled=true;
-      try{ bs[i].scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+      c.scrollTop=c.scrollHeight;
       return;
     }
   }
@@ -1437,7 +1558,90 @@ function chatReset(sid){
   var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
   c.querySelectorAll('.b').forEach(function(b){b.classList.remove('show');});
   c.querySelectorAll('.ccq-answer').forEach(function(a){a.classList.remove('show');});
-  btn.disabled=false; btn.textContent='Start the conversation';
+  c.scrollTop=0; btn.disabled=false; btn.textContent='Start the conversation';
+}
+
+/* copy the AI prompt */
+function copyPrompt(sid){
+  var el=document.getElementById(sid+'-text'); if(!el) return;
+  var txt=el.textContent, btn=el.closest('.ai-prompt-wrap').querySelector('.ai-copy');
+  function done(){ btn.textContent='Copied \u2713'; setTimeout(function(){btn.textContent='Copy prompt';},2000); }
+  function fallback(){ var r=document.createRange(); r.selectNodeContents(el); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); try{document.execCommand('copy');}catch(e){} s.removeAllRanges(); done(); }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); } else { fallback(); }
+}
+
+
+function wheelSpin(sid) {
+  var g = document.getElementById(sid + '-wg'); if (!g || g.dataset.busy) return;
+  var segs = JSON.parse(g.dataset.segs), n = segs.length, a = 360 / n;
+  var svg = g.querySelector('.wheel-svg'), card = document.getElementById(sid + '-card');
+  var done = JSON.parse(g.dataset.done || '[]'); if (done.length >= n) done = [];
+  var left = []; for (var q = 0; q < n; q++) if (done.indexOf(q) < 0) left.push(q);
+  var pick = left[Math.floor(Math.random() * left.length)], mode = Math.random() < 0.5 ? 'ask' : 'tell';
+  done.push(pick); g.dataset.done = JSON.stringify(done);
+  var hist = document.getElementById(sid + '-hist');
+  if (done.length === 1) hist.innerHTML = '';
+  var cur = parseFloat(g.dataset.rot || '0');
+  var target = 360 * 5 + (360 - (pick * a + a / 2)) + (Math.random() - .5) * a * .6;
+  var next = cur - (cur % 360) + target; if (next <= cur) next += 360;
+  g.dataset.rot = next; g.dataset.busy = '1';
+  card.innerHTML = '<div class="wc-idle">&hellip;</div>';
+  svg.style.transition = 'transform 3.6s cubic-bezier(.12,.7,.15,1)';
+  svg.style.transform = 'rotate(' + next + 'deg)';
+  setTimeout(function () {
+    var s = segs[pick];
+    var lb = JSON.parse(g.dataset.labels || '[]'); var task = mode === 'ask' ? (lb[0] || '\u2753 Ask a question about this.') : (lb[1] || '\uD83D\uDCAC Say something true about you.');
+    card.innerHTML = '<div class="wc-topic">' + s.t + '</div><div class="wc-task">' + task + '</div>' +
+      '<button class="say-btn" onclick="this.nextElementSibling.classList.toggle(\'show\')">\uD83D\uDCAC Example sentence</button>' +
+      '<div class="ccq-answer ex-sent">' + s[mode] + '</div>';
+    hist.innerHTML += '<span class="wh-chip">' + s.t + '</span>';
+    if (done.length >= n) hist.innerHTML += '<span class="wh-all">All done! Spin again to start over.</span>';
+    delete g.dataset.busy;
+  }, 3700);
+}
+
+
+/* ---- speaking games ---- */
+function _gm(sid, suffix, attr) { var g = document.getElementById(sid + suffix); return g ? JSON.parse(g.dataset.items) : []; }
+function _exCard(card, p, e, num) {
+  card.innerHTML = '<div class="wc-topic">' + (num ? num + '. ' : '') + p + '</div>' +
+    '<button class="say-btn" onclick="this.nextElementSibling.classList.toggle(\'show\')">\uD83D\uDCAC Example sentence</button>' +
+    '<div class="ccq-answer ex-sent">' + e + '</div>';
+}
+function diceRoll(sid) {
+  var g = document.getElementById(sid + '-dg'); if (!g || g.dataset.busy) return;
+  var items = JSON.parse(g.dataset.items), n = items.length, die = document.getElementById(sid + '-die'), card = document.getElementById(sid + '-card');
+  var faces = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
+  var done = JSON.parse(g.dataset.done || '[]');
+  if (done.length >= n) { done = []; g.querySelectorAll('.dchip').forEach(function (c) { c.classList.remove('done'); }); }
+  var left = []; for (var q = 0; q < n; q++) if (done.indexOf(q) < 0) left.push(q);
+  var pick = left[Math.floor(Math.random() * left.length)], t = 0; g.dataset.busy = '1';
+  done.push(pick); g.dataset.done = JSON.stringify(done);
+  card.innerHTML = '<div class="wc-idle">&hellip;</div>'; die.classList.add('rolling');
+  var iv = setInterval(function () { die.textContent = faces[Math.floor(Math.random() * 6)]; t++; if (t > 12) {
+    clearInterval(iv); die.classList.remove('rolling'); die.textContent = faces[pick % 6]; delete g.dataset.busy;
+    _exCard(card, items[pick].p, items[pick].e, pick + 1);
+    var chip = g.querySelector('.dchip[data-n="' + (pick + 1) + '"]'); if (chip) chip.classList.add('done');
+    if (done.length >= n) card.innerHTML += '<div class="wh-all" style="margin-top:10px">All questions done! Roll again to start over.</div>';
+  } }, 90);
+}
+var _BL = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function bingoPick(sid, btn) {
+  var g = document.getElementById(sid + '-bg'), items = JSON.parse(g.dataset.items), i = parseInt(btn.dataset.i);
+  btn.classList.add('marked'); _exCard(document.getElementById(sid + '-card'), items[i].p, items[i].e, 0);
+  var cells = g.querySelectorAll('.bcell'), won = false;
+  _BL.forEach(function (l) { if (l.every(function (k) { return cells[k].classList.contains('marked'); })) { won = true; l.forEach(function (k) { cells[k].classList.add('line'); }); } });
+  document.getElementById(sid + '-msg').textContent = won ? '\uD83C\uDF89 Bingo! Three in a row.' : '';
+}
+function bingoReset(sid) {
+  var g = document.getElementById(sid + '-bg');
+  g.querySelectorAll('.bcell').forEach(function (c) { c.classList.remove('marked'); c.classList.remove('line'); });
+  document.getElementById(sid + '-msg').textContent = '';
+  document.getElementById(sid + '-card').innerHTML = '<div class="wc-idle">Choose a square.<br>Say your answer, then try for three in a row.</div>';
+}
+function cardsReset(btn) {
+  var w = btn.closest('.content');
+  w.querySelectorAll('.fcard').forEach(function (c) { c.classList.remove('flipped'); var s = c.querySelector('.ex-sent'); if (s) s.classList.remove('show'); });
 }
 
 /* ===================== AUDIO CLIPS ===================== */

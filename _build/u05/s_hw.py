@@ -4,6 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
 from lib import *
 from ex import *
+import aihw
 hw_cover('Delegating tasks')
 
 H1 = [(["Staff must not smoking in the building.", "Staff must not smoke in the building."], 1), (["We don't have to go to work tomorrow.", "We not have to go to work tomorrow."], 0),
@@ -66,3 +67,6 @@ exercise('hw-5', 'HW6 – Respond', 'hw', 'HW6 — Respond', 'Read each statemen
          [resp_row(i + 1, a, b, c, d) for i, (a, b, c, d) in enumerate(R6)], 'wb',
          example=ex_given('%s<span style="color:var(--muted);">I just received Eric\'s memo about the conference.</span><br><span style="margin-left:34px;display:inline-block;margin-top:4px;">Great. <span class="wb-blank filled is-example" data-ans="Would">Would</span> you print me a copy, please?</span>' % example_badge()),
          pre=wb_bank(["don't have", 'need', 'Would', 'must', "don't need", 'Could', 'must not'], 'Would'), gid='hw5', aud=AL.pb_clips(5, 6, 6))
+
+
+slide('hw-ai', 'HW – Practice with AI', aihw.ai_slide(banner('hw'), 'hw-ai', 'obligation and delegating tasks, with must, have to, need to and polite requests', "must, have to, have got to, need to, don't have to, must not, Could you...? and Would you...?", 'What do you have to do every day at work, and what must you never forget?', 'Save your best corrected sentences. Bring them to the next class.'))

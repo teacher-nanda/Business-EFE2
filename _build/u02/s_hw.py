@@ -4,6 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
 from lib import *
 from ex import *
+import aihw
 
 hw_cover('Getting to know colleagues')
 
@@ -77,3 +78,6 @@ H5 = [("At 3pm yesterday, I", ['discussed', 'was discussing'], 'was discussing',
 exercise('hw-5', 'HW6 – Choose, Then Say It', 'hw', 'HW6 — Choose, then say it', 'Cross out the incorrect words in each sentence, then say the sentences out loud.',
          [co_row(i + 1, p, c, a, post, 'hw5-%d' % (i + 1), say=True) for i, (p, c, a, post) in enumerate(H5)], 'circ',
          example=co_example('My doctor', ['told', 'was telling'], 'told', 'me that I should take a vacation.'), gid='hw5', aud=AL.pb_clips(2, 6, 14))
+
+
+slide('hw-ai', 'HW – Practice with AI', aihw.ai_slide(banner('hw'), 'hw-ai', 'talking about my work history with past simple, past continuous and present perfect', 'past simple, past continuous, present perfect, and polite past forms like "I was wondering if..."', 'What did you do in your first job, and what were you doing when you got your current one?', 'Save your best corrected sentences. Bring them to the next class.'))

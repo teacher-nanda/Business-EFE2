@@ -36,8 +36,8 @@
   .banner-speaking  { background:#B23A6B; }
   .banner-grammar   { background:#5A2E8C; }
   .banner-pron      { background:#A8571E; }
-  .banner-reading   { background:#2A6B42; }
-  .banner-vocab     { background:#1E7A5F; }
+  .banner-reading   { background:#1F5F8B; }
+  .banner-vocab     { background:#2563A8; }
   .banner-video     { background:#A83232; }
   .banner-review    { background:#2E2A6B; }
   .banner-hw        { background:#1C2B3A; }
@@ -124,7 +124,7 @@
   .match-item.c4 { border-color:#B23A6B; border-width:3px; background:#F8E6EE; box-shadow:0 0 0 2px rgba(178,58,107,.25); }
   .match-item.c5 { border-color:#8C7A1E; border-width:3px; background:#F5F1DD; box-shadow:0 0 0 2px rgba(140,122,30,.25); }
   .match-item.c6 { border-color:#4A5A8C; border-width:3px; background:#E6E9F5; box-shadow:0 0 0 2px rgba(74,90,140,.25); }
-  .match-item.c7 { border-color:#3E8C5E; border-width:3px; background:#E6F5EC; box-shadow:0 0 0 2px rgba(62,140,94,.25); }
+  .match-item.c7 { border-color:#0F2438; border-width:3px; background:#E3E9EF; box-shadow:0 0 0 2px rgba(15,36,56,.25); }
   .match-item.picking { border-color:#5A2E8C; border-width:3px; border-style:dashed; box-shadow:0 0 0 2px rgba(90,46,140,.2); }
   .match-item.correctpair { outline:3px solid #1A7A4A; background:#1A7A4A !important; color:#fff; }
   .match-item.wrongpair { outline:3px solid #C4614A; background:#C4614A !important; color:#fff; }
@@ -235,9 +235,9 @@
   /* checkbox tick list */
   .tick-list { display:flex; flex-direction:column; gap:8px; margin:10px 0 18px; }
   .tick-item { display:flex; align-items:center; gap:12px; padding:9px 14px; border:1.5px solid #ddd; border-radius:8px; cursor:pointer; font-size:1.05rem; color:#1C2B3A; background:#fff; transition:all .15s; }
-  .tick-item:hover { border-color:#2A6B42; }
+  .tick-item:hover { border-color:#2563A8; }
   .tick-box { width:22px; height:22px; border:2px solid #999; border-radius:5px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.85rem; color:#fff; font-weight:800; }
-  .tick-item.picked { border-color:#2A6B42; background:#EAF6EE; }
+  .tick-item.picked { border-color:#2563A8; background:#E3EDF8; }
   .tick-item.picked .tick-box { background:#2A6B42; border-color:#2A6B42; }
   .tick-item.correct { border-color:#1A7A4A; background:#E3F5EA; }
   .tick-item.correct .tick-box { background:#1A7A4A; border-color:#1A7A4A; }
@@ -324,10 +324,10 @@
      Adult / professional: ink navy, deep teal, brass, warm paper. Serif headlines.
      ===================================================================== */
   :root {
-    --ink:#0F2438; --ink2:#1B3A57; --teal:#0F766E; --teal-l:#E2F0EE; --brass:#B8892B; --brass-l:#F6EBD0;
+    --ink:#0F2438; --ink2:#1B3A57; --teal:#2563A8; --teal-l:#E3EDF8; --brass:#B8892B; --brass-l:#F6EBD0;
     --paper:#FBF9F4; --line:#D8D2C4; --text:#1B2733; --muted:#586573;
     --ok:#1E7A4D; --ok-l:#E3F4EA; --bad:#B4432F; --bad-l:#FBE9E5; --warn:#A8700F; --warn-l:#FFF1D6;
-    --plum:#5B3A7A; --olive:#4C6B2F; --blue:#1F5F8B; --clay:#A4472F;
+    --plum:#5B3A7A; --olive:#B23A6B; --blue:#1F5F8B; --clay:#A4472F;
   }
   body { font-family:'DM Sans','Segoe UI',system-ui,sans-serif; background:var(--ink); color:var(--text); }
   .slide { background:var(--paper); }
@@ -340,7 +340,7 @@
 
   /* ---------- covers ---------- */
   #s1, #hw-cover { background:
-      radial-gradient(1200px 600px at 85% -10%, rgba(15,118,110,.55), transparent 60%),
+      radial-gradient(1200px 600px at 85% -10%, rgba(37,99,168,.55), transparent 60%),
       radial-gradient(900px 500px at -10% 110%, rgba(184,137,43,.28), transparent 60%),
       linear-gradient(160deg,#0B1B2B 0%, #11304B 100%); }
   .title-inner { z-index:3; }
@@ -400,7 +400,7 @@
 
   /* ---------- answer fields ---------- */
   .ans-input { border:0; border-bottom:2px solid var(--ink2); background:rgba(184,137,43,.12); border-radius:4px 4px 0 0; color:var(--ink); text-align:left; font-weight:600; }
-  .ans-input:focus { outline:none; border-bottom-color:var(--teal); background:rgba(15,118,110,.10); }
+  .ans-input:focus { outline:none; border-bottom-color:var(--teal); background:rgba(37,99,168,.10); }
   .ans-input.correct { color:var(--ok); border-bottom-color:var(--ok); background:var(--ok-l); }
   .ans-input.wrong { color:var(--bad); border-bottom-color:var(--bad); background:var(--bad-l); }
   .ans-input.empty-warn { color:var(--warn); border-bottom-color:#D9A441; background:var(--warn-l); }
@@ -448,9 +448,9 @@
   .match-col-head.mc-left, .match-col-head.mc-right { color:var(--ink); border-bottom:2px solid var(--brass); font-family:'DM Serif Display',Georgia,serif; font-weight:400; font-size:1.2rem; }
   .match-item { background:var(--paper); border:1.5px solid var(--line); border-radius:10px; color:var(--text); }
   .match-item.example-pair { background:var(--ok-l) !important; border-color:var(--ok) !important; }
-  .match-item.c0 { border-color:#0F766E; background:#E2F0EE; box-shadow:none; } .match-item.c1 { border-color:#B8892B; background:#F6EBD0; box-shadow:none; }
-  .match-item.c2 { border-color:#1F5F8B; background:#E1EDF6; box-shadow:none; } .match-item.c3 { border-color:#5B3A7A; background:#EDE5F4; box-shadow:none; }
-  .match-item.c4 { border-color:#A4472F; background:#F8E7E1; box-shadow:none; } .match-item.c5 { border-color:#4C6B2F; background:#E8F0DE; box-shadow:none; }
+  .match-item.c0 { border-color:#2563A8; background:#E3EDF8; box-shadow:none; } .match-item.c1 { border-color:#B8892B; background:#F6EBD0; box-shadow:none; }
+  .match-item.c2 { border-color:#C2570C; background:#FFF1E3; box-shadow:none; } .match-item.c3 { border-color:#5B3A7A; background:#EDE5F4; box-shadow:none; }
+  .match-item.c4 { border-color:#A4472F; background:#F8E7E1; box-shadow:none; } .match-item.c5 { border-color:#B23A6B; background:#F8E6EE; box-shadow:none; }
   .match-item.c6 { border-color:#6B6B6B; background:#EEEEEE; box-shadow:none; } .match-item.c7 { border-color:#0F2438; background:#E3E9EF; box-shadow:none; }
   .match-item.picking { border-color:var(--ink); border-style:dashed; }
   .match-item.correctpair { outline:3px solid var(--ok); background:var(--ok-l) !important; color:var(--ok); }
@@ -470,7 +470,7 @@
   .lead-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,380px); gap:34px; align-items:start; }
   .bd-form label { display:block; font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:14px 0 4px; }
   .bd-form input { width:100%; font-family:inherit; font-size:1.1rem; color:var(--ink); border:1.5px solid var(--line); background:#fff; border-radius:10px; padding:10px 14px; }
-  .bd-form input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(15,118,110,.15); }
+  .bd-form input:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px rgba(37,99,168,.15); }
   .badge { position:relative; width:100%; max-width:360px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 14px 30px rgba(15,36,56,.18); overflow:hidden; text-align:center; transform:rotate(-1.5deg); }
   .badge::before { content:""; display:block; width:74px; height:12px; background:var(--ink); border-radius:8px; margin:14px auto 12px; box-shadow:inset 0 2px 4px rgba(0,0,0,.5); }
   .bd-event { background:var(--ink); color:#E3C477; letter-spacing:.24em; font-size:.74rem; padding:9px 12px; font-weight:500; }
@@ -597,7 +597,7 @@
   .clips-box { flex-wrap:wrap; gap:8px; border-radius:18px; }
   .clips-label { font-weight:700; color:var(--ink2); margin-right:4px; }
   .clip { font-family:inherit; font-size:.95rem; font-weight:700; border:1.5px solid var(--teal); background:#fff; color:var(--teal); border-radius:999px; padding:6px 16px; cursor:pointer; }
-  .clip:hover { background:rgba(15,118,110,.08); }
+  .clip:hover { background:rgba(37,99,168,.08); }
   .clip.playing { background:var(--teal); color:#fff; }
   .clip.word { padding:2px 10px; font-size:.9rem; border-width:1.2px; }
   /* ---- block options (mark the correct sentence) ---- */
@@ -642,14 +642,105 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 #notesTA { background:#fff; color:#1C2B3A; font-size:1.2rem; backdrop-filter:none; }
 #notesTA:empty::before { color:rgba(28,43,58,.45); }
 .ccq-answer.ex-sent.show { display:block; margin:8px 0 0 34px; }
-.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;}
+.chat{display:flex;flex-direction:column;gap:12px;margin:6px 0 4px;max-height:calc(100vh - 440px);min-height:240px;overflow-y:auto;padding:2px 6px 2px 0;scroll-behavior:smooth;}
 .chat .b{display:none;max-width:76%;padding:12px 16px;border-radius:16px;font-size:1.08rem;line-height:1.5;color:#1C2B3A;}
 .chat .b.show{display:block;}
 .chat .b.them{align-self:flex-start;background:#fff;border:1.5px solid #D9D4C5;border-bottom-left-radius:4px;}
-.chat .b.you{align-self:flex-end;background:#E3F0EC;border:1.5px solid #9CC7BB;border-bottom-right-radius:4px;}
+.chat .b.you{align-self:flex-end;background:#E3EDF8;border:1.5px solid #9DBCE0;border-bottom-right-radius:4px;}
 .chat .who{display:block;font-size:.72rem;letter-spacing:.12em;font-weight:700;text-transform:uppercase;color:#6B7280;margin-bottom:2px;}
 .chat .you-task{font-weight:600;}
 .chat .ccq-answer.ex-sent.show{margin:8px 0 0 0;}
+.sum-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:6px 0 16px;align-items:stretch;}
+.sum-card{background:#fff;border:1.5px solid #D9D4C5;border-top:5px solid #B8892B;border-radius:14px;padding:14px 18px 8px;}
+.sum-card:nth-child(2){border-top-color:#2563A8;}
+.sum-card:nth-child(3){border-top-color:#5B3A7A;}
+.sum-ic{font-size:1.6rem;}
+.sum-card h3{margin:2px 0 8px;font-size:1.15rem;color:#1B3A57;}
+.sum-p{margin:0 0 8px;font-size:1rem;color:#1C2B3A;}
+.sum-p b{color:#1B4F8A;}
+.sum-p mark,.sum-ex mark{background:#FFF0B3;color:#1C2B3A;padding:0 4px;border-radius:4px;font-weight:700;}
+.sum-ex{margin:0 0 8px;padding:6px 10px;border-left:4px solid #B8892B;background:#FAF6EA;border-radius:0 8px 8px 0;font-style:italic;font-size:1rem;color:#1C2B3A;}
+.sum-turn{background:#1B3A57;color:#fff;border-radius:12px;padding:12px 18px;font-size:1.05rem;}
+.sum-turn-l{display:inline-block;background:#B8892B;color:#fff;font-weight:700;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;border-radius:6px;padding:2px 8px;margin-right:12px;}
+.ai-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:4px 0 10px;}
+.ai-step{background:#fff;border:1.5px solid #D9D4C5;border-radius:12px;padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-size:.92rem;line-height:1.4;color:#1C2B3A;position:relative;padding-left:48px;}
+.ai-step b{color:#1B3A57;font-size:1.05rem;}
+.ai-n{position:absolute;left:12px;top:10px;width:26px;height:26px;border-radius:50%;background:#2563A8;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.ai-prompt-wrap{background:#1B3A57;border-radius:14px;padding:12px 16px 14px;}
+.ai-prompt-head{display:flex;justify-content:space-between;align-items:center;color:#fff;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin-bottom:8px;}
+.ai-copy{margin:0 !important;padding:8px 18px !important;font-size:.95rem !important;}
+.ai-prompt{margin:0;background:#fff;color:#1C2B3A;border-radius:10px;padding:12px 16px;font-family:inherit;font-size:.92rem;white-space:pre-wrap;line-height:1.5;max-height:calc(100vh - 590px);min-height:120px;overflow-y:auto;}
+.classify-bank.grid{display:grid;gap:10px;}
+.classify-bank.grid .classify-chip{border-radius:12px;padding:12px 16px;text-align:left;line-height:1.5;font-weight:500;font-size:1.05rem;border:1.5px solid #CFC8B4;background:#fff;color:#1C2B3A;}
+.classify-bank.grid .classify-chip.selected{background:#1B3A57;color:#fff;border-color:#1B3A57;}
+.classify-bank.grid .classify-chip.selected mark.vb{background:#FFE48A;color:#1C2B3A;}
+mark.vb{background:#FFE48A;color:#1C2B3A;padding:0 5px;border-radius:5px;font-weight:700;}
+.classify-col{padding:0 18px 14px !important;overflow:hidden;min-height:110px;}
+.classify-col h4{font-weight:500 !important;margin:0 -18px 10px !important;padding:12px 18px;color:#fff !important;font-size:1.05rem;line-height:1.5;}
+.classify-col h4 b{font-size:1.2rem;}
+.classify-col.c-a{border-color:#2563A8 !important;background:#EEF4FB !important;}
+.classify-col.c-a h4{background:#2563A8;}
+.classify-col.c-b{border-color:#C2570C !important;background:#FFF4EA !important;}
+.classify-col.c-b h4{background:#C2570C;}
+.classify-col.c-c{border-color:#5B3A7A !important;background:#F4EFF8 !important;}
+.classify-col.c-c h4{background:#5B3A7A;}
+.classify-col .placed{display:block !important;margin:6px 0 !important;padding:8px 12px !important;border-radius:10px !important;font-weight:500 !important;background:#fff !important;border:1px solid #CFC8B4 !important;color:#1C2B3A !important;}
+.classify-col .placed.correct{background:#E3F5EA !important;border-color:#1A7A4A !important;}
+.classify-col .placed.wrong{background:#FBEAE6 !important;border-color:#C4614A !important;}
+.hl-ok{color:#1B4F8A !important;background:#E3EDF8 !important;}
+
+.wheel-game{display:grid;grid-template-columns:minmax(260px,340px) 1fr;gap:28px;align-items:center;margin-top:8px}
+.wheel-box{position:relative;width:100%;max-width:340px}
+.wheel-svg{width:100%;height:auto;display:block;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.wheel-pointer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:2rem;color:#1B2A38;z-index:2;line-height:1}
+.wheel-side{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.wheel-card{min-height:150px;width:100%;background:#fff;border:1px solid #D9D4C7;border-left:6px solid #2563A8;border-radius:14px;padding:16px 20px;line-height:1.5}
+.wheel-card .wc-topic{font-size:1.5rem;font-weight:700;color:#1B2A38}
+.wheel-card .wc-task{font-size:1.15rem;margin:4px 0 10px}
+.wheel-card .wc-idle{color:#6B7580;font-size:1.1rem}
+.listen-img{display:block;max-height:170px;width:auto;max-width:100%;border-radius:14px;margin:6px 0 4px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.chat .you-blank{display:inline-block;min-width:min(420px,80%);border-bottom:2px solid #8A94A0;height:1.7em;vertical-align:bottom;margin-bottom:6px}
+.pic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 18px;margin:8px 0}
+.pic-card{display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border:1px solid #D9D4C7;border-radius:12px;padding:8px}
+.pic-card img{width:100%;height:128px;object-fit:contain;display:block}
+.pic-in{width:64px;text-align:center;font-size:1.3rem;font-weight:700}
+.pic-ex{display:flex;align-items:center;gap:8px;min-height:40px}
+.pic-exnum{font-size:1.4rem;font-weight:700;color:#1B2A38;border-bottom:2px solid #1B2A38;padding:0 10px}
+.dice-game{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start;margin-top:8px}
+.dice-left{display:flex;flex-direction:column;align-items:center;gap:14px}
+.die{width:150px;height:150px;border-radius:26px;background:#fff;border:3px solid #1B2A38;box-shadow:0 6px 16px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;font-size:6.5rem;line-height:1;color:#1B2A38}
+.die.rolling{animation:dieshake .18s infinite}
+@keyframes dieshake{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg) translateY(-6px)}100%{transform:rotate(-8deg)}}
+.dchips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.dchip{width:34px;height:34px;border-radius:50%;border:2px solid #9AA5B1;color:#586573;display:flex;align-items:center;justify-content:center;font-weight:700}
+.dchip.done{background:#2563A8;border-color:#2563A8;color:#fff}
+.dice-card{min-height:170px;background:#fff;border:1px solid #D9D4C7;border-left:6px solid #C4570C;border-radius:14px;padding:16px 22px;line-height:1.5}
+.dice-card .wc-topic{font-size:1.45rem;font-weight:700;color:#1B2A38;margin-bottom:10px}
+.dice-card .wc-idle{color:#6B7580;font-size:1.1rem}
+.bingo-game{display:grid;grid-template-columns:minmax(340px,1.2fr) 1fr;gap:26px;align-items:start;margin-top:8px}
+.bingo-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bcell{min-height:92px;padding:10px;border-radius:12px;border:2px solid #D9D4C7;background:#fff;font:inherit;font-size:2.4rem;line-height:1.35;font-weight:700;color:#1B2A38;display:flex;align-items:center;justify-content:center}
+.bcell.marked{background:#E3EDF8;border-color:#2563A8;color:#1B4F8A}
+.bcell.current{box-shadow:0 0 0 4px rgba(37,99,168,.35)}
+.bcell.line{background:#2563A8;border-color:#1B4F8A;color:#fff}
+.bingo-side{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.bingo-side .dice-card{width:100%}
+.bingo-msg{font-size:1.35rem;font-weight:700;color:#2563A8;min-height:1.6em}
+.fcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+.fcard{position:relative;min-height:170px;border-radius:14px;cursor:pointer}
+.fc-front,.fc-back{border-radius:14px;min-height:170px;padding:14px 18px;box-sizing:border-box}
+.fc-front{background:#2563A8;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.fc-front span{font-size:1rem;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.fc-front b{font-size:3rem;line-height:1}
+.fcard:nth-child(3n+2) .fc-front{background:#C4570C}
+.fcard:nth-child(3n) .fc-front{background:#5B3A7A}
+.fc-back{display:none;background:#fff;border:1px solid #D9D4C7}
+.fcard.flipped .fc-front{display:none}
+.fcard.flipped .fc-back{display:block}
+.fc-p{font-size:1.15rem;font-weight:700;color:#1B2A38;margin-bottom:8px;line-height:1.4}
+.wheel-hist{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:34px}
+.wh-chip{background:#E3EDF8;color:#1B4F8A;border:1px solid #2563A8;border-radius:999px;padding:4px 14px;font-weight:600;font-size:.95rem}
+.wh-all{font-weight:700;color:#2563A8}
 
 </style>
 </head>
@@ -773,7 +864,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
     <p class="inst-light" style="margin:0 0 6px;">It is common to shake hands with new colleagues and introduce yourself.</p>
     <p class="instruction" style="margin-bottom:12px;">Read what each delegate says.<br>Click a situation, then click the delegate it matches.</p>
     <div id="sit-bank" class="classify-bank" style="margin-bottom:16px;"><button class="classify-chip" data-ans="you think you may have met before" onclick="classifyPick(this)">you think you may have met before</button><button class="classify-chip" data-ans="for the first time" onclick="classifyPick(this)">for the first time</button><button class="classify-chip" data-ans="you have heard about" onclick="classifyPick(this)">you have heard about</button></div>
-    <div id="sit-cols" class="three-up"><div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#0F766E"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#0F766E"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#0F766E"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div><div class="say">You must be Eric from the UK.<br>Carl has told me a lot about you.</div><div class="sc-drop classify-col" data-target="you have heard about" onclick="classifyTarget(this)">Use when you meet someone&hellip;</div></div><div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#0F766E"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#0F766E"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#0F766E"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div><div class="say">I think we met in Mumbai, didn't we?<br>I'm Max from HTB Engineering.</div><div class="say b">Great to see you again!</div><div class="sc-drop classify-col" data-target="you think you may have met before" onclick="classifyTarget(this)">Use when you meet someone&hellip;</div></div><div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#0F766E"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#0F766E"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#0F766E"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/><line x1="58" y1="56" x2="92" y2="56" stroke="#B8892B" stroke-width="5" stroke-linecap="round"/></svg></div><div class="say">Hello, I don't think we've met.<br>I'm Osric.</div><div class="say b">Hi Osric.<br>Laura.</div><div class="sc-drop classify-col" data-target="for the first time" onclick="classifyTarget(this)">Use when you meet someone&hellip;</div></div></div>
+    <div id="sit-cols" class="three-up"><div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#2563A8"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#2563A8"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#2563A8"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#2563A8"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div><div class="say">You must be Eric from the UK.<br>Carl has told me a lot about you.</div><div class="sc-drop classify-col" data-target="you have heard about" onclick="classifyTarget(this)">Use when you meet someone&hellip;</div></div><div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#2563A8"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#2563A8"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#2563A8"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#2563A8"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div><div class="say">I think we met in Mumbai, didn't we?<br>I'm Max from HTB Engineering.</div><div class="say b">Great to see you again!</div><div class="sc-drop classify-col" data-target="you think you may have met before" onclick="classifyTarget(this)">Use when you meet someone&hellip;</div></div><div class="scene"><div class="sc-figs"><svg viewBox="0 0 150 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#2563A8"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#2563A8"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#2563A8"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#2563A8"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/><line x1="58" y1="56" x2="92" y2="56" stroke="#B8892B" stroke-width="5" stroke-linecap="round"/></svg></div><div class="say">Hello, I don't think we've met.<br>I'm Osric.</div><div class="say b">Hi Osric.<br>Laura.</div><div class="sc-drop classify-col" data-target="for the first time" onclick="classifyTarget(this)">Use when you meet someone&hellip;</div></div></div>
     <div class="btn-row">
       <button class="btn-check" onclick="checkClassifySlide('sit')">Check Answers</button>
       <button class="btn-reset" onclick="resetClassifySlide('sit')">Reset</button>
@@ -789,13 +880,13 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
     <h2>Introducing people you know</h2>
     <p class="instruction">It is polite to introduce people you know but who do not know each other.</p>
     <div class="two-up">
-      <div class="scene"><div class="sc-figs"><svg viewBox="0 0 210 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#0F766E"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#0F766E"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#0F766E"/><circle cx="105" cy="22" r="11" fill="#1B3A57"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#1B3A57"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><circle cx="165" cy="22" r="11" fill="#B8892B"/><path d="M149 70 Q149 38 165 38 Q181 38 181 70 Z" fill="#B8892B"/><rect x="153" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="168" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div>
-        <div class="say" style="border-left-color:#0F766E;">Tony, this is Hayao from our Japanese office.<br>Hayao, meet Tony, our new director of marketing.</div>
+      <div class="scene"><div class="sc-figs"><svg viewBox="0 0 210 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#2563A8"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#2563A8"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#2563A8"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#2563A8"/><circle cx="105" cy="22" r="11" fill="#1B3A57"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#1B3A57"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><circle cx="165" cy="22" r="11" fill="#B8892B"/><path d="M149 70 Q149 38 165 38 Q181 38 181 70 Z" fill="#B8892B"/><rect x="153" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="168" y="68" width="9" height="26" rx="3" fill="#B8892B"/></svg></div>
+        <div class="say" style="border-left-color:#2563A8;">Tony, this is Hayao from our Japanese office.<br>Hayao, meet Tony, our new director of marketing.</div>
         <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">When you know both parties, introduce each one separately, saying both their names.</p></div>
-      <div class="scene"><div class="sc-figs"><svg viewBox="0 0 210 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#1B3A57"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#1B3A57"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/><circle cx="165" cy="22" r="11" fill="#0F766E"/><path d="M149 70 Q149 38 165 38 Q181 38 181 70 Z" fill="#0F766E"/><rect x="153" y="68" width="9" height="26" rx="3" fill="#0F766E"/><rect x="168" y="68" width="9" height="26" rx="3" fill="#0F766E"/></svg></div>
+      <div class="scene"><div class="sc-figs"><svg viewBox="0 0 210 100" role="img" aria-hidden="true"><circle cx="45" cy="22" r="11" fill="#1B3A57"/><path d="M29 70 Q29 38 45 38 Q61 38 61 70 Z" fill="#1B3A57"/><rect x="33" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><rect x="48" y="68" width="9" height="26" rx="3" fill="#1B3A57"/><circle cx="105" cy="22" r="11" fill="#B8892B"/><path d="M89 70 Q89 38 105 38 Q121 38 121 70 Z" fill="#B8892B"/><rect x="93" y="68" width="9" height="26" rx="3" fill="#B8892B"/><rect x="108" y="68" width="9" height="26" rx="3" fill="#B8892B"/><circle cx="165" cy="22" r="11" fill="#2563A8"/><path d="M149 70 Q149 38 165 38 Q181 38 181 70 Z" fill="#2563A8"/><rect x="153" y="68" width="9" height="26" rx="3" fill="#2563A8"/><rect x="168" y="68" width="9" height="26" rx="3" fill="#2563A8"/></svg></div>
         <div class="say" style="border-left-color:#1B3A57;">Victoria, I'd like to introduce you to Faisal.<br>I'm not sure you two have met each other.</div>
         <div class="say" style="border-left-color:#B8892B;">Nice to meet you.</div>
-        <div class="say" style="border-left-color:#0F766E;">Pleased to meet you.</div>
+        <div class="say" style="border-left-color:#2563A8;">Pleased to meet you.</div>
         <p style="margin:4px 0 0;color:var(--muted);font-size:1rem;">Say a polite response when you are introduced.</p></div>
     </div>
     <div class="two-up" style="margin-top:18px;">
@@ -818,7 +909,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
       <button class="btn-check" onclick="checkMatchSlide('s-cb12-match')">Check Answers</button>
       <button class="btn-reset" onclick="resetMatchSlide('s-cb12-match')">Reset</button>
     </div>
-    <div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_5.mp3" onclick="playClip(this)">5</button></div>
+    <div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_2_5.mp3" onclick="playClip(this)">5</button></div>
   </div></div>
 </div>
 
@@ -834,7 +925,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <button class="btn-check" onclick="checkWbSlide('cb13')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('cb13')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_5.mp3" onclick="playClip(this)">5</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_3_5.mp3" onclick="playClip(this)">5</button></div>
 </div></div>
 </div>
 
@@ -857,6 +948,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
   <div class="banner banner-grammar">📐 Grammar</div>
   <div class="slide-main"><div class="content">
     <h2>Always, or right now?</h2>
+    
     <div class="gram-box"><h3>Present simple and present continuous</h3>
       <p style="margin:0;">The <span class="hl">present simple</span> is used to describe something that happens in general, or is part of a routine.<br>The <span class="hl">present continuous</span> describes something that is happening right now, and will be continuing for a limited time.</p></div>
     <div class="big-sent">I don't usually <span class="ps">enjoy</span> networking, but I'm <span class="pc">enjoying</span> this conference.</div>
@@ -866,11 +958,25 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
     </div>
     <div class="tl-wrap">
       <div class="tl"><h4>Present simple</h4><div class="tl-sub">in general · part of a routine</div><svg viewBox="0 0 400 100" role="img" aria-label="repeated routine"><line x1="10" y1="52" x2="385" y2="52" stroke="#9AA5B1" stroke-width="3"/><polygon points="392,52 380,45 380,59" fill="#9AA5B1"/><circle cx="45" cy="52" r="6" fill="#5B3A7A"/><circle cx="105" cy="52" r="6" fill="#5B3A7A"/><circle cx="165" cy="52" r="6" fill="#5B3A7A"/><circle cx="225" cy="52" r="6" fill="#5B3A7A"/><circle cx="285" cy="52" r="6" fill="#5B3A7A"/><circle cx="345" cy="52" r="6" fill="#5B3A7A"/><text x="10" y="22" font-size="13" fill="#586573">past</text><text x="352" y="22" font-size="13" fill="#586573">future</text><text x="170" y="82" font-size="13" fill="#586573">again and again</text></svg><div class="tl-ex">I don't usually <span class="hl">enjoy</span> networking.</div></div>
-      <div class="tl"><h4>Present continuous</h4><div class="tl-sub">right now · for a limited time</div><svg viewBox="0 0 400 100" role="img" aria-label="happening now for a limited time"><line x1="10" y1="52" x2="385" y2="52" stroke="#9AA5B1" stroke-width="3"/><polygon points="392,52 380,45 380,59" fill="#9AA5B1"/><rect x="135" y="26" width="130" height="52" rx="12" fill="rgba(15,118,110,.12)" stroke="#0F766E" stroke-width="2.5" stroke-dasharray="6 5"/><circle cx="200" cy="52" r="8" fill="#0F766E"/><text x="10" y="22" font-size="13" fill="#586573">past</text><text x="352" y="22" font-size="13" fill="#586573">future</text><text x="173" y="94" font-size="13" fill="#586573">now · limited time</text></svg><div class="tl-ex">I'm <span class="hl">enjoying</span> this conference.</div></div>
+      <div class="tl"><h4>Present continuous</h4><div class="tl-sub">right now · for a limited time</div><svg viewBox="0 0 400 100" role="img" aria-label="happening now for a limited time"><line x1="10" y1="52" x2="385" y2="52" stroke="#9AA5B1" stroke-width="3"/><polygon points="392,52 380,45 380,59" fill="#9AA5B1"/><rect x="135" y="26" width="130" height="52" rx="12" fill="rgba(37,99,168,.12)" stroke="#2563A8" stroke-width="2.5" stroke-dasharray="6 5"/><circle cx="200" cy="52" r="8" fill="#2563A8"/><text x="10" y="22" font-size="13" fill="#586573">past</text><text x="352" y="22" font-size="13" fill="#586573">future</text><text x="173" y="94" font-size="13" fill="#586573">now · limited time</text></svg><div class="tl-ex">I'm <span class="hl">enjoying</span> this conference.</div></div>
     </div>
     <div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p>
       <ul class="ccq-list"><li>Do I enjoy networking in general? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. &ldquo;I don't usually enjoy networking&rdquo; is about my general habit.</span></li><li>Is the conference happening now? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">Yes. &ldquo;I'm enjoying this conference&rdquo; is about now.</span></li><li>Will I enjoy this conference for ever? <button class="ccq-reveal-btn" onclick="this.nextElementSibling.classList.toggle('show')">Show answer</button><span class="ccq-answer">No. It is only for a limited time, because the conference will end.</span></li></ul></div>
-    <div class="audio-box"><audio controls preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_5.mp3"></audio></div>
+  </div></div>
+</div>
+
+<div class="slide" id="s-l9">
+  <div class="banner banner-listening">🎧 Listening</div>
+  <div class="slide-main"><div class="content">
+    <h2>Which one do you hear?</h2>
+    <p class="instruction">Listen as many times as you need.<br>In each pair, click the sentence you hear.</p>
+    <div class="audio-box clips-box top"><audio controls preload="none" src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_5.mp3"></audio></div>
+    <div class="ex-row ex-given"><span class="example-badge">✓</span><span class="pick-wrap"><span class="circ-opt block is-example">I don't usually enjoy networking, but I'm enjoying this conference.</span><span class="circ-opt block struck">I don't usually enjoy networking, but I enjoy this conference.</span></span></div>
+    <div class="fixed-two-col" id="l9"><div><div class="ex-row"><span class="circ-num">1</span><span class="pick-wrap"><button class="circ-opt block" data-group="l9-1" data-correct="I don't usually enjoy networking." onclick="circPick(this)">I don't usually enjoy networking.</button><button class="circ-opt block" data-group="l9-1" data-correct="I don't usually enjoy networking." onclick="circPick(this)">I'm not usually enjoying networking.</button></span></div><div class="ex-row"><span class="circ-num">2</span><span class="pick-wrap"><button class="circ-opt block" data-group="l9-2" data-correct="I'm enjoying this conference." onclick="circPick(this)">I'm enjoying this conference.</button><button class="circ-opt block" data-group="l9-2" data-correct="I'm enjoying this conference." onclick="circPick(this)">I enjoy this conference.</button></span></div></div></div>
+    <div class="btn-row">
+      <button class="btn-check" onclick="checkCircSlide('l9')">Check Answers</button>
+      <button class="btn-reset" onclick="resetCircSlide('l9')">Reset</button>
+    </div>
   </div></div>
 </div>
 
@@ -913,12 +1019,20 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 </div>
 
 <div class="slide" id="s-x2">
-<div class="banner banner-speaking">💬 Speaking</div>
-<div class="slide-main"><div class="content">
-<h2>Speaking break: habits and right now</h2>
-<p class="instruction">Answer the questions about you.<br>Use the present simple for habits and the present continuous for what is happening now.</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>What do you usually do on Monday mornings at work?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">On Monday mornings I usually check my emails and plan the week.</div></div><div class="ex-row"><span class="circ-num">2</span>What are you working on at the moment? Tell me about one project.<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I am working on a new training program for our sales team.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>Do you know many people at your company? Who do you know best?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I know about twenty people. I know my team best.</div></div><div class="ex-row"><span class="circ-num">4</span>What do you think about networking events? Are you enjoying this course?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I think networking events are useful. I am enjoying this course a lot.</div></div></div></div>
-</div></div>
+  <div class="banner banner-speaking">💬 Speaking</div>
+  <div class="slide-main"><div class="content">
+    <h2>Speaking bingo</h2>
+    <p class="instruction">Draw a number and answer the question.<br>Try to get three in a row.</p>
+    <div class="bingo-game" id="s-x2-bg" data-items="[{&quot;p&quot;: &quot;What do you usually do on Monday mornings?&quot;, &quot;e&quot;: &quot;I usually check my emails and plan the week.&quot;}, {&quot;p&quot;: &quot;What are you working on at the moment?&quot;, &quot;e&quot;: &quot;I'm working on a budget report right now.&quot;}, {&quot;p&quot;: &quot;Who do you know best at your company?&quot;, &quot;e&quot;: &quot;I know Maria from Finance best. We have lunch together every Friday.&quot;}, {&quot;p&quot;: &quot;What do you think about networking events?&quot;, &quot;e&quot;: &quot;I think they're useful, but I don't always enjoy them.&quot;}, {&quot;p&quot;: &quot;Are you enjoying this course?&quot;, &quot;e&quot;: &quot;Yes, I'm enjoying it a lot. I'm learning useful phrases.&quot;}, {&quot;p&quot;: &quot;How do you usually get to work?&quot;, &quot;e&quot;: &quot;I usually take the train, but today I'm driving.&quot;}, {&quot;p&quot;: &quot;What are you learning at the moment?&quot;, &quot;e&quot;: &quot;I'm learning to give presentations in English.&quot;}, {&quot;p&quot;: &quot;What do you usually have for lunch at work?&quot;, &quot;e&quot;: &quot;I usually bring a sandwich from home.&quot;}, {&quot;p&quot;: &quot;Who are you working with this week?&quot;, &quot;e&quot;: &quot;I'm working with the design team this week.&quot;}]">
+  <div class="bingo-board"><div class="bcell" data-i="0">1</div><div class="bcell" data-i="1">2</div><div class="bcell" data-i="2">3</div><div class="bcell" data-i="3">4</div><div class="bcell" data-i="4">5</div><div class="bcell" data-i="5">6</div><div class="bcell" data-i="6">7</div><div class="bcell" data-i="7">8</div><div class="bcell" data-i="8">9</div></div>
+  <div class="bingo-side">
+    <button class="btn-deal" id="s-x2-draw" onclick="bingoDraw('s-x2')">Draw a number</button>
+    <div class="dice-card" id="s-x2-card"><div class="wc-idle">Draw a number and answer the question.<br>Get three in a row to win.</div></div>
+    <div class="bingo-msg" id="s-x2-msg"></div>
+    <button class="btn-reset" onclick="bingoReset('s-x2')">New game</button>
+  </div>
+</div>
+  </div></div>
 </div>
 
 <div class="slide" id="s-g3">
@@ -931,12 +1045,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 </div>
 
 <div class="slide" id="s-x3">
-<div class="banner banner-speaking">💬 Speaking</div>
-<div class="slide-main"><div class="content">
-<h2>Speaking break: make the introductions</h2>
-<p class="instruction">Read each situation.<br>What could you say?</p>
-<div class="fixed-two-col" style="gap:0 40px;"><div><div class="ex-row"><span class="circ-num">1</span>You meet a new contact at a conference. What could you say to show you are happy to meet them?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">It's a pleasure to meet you.</div></div><div class="ex-row"><span class="circ-num">2</span>You want to start a conversation with someone you do not know. How could you introduce yourself politely?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">I'd like to introduce myself. I'm Ana from the finance department.</div></div></div><div><div class="ex-row"><span class="circ-num">3</span>You think the person in front of you is Daniel from the Berlin office, but you are not sure. What could you say?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">You must be Daniel from the Berlin office.</div></div><div class="ex-row"><span class="circ-num">4</span>You think you met this person at an event last year. How could you check with a question tag?<br/><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')" style="margin-left:34px;margin-top:6px;">💬 Example sentence</button><div class="ccq-answer ex-sent">We met in Lisbon last year, didn't we?</div></div></div></div>
-</div></div>
+  <div class="banner banner-speaking">💬 Speaking</div>
+  <div class="slide-main"><div class="content">
+    <h2>Pick a card</h2>
+    <p class="instruction">Flip a card.<br>What could you say in this situation?</p>
+    <div class="fcards"><div class="fcard" onclick="this.classList.add('flipped')"><div class="fc-front"><span>Situation</span><b>1</b></div><div class="fc-back"><div class="fc-p">A stranger at a conference smiles at you.</div><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">&#128172; Example sentence</button><div class="ccq-answer ex-sent">Hello, I'm Lena from the Toronto office.<br>Nice to meet you.</div></div></div><div class="fcard" onclick="this.classList.add('flipped')"><div class="fc-front"><span>Situation</span><b>2</b></div><div class="fc-back"><div class="fc-p">You think this is Daniel from the Berlin office, but you are not sure.</div><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">&#128172; Example sentence</button><div class="ccq-answer ex-sent">You must be Daniel from the Berlin office.</div></div></div><div class="fcard" onclick="this.classList.add('flipped')"><div class="fc-front"><span>Situation</span><b>3</b></div><div class="fc-back"><div class="fc-p">You think you met this person at an event last year.</div><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">&#128172; Example sentence</button><div class="ccq-answer ex-sent">We met at the Dubai conference last year, didn't we?</div></div></div><div class="fcard" onclick="this.classList.add('flipped')"><div class="fc-front"><span>Situation</span><b>4</b></div><div class="fc-back"><div class="fc-p">Your manager and a new colleague have not met.</div><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">&#128172; Example sentence</button><div class="ccq-answer ex-sent">I'd like to introduce you to Sam, our new analyst.</div></div></div><div class="fcard" onclick="this.classList.add('flipped')"><div class="fc-front"><span>Situation</span><b>5</b></div><div class="fc-back"><div class="fc-p">You see someone you met last week.</div><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">&#128172; Example sentence</button><div class="ccq-answer ex-sent">Great to see you again!</div></div></div><div class="fcard" onclick="this.classList.add('flipped')"><div class="fc-front"><span>Situation</span><b>6</b></div><div class="fc-back"><div class="fc-p">Someone says: &ldquo;Hi, I'm Priya from IT.&rdquo;</div><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">&#128172; Example sentence</button><div class="ccq-answer ex-sent">Nice to meet you, Priya.<br>I'm Tom from Sales.</div></div></div></div><div class="btn-row" style="margin-top:6px;"><button class="btn-reset" onclick="cardsReset(this)">Turn the cards over</button></div>
+  </div></div>
 </div>
 
 <div class="slide" id="s-pron">
@@ -944,7 +1058,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
   <div class="slide-main"><div class="content">
     <h2>Stress the important words</h2>
     <p class="instruction">Listen, then say each sentence.<br>The highlighted words are stronger and clearer.</p>
-    <div class="stress-line"><span><span class="st">Nice</span> to <span class="st">meet</span> you.</span><button class="say-btn" onclick="this.classList.toggle('done')">I said it</button></div><div class="stress-line"><span>How do you <span class="st">do</span>?</span><button class="say-btn" onclick="this.classList.toggle('done')">I said it</button></div><div class="stress-line"><span>I'd <span class="st">like</span> to intro<span class="st sy">duce</span> you to <span class="st">Karl</span>.</span><button class="say-btn" onclick="this.classList.toggle('done')">I said it</button></div><div class="stress-line"><span><span class="st">Great</span> to <span class="st">see</span> you a<span class="st sy">gain</span>!</span><button class="say-btn" onclick="this.classList.toggle('done')">I said it</button></div><div class="stress-line"><span>I don't <span class="st">think</span> we've <span class="st">met</span>.</span><button class="say-btn" onclick="this.classList.toggle('done')">I said it</button></div>
+    <div class="stress-line"><span><span class="st">Nice</span> to <span class="st">meet</span> you.</span></div><div class="stress-line"><span>How do you <span class="st">do</span>?</span></div><div class="stress-line"><span>I'd <span class="st">like</span> to intro<span class="st sy">duce</span> you to <span class="st">Karl</span>.</span></div><div class="stress-line"><span><span class="st">Great</span> to <span class="st">see</span> you a<span class="st sy">gain</span>!</span></div><div class="stress-line"><span>I don't <span class="st">think</span> we've <span class="st">met</span>.</span></div>
     <div class="gram-note">🔊 The small words are quick and weak.<br>In fast speech, &ldquo;to&rdquo; sounds like /tə/ and &ldquo;you&rdquo; sounds like /jə/.</div>
   </div></div>
 </div>
@@ -987,7 +1101,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <button class="btn-check" onclick="checkSlide('cb17')">Check Answers</button>
 <button class="btn-reset" onclick="resetSlide('cb17')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_4.mp3" onclick="playClip(this)">4</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_7_4.mp3" onclick="playClip(this)">4</button></div>
 </div></div>
 </div>
 
@@ -997,12 +1111,12 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <h2>Choose, then say it</h2>
 <p class="instruction">Cross out the incorrect words in each sentence, then say the sentences out loud.</p>
 <div class="ex-row ex-given" style=";max-width:calc(50% - 20px);box-sizing:border-box;"><span class="example-badge">✓</span>I'm sorry, how <span class="circ-opt is-example">do you say</span> <span class="circ-sep">/</span> <span class="circ-opt struck">are you saying</span> your name again?</div>
-<div class="fixed-two-col" id="cb18"><div><div class="ex-row"><span class="circ-num">1</span>Hello Frank. <button class="circ-opt" data-correct="Are you enjoying" data-group="cb18-1" onclick="circPick(this)">Are you enjoying</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="Are you enjoying" data-group="cb18-1" onclick="circPick(this)">do you enjoy</button> the conference?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Wilfred, I'd like you to <button class="circ-opt" data-correct="meet" data-group="cb18-2" onclick="circPick(this)">meet</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="meet" data-group="cb18-2" onclick="circPick(this)">be meeting</button> Roger, our new press officer.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">3</span>Serena, it's really great to <button class="circ-opt" data-correct="see" data-group="cb18-3" onclick="circPick(this)">see</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="see" data-group="cb18-3" onclick="circPick(this)">seeing</button> you again after so long.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>I usually enjoy workshops, but I am not <button class="circ-opt" data-correct="finding" data-group="cb18-4" onclick="circPick(this)">find</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="finding" data-group="cb18-4" onclick="circPick(this)">finding</button> this one interesting.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="fixed-two-col" id="cb18"><div><div class="ex-row"><span class="circ-num">1</span>Hello Frank. <button class="circ-opt" data-correct="Are you enjoying" data-group="cb18-1" onclick="circPick(this)">Are you enjoying</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="Are you enjoying" data-group="cb18-1" onclick="circPick(this)">do you enjoy</button> the conference?</div><div class="ex-row"><span class="circ-num">2</span>Wilfred, I'd like you to <button class="circ-opt" data-correct="meet" data-group="cb18-2" onclick="circPick(this)">meet</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="meet" data-group="cb18-2" onclick="circPick(this)">be meeting</button> Roger, our new press officer.</div></div><div><div class="ex-row"><span class="circ-num">3</span>Serena, it's really great to <button class="circ-opt" data-correct="see" data-group="cb18-3" onclick="circPick(this)">see</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="see" data-group="cb18-3" onclick="circPick(this)">seeing</button> you again after so long.</div><div class="ex-row"><span class="circ-num">4</span>I usually enjoy workshops, but I am not <button class="circ-opt" data-correct="finding" data-group="cb18-4" onclick="circPick(this)">find</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="finding" data-group="cb18-4" onclick="circPick(this)">finding</button> this one interesting.</div></div></div>
 <div class="btn-row">
 <button class="btn-check" onclick="checkCircSlide('cb18')">Check Answers</button>
 <button class="btn-reset" onclick="resetCircSlide('cb18')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_4.mp3" onclick="playClip(this)">4</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Course%20Book%20Audio/1/1_8_4.mp3" onclick="playClip(this)">4</button></div>
 </div></div>
 </div>
 
@@ -1015,33 +1129,16 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
       <button class="btn-deal" id="s-free-next" onclick="chatNext('s-free')">Start the conversation</button>
       <button class="btn-reset" onclick="chatReset('s-free')">Start again</button>
     </div>
-    <div class="chat" id="s-free-chat"><div class="b them"><span class="who">Daniel</span>Hello. I don't think we've met. I'm Daniel, from the Berlin office.</div><div class="b you"><span class="who">You</span><span class="you-task">Greet Daniel and introduce yourself.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Nice to meet you, Daniel. I'm Lena, from the Toronto office.</div></div><div class="b them"><span class="who">Daniel</span>Great to meet you too.<br>Are you enjoying the conference?</div><div class="b you"><span class="who">You</span><span class="you-task">Say whether you are enjoying it, and why.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, I'm enjoying it a lot. The presentations are really interesting.</div></div><div class="b them"><span class="who">Daniel</span>Me too.<br>What do you usually do at your company?</div><div class="b you"><span class="who">You</span><span class="you-task">Tell Daniel what you usually do.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I usually manage the budget and work with the sales team.</div></div><div class="b them"><span class="who">Daniel</span>And what are you working on at the moment?</div><div class="b you"><span class="who">You</span><span class="you-task">Say what you are working on now.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I'm working on a new pricing project. It's keeping me busy.</div></div><div class="b them"><span class="who">Daniel</span>Interesting!<br>Oh, here comes Mei, our CEO. Do you two know each other?</div><div class="b you"><span class="who">You</span><span class="you-task">Introduce Daniel to your colleague Mei.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Mei, I'd like to introduce you to Daniel from the Berlin office.</div></div><div class="b them"><span class="who">Daniel</span>It was great talking to you. I'd love to stay in touch.</div><div class="b you"><span class="who">You</span><span class="you-task">Say goodbye politely and suggest staying in touch.</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">It was a pleasure to meet you. Let's connect on LinkedIn.</div></div></div>
+    <div class="chat" id="s-free-chat"><div class="b them"><span class="who">Daniel</span>Hello. I don't think we've met. I'm Daniel, from the Berlin office.</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Nice to meet you, Daniel. I'm Lena, from the Toronto office.</div></div><div class="b them"><span class="who">Daniel</span>Great to meet you too.<br>Are you enjoying the conference?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Yes, I'm enjoying it a lot. The presentations are really interesting.</div></div><div class="b them"><span class="who">Daniel</span>Me too.<br>What do you usually do at your company?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I usually manage the budget and work with the sales team.</div></div><div class="b them"><span class="who">Daniel</span>And what are you working on at the moment?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">I'm working on a new pricing project. It's keeping me busy.</div></div><div class="b them"><span class="who">Daniel</span>Interesting!<br>Oh, here comes Mei, our CEO. Do you two know each other?</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">Mei, I'd like to introduce you to Daniel from the Berlin office.</div></div><div class="b them"><span class="who">Daniel</span>It was great talking to you. I'd love to stay in touch.</div><div class="b you"><span class="who">You</span><span class="you-task you-blank">&nbsp;</span><br><button class="say-btn" onclick="this.nextElementSibling.classList.toggle('show')">💬 Example sentence</button><div class="ccq-answer ex-sent">It was a pleasure to meet you. Let's connect on LinkedIn.</div></div></div>
   </div></div>
 </div>
 
 <div class="slide" id="s-review">
   <div class="banner banner-review">⭐ Lesson Review</div>
   <div class="slide-main"><div class="content">
-    <h2>Before you leave the lobby</h2>
-    <p class="instruction">Click each one when you feel ready to use it.</p>
-    <div class="lead-grid">
-      <div>
-        <div class="check-list" id="ck-list"><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Present simple and continuous</span><span class="ck-ic">⚙️</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Etiquette for introductions</span><span class="ck-ic">🤝</span></button><button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>Introducing yourself and others</span><span class="ck-ic">🧩</span></button></div>
-        <div class="win-banner" id="ck-win">You are ready for the next unit.</div>
-      </div>
-      <div>
-        <div class="badge" id="bd-review">
-          <div class="bd-event">MERIDIAN BUSINESS SUMMIT</div>
-          <div class="bd-hello">Hello, I'm</div>
-          <div class="bd-name" data-bd="name">&nbsp;</div>
-          <div class="bd-role" data-bd="role">&nbsp;</div>
-          <div class="bd-company" data-bd="company">&nbsp;</div>
-          <div class="bd-ask"><b>Ask me about</b><span data-bd="ask">&nbsp;</span></div>
-          <div class="bd-foot">DELEGATE</div>
-        </div>
-      </div>
-    </div>
-    <p class="instruction" style="margin-top:22px;">Introduce yourself to me one more time.<br>What is different from the first time?</p>
+    <h2>Lesson summary</h2>
+    <div class="sum-grid"><div class="sum-card"><div class="sum-ic">⚙️</div><h3>Present simple or continuous?</h3><p class="sum-p"><b>Present simple</b> = habits, facts and states.</p><p class="sum-ex">I <mark>usually work</mark> from home.</p><p class="sum-p"><b>Present continuous</b> = happening now, or temporary.</p><p class="sum-ex"><mark>I'm working</mark> on a new project.</p><p class="sum-p"><b>Know</b>, <b>like</b>, <b>want</b> and <b>think</b> are not used in the continuous.</p><p class="sum-ex">I <mark>know</mark> Daniel. (not: I am knowing)</p></div><div class="sum-card"><div class="sum-ic">🤝</div><h3>Introductions</h3><p class="sum-ex">I'd like <mark>to introduce you to</mark> Marco.</p><p class="sum-ex">It's <mark>a pleasure to meet you</mark>.</p><p class="sum-ex">You <mark>must be</mark> Paola, from Madrid.</p><p class="sum-p">Check: <b>I don't think we've met</b>, have we?</p><p class="sum-ex">We <mark>met in Lisbon</mark> last year, didn't we?</p></div><div class="sum-card"><div class="sum-ic">🧩</div><h3>Introducing yourself</h3><p class="sum-p">Prepare a <b>30&ndash;60 second</b> introduction.</p><p class="sum-p">End with a <mark>question</mark> to start the conversation.</p><p class="sum-p">Make eye contact for about <mark>two seconds</mark>, and shake hands firmly.</p><p class="sum-p">Follow up within <mark>24&ndash;48 hours</mark>.</p></div></div>
+    <div class="sum-turn"><span class="sum-turn-l">Your turn</span>Introduce yourself to me one more time. What is different from the first time?</div>
   </div></div>
 </div>
 
@@ -1064,7 +1161,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <button class="btn-check" onclick="checkWbSlide('hw1')">Check Answers</button>
 <button class="btn-reset" onclick="resetWbSlide('hw1')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_9.mp3" onclick="playClip(this)">9</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_1_9.mp3" onclick="playClip(this)">9</button></div>
 </div></div>
 </div>
 
@@ -1081,7 +1178,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
       <button class="btn-check" onclick="checkMatchSlide('hw-2-match')">Check Answers</button>
       <button class="btn-reset" onclick="resetMatchSlide('hw-2-match')">Reset</button>
     </div>
-    <div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_6.mp3" onclick="playClip(this)">6</button></div>
+    <div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_2_6.mp3" onclick="playClip(this)">6</button></div>
   </div></div>
 </div>
 
@@ -1112,7 +1209,7 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <button class="btn-check" onclick="checkSlide('hw4')">Check Answers</button>
 <button class="btn-reset" onclick="resetSlide('hw4')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_10.mp3" onclick="playClip(this)">10</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_11.mp3" onclick="playClip(this)">11</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_12.mp3" onclick="playClip(this)">12</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_10.mp3" onclick="playClip(this)">10</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_11.mp3" onclick="playClip(this)">11</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_4_12.mp3" onclick="playClip(this)">12</button></div>
 </div></div>
 </div>
 
@@ -1122,13 +1219,34 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 <h2>HW5 — Choose, then say it</h2>
 <p class="instruction">Cross out the incorrect words in each sentence, then say the sentences out loud.</p>
 <div class="ex-row ex-given" style=";max-width:calc(50% - 20px);box-sizing:border-box;"><span class="example-badge">✓</span>Raul <span class="circ-opt struck">presents</span> <span class="circ-sep">/</span> <span class="circ-opt is-example">is presenting</span> at the moment.</div>
-<div class="fixed-two-col" id="hw5"><div><div class="ex-row"><span class="circ-num">1</span>Our company <button class="circ-opt" data-correct="is having" data-group="hw5-1" onclick="circPick(this)">is having</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="is having" data-group="hw5-1" onclick="circPick(this)">have</button> some difficulties at the moment.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">2</span>Pablo, I'd like you to <button class="circ-opt" data-correct="meet" data-group="hw5-2" onclick="circPick(this)">meet</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="meet" data-group="hw5-2" onclick="circPick(this)">meeting</button> my wife, Elvira.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">3</span>I usually hate conferences, but I <button class="circ-opt" data-correct="am enjoying" data-group="hw5-3" onclick="circPick(this)">enjoy</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="am enjoying" data-group="hw5-3" onclick="circPick(this)">am enjoying</button> this one a lot.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">4</span>I <button class="circ-opt" data-correct="have" data-group="hw5-4" onclick="circPick(this)">have</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have" data-group="hw5-4" onclick="circPick(this)">am having</button> two children, a son and a daughter.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">5</span>Michael, <button class="circ-opt" data-correct="I'd like" data-group="hw5-5" onclick="circPick(this)">I like</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="I'd like" data-group="hw5-5" onclick="circPick(this)">I'd like</button> to introduce you to Michelle.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div><div><div class="ex-row"><span class="circ-num">6</span>I <button class="circ-opt" data-correct="don't think" data-group="hw5-6" onclick="circPick(this)">don't think</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="don't think" data-group="hw5-6" onclick="circPick(this)">am not thinking</button> we've met before, have we?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">7</span>It's so great <button class="circ-opt" data-correct="to see" data-group="hw5-7" onclick="circPick(this)">to see</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="to see" data-group="hw5-7" onclick="circPick(this)">see</button> you again after such a long time.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">8</span>How <button class="circ-opt" data-correct="do you pronounce" data-group="hw5-8" onclick="circPick(this)">do you pronounce</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="do you pronounce" data-group="hw5-8" onclick="circPick(this)">are you pronouncing</button> your last name?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">9</span>You must <button class="circ-opt" data-correct="be" data-group="hw5-9" onclick="circPick(this)">be</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="be" data-group="hw5-9" onclick="circPick(this)">being</button> Harold from Copenhagen. Nice to meet you.<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div><div class="ex-row"><span class="circ-num">10</span>Hi, I think we met in Oslo, <button class="circ-opt" data-correct="didn't we" data-group="hw5-10" onclick="circPick(this)">aren't we</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="didn't we" data-group="hw5-10" onclick="circPick(this)">didn't we</button>?<br/><button class="say-btn" onclick="this.classList.toggle('done')" style="margin-left:34px;margin-top:6px;">🗣 I said it</button></div></div></div>
+<div class="fixed-two-col" id="hw5"><div><div class="ex-row"><span class="circ-num">1</span>Our company <button class="circ-opt" data-correct="is having" data-group="hw5-1" onclick="circPick(this)">is having</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="is having" data-group="hw5-1" onclick="circPick(this)">have</button> some difficulties at the moment.</div><div class="ex-row"><span class="circ-num">2</span>Pablo, I'd like you to <button class="circ-opt" data-correct="meet" data-group="hw5-2" onclick="circPick(this)">meet</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="meet" data-group="hw5-2" onclick="circPick(this)">meeting</button> my wife, Elvira.</div><div class="ex-row"><span class="circ-num">3</span>I usually hate conferences, but I <button class="circ-opt" data-correct="am enjoying" data-group="hw5-3" onclick="circPick(this)">enjoy</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="am enjoying" data-group="hw5-3" onclick="circPick(this)">am enjoying</button> this one a lot.</div><div class="ex-row"><span class="circ-num">4</span>I <button class="circ-opt" data-correct="have" data-group="hw5-4" onclick="circPick(this)">have</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="have" data-group="hw5-4" onclick="circPick(this)">am having</button> two children, a son and a daughter.</div><div class="ex-row"><span class="circ-num">5</span>Michael, <button class="circ-opt" data-correct="I'd like" data-group="hw5-5" onclick="circPick(this)">I like</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="I'd like" data-group="hw5-5" onclick="circPick(this)">I'd like</button> to introduce you to Michelle.</div></div><div><div class="ex-row"><span class="circ-num">6</span>I <button class="circ-opt" data-correct="don't think" data-group="hw5-6" onclick="circPick(this)">don't think</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="don't think" data-group="hw5-6" onclick="circPick(this)">am not thinking</button> we've met before, have we?</div><div class="ex-row"><span class="circ-num">7</span>It's so great <button class="circ-opt" data-correct="to see" data-group="hw5-7" onclick="circPick(this)">to see</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="to see" data-group="hw5-7" onclick="circPick(this)">see</button> you again after such a long time.</div><div class="ex-row"><span class="circ-num">8</span>How <button class="circ-opt" data-correct="do you pronounce" data-group="hw5-8" onclick="circPick(this)">do you pronounce</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="do you pronounce" data-group="hw5-8" onclick="circPick(this)">are you pronouncing</button> your last name?</div><div class="ex-row"><span class="circ-num">9</span>You must <button class="circ-opt" data-correct="be" data-group="hw5-9" onclick="circPick(this)">be</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="be" data-group="hw5-9" onclick="circPick(this)">being</button> Harold from Copenhagen. Nice to meet you.</div><div class="ex-row"><span class="circ-num">10</span>Hi, I think we met in Oslo, <button class="circ-opt" data-correct="didn't we" data-group="hw5-10" onclick="circPick(this)">aren't we</button> <span class="circ-sep">/</span> <button class="circ-opt" data-correct="didn't we" data-group="hw5-10" onclick="circPick(this)">didn't we</button>?</div></div></div>
 <div class="btn-row">
 <button class="btn-check" onclick="checkCircSlide('hw5')">Check Answers</button>
 <button class="btn-reset" onclick="resetCircSlide('hw5')">Reset</button>
 </div>
-<div class="audio-box clips-box"><span class="clips-label">🎧 Listen and check</span><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_10.mp3" onclick="playClip(this)">10</button></div>
+<div class="audio-box clips-box"><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5__eg.mp3" onclick="playClip(this)">Example</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_1.mp3" onclick="playClip(this)">1</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_2.mp3" onclick="playClip(this)">2</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_3.mp3" onclick="playClip(this)">3</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_4.mp3" onclick="playClip(this)">4</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_5.mp3" onclick="playClip(this)">5</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_6.mp3" onclick="playClip(this)">6</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_7.mp3" onclick="playClip(this)">7</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_8.mp3" onclick="playClip(this)">8</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_9.mp3" onclick="playClip(this)">9</button><button class="clip" data-src="../EFE.B%20B1%20Level%202%20-%20Practice%20Book%20Audio/1/1_5_10.mp3" onclick="playClip(this)">10</button></div>
 </div></div>
+</div>
+
+<div class="slide" id="hw-ai">
+  <div class="banner banner-hw">📝 Homework</div>
+  <div class="slide-main"><div class="content">
+    <h2>Practice with AI</h2>
+    <p class="instruction">Copy the prompt, paste it into an AI chat, and practice.<br>The AI will correct you and give feedback.</p>
+    <div class="ai-steps"><div class="ai-step"><span class="ai-n">1</span><b>Open an AI chat</b><span>Use any AI assistant you like, on your phone or computer.</span></div><div class="ai-step"><span class="ai-n">2</span><b>Copy the prompt</b><span>Press the button below, paste it into the chat, and send it.</span></div><div class="ai-step"><span class="ai-n">3</span><b>Answer in English</b><span>Type your answers, or use voice. Write full sentences.</span></div><div class="ai-step"><span class="ai-n">4</span><b>Collect your corrections</b><span>Save your best corrected sentences. Bring them to the next class.</span></div></div>
+    <div class="ai-prompt-wrap">
+      <div class="ai-prompt-head"><span>Prompt for your AI tutor</span><button class="btn-deal ai-copy" onclick="copyPrompt('hw-ai')">Copy prompt</button></div>
+      <pre class="ai-prompt" id="hw-ai-text">You are my friendly business English tutor. I am an upper-intermediate (B2) learner and I use American English. Challenge me with some B2+ vocabulary and structures.
+Today we are practicing: present simple and present continuous, and introducing myself and other people at a business event.
+Rules:
+1. Ask me ONE question at a time about my real work life. Use this language in your questions: present simple for habits, present continuous for what is happening now, and phrases for introductions.
+2. Wait for my answer. Never answer for me.
+3. After each answer, show my sentence and a corrected version, explain the mistake in one short sentence, and give me one more natural, more advanced (B2+) way to say it.
+4. Keep the conversation going with a follow-up question.
+5. After 6 questions, give me feedback: 3 things I did well, 3 things to improve, and a mini-quiz of 3 sentences to correct.
+Start now. Your first question: What do you usually do at work, and what are you working on at the moment?</pre>
+    </div>
+  </div></div>
 </div>
 
 </div><!-- END #deck -->
@@ -1145,8 +1263,8 @@ body, p, li, .instruction, .ex-row, .ccq-list li, .scene p, .scene .say, .gram-n
 
 <script>
 /* ===================== SLIDE NAV DATA ===================== */
-var slideIds = ["s1", "s-lead", "s-lead2", "s-l1", "s-m1", "s-m2", "s-cb12", "s-cb13", "s-cb14", "s-g1", "s-g2", "s-x1", "s-x2", "s-g3", "s-x3", "s-pron", "s-cb16a", "s-cb16b", "s-cb17", "s-cb18", "s-free", "s-review", "hw-cover", "hw-1", "hw-2", "hw-3", "hw-4", "hw-5"];
-var slideLabels = ["Cover", "Warm-Up – Registration Desk", "Warm-Up – Would You Rather?", "Listening – Key Language", "Vocabulary – Three First Moments", "Vocabulary – Introducing Other People", "Vocabulary – Match the Introductions", "Vocabulary – Fill in the Gaps", "Listening – At the Conference", "Grammar – Meaning: Present Simple and Continuous", "Grammar – Form", "Extra – Simple or Continuous?", "Speaking Break – Habits and Right Now", "Grammar – Small Words That Matter", "Speaking Break – Make the Introductions", "Pronunciation – Sound Like a Professional", "Reading – Making Connections", "Reading – Answer the Questions", "Grammar – Correct the Errors", "Speaking – Choose, Then Say It", "Speaking – Work the Room", "Lesson Review – Before You Leave the Lobby", "Homework Cover", "HW1 – Fill in the Gaps", "HW2 – Match the Introductions", "HW3 – Read and Answer", "HW4 – Correct the Errors", "HW5 – Choose, Then Say It"];
+var slideIds = ["s1", "s-lead", "s-lead2", "s-l1", "s-m1", "s-m2", "s-cb12", "s-cb13", "s-cb14", "s-g1", "s-l9", "s-g2", "s-x1", "s-x2", "s-g3", "s-x3", "s-pron", "s-cb16a", "s-cb16b", "s-cb17", "s-cb18", "s-free", "s-review", "hw-cover", "hw-1", "hw-2", "hw-3", "hw-4", "hw-5", "hw-ai"];
+var slideLabels = ["Cover", "Warm-Up – Registration Desk", "Warm-Up – Would You Rather?", "Listening – Key Language", "Vocabulary – Three First Moments", "Vocabulary – Introducing Other People", "Vocabulary – Match the Introductions", "Vocabulary – Fill in the Gaps", "Listening – At the Conference", "Grammar – Meaning: Present Simple and Continuous", "Listening – Always or Right Now?", "Grammar – Form", "Extra – Simple or Continuous?", "Speaking Game – Bingo", "Grammar – Small Words That Matter", "Speaking Game – Pick a Card", "Pronunciation – Sound Like a Professional", "Reading – Making Connections", "Reading – Answer the Questions", "Grammar – Correct the Errors", "Speaking – Choose, Then Say It", "Speaking – Work the Room", "Lesson Summary", "Homework Cover", "HW1 – Fill in the Gaps", "HW2 – Match the Introductions", "HW3 – Read and Answer", "HW4 – Correct the Errors", "HW5 – Choose, Then Say It", "HW – Practice with AI"];
 var slides = Array.from(document.querySelectorAll('.slide'));
 var current = 0;
 var notesStoreKey = 'befeNotes::' + document.title;
@@ -1448,7 +1566,7 @@ function classifyTarget(col){
   if (!chip) return;
   var tag = document.createElement('span');
   tag.className = 'placed';
-  tag.textContent = chip.textContent;
+  tag.innerHTML = chip.innerHTML;
   tag.dataset.ans = chip.dataset.ans;
   tag.dataset.chipRef = '1';
   tag.onclick = function(e){ e.stopPropagation(); tag.remove(); chip.classList.remove('used'); };
@@ -1649,7 +1767,7 @@ function savePDF(){
     '.step p{margin:0;font-size:1.08rem;line-height:1.55}'+
     '.btns{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 6px 48px}'+
     '.bigbtn{display:inline-block;text-decoration:none;color:#fff!important;font-weight:800;font-size:1.2rem;padding:13px 26px;border-radius:999px;border:3px solid #2B1B5E;box-shadow:0 5px 0 #2B1B5E}'+
-    '.bigbtn.lesson{background:#1F9D6B}.bigbtn.hw{background:#FF6B5E}'+
+    '.bigbtn.lesson{background:#2563A8}.bigbtn.hw{background:#FF6B5E}'+
     '.link-note{margin:6px 0 0 48px;font-size:.88rem;color:#5b5b6b;word-break:break-all}'+
     '.tip{margin-top:12px;font-size:.95rem;color:#5b5b6b}'+
     '.notes-title{font-family:"DM Serif Display",Georgia,serif;font-size:1.5rem;color:#2B1B5E;margin:26px 28px 12px}'+
@@ -1690,7 +1808,7 @@ function chatNext(sid){
       bs[i].classList.add('show');
       btn.textContent = (i===bs.length-1) ? 'End of conversation' : (bs[i].classList.contains('them') ? 'Your turn ▸' : 'Continue ▸');
       if(i===bs.length-1) btn.disabled=true;
-      try{ bs[i].scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+      c.scrollTop=c.scrollHeight;
       return;
     }
   }
@@ -1699,7 +1817,97 @@ function chatReset(sid){
   var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
   c.querySelectorAll('.b').forEach(function(b){b.classList.remove('show');});
   c.querySelectorAll('.ccq-answer').forEach(function(a){a.classList.remove('show');});
-  btn.disabled=false; btn.textContent='Start the conversation';
+  c.scrollTop=0; btn.disabled=false; btn.textContent='Start the conversation';
+}
+
+/* copy the AI prompt */
+function copyPrompt(sid){
+  var el=document.getElementById(sid+'-text'); if(!el) return;
+  var txt=el.textContent, btn=el.closest('.ai-prompt-wrap').querySelector('.ai-copy');
+  function done(){ btn.textContent='Copied \u2713'; setTimeout(function(){btn.textContent='Copy prompt';},2000); }
+  function fallback(){ var r=document.createRange(); r.selectNodeContents(el); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); try{document.execCommand('copy');}catch(e){} s.removeAllRanges(); done(); }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); } else { fallback(); }
+}
+
+
+function wheelSpin(sid) {
+  var g = document.getElementById(sid + '-wg'); if (!g || g.dataset.busy) return;
+  var segs = JSON.parse(g.dataset.segs), n = segs.length, a = 360 / n;
+  var svg = g.querySelector('.wheel-svg'), card = document.getElementById(sid + '-card');
+  var done = JSON.parse(g.dataset.done || '[]'); if (done.length >= n) done = [];
+  var left = []; for (var q = 0; q < n; q++) if (done.indexOf(q) < 0) left.push(q);
+  var pick = left[Math.floor(Math.random() * left.length)], mode = Math.random() < 0.5 ? 'ask' : 'tell';
+  done.push(pick); g.dataset.done = JSON.stringify(done);
+  var hist = document.getElementById(sid + '-hist');
+  if (done.length === 1) hist.innerHTML = '';
+  var cur = parseFloat(g.dataset.rot || '0');
+  var target = 360 * 5 + (360 - (pick * a + a / 2)) + (Math.random() - .5) * a * .6;
+  var next = cur - (cur % 360) + target; if (next <= cur) next += 360;
+  g.dataset.rot = next; g.dataset.busy = '1';
+  card.innerHTML = '<div class="wc-idle">&hellip;</div>';
+  svg.style.transition = 'transform 3.6s cubic-bezier(.12,.7,.15,1)';
+  svg.style.transform = 'rotate(' + next + 'deg)';
+  setTimeout(function () {
+    var s = segs[pick];
+    var lb = JSON.parse(g.dataset.labels || '[]'); var task = mode === 'ask' ? (lb[0] || '\u2753 Ask a question about this.') : (lb[1] || '\uD83D\uDCAC Say something true about you.');
+    card.innerHTML = '<div class="wc-topic">' + s.t + '</div><div class="wc-task">' + task + '</div>' +
+      '<button class="say-btn" onclick="this.nextElementSibling.classList.toggle(\'show\')">\uD83D\uDCAC Example sentence</button>' +
+      '<div class="ccq-answer ex-sent">' + s[mode] + '</div>';
+    hist.innerHTML += '<span class="wh-chip">' + s.t + '</span>';
+    if (done.length >= n) hist.innerHTML += '<span class="wh-all">All done! Spin again to start over.</span>';
+    delete g.dataset.busy;
+  }, 3700);
+}
+
+
+/* ---- speaking games ---- */
+function _gm(sid, suffix, attr) { var g = document.getElementById(sid + suffix); return g ? JSON.parse(g.dataset.items) : []; }
+function _exCard(card, p, e, num) {
+  card.innerHTML = '<div class="wc-topic">' + (num ? num + '. ' : '') + p + '</div>' +
+    '<button class="say-btn" onclick="this.nextElementSibling.classList.toggle(\'show\')">\uD83D\uDCAC Example sentence</button>' +
+    '<div class="ccq-answer ex-sent">' + e + '</div>';
+}
+function diceRoll(sid) {
+  var g = document.getElementById(sid + '-dg'); if (!g || g.dataset.busy) return;
+  var items = JSON.parse(g.dataset.items), n = items.length, die = document.getElementById(sid + '-die'), card = document.getElementById(sid + '-card');
+  var faces = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
+  var done = JSON.parse(g.dataset.done || '[]');
+  if (done.length >= n) { done = []; g.querySelectorAll('.dchip').forEach(function (c) { c.classList.remove('done'); }); }
+  var left = []; for (var q = 0; q < n; q++) if (done.indexOf(q) < 0) left.push(q);
+  var pick = left[Math.floor(Math.random() * left.length)], t = 0; g.dataset.busy = '1';
+  done.push(pick); g.dataset.done = JSON.stringify(done);
+  card.innerHTML = '<div class="wc-idle">&hellip;</div>'; die.classList.add('rolling');
+  var iv = setInterval(function () { die.textContent = faces[Math.floor(Math.random() * 6)]; t++; if (t > 12) {
+    clearInterval(iv); die.classList.remove('rolling'); die.textContent = faces[pick % 6]; delete g.dataset.busy;
+    _exCard(card, items[pick].p, items[pick].e, pick + 1);
+    var chip = g.querySelector('.dchip[data-n="' + (pick + 1) + '"]'); if (chip) chip.classList.add('done');
+    if (done.length >= n) card.innerHTML += '<div class="wh-all" style="margin-top:10px">All questions done! Roll again to start over.</div>';
+  } }, 90);
+}
+var _BL = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+function bingoDraw(sid) {
+  var g = document.getElementById(sid + '-bg'), items = JSON.parse(g.dataset.items), cells = g.querySelectorAll('.bcell');
+  if (g.dataset.over) return;
+  var left = []; cells.forEach(function (c, k) { if (!c.classList.contains('marked')) left.push(k); });
+  if (!left.length) return;
+  var i = left[Math.floor(Math.random() * left.length)];
+  cells.forEach(function (c) { c.classList.remove('current'); });
+  cells[i].classList.add('marked'); cells[i].classList.add('current');
+  _exCard(document.getElementById(sid + '-card'), items[i].p, items[i].e, i + 1);
+  var won = false;
+  _BL.forEach(function (l) { if (l.every(function (k) { return cells[k].classList.contains('marked'); })) { won = true; l.forEach(function (k) { cells[k].classList.add('line'); }); } });
+  if (won) { g.dataset.over = '1'; document.getElementById(sid + '-msg').textContent = '\uD83C\uDF89 Bingo! Three in a row.'; document.getElementById(sid + '-draw').disabled = true; }
+  else if (left.length === 1) { document.getElementById(sid + '-msg').textContent = 'No bingo this time. Start a new game!'; }
+}
+function bingoReset(sid) {
+  var g = document.getElementById(sid + '-bg'); delete g.dataset.over;
+  g.querySelectorAll('.bcell').forEach(function (c) { c.classList.remove('marked'); c.classList.remove('line'); c.classList.remove('current'); });
+  document.getElementById(sid + '-msg').textContent = ''; document.getElementById(sid + '-draw').disabled = false;
+  document.getElementById(sid + '-card').innerHTML = '<div class="wc-idle">Draw a number and answer the question.<br>Get three in a row to win.</div>';
+}
+function cardsReset(btn) {
+  var w = btn.closest('.content');
+  w.querySelectorAll('.fcard').forEach(function (c) { c.classList.remove('flipped'); var s = c.querySelector('.ex-sent'); if (s) s.classList.remove('show'); });
 }
 
 /* ===================== AUDIO CLIPS ===================== */

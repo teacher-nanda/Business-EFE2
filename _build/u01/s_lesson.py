@@ -410,7 +410,7 @@ _xspeak('s-x3', 'Speaking Break – Make the Introductions', 'Speaking break: ma
 
 # ------------------------------------------------------------------ 12 PRONUNCIATION
 def stress_line(html):
-    return '<div class="stress-line"><span>%s</span><button class="say-btn" onclick="this.classList.toggle(\'done\')">I said it</button></div>' % html
+    return '<div class="stress-line"><span>%s</span></div>' % html
 St = lambda t: '<span class="st">%s</span>' % t
 Sy = lambda t: '<span class="st sy">%s</span>' % t
 slide('s-pron', 'Pronunciation – Sound Like a Professional', '''<div class="slide" id="s-pron">
@@ -519,8 +519,7 @@ def co_row(n, pre, a, b, correct, post, group):
     ba = '<button class="circ-opt" data-group="%s" data-correct="%s" onclick="circPick(this)">%s</button>' % (group, correct, a)
     bb = '<button class="circ-opt" data-group="%s" data-correct="%s" onclick="circPick(this)">%s</button>' % (group, correct, b)
     sp = '' if post[:1] in '?.,!' else ' '
-    return ('<div class="ex-row"><span class="circ-num">%d</span>%s %s <span class="circ-sep">/</span> %s%s%s<br>'
-            '<button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle(\'done\')">🗣 I said it</button></div>') % (n, pre, ba, bb, sp, post)
+    return ('<div class="ex-row"><span class="circ-num">%d</span>%s %s <span class="circ-sep">/</span> %s%s%s</div>') % (n, pre, ba, bb, sp, post)
 co_ex = ex_given('%sI\'m sorry, how <span class="circ-opt is-example">do you say</span> <span class="circ-sep">/</span> <span class="circ-opt struck">are you saying</span> your name again?' % example_badge())
 slide('s-cb18', 'Speaking – Choose, Then Say It', '''<div class="slide" id="s-cb18">
   %s
@@ -573,32 +572,27 @@ chat_speak('s-free', 'Speaking – Work the Room', 'Work the room', 'Read the co
  ("Interesting!<br>Oh, here comes Mei, our CEO. Do you two know each other?", 'Introduce Daniel to your colleague Mei.', "Mei, I'd like to introduce you to Daniel from the Berlin office."),
  ("It was great talking to you. I'd love to stay in touch.", 'Say goodbye politely and suggest staying in touch.', "It was a pleasure to meet you. Let's connect on LinkedIn.")])
 
-# ------------------------------------------------------------------ 17 LESSON REVIEW
-def ck(label, icon):
-    return '<button class="check-item" onclick="ckToggle(this)"><span class="ck"></span><span>%s</span><span class="ck-ic">%s</span></button>' % (label, icon)
-slide('s-review', 'Lesson Review – Before You Leave the Lobby', '''<div class="slide" id="s-review">
+# ------------------------------------------------------------------ 17 LESSON SUMMARY
+def summary_review(h2, cards, closing, label='Lesson Summary'):
+    """Static lesson summary: 3 cards with highlighted key points (no interactivity).
+    cards = [(icon, title, [lines])]; a line starting with 'ex:' is rendered as an example sentence."""
+    out = ''
+    for icon, title, lines in cards:
+        body = ''
+        for l in lines:
+            if l.startswith('ex:'):
+                body += '<p class="sum-ex">%s</p>' % l[3:].strip()
+            else:
+                body += '<p class="sum-p">%s</p>' % l
+        out += '<div class="sum-card"><div class="sum-ic">%s</div><h3>%s</h3>%s</div>' % (icon, title, body)
+    slide('s-review', label, '''<div class="slide" id="s-review">
   %s
   <div class="slide-main"><div class="content">
-    <h2>Before you leave the lobby</h2>
-    <p class="instruction">Click each one when you feel ready to use it.</p>
-    <div class="lead-grid">
-      <div>
-        <div class="check-list" id="ck-list">%s%s%s</div>
-        <div class="win-banner" id="ck-win">You are ready for the next unit.</div>
-      </div>
-      <div>
-        <div class="badge" id="bd-review">
-          <div class="bd-event">MERIDIAN BUSINESS SUMMIT</div>
-          <div class="bd-hello">Hello, I'm</div>
-          <div class="bd-name" data-bd="name">&nbsp;</div>
-          <div class="bd-role" data-bd="role">&nbsp;</div>
-          <div class="bd-company" data-bd="company">&nbsp;</div>
-          <div class="bd-ask"><b>Ask me about</b><span data-bd="ask">&nbsp;</span></div>
-          <div class="bd-foot">DELEGATE</div>
-        </div>
-      </div>
-    </div>
-    <p class="instruction" style="margin-top:22px;">Introduce yourself to me one more time. What is different from the first time?</p>
+    <h2>%s</h2>
+    <div class="sum-grid">%s</div>
+    <div class="sum-turn"><span class="sum-turn-l">Your turn</span>%s</div>
   </div></div>
-</div>''' % (banner('review'),
-             ck('Present simple and continuous', '⚙️'), ck('Etiquette for introductions', '🤝'), ck('Introducing yourself and others', '🧩')))
+</div>''' % (banner('review'), h2, out, closing))
+
+summary_review('Lesson summary', [('⚙️', 'Present simple or continuous?', ['<b>Present simple</b> = habits, facts and states.', 'ex:I <mark>usually work</mark> from home.', '<b>Present continuous</b> = happening now, or temporary.', "ex:<mark>I'm working</mark> on a new project.", '<b>Know</b>, <b>like</b>, <b>want</b> and <b>think</b> are not used in the continuous.', 'ex:I <mark>know</mark> Daniel. (not: I am knowing)']), ('🤝', 'Introductions', ["ex:I'd like <mark>to introduce you to</mark> Marco.", "ex:It's <mark>a pleasure to meet you</mark>.", 'ex:You <mark>must be</mark> Paola, from Madrid.', "Check: <b>I don't think we've met</b>, have we?", "ex:We <mark>met in Lisbon</mark> last year, didn't we?"]), ('🧩', 'Introducing yourself', ['Prepare a <b>30&ndash;60 second</b> introduction.', 'End with a <mark>question</mark> to start the conversation.', 'Make eye contact for about <mark>two seconds</mark>, and shake hands firmly.', 'Follow up within <mark>24&ndash;48 hours</mark>.'])],
+       'Introduce yourself to me one more time. What is different from the first time?')

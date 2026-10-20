@@ -254,7 +254,7 @@ function classifyTarget(col){
   if (!chip) return;
   var tag = document.createElement('span');
   tag.className = 'placed';
-  tag.textContent = chip.textContent;
+  tag.innerHTML = chip.innerHTML;
   tag.dataset.ans = chip.dataset.ans;
   tag.dataset.chipRef = '1';
   tag.onclick = function(e){ e.stopPropagation(); tag.remove(); chip.classList.remove('used'); };

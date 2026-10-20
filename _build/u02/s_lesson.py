@@ -71,13 +71,14 @@ content('s-lead2', 'Warm-Up – Would You Rather?', 'leadin', 'Would you rather&
 # ------------------------------------------------------------------ 2.1 MEANING: past simple vs continuous (sort)
 S_SIMPLE, S_CONT = 'simple', 'continuous'
 sort_slide('s-m1', 'Meaning – Past Simple or Past Continuous?', 'grammar', 'Finished, or in progress?',
-           'Talking about your past work experience is a good way to get to know your colleagues. Click a sentence, then click the box where it belongs.',
-           [("I fixed computers.", S_SIMPLE), ("I was working 60 hours a week before I came here.", S_CONT), ("I ran my own construction company.", S_SIMPLE),
-            ("At 9am yesterday I was writing a report.", S_CONT), ("I was a legal assistant.", S_SIMPLE), ("While I was waiting, the manager arrived.", S_CONT)],
-            [(S_SIMPLE, '<b>Past simple</b><br>a single, completed action, a past habit, or a state that was true for a time'),
-             (S_CONT, '<b>Past continuous</b><br>an ongoing action that was in progress at a certain time in the past')],
+           'Click a sentence, then click the box where the highlighted verb belongs.',
+           [("I <mark class=\"vb\">ran</mark> my own construction company.", S_SIMPLE), ("While I <mark class=\"vb\">was waiting</mark>, the manager arrived.", S_CONT),
+            ("I <mark class=\"vb\">was</mark> a legal assistant.", S_SIMPLE), ("I <mark class=\"vb\">was working</mark> 60 hours a week before I came here.", S_CONT),
+            ("At 9am yesterday I <mark class=\"vb\">was writing</mark> a report.", S_CONT), ("I <mark class=\"vb\">fixed</mark> computers.", S_SIMPLE)],
+            [(S_SIMPLE, '✅ <b>Past simple</b><br>a completed action, a past habit, or a state that was true for a time'),
+             (S_CONT, '⏳ <b>Past continuous</b><br>an action in progress at a certain time in the past')],
            post=ccqs(('&ldquo;I ran my own construction company.&rdquo; Is the company still mine now?', 'No. It is finished. We use the past simple for completed actions and states.'),
-                     ('&ldquo;I was working 60 hours a week before I came here.&rdquo; What happened next?', 'The speaker came here. The long action (working) was in progress when the short action (came) happened.')),
+                     ('&ldquo;I was working 60 hours a week before I came here.&rdquo; Which verb is the long action in progress, and which is the short, finished action?', 'Was working is the long action in progress. Came is the short, finished action (past simple).')),
            aud=AL.single(U, '2_1'))
 
 # ------------------------------------------------------------------ 2.2 FORM
@@ -150,10 +151,10 @@ speak('s-sp2', 'Speaking Break 2 – Be Polite', 'Speaking break: sound polite',
 # ------------------------------------------------------------------ 2.6 MEANING: present perfect simple vs past simple (sort)
 P_PS, P_PP = 'past simple', 'present perfect'
 sort_slide('s-m3', 'Meaning – Present Perfect or Past Simple?', 'grammar', 'Is there a date?',
-           'The present perfect simple is used to talk about events in the recent past that still have an effect on the present moment. Click a sentence, then click the box where it belongs.',
-           [("I have worked in a few different teams.", P_PP), ("I worked in a small team in 2005.", P_PS), ("I haven't worked in a team before.", P_PP),
-            ("We moved offices last March.", P_PS), ("He has just finished the report.", P_PP), ("She left the company in 2019.", P_PS)],
-           [(P_PP, '<b>Present perfect</b><br>no date is specified'), (P_PS, '<b>Past simple</b><br>a specific date is given')],
+           'Click a sentence, then click the box where the highlighted verb belongs.',
+           [("She <mark class=\"vb\">left</mark> the company in 2019.", P_PS), ("I <mark class=\"vb\">have worked</mark> in a few different teams.", P_PP), ("He <mark class=\"vb\">has just finished</mark> the report.", P_PP),
+            ("We <mark class=\"vb\">moved</mark> offices last March.", P_PS), ("I <mark class=\"vb\">haven't worked</mark> in a team before.", P_PP), ("I <mark class=\"vb\">worked</mark> in a small team in 2005.", P_PS)],
+           [(P_PP, '🔗 <b>Present perfect</b><br>no date is specified; it still matters now'), (P_PS, '📅 <b>Past simple</b><br>a specific date or time is given')],
            post=ccqs(('&ldquo;I have worked in a few different teams.&rdquo; Do we know when?', 'No. No date is specified, so the present perfect is used.'),
                      ('&ldquo;I worked in a small team in 2005.&rdquo; Why the past simple?', 'A specific date is given, so the past simple is used.')),
            aud=AL.single(U, '2_6'))
@@ -265,5 +266,5 @@ chat_speak('s-free', 'Speaking – Coffee Machine Catch-up', 'Coffee-machine cat
  ("I was wondering if you could show me where the meeting rooms are.", 'Offer to show Priya around, politely.', "Of course! Did you want a quick tour of the whole office?")])
 
 # ------------------------------------------------------------------ REVIEW
-review([('Past simple and past continuous', '⚙️'), ('Sharing past experiences', '🗂️'), ('Talking about past experiences', '🧩')],
-       'Before you leave the coffee machine', 'Tell me about your career one more time. What can you say now that you could not say before?')
+summary_review('Lesson summary', [('⚙️', 'Past simple and past continuous', ['<b>Past simple</b> = a finished action.', 'ex:I <mark>worked</mark> in a bank.', '<b>Past continuous</b> = an action in progress.', 'ex:I <mark>was working</mark> when she called.', 'Use both together:', 'ex:I <mark>was driving</mark> when I <mark>saw</mark> this job advertised.']), ('🗂️', 'Present perfect or past simple?', ['<b>Present perfect</b> = experience, no finished time. Use <mark>for</mark> and <mark>since</mark>.', 'ex:I <mark>have worked</mark> in a few teams.', '<b>Past simple</b> = a finished time.', 'ex:I <mark>worked</mark> in a small team <mark>in 2005</mark>.']), ('🧩', 'Sounding polite', ['Use the past to sound polite and less direct.', 'ex:<mark>Did you want</mark> some more coffee?', 'ex:<mark>I was wondering</mark> if you could help me.', '<b>-ed endings</b> have three sounds: <mark>/t/</mark> worked, <mark>/d/</mark> played, <mark>/ɪd/</mark> wanted.'])],
+       'Tell me about your career one more time. What can you say now that you could not say before?')

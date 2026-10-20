@@ -121,7 +121,7 @@ function chatNext(sid){
       bs[i].classList.add('show');
       btn.textContent = (i===bs.length-1) ? 'End of conversation' : (bs[i].classList.contains('them') ? 'Your turn ▸' : 'Continue ▸');
       if(i===bs.length-1) btn.disabled=true;
-      try{ bs[i].scrollIntoView({block:'nearest',behavior:'smooth'}); }catch(e){}
+      c.scrollTop=c.scrollHeight;
       return;
     }
   }
@@ -130,5 +130,14 @@ function chatReset(sid){
   var c=document.getElementById(sid+'-chat'), btn=document.getElementById(sid+'-next'); if(!c) return;
   c.querySelectorAll('.b').forEach(function(b){b.classList.remove('show');});
   c.querySelectorAll('.ccq-answer').forEach(function(a){a.classList.remove('show');});
-  btn.disabled=false; btn.textContent='Start the conversation';
+  c.scrollTop=0; btn.disabled=false; btn.textContent='Start the conversation';
+}
+
+/* copy the AI prompt */
+function copyPrompt(sid){
+  var el=document.getElementById(sid+'-text'); if(!el) return;
+  var txt=el.textContent, btn=el.closest('.ai-prompt-wrap').querySelector('.ai-copy');
+  function done(){ btn.textContent='Copied \u2713'; setTimeout(function(){btn.textContent='Copy prompt';},2000); }
+  function fallback(){ var r=document.createRange(); r.selectNodeContents(el); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); try{document.execCommand('copy');}catch(e){} s.removeAllRanges(); done(); }
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,fallback); } else { fallback(); }
 }

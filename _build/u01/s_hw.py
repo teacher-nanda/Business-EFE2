@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # Unit 1 "Introductions" — homework slides (Practice Book Unit 1, exercises 1.1-1.5, in book order)
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
+import aihw
 from lib import slide, audio, banner, ex_given, example_badge, tf_row, tf_example, PB_ARTICLE, ph
 from s_lesson import (wb_row, wb_bank, wb_blank, mrow, mc_row, rw_row, co_row, alts)
 
@@ -147,3 +150,6 @@ slide('hw-5', 'HW5 – Choose, Then Say It', '''<div class="slide" id="hw-5">
     %s
   </div></div>
 </div>''' % (banner('hw'), hw5_ex, ''.join(r5[:5]), ''.join(r5[5:]), audio('pb1.5')))
+
+
+slide('hw-ai', 'HW – Practice with AI', aihw.ai_slide(banner('hw'), 'hw-ai', 'present simple and present continuous, and introducing myself and other people at a business event', 'present simple for habits, present continuous for what is happening now, and phrases for introductions', 'What do you usually do at work, and what are you working on at the moment?', 'Save your best corrected sentences. Bring them to the next class.'))

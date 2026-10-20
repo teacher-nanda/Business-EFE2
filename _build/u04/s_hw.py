@@ -4,6 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
 from lib import *
 from ex import *
+import aihw
 hw_cover('Talking about changes')
 
 H1 = [(["Claude is used to working weekends.", "Claude is used to work weekends."], 0), (["Did Paul use to work in San Francisco?", "Did Paul used to work in San Francisco?"], 0),
@@ -65,3 +66,6 @@ C6 = [("Are you", ['used to', 'got used to'], 'used to', "living in a tropical c
 exercise('hw-5', 'HW6 – Choose, Then Say It', 'hw', 'HW6 — Choose, then say it', 'Cross out the incorrect words in each sentence, then say the sentences out loud.',
          [co_row(i + 1, p, c, a, post, 'hw5-%d' % (i + 1), say=True) for i, (p, c, a, post) in enumerate(C6)], 'circ',
          example=co_example('I took a while to', ['get used to', 'am used to'], 'get used to', 'the weather here.'), gid='hw5', aud=AL.pb_clips(4, 6, 10))
+
+
+slide('hw-ai', 'HW – Practice with AI', aihw.ai_slide(banner('hw'), 'hw-ai', 'changes at work and small talk, with used to, be used to and get used to', 'used to + verb, be used to + -ing, get used to + -ing, and safe small talk topics', 'What did you use to do in your first job that you do not do now?', 'Save your best corrected sentences. Bring them to the next class.'))

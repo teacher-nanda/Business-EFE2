@@ -37,7 +37,7 @@ content('s-lead', 'Warm-Up – Then and Now', 'leadin', 'Then and now', '''
 # ---- 4.1 / 4.2 MEANING: used to / get used to / be used to
 UT, GU, BU = 'used to', 'get used to', 'be used to'
 sort_slide('s-m1', 'Meaning – Used To, Get Used To, Be Used To', 'grammar', 'Three meanings of &ldquo;used to&rdquo;',
-           'Click a sentence, then click the box where it belongs.',
+           'Click a sentence, then click the box where the highlighted words belong.',
            [("Staff used to eat lunch at their desks.", UT), ("It took a while to get used to the commute.", GU), ("Nowadays I am used to waking up early.", BU),
             ("Did you use to do everything by hand in the factory?", UT), ("I don't know that I will ever get used to these uniforms!", GU),
             ("After working here for a decade, we are used to the noise.", BU), ("We didn't use to have so much construction in the area.", UT)],
@@ -45,7 +45,8 @@ sort_slide('s-m1', 'Meaning – Used To, Get Used To, Be Used To', 'grammar', 'T
             (BU, '<b>be used to</b><br>being familiar with something')],
            post=ccqs(('&ldquo;Staff used to eat lunch at their desks.&rdquo; Do they still do it?', 'No. It was a habit in the past, but it is not true now.'),
                      ('&ldquo;It took a while to get used to the commute.&rdquo; Is the commute strange now?', 'No. At first it was strange, but the speaker became familiar with it.')),
-           aud='<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span>%s%s</div>' % (AL.word(U, '4_1', 'key language'), AL.word(U, '4_2', 'further examples')))
+           aud='<div class="audio-box clips-box"><span class="clips-label">🎧 Listen</span>%s%s</div>' % (AL.word(U, '4_1', 'key language'), AL.word(U, '4_2', 'further examples')),
+           hl=r"get used to|am used to|are used to|didn't use to|use to|used to")
 
 content('s-g1', 'Grammar – Form', 'grammar', 'How we build them', '''
     <div class="form-grid">
@@ -165,5 +166,5 @@ chat_speak('s-free', 'Speaking – Small Talk', 'Small talk', 'Read the conversa
  ("Oh, I love mysteries!<br>Did you use to read a lot as a kid?", 'Answer, and add a detail.', "Yes, I used to read every night before bed."),
  ("Have you seen any good films lately?", 'Talk about a film, or suggest a different safe topic.', "I watched a great documentary last weekend. Have you seen it?"),
  ("Not yet.<br>How are you getting used to the new software at work?", 'Say how you are getting used to something new at work.', "I'm getting used to it. It's confusing, but it saves a lot of time.")])
-review([('&ldquo;Used to,&rdquo; &ldquo;be / get used to&rdquo;', '⚙️'), ('Small talk', '☕'), ('Talking about changes at work', '🧩')], 'Before you leave',
+summary_review('Lesson summary', [('⚙️', 'Used to + verb', ['Past habits or situations that are <b>not true now</b>.', 'ex:I <mark>used to work</mark> weekends.', 'In questions and negatives, drop the <b>-d</b>:', 'ex:<mark>Did</mark> you <mark>use to</mark> work in Paris?', "ex:We <mark>didn't use to</mark> have so many meetings."]), ('☕', 'Be used to / get used to', ['<b>Be used to</b> = it is normal for you now.', "ex:<mark>I'm used to working</mark> from home.", '<b>Get used to</b> = it is becoming normal.', 'ex:It took a while to <mark>get used to</mark> the weather.', 'After <b>to</b>, use a noun or <mark>-ing</mark>.']), ('🧩', 'Small talk', ['Keep it light and friendly.', 'Safe topics: <mark>hobbies</mark>, <mark>books</mark>, <mark>films</mark>, <mark>the weather</mark>.', "ex:Terrible weather today, isn't it?", 'ex:Have you seen any good films lately?', 'Ask a follow-up question to keep the conversation going.'])],
        'Tell me about two changes in your working life, one from the past and one you are still getting used to.')

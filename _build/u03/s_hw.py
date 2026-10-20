@@ -4,6 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
 from lib import *
 from ex import *
+import aihw
 
 hw_cover('Departments and roles')
 
@@ -47,3 +48,6 @@ exercise('hw-3', 'HW3 – Describing Roles', 'hw', 'HW3 — Describing roles', '
          [defrow(i + 1, d, a) for i, (d, a) in enumerate(H3)], 'wb',
          example=ex_given('%sTo ensure something runs smoothly<br><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="to look after">to look after</span></span>' % example_badge()),
          pre=wb_bank(ph3, 'to look after'), gid='hw3', aud=AL.pb_clips(3, 3, 5))
+
+
+slide('hw-ai', 'HW – Practice with AI', aihw.ai_slide(banner('hw'), 'hw-ai', 'departments and roles in a company, and describing my job', 'department names, and the phrases work for, work in, work as, in charge of and responsible for', 'Which department do you work in, and what is your role there?', 'Save your best corrected sentences. Bring them to the next class.'))

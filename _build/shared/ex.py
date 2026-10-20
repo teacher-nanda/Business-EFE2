@@ -42,7 +42,7 @@ def co_row(n, pre, choices, correct, post, group, say=False):
     bs = ' <span class="circ-sep">/</span> '.join('<button class="circ-opt" data-group="%s" data-correct="%s" onclick="circPick(this)">%s</button>' % (group, esc(correct), c) for c in choices)
     sp = '' if (not post or post[:1] in '?.,!') else ' '
     pre = (pre + ' ') if pre else ''
-    sb = '<br><button class="say-btn" style="margin-left:34px;margin-top:6px;" onclick="this.classList.toggle(\'done\')">🗣 I said it</button>' if say else ''
+    sb = ''
     return '<div class="ex-row"><span class="circ-num">%d</span>%s%s%s%s%s</div>' % (n, pre, bs, sp, post, sb)
 
 def co_example(pre, choices, correct, post):
@@ -214,10 +214,16 @@ def content(sid, label, kind, h2, body, instr=''):
 def ccqs(*pairs):
     return '<div class="ccq-box"><p class="ccq-label">💭 Check your understanding</p><ul class="ccq-list">%s</ul></div>' % ''.join(ccq(q, a) for q, a in pairs)
 
-def sort_slide(sid, label, kind, h2, instr, items, cols, pre='', post='', aud='', ncols=None):
-    """Sort chips into categories. items=[(text, target)], cols=[(target, heading)]."""
+def sort_slide(sid, label, kind, h2, instr, items, cols, pre='', post='', aud='', ncols=None, hl=None):
+    """Sort chips into categories. items=[(text, target)], cols=[(target, heading)].
+    Chips are shown as a card grid; the category boxes are colour-coded."""
+    import re as _re
+    if hl:
+        items = [(_re.sub(hl, lambda m: '<mark class="vb">%s</mark>' % m.group(0), x, count=1), t) for x, t in items]
+    nb = len(items)
+    bcols = next((c for c in (3, 4) if nb % c == 0), None) or next((c for c in (3, 4) if nb % c >= 2), 2)
     chips = ''.join('<button class="classify-chip" data-ans="%s" onclick="classifyPick(this)">%s</button>' % (esc(t), x) for x, t in items)
-    cs = ''.join('<div class="classify-col" data-target="%s" onclick="classifyTarget(this)"><h4>%s</h4></div>' % (esc(t), h) for t, h in cols)
+    cs = ''.join('<div class="classify-col c-%s" data-target="%s" onclick="classifyTarget(this)"><h4>%s</h4></div>' % ('abc'[i % 3], esc(t), h) for i, (t, h) in enumerate(cols))
     n = ncols or len(cols)
     slide(sid, label, '''<div class="slide" id="%s">
   %s
@@ -225,7 +231,7 @@ def sort_slide(sid, label, kind, h2, instr, items, cols, pre='', post='', aud=''
     <h2>%s</h2>
     %s
     <p class="instruction" style="margin-bottom:12px;">%s</p>
-    <div id="%s-bank" class="classify-bank" style="margin-bottom:16px;">%s</div>
+    <div id="%s-bank" class="classify-bank grid" style="margin-bottom:16px;grid-template-columns:repeat(%d,minmax(0,1fr));">%s</div>
     <div id="%s-cols" style="display:grid;grid-template-columns:repeat(%d,minmax(0,1fr));gap:16px;">%s</div>
     <div class="btn-row">
       <button class="btn-check" onclick="checkClassifySlide('%s')">Check Answers</button>
@@ -234,7 +240,7 @@ def sort_slide(sid, label, kind, h2, instr, items, cols, pre='', post='', aud=''
     %s
     %s
   </div></div>
-</div>''' % (sid, banner(kind), h2, pre, instr, sid, chips, sid, n, cs, sid, sid, post, aud))
+</div>''' % (sid, banner(kind), h2, pre, instr, sid, bcols, chips, sid, n, cs, sid, sid, post, aud))
 
 def bubble(text, who='a'):
     return '<div class="say%s">%s</div>' % (' b' if who == 'b' else '', text)
@@ -272,7 +278,7 @@ def order_example(words, ans):
     return ex_given('%s<span class="scr">%s</span><span class="ans-line">%s</span>' % (example_badge(), ch, ans))
 
 def say_line(html):
-    return '<div class="stress-line"><span>%s</span><button class="say-btn" onclick="this.classList.toggle(\'done\')">I said it</button></div>' % html
+    return '<div class="stress-line"><span>%s</span></div>' % html
 St = lambda t: '<span class="st">%s</span>' % t
 Sy = lambda t: '<span class="st sy">%s</span>' % t
 
@@ -321,3 +327,25 @@ def chat_speak(sid, label, h2, instr, name, turns, kind='speaking'):
     <div class="chat" id="%s-chat">%s</div>
   </div></div>
 </div>''' % (sid, banner(kind), h2, instr, sid, sid, sid, sid, bub))
+
+
+def summary_review(h2, cards, closing, label='Lesson Summary'):
+    """Static lesson summary: 3 cards with highlighted key points (no interactivity).
+    cards = [(icon, title, [lines])]; a line starting with 'ex:' is rendered as an example sentence."""
+    out = ''
+    for icon, title, lines in cards:
+        body = ''
+        for l in lines:
+            if l.startswith('ex:'):
+                body += '<p class="sum-ex">%s</p>' % l[3:].strip()
+            else:
+                body += '<p class="sum-p">%s</p>' % l
+        out += '<div class="sum-card"><div class="sum-ic">%s</div><h3>%s</h3>%s</div>' % (icon, title, body)
+    slide('s-review', label, '''<div class="slide" id="s-review">
+  %s
+  <div class="slide-main"><div class="content">
+    <h2>%s</h2>
+    <div class="sum-grid">%s</div>
+    <div class="sum-turn"><span class="sum-turn-l">Your turn</span>%s</div>
+  </div></div>
+</div>''' % (banner('review'), h2, out, closing))

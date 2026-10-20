@@ -4,6 +4,7 @@ import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'shared'))
 from lib import *
 from ex import *
+import aihw
 hw_cover('Money and finance')
 
 D = [("To lose money by spending more than you earn", 'to make a loss'), ("To charge less than others who sell the same goods or services as you", 'to undercut competitors'),
@@ -22,3 +23,6 @@ exercise('hw-1', 'HW1 – Money and Finance', 'hw', 'HW1 — Money and finance',
          [defrow(i + 1, d, a) for i, (d, a) in enumerate(D)], 'wb',
          example=ex_given('%sThe amount of money that is available to spend on something<br><span style="margin-left:34px;display:inline-block;"><span class="wb-blank filled is-example" data-ans="a budget">a budget</span></span>' % example_badge()),
          pre=wb_bank(bank, 'a budget'), gid='hw1', aud=AL.pb_clips(6, 1, 17))
+
+
+slide('hw-ai', 'HW – Practice with AI', aihw.ai_slide(banner('hw'), 'hw-ai', 'money and finance vocabulary and talking about a business situation', 'income, expenditure, overheads, budget, break even, make a loss, upturn, downturn and undercut', 'How is your company doing financially? Tell me about its income and costs.', 'Save your best corrected sentences. Bring them to the next class.'))

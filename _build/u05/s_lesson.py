@@ -42,14 +42,14 @@ content('s-lead', 'Warm-Up – Delegation Memo', 'leadin', 'Delegation memo', ''
 
 OB, NO, PR = 'obligation', 'no obligation', 'prohibited'
 sort_slide('s-m1', 'Meaning – Levels of Obligation', 'grammar', 'How strong is it?',
-           'Certain modal verbs can be used to say that someone needs to do something. Click a sentence, then click the box where it belongs.',
+           'Certain modal verbs can be used to say that someone needs to do something. Click a sentence, then click the box where the highlighted words belong.',
            [("I have to leave this with you.", OB), ("I need to leave this with you.", OB), ("You must complete this project by Monday.", OB),
             ("You don't have to deal with this today.", NO), ("You must not go into the testing area.", PR), ("We don't have to work late tomorrow.", NO)],
            [(OB, '<b>Obligation</b><br>someone needs to do something'), (NO, '<b>No obligation</b><br>there is no need to do it'), (PR, '<b>Prohibited</b><br>someone must not do it')],
            post=ccqs(('&ldquo;You don\'t have to deal with this today.&rdquo; Can I deal with it today if I want to?', 'Yes. It is allowed, but it is not necessary.'),
                      ('&ldquo;You must not go into the testing area.&rdquo; Is it allowed?', 'No. &ldquo;Must not&rdquo; means that something is prohibited.'),
                      ('Why can &ldquo;must&rdquo; sound impolite?', 'It is a direct way to say something needs to be done.')),
-           aud=AL.single(U, '5_1'))
+           aud=AL.single(U, '5_1'), hl=r"don't have to|must not|have to|need to|must")
 
 content('s-g1', 'Grammar – Form', 'grammar', 'How we build them', '''
     <p style="margin:0 0 4px;">&ldquo;Must&rdquo; does not change with the subject, but &ldquo;have to&rdquo; becomes &ldquo;has to&rdquo; in the third person singular. Both are followed by the base form of the main verb. &ldquo;Need&rdquo; acts like a modal verb here, expressing strong obligation.</p>
@@ -141,7 +141,8 @@ chat_speak('s-free', 'Speaking – Delegate It', 'Delegate it', 'Read the conver
  ("Is there anything I must not forget?", 'Say what Alex must not forget.', "You must not forget to check the figures. Mistakes are a big problem."),
  ("The deadline is tight.<br>What if I'm late?", 'Say how strict the deadline is.', "You can't be late, I'm afraid. The report has to be ready by 5pm on Friday."),
  ("Understood.<br>Is there anything else?", 'Ask for one more small thing, politely.', "Would you also reserve the meeting room for Monday? Thanks so much!")])
-review([('Modal verbs for obligation', '⚙️'), ('Delegation and politeness', '🤝'), ('Delegating tasks to colleagues', '🧩')], 'Before you leave', 'Delegate one real task to me, politely. Then tell me one thing I must not do.')
+summary_review('Lesson summary', [('⚙️', 'Modals of obligation', ['<b>Obligatory:</b> <mark>must</mark>, <mark>have to</mark>, <mark>have got to</mark>, <mark>need to</mark>.', 'ex:We <mark>have to</mark> finish before 5pm.', "<b>Not necessary:</b> <mark>don't have to</mark>, <mark>don't need to</mark>.", '<b>Forbidden:</b> <mark>must not</mark>.', 'ex:Staff <mark>must not</mark> smoke in the building.']), ('🤝', 'Polite requests', ['Use <mark>Could you…?</mark> and <mark>Would you…?</mark>', 'ex:<mark>Could you</mark> look after my project for a week?', 'ex:<mark>Would you</mark> send me the report by Friday?', 'Add <b>please</b> and <b>thank you</b>.']), ('🧩', 'Delegating tasks', ['Be clear about <b>what</b>, <b>when</b>, and <b>how important</b>.', 'ex:I <mark>need you to</mark> finish the presentation by Friday.', 'ex:You <mark>must not</mark> forget to check the figures.', 'Finish politely: <b>Thanks so much!</b>'])],
+       'Delegate one real task to me, politely. Then tell me one thing I must not do.')
 
 # ---- CB p.29 REVIEW of Units 1-5 (book table)
 rows5 = [('Introducing yourself and others', 'You must be Eric from the UK. / Tony, this is Hayao from our Japanese office.', 'Unit 1'),
