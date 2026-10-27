@@ -91,19 +91,22 @@ function savePDF(){
     '[style*="background-color"]{color:#1a1a1a!important}'+
     '.card-body,.card-body *{color:#1a1a1a!important}'+
     '*{print-color-adjust:exact;-webkit-print-color-adjust:exact}'+
+    '.hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;border-radius:0 0 16px 16px}'+
+    '.hero:after{display:none}.hero .kicker{font-size:.62rem;margin:0 0 2px}.hero h1{font-size:1.4rem;margin:0;line-height:1.15}.hero .sub{font-size:.82rem;margin:3px 0 0;opacity:.9}'+
+    '.hero .bigbtn.lesson{background:#FFD84D;color:#2B1B5E!important;border:2px solid #fff;box-shadow:none;font-size:.9rem;padding:8px 16px;white-space:nowrap}.notes-title{margin-top:16px}'+
+        '.hero{display:block;background:#2B1B5E;padding:14px 24px 16px;border-radius:0 0 16px 16px;overflow:visible}.hero:after{display:none}'+
+    '.hero .kicker{font-size:.75rem;margin:0 0 3px}.hero h1{font-family:Georgia,serif;font-size:1.85rem;margin:0 0 3px;line-height:1.15}.hero .dt{margin:0 0 9px;font-size:.98rem;color:#FFD84D;font-weight:700}'+
+    '.hero .row{display:flex;align-items:center;justify-content:space-between;gap:18px}.hero .row p{margin:0;font-size:1.02rem;line-height:1.45}'+
+    '.hero .bigbtn.lesson{flex:none;background:#FFD84D;color:#2B1B5E!important;border:0;box-shadow:none;font-size:1.02rem;padding:9px 18px;white-space:nowrap}.notes-title{margin-top:16px}'+
     '@media print{@page{margin:1.2cm}body{padding:0}.hero,.how{break-inside:avoid}}';
   var today = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Notes – '+document.title+'</title>'+
     '<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;700;800&display=swap" rel="stylesheet">'+
     '<style>'+css+'</style></head><body>'+
     '<div class="hero"><p class="kicker">Conversational English with teacher Nanda</p>'+
-      '<h1>'+document.title.replace(' — ',' · ')+'</h1>'+
-      '<p class="sub">📝 Your notes from class</p><span class="date">'+today+'</span></div>'+
-    '<div class="how"><h2>👋 How to use this PDF</h2>'+
-      '<div class="step"><div class="n">1</div><p><b>Read your notes</b> below. These are the notes we made together in class.</p></div>'+
-      '<div class="step"><div class="n">2</div><p><b>Click &ldquo;Open the Lesson&rdquo;</b> to see the lesson content from class and do homework activities.</p></div>'+
-      '<div class="btns"><a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the Lesson</a></div>'+
-      '<p class="link-note">If the button does not open, copy this link: '+LESSON+'</p></div>'+
+    '<h1>'+document.title.replace(/^Lesson \d+\s*[—\-]\s*/,'')+'</h1><p class="dt">📅 '+today+'</p>'+
+    '<div class="row"><p>Below are the notes from our class. Click the button to open the lesson material and the homework.</p>'+
+    '<a class="bigbtn lesson" href="'+LESSON+'" target="_blank">▶ Open the lesson</a></div></div><!--hero-v3-->'+
     '<h2 class="notes-title">📝 Notes from class</h2>'+cards+'</body></html>';
   win.document.write(html);
   win.document.close();
